@@ -19,6 +19,10 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = CustomUserSerializer
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
+    def update(self, request, *args, **kwargs):
+        kwargs['partial'] = True
+        return super().update(request, *args, **kwargs)
+
     def get_permissions(self):
         if self.action == 'create':
             return [AllowAny()]

@@ -4,21 +4,20 @@ from .models import CustomUser
 
 class CustomUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
+    friend_to_add = serializers.IntegerField(required=False, write_only=True)
+    friend_to_remove = serializers.IntegerField(required=False, write_only=True)
 
     def create(self, validated_data):
         password = validated_data.pop('password')
-        # friends = validated_data.pop('friends', None)
         user = CustomUser(**validated_data)
         user.set_password(password)
         user.save()
-        # if friends is not None:
-        #     user.friends.set(friends)
         return user
 
     def update(self, instance, validated_data):
         password = validated_data.pop('password', None)
-        friends_to_add = validated_data.pop('friends_to_add', None)
-        friends_to_remove = validated_data.pop('friends_to_remove', None)
+        friend_to_add = validated_data.pop('friend_to_add', None)
+        friend_to_remove = validated_data.pop('friend_to_remove', None)
 
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
@@ -26,15 +25,17 @@ class CustomUserSerializer(serializers.ModelSerializer):
         if password:
             instance.set_password(password)
 
-        if friends_to_add is not None:
-            instance.friends.add(*friends_to_add)
-        
-        if friends_to_remove is not None:
-            instance.friends.remove(*friends_to_remove)
+        if friend_to_add:
+            instance.friends.add(friend_to_add)
+
+        if friend_to_remove:
+            instance.friends.remove(friend_to_remove)
 
         instance.save()
         return instance
 
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'first_name', 'last_name', 'date_joined', 'email', 'date_of_birth', 'bio', 'friends', 'password']
+        fields = ['id', 'username', 'first_name', 'last_name', 
+                  'date_joined', 'email', 'date_of_birth', 'bio', 
+                  'friends', 'password', 'friend_to_add', 'friend_to_remove']
