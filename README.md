@@ -1,7 +1,3 @@
-rm db.sqlite3
-py manage.py makemigrations
-py manage.py migrate
-
 # API Endpoints
 
 | **HTTP Method** | **Endpoint**                           | **Description**                       | **Authentication** | **Request Body Params**                                                                                                                                    |
