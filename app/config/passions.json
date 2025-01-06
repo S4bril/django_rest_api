@@ -1,0 +1,95 @@
+{
+    "passions": {
+      "1": {
+        "name": "Piłka nożna"
+      },
+      "2": {
+        "name": "Koszykówka"
+      },
+      "3": {
+        "name": "Siatkówka"
+      },
+      "4": {
+        "name": "Bieganie"
+      },
+      "5": {
+        "name": "Siłownia"
+      },
+      "6": {
+        "name": "Piłka ręczna"
+      }, 
+      "7": {
+        "name": "Anime"
+      },
+      "8": {
+        "name": "D&D"
+      },
+      "9": {
+        "name": "Koncerty"
+      },
+      "10": {
+        "name": "Szachy"
+      },
+      "11": {
+        "name": "Gry komputerowe"
+      },
+      "12": {
+        "name": "Gry planszowe"
+      },
+      "13": {
+        "name": "Malowanie"
+      },
+      "14": {
+        "name": "Gra na instrumentach"
+      },
+      "15": {
+        "name": "Muzyka"
+      },
+      "16": {
+        "name": "Teatr"
+      },
+      "17": {
+        "name": "Kino"
+      },
+      "18": {
+        "name": "Filmy/Netflix"
+      },
+      "19": {
+        "name": "Gotowanie"
+      },
+      "20": {
+        "name": "Książki"
+      },
+      "21": {
+        "name": "Historia"
+      },
+      "22": {
+        "name": "Polityka"
+      },
+      "23": {
+        "name": "Fizyka"
+      },
+      "24": {
+        "name": "Chemia"
+      },
+      "25": {
+        "name": "Matematyka"
+      },
+      "26": {
+        "name": "Pisanie wierszy"
+      },
+      "27": {
+        "name": "Pisanie piosenek"
+      },
+      "28": {
+        "name": "Zwierzęta"
+      },
+      "29": {
+        "name": "Rower"
+      },
+      "30": {
+        "name": "Astrologia"
+      }
+    }
+  }
+  
