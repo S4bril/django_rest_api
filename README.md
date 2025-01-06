@@ -19,37 +19,3 @@
 | **GET**         | `/events/<id>/`                        | Retrieve details of a specific event. | Yes                | None                                                                                                                                                       |
 | **PUT**         | `/events/<id>/`                        | Update event details.                 | Yes                | `{ "title": "string", "description": "string", ... }`                                                                                                      |
 | **DELETE**      | `/events/<id>/`                        | Delete an event.                      | Yes                | None                                                                                                                                                       |
-
-class CustomUserSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True)
-    profile_image = Base64ImageField(required=False)
-    # image_url = serializers.SerializerMethodField()
-
-    class Meta:
-        model = CustomUser
-        fields = ['id', 'email', 'username', 'sex', 'birthday', 'bio', 'password', 'profile_image']
-        read_only_fields = ['id', 'account_creation_date']
-        
-    # def create(self, validated_data):
-    #     password = validated_data.pop('password')
-    #     user = CustomUser(**validated_data)
-    #     user.set_password(password)
-    #     user.save()
-    #     return user
-
-    # def update(self, instance, validated_data):
-    #     if 'password' in validated_data:
-    #         instance.set_password(validated_data.pop('password', None))
-
-    #     for attr, value in validated_data.items():
-    #         setattr(instance, attr, value)
-
-    #     instance.save()
-
-    #     return instance
-    
-    # def get_image_url(self, obj):
-    #     if obj.profile_image:
-    #         return self.context['request'].build_absolute_uri(obj.profile_image.url)
-    #     return None
-    
