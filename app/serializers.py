@@ -1,7 +1,10 @@
-from django.contrib.contenttypes.models import ContentType
-from rest_framework import serializers
-from django.core.files.base import ContentFile
 from base64 import b64decode
+
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.hashers import make_password
+from django.core.files.base import ContentFile
+
+from rest_framework import serializers
 
 from .models import CustomUser, Event, Location
 
@@ -52,7 +55,15 @@ class CustomUserSerializer(serializers.ModelSerializer):
         
     def get_sex(self, obj):
         return obj.get_sex_display()
-    
+
+    def create(self, validated_data):
+        _ = validated_data.pop('friends', None)
+        password = validated_data.pop('password')
+        user = CustomUser(**validated_data)
+        user.set_password(password)
+        user.save()
+        return user
+
     def update(self, instance, validated_data):
         if 'password' in validated_data:
             instance.set_password(validated_data.pop('password', None))

@@ -1,5 +1,6 @@
 import os
 import json
+import logging
 
 from django.contrib.auth import authenticate
 from django.shortcuts import get_object_or_404
@@ -7,6 +8,7 @@ from django.conf import settings
 
 from rest_framework import viewsets, mixins, status
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -166,14 +168,20 @@ class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+        refresh_token = request.data.get("refresh")
+
+        if not refresh_token:
+            return Response({"detail": "Refresh token is required."}, status=status.HTTP_400_BAD_REQUEST)
+
         try:
-            refresh_token = request.data["refresh"]
             token = RefreshToken(refresh_token)
             user_id = token["user_id"]
             token.blacklist()
+
             return Response({"detail": f"{CustomUser.objects.get(id=user_id)} logged out successfully"})
+
         except Exception as e:
-            return Response({"detail": "Invalid token"}, status=400)
+            return Response({"detail": f"Invalid token: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
         
 class GetFormView(APIView):
     permission_classes = [AllowAny]
