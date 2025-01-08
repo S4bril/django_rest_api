@@ -1,11 +1,11 @@
 from django.contrib.auth.models import AbstractUser
 from django.utils.timezone import now
 from django.conf import settings
-
 from django.db import models
 
 
 class CustomUser(AbstractUser):
+    username = models.CharField(max_length=150)
     email = models.EmailField(unique=True)
     sex = models.IntegerField(choices=[
         (0, 'Mężczyzna'),
@@ -27,6 +27,9 @@ class CustomUser(AbstractUser):
         blank=True,
         default=list,
     )
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
 
     def __str__(self):
         return f"{self.username}"
