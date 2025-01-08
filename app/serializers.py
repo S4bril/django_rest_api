@@ -50,7 +50,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['id', 'email', 'username', 'sex', 'birthday', 'bio', 'password', 'profile_image', 'image_url', 'owned_events', 'participated_events']
+        fields = ['id', 'email', 'username', 'sex', 'birthday', 'bio', 'password', 'profile_image', 'image_url', 
+                  'owned_events', 'participated_events', 'passions']
         read_only_fields = ['id', 'account_creation_date', 'image_url', 'owned_events', 'participated_events']
         
     def get_sex(self, obj):

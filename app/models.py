@@ -23,6 +23,10 @@ class CustomUser(AbstractUser):
         null=True,
         blank=True,
     )
+    passions = models.JSONField(
+        blank=True,
+        default=list,
+    )
 
     def __str__(self):
         return f"{self.username}"

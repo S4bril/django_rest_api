@@ -1,0 +1,732 @@
+[
+    {
+        "username": "jan_kowalski",
+        "password": "pass",
+        "email": "jan.kowalski@example.com",
+        "sex": "0",
+        "birthday": "1990-01-15",
+        "bio": "Uwielbiam grać w piłkę nożną.",
+        "passions": [1, 5, 8],
+        "location": [52.229, 21.012]
+    },
+    {
+        "username": "anna_nowak",
+        "password": "pass",
+        "email": "anna.nowak@example.com",
+        "sex": "1",
+        "birthday": "1985-06-20",
+        "bio": "Gotowanie to moja pasja.",
+        "passions": [19, 20, 28],
+        "location": [50.064, 19.945]
+    },
+    {
+        "username": "michal_wisniewski",
+        "password": "pass",
+        "email": "michal.wisniewski@example.com",
+        "sex": "0",
+        "birthday": "1995-08-10",
+        "bio": "Lubię biegać i jeździć na rowerze.",
+        "passions": [4, 29],
+        "location": [51.107, 17.038]
+    },
+    {
+        "username": "katarzyna_wrobel",
+        "password": "pass",
+        "email": "katarzyna.wrobel@example.com",
+        "sex": "1",
+        "birthday": "1998-03-12",
+        "bio": "Jestem wielką fanką anime i planszówek.",
+        "passions": [7, 12, 11],
+        "location": [53.428, 14.553]
+    },
+    {
+        "username": "adam_lewandowski",
+        "password": "pass",
+        "email": "adam.lewandowski@example.com",
+        "sex": "0",
+        "birthday": "2000-11-25",
+        "bio": "Uwielbiam malować i słuchać muzyki.",
+        "passions": [13, 15, 14],
+        "location": [54.352, 18.646]
+    },
+    {
+        "username": "sylwia_kaczmarek",
+        "password": "pass",
+        "email": "sylwia.kaczmarek@example.com",
+        "sex": "1",
+        "birthday": "1992-05-07",
+        "bio": "Uwielbiam historię i szachy.",
+        "passions": [21, 10],
+        "location": [50.868, 20.627]
+    },
+    {
+        "username": "piotr_zielinski",
+        "password": "pass",
+        "email": "piotr.zielinski@example.com",
+        "sex": "0",
+        "birthday": "1994-12-19",
+        "bio": "Gram w D&D i piszę piosenki.",
+        "passions": [8, 27, 26],
+        "location": [52.406, 16.925]
+    },
+    {
+        "username": "magdalena_pietrzak",
+        "password": "pass",
+        "email": "magdalena.pietrzak@example.com",
+        "sex": "1",
+        "birthday": "1989-09-02",
+        "bio": "Uwielbiam oglądać filmy i zgłębiać astrologię.",
+        "passions": [18, 30, 17],
+        "location": [51.935, 15.506]
+    },
+    {
+        "username": "tomasz_szymanski",
+        "password": "pass",
+        "email": "tomasz.szymanski@example.com",
+        "sex": "0",
+        "birthday": "1997-07-14",
+        "bio": "Uwielbiam gry komputerowe i Netflix.",
+        "passions": [11, 18],
+        "location": [50.289, 18.677]
+    },
+    {
+        "username": "paulina_kowalczyk",
+        "password": "pass",
+        "email": "paulina.kowalczyk@example.com",
+        "sex": "1",
+        "birthday": "1991-02-28",
+        "bio": "Lubię teatr, koncerty i politykę.",
+        "passions": [16, 9, 22],
+        "location": [53.013, 18.598]
+    },
+    {
+        "username": "lukasz_kowalski",
+        "password": "pass",
+        "email": "lukasz.kowalski@example.pl",
+        "sex": "0",
+        "birthday": "1991-05-17",
+        "bio": "Uwielbiam odkrywać nowinki technologiczne!",
+        "passions": [1, 5, 11, 6],
+        "location": [52.2298, 21.0118]
+    },
+    {
+        "username": "olga_nowak",
+        "password": "pass",
+        "email": "olga.nowak@example.pl",
+        "sex": "1",
+        "birthday": "1992-07-23",
+        "bio": "Lubię czytać powieści i malować.",
+        "passions": [20, 13, 18, 10],
+        "location": [51.5074, 19.1278]
+    },
+    {
+        "username": "piotr_jablonski",
+        "password": "pass",
+        "email": "piotr.jablonski@example.pl",
+        "sex": "0",
+        "birthday": "1985-11-12",
+        "bio": "Pasjonat sportów drużynowych.",
+        "passions": [1, 2, 4, 5],
+        "location": [50.0614, 19.9383]
+    },
+    {
+        "username": "agnieszka_wozniak",
+        "password": "pass",
+        "email": "agnieszka.wozniak@example.pl",
+        "sex": "1",
+        "birthday": "1988-02-08",
+        "bio": "Miłośniczka sztuki i literatury.",
+        "passions": [16, 13, 20],
+        "location": [54.6872, 25.2798]
+    },
+    {
+        "username": "karolina_michalska",
+        "password": "pass",
+        "email": "karolina.michalska@example.pl",
+        "sex": "1",
+        "birthday": "1993-04-29",
+        "bio": "Podróżuję i fotografuję.",
+        "passions": [19, 8, 17, 5],
+        "location": [52.4064, 16.9252]
+    },
+    {
+        "username": "sebastian_kaczmarek",
+        "password": "pass",
+        "email": "sebastian.kaczmarek@example.pl",
+        "sex": "0",
+        "birthday": "1990-10-19",
+        "bio": "Zapalony gracz komputerowy.",
+        "passions": [11, 12, 13],
+        "location": [50.6757, 21.0059]
+    },
+    {
+        "username": "katarzyna_zielinska",
+        "password": "pass",
+        "email": "katarzyna.zielinska@example.pl",
+        "sex": "1",
+        "birthday": "1989-06-10",
+        "bio": "Lubię gotować i poznawać nowe przepisy.",
+        "passions": [19, 4, 7],
+        "location": [51.1079, 17.0385]
+    },
+    {
+        "username": "mateusz_rogalski",
+        "password": "pass",
+        "email": "mateusz.rogalski@example.pl",
+        "sex": "0",
+        "birthday": "1987-03-14",
+        "bio": "Fascynuję się historią.",
+        "passions": [21, 23, 22],
+        "location": [51.7592, 19.4566]
+    },
+    {
+        "username": "ada_wilczek",
+        "password": "pass",
+        "email": "ada.wilczek@example.pl",
+        "sex": "1",
+        "birthday": "1995-12-03",
+        "bio": "Uwielbiam fitness i zdrowy styl życia.",
+        "passions": [6, 5],
+        "location": [51.1097, 17.0292]
+    },
+    {
+        "username": "pawel_lukaszewicz",
+        "password": "pass",
+        "email": "pawel.lukaszewicz@example.pl",
+        "sex": "0",
+        "birthday": "1994-08-21",
+        "bio": "Gry komputerowe to moja pasja.",
+        "passions": [11, 12, 1],
+        "location": [52.2298, 21.0118]
+    },
+    {
+        "username": "marta_krzak",
+        "password": "pass",
+        "email": "marta.krzak@example.pl",
+        "sex": "1",
+        "birthday": "1992-05-10",
+        "bio": "Lubię filmy i książki.",
+        "passions": [18, 20, 17],
+        "location": [50.0499, 19.9449]
+    },
+    {
+        "username": "krzysztof_wisniewski",
+        "password": "pass",
+        "email": "krzysztof.wisniewski@example.pl",
+        "sex": "0",
+        "birthday": "1989-09-16",
+        "bio": "Zawsze gotowy do nowych wyzwań.",
+        "passions": [9, 7, 3],
+        "location": [53.3498, 14.5500]
+    },
+    {
+        "username": "eugenia_wojcik",
+        "password": "pass",
+        "email": "eugenia.wojcik@example.pl",
+        "sex": "1",
+        "birthday": "1986-01-12",
+        "bio": "Pasjonatka mody.",
+        "passions": [13, 14, 16],
+        "location": [50.0623, 19.9375]
+    },
+    {
+        "username": "jakub_olejniczak",
+        "password": "pass",
+        "email": "jakub.olejniczak@example.pl",
+        "sex": "0",
+        "birthday": "1990-11-02",
+        "bio": "Jestem fanem piłki nożnej.",
+        "passions": [1, 5],
+        "location": [50.6292, 19.9983]
+    },
+    {
+        "username": "anna_szewczyk",
+        "password": "pass",
+        "email": "anna.szewczyk@example.pl",
+        "sex": "1",
+        "birthday": "1993-04-15",
+        "bio": "Uwielbiam tworzyć muzykę.",
+        "passions": [14, 15],
+        "location": [52.2298, 21.0118]
+    },
+    {
+        "username": "michal_bak",
+        "password": "pass",
+        "email": "michal.bak@example.pl",
+        "sex": "0",
+        "birthday": "1991-03-30",
+        "bio": "Gra na instrumentach to moje życie.",
+        "passions": [14, 13, 10],
+        "location": [51.1079, 17.0385]
+    },
+    {
+        "username": "klaudia_majewska",
+        "password": "pass",
+        "email": "klaudia.majewska@example.pl",
+        "sex": "1",
+        "birthday": "1994-10-04",
+        "bio": "Kocham zwierzęta i podróże.",
+        "passions": [28, 19, 3],
+        "location": [52.4064, 16.9252]
+    },
+    {
+        "username": "tomasz_nowicki",
+        "password": "pass",
+        "email": "tomasz.nowicki@example.pl",
+        "sex": "0",
+        "birthday": "1987-01-28",
+        "bio": "Fascynat filmów i seriali.",
+        "passions": [17, 18],
+        "location": [51.7592, 19.4566]
+    },
+    {
+        "username": "karolina_jakubowska",
+        "password": "pass",
+        "email": "karolina.jakubowska@example.pl",
+        "sex": "1",
+        "birthday": "1992-09-25",
+        "bio": "Jestem miłośniczką książek.",
+        "passions": [20, 21],
+        "location": [50.6757, 21.0059]
+    },
+    {
+        "username": "adam_kaczmarek",
+        "password": "pass",
+        "email": "adam.kaczmarek@example.pl",
+        "sex": "0",
+        "birthday": "1992-08-21",
+        "bio": "Miłośnik muzyki elektronicznej.",
+        "passions": [15, 5, 11],
+        "location": [51.1079, 17.0385]
+    },
+    {
+        "username": "beata_wisniewska",
+        "password": "pass",
+        "email": "beata.wisniewska@example.pl",
+        "sex": "1",
+        "birthday": "1986-12-13",
+        "bio": "Podróżniczka i fotografka.",
+        "passions": [19, 13, 18],
+        "location": [50.6757, 21.0059]
+    },
+    {
+        "username": "jacek_kowalski",
+        "password": "pass",
+        "email": "jacek.kowalski@example.pl",
+        "sex": "0",
+        "birthday": "1990-03-10",
+        "bio": "Uwielbiam gotować.",
+        "passions": [19, 5],
+        "location": [52.4064, 16.9252]
+    },
+    {
+        "username": "klaudia_borkowska",
+        "password": "pass",
+        "email": "klaudia.borkowska@example.pl",
+        "sex": "1",
+        "birthday": "1991-11-02",
+        "bio": "Pasja do malowania.",
+        "passions": [13, 3, 6],
+        "location": [50.6292, 19.9983]
+    },
+    {
+        "username": "mariusz_rutkowski",
+        "password": "pass",
+        "email": "mariusz.rutkowski@example.pl",
+        "sex": "0",
+        "birthday": "1988-01-14",
+        "bio": "Fan sportów ekstremalnych.",
+        "passions": [1, 2, 6],
+        "location": [53.3498, 14.5500]
+    },
+    {
+        "username": "marta_kruk",
+        "password": "pass",
+        "email": "marta.kruk@example.pl",
+        "sex": "1",
+        "birthday": "1993-09-25",
+        "bio": "Zakochana w książkach.",
+        "passions": [20, 21, 12],
+        "location": [51.5074, 19.1278]
+    },
+    {
+        "username": "dawid_gorski",
+        "password": "pass",
+        "email": "dawid.gorski@example.pl",
+        "sex": "0",
+        "birthday": "1985-05-03",
+        "bio": "Amator gier planszowych.",
+        "passions": [12, 8],
+        "location": [52.2298, 21.0118]
+    },
+    {
+        "username": "patrycja_szumska",
+        "password": "pass",
+        "email": "patrycja.szumska@example.pl",
+        "sex": "1",
+        "birthday": "1990-07-08",
+        "bio": "Pasjonatka filmów niezależnych.",
+        "passions": [17, 18, 16],
+        "location": [50.0614, 19.9383]
+    },
+    {
+        "username": "michal_janowski",
+        "password": "pass",
+        "email": "michal.janowski@example.pl",
+        "sex": "0",
+        "birthday": "1994-11-11",
+        "bio": "Wielki fan piłki nożnej.",
+        "passions": [1, 9],
+        "location": [51.7592, 19.4566]
+    },
+    {
+        "username": "emilia_zawisza",
+        "password": "pass",
+        "email": "emilia.zawisza@example.pl",
+        "sex": "1",
+        "birthday": "1989-02-19",
+        "bio": "Uwielbiam pisać wiersze.",
+        "passions": [26, 20],
+        "location": [51.1079, 17.0385]
+    },
+    {
+        "username": "paweł_wojtowski",
+        "password": "pass",
+        "email": "pawel.wojtowski@example.pl",
+        "sex": "0",
+        "birthday": "1995-04-22",
+        "bio": "Fascynuję się historią i polityką.",
+        "passions": [21, 22, 23],
+        "location": [52.4064, 16.9252]
+    },
+    {
+        "username": "karol_malinowski",
+        "password": "pass",
+        "email": "karol.malinowski@example.pl",
+        "sex": "0",
+        "birthday": "1988-10-14",
+        "bio": "Fan muzyki rockowej.",
+        "passions": [15, 9],
+        "location": [50.6292, 19.9983]
+    },
+    {
+        "username": "anna_majewska",
+        "password": "pass",
+        "email": "anna.majewska@example.pl",
+        "sex": "1",
+        "birthday": "1992-03-30",
+        "bio": "Kocham teatry i kino.",
+        "passions": [16, 17],
+        "location": [50.6757, 21.0059]
+    },
+    {
+        "username": "grzegorz_krupa",
+        "password": "pass",
+        "email": "grzegorz.krupa@example.pl",
+        "sex": "0",
+        "birthday": "1984-12-17",
+        "bio": "Pasjonat astronomii.",
+        "passions": [30, 23],
+        "location": [52.2298, 21.0118]
+    },
+    {
+        "username": "ania_lis",
+        "password": "pass",
+        "email": "ania.lis@example.pl",
+        "sex": "1",
+        "birthday": "1994-06-11",
+        "bio": "Piesza turystyka i jazda na rowerze.",
+        "passions": [29, 6],
+        "location": [51.7592, 19.4566]
+    },
+    {
+        "username": "adam_wachowski",
+        "password": "pass",
+        "email": "adam.wachowski@example.pl",
+        "sex": "0",
+        "birthday": "1989-07-27",
+        "bio": "Miłośnik gier komputerowych.",
+        "passions": [11, 12],
+        "location": [52.4064, 16.9252]
+    },
+    {
+        "username": "marta_szewczyk",
+        "password": "pass",
+        "email": "marta.szewczyk@example.pl",
+        "sex": "1",
+        "birthday": "1993-01-16",
+        "bio": "Uwielbiam kino i teatr.",
+        "passions": [17, 16],
+        "location": [51.1079, 17.0385]
+    },
+    {
+        "username": "damian_nowakowski",
+        "password": "pass",
+        "email": "damian.nowakowski@example.pl",
+        "sex": "0",
+        "birthday": "1986-10-23",
+        "bio": "Fascynuję się polityką i historią.",
+        "passions": [21, 22],
+        "location": [50.6292, 19.9983]
+    },
+    {
+        "username": "alicja_witkowska",
+        "password": "pass",
+        "email": "alicja.witkowska@example.pl",
+        "sex": "1",
+        "birthday": "1995-12-01",
+        "bio": "Fanka muzyki klasycznej.",
+        "passions": [15, 5],
+        "location": [51.5074, 19.1278]
+    },
+    {
+        "username": "mateusz_sobczak",
+        "password": "pass",
+        "email": "mateusz.sobczak@example.pl",
+        "sex": "0",
+        "birthday": "1995-01-12",
+        "bio": "Miłośnik gier komputerowych.",
+        "passions": [11, 12, 1, 9],
+        "location": [52.4064, 16.9252]
+    },
+    {
+        "username": "patryk_kulig",
+        "password": "pass",
+        "email": "patryk.kulig@example.pl",
+        "sex": "0",
+        "birthday": "1992-04-09",
+        "bio": "Interesuję się piłką nożną.",
+        "passions": [1, 5, 6],
+        "location": [50.6757, 21.0059]
+    },
+    {
+        "username": "michal_siwiec",
+        "password": "pass",
+        "email": "michal.siwiec@example.pl",
+        "sex": "0",
+        "birthday": "1987-11-02",
+        "bio": "Zawsze mam czas na gry planszowe.",
+        "passions": [12, 8, 17],
+        "location": [51.1079, 17.0385]
+    },
+    {
+        "username": "julia_wojcik",
+        "password": "pass",
+        "email": "julia.wojcik@example.pl",
+        "sex": "1",
+        "birthday": "1994-08-15",
+        "bio": "Kocham zwierzęta.",
+        "passions": [28, 2, 3],
+        "location": [52.2298, 21.0118]
+    },
+    {
+        "username": "krzysztof_rutkowski",
+        "password": "pass",
+        "email": "krzysztof.rutkowski@example.pl",
+        "sex": "0",
+        "birthday": "1984-12-17",
+        "bio": "Fan sportów siłowych.",
+        "passions": [5, 6, 15, 23],
+        "location": [50.6292, 19.9983]
+    },
+    {
+        "username": "aneta_novak",
+        "password": "pass",
+        "email": "aneta.novak@example.pl",
+        "sex": "1",
+        "birthday": "1991-06-23",
+        "bio": "Uwielbiam podróże.",
+        "passions": [19, 18, 9],
+        "location": [51.5074, 19.1278]
+    },
+    {
+        "username": "andrzej_laskowski",
+        "password": "pass",
+        "email": "andrzej.laskowski@example.pl",
+        "sex": "0",
+        "birthday": "1983-09-30",
+        "bio": "Pasja do matematyki.",
+        "passions": [25, 5, 22],
+        "location": [52.2298, 21.0118]
+    },
+    {
+        "username": "agata_nowa",
+        "password": "pass",
+        "email": "agata.nowa@example.pl",
+        "sex": "1",
+        "birthday": "1986-07-10",
+        "bio": "Interesuję się teatrem.",
+        "passions": [16, 2, 5],
+        "location": [50.0614, 19.9383]
+    },
+    {
+        "username": "adam_pawlak",
+        "password": "pass",
+        "email": "adam.pawlak@example.pl",
+        "sex": "0",
+        "birthday": "1990-02-24",
+        "bio": "Zakochany w szachach.",
+        "passions": [10, 19, 3],
+        "location": [50.6757, 21.0059]
+    },
+    {
+        "username": "agnieszka_michalska",
+        "password": "pass",
+        "email": "agnieszka.michalska@example.pl",
+        "sex": "1",
+        "birthday": "1994-11-18",
+        "bio": "Uwielbiam gotować.",
+        "passions": [19, 28, 18],
+        "location": [51.1079, 17.0385]
+    },
+    {
+        "username": "tomasz_bielecki",
+        "password": "pass",
+        "email": "tomasz.bielecki@example.pl",
+        "sex": "0",
+        "birthday": "1991-09-12",
+        "bio": "Zainteresowania: muzyka.",
+        "passions": [15, 16, 5],
+        "location": [52.2298, 21.0118]
+    },
+    {
+        "username": "emilia_krupa",
+        "password": "pass",
+        "email": "emilia.krupa@example.pl",
+        "sex": "1",
+        "birthday": "1996-05-22",
+        "bio": "Uwielbiam filmy.",
+        "passions": [17, 9, 10],
+        "location": [51.7592, 19.4566]
+    },
+    {
+        "username": "marek_bartosz",
+        "password": "pass",
+        "email": "marek.bartosz@example.pl",
+        "sex": "0",
+        "birthday": "1991-09-12",
+        "bio": "Zainteresowania: muzyka.",
+        "passions": [15, 19, 12],
+        "location": [52.4064, 16.9252]
+    },
+    {
+        "username": "izabela_grzesiak",
+        "password": "pass",
+        "email": "izabela.grzesiak@example.pl",
+        "sex": "1",
+        "birthday": "1989-12-03",
+        "bio": "Fanka dobrego kina.",
+        "passions": [17, 18, 2],
+        "location": [50.6757, 21.0059]
+    },
+    {
+        "username": "zuzanna_sobota",
+        "password": "pass",
+        "email": "zuzanna.sobota@example.pl",
+        "sex": "1",
+        "birthday": "1995-07-01",
+        "bio": "Wszystko o naturze i zwierzętach.",
+        "passions": [28, 19, 11],
+        "location": [52.2298, 21.0118]
+    },
+    {
+        "username": "jakub_wysocki",
+        "password": "pass",
+        "email": "jakub.wysocki@example.pl",
+        "sex": "0",
+        "birthday": "1992-06-10",
+        "bio": "Interesuję się polityką.",
+        "passions": [22, 15, 25],
+        "location": [50.6757, 21.0059]
+    },
+    {
+        "username": "martyna_kaczmarek",
+        "password": "pass",
+        "email": "martyna.kaczmarek@example.pl",
+        "sex": "1",
+        "birthday": "1993-09-15",
+        "bio": "Miłośniczka literatury.",
+        "passions": [20, 28, 18],
+        "location": [51.1079, 17.0385]
+    },
+    {
+        "username": "grzegorz_wilk",
+        "password": "pass",
+        "email": "grzegorz.wilk@example.pl",
+        "sex": "0",
+        "birthday": "1984-03-09",
+        "bio": "Fan piłki ręcznej.",
+        "passions": [6, 3, 5],
+        "location": [50.6757, 21.0059]
+    },
+    {
+        "username": "monika_oliwa",
+        "password": "pass",
+        "email": "monika.oliwa@example.pl",
+        "sex": "1",
+        "birthday": "1987-10-25",
+        "bio": "Miłośniczka kina.",
+        "passions": [17, 19, 12],
+        "location": [50.6757, 21.0059]
+    },
+    {
+        "username": "rafal_michalowski",
+        "password": "pass",
+        "email": "rafal.michalowski@example.pl",
+        "sex": "0",
+        "birthday": "1990-07-14",
+        "bio": "Wielki fan astronomii.",
+        "passions": [30, 1, 12],
+        "location": [51.1079, 17.0385]
+    },
+    {
+        "username": "agnieszka_wilk",
+        "password": "pass",
+        "email": "agnieszka.wilk@example.pl",
+        "sex": "1",
+        "birthday": "1985-01-28",
+        "bio": "Interesuję się zdrowym stylem życia.",
+        "passions": [5, 28, 15],
+        "location": [52.2298, 21.0118]
+    },
+    {
+        "username": "stefan_rudzinski",
+        "password": "pass",
+        "email": "stefan.rudzinski@example.pl",
+        "sex": "0",
+        "birthday": "1994-05-14",
+        "bio": "Zainteresowany historią.",
+        "passions": [21, 17, 8],
+        "location": [51.1079, 17.0385]
+    },
+    {
+        "username": "ewelina_rozanska",
+        "password": "pass",
+        "email": "ewelina.rozanska@example.pl",
+        "sex": "1",
+        "birthday": "1992-01-17",
+        "bio": "Interesuję się modą.",
+        "passions": [16, 28, 3],
+        "location": [50.0614, 19.9383]
+    },
+    {
+        "username": "grzegorz_bogdanowicz",
+        "password": "pass",
+        "email": "grzegorz.bogdanowicz@example.pl",
+        "sex": "0",
+        "birthday": "1988-03-02",
+        "bio": "Pasjonat książek i muzyki.",
+        "passions": [15, 20, 19],
+        "location": [50.6757, 21.0059]
+    },
+    {
+        "username": "agnieszka_wloch",
+        "password": "pass",
+        "email": "agnieszka.wloch@example.pl",
+        "sex": "1",
+        "birthday": "1993-10-10",
+        "bio": "Uwielbiam grzebać w ogrodzie.",
+        "passions": [6, 15, 3],
+        "location": [52.4064, 16.9252]
+    }    
+]

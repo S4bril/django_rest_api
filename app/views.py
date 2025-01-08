@@ -187,7 +187,7 @@ class GetFormView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, *args, **kwargs):
-        json_file_path = os.path.join(settings.BASE_DIR, "app", "config", "form.json")
+        json_file_path = os.path.join(settings.BASE_DIR, "app", "json_forms", "form.json")
         print(json_file_path)
         
         if not os.path.exists(json_file_path):
