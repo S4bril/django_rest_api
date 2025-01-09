@@ -2,3 +2,4 @@ venv/
 media/profile_images/
 nohup.out
 static/
+db.sqlite3
