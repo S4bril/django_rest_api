@@ -4,6 +4,12 @@ from django.conf import settings
 from django.db import models
 
 
+class Location(models.Model):
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    updated_at = models.DateTimeField(auto_now=True)
+
+
 class CustomUser(AbstractUser):
     username = models.CharField(max_length=150)
     email = models.EmailField(unique=True)
@@ -33,12 +39,6 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return f"{self.username}"
-
-
-class Location(models.Model):
-    latitude = models.FloatField()
-    longitude = models.FloatField()
-    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Event(models.Model):

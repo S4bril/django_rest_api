@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 from app import views
 
 router = DefaultRouter()
-router.register(r'users', views.UserViewSet, basename='user')
+router.register(r'user', views.UserViewSet, basename='user')
 router.register(r'events', views.EventViewSet, basename='event')
 
 urlpatterns = [
