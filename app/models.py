@@ -11,14 +11,14 @@ class Location(models.Model):
 
 
 class CustomUser(AbstractUser):
-    username = models.CharField(max_length=150)
-    email = models.EmailField(unique=True)
-    sex = models.IntegerField(choices=[(0, 'Mężczyzna'), (1, 'Kobieta'),], default=0)
-    birthday = models.DateField(default='2000-01-01')
-    bio = models.TextField(max_length=500, blank=True)
-    account_creation_date = models.DateTimeField(default=now)
+    username = models.CharField(max_length=150, blank=False, null=False)
+    email = models.EmailField(unique=True, blank=False, null=False)
+    sex_id = models.IntegerField(choices=[(0, 'Mężczyzna'), (1, 'Kobieta'),], blank=False, null=False)
+    birthday = models.DateField(blank=False, null=False)
+    bio = models.TextField(blank=False, null=False)
+    created_at = models.DateTimeField(default=now)
     friends = models.ManyToManyField("self", blank=True, symmetrical=True)
-    profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
+    profile_image = models.ImageField(upload_to='profile_images/', blank=False, null=False)
 
     location = models.OneToOneField(
         'Location',
@@ -29,16 +29,12 @@ class CustomUser(AbstractUser):
     )
 
     passions = models.JSONField(
-        blank=True,
+        blank=False,
+        null=False,
         default=list,
     )
 
     rejected_users = models.ManyToManyField("self", blank=True, symmetrical=True)
-
-    data_vector = models.JSONField(
-        blank=True,
-        default=list,
-    )
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']

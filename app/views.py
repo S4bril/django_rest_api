@@ -69,7 +69,7 @@ class UserViewSet(
     def list_friends(self, request):
         user = request.user
         friends = user.friends.all()
-        serialized_friends = serializers.FriendSerializer(friends, many=True)
+        serialized_friends = serializers.FriendSerializer(friends, many=True, context={'request': request})
         return Response({"friends": serialized_friends.data}, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=['delete'], url_path='friends/remove/(?P<friend_id>[^/.]+)')
@@ -87,7 +87,7 @@ class UserViewSet(
         friend.friends.remove(user)
         return Response({"message": f"User {friend.username} removed from friends."}, status=status.HTTP_204_NO_CONTENT)
 
-    @action(detail=True, methods=['post'], url_path='friends/add-friend/(?P<friend_id>[^/.]+)')
+    @action(detail=False, methods=['post'], url_path='friends/add-friend/(?P<friend_id>[^/.]+)')
     def add_friend(self, request, friend_id=None):
         user = request.user
 
@@ -96,7 +96,6 @@ class UserViewSet(
             return Response({"error": "This user is already your friend."}, status=status.HTTP_400_BAD_REQUEST)
 
         user.friends.add(friend)
-        friend.friends.add(user)
         return Response({"message": f"User {friend.username} added to your friends."}, status=status.HTTP_204_NO_CONTENT)
 
     @action(detail=False, methods=['put'], url_path='location')
@@ -138,8 +137,7 @@ class UserViewSet(
     def get_suggested_friends(self, request):
         user = request.user
         suggested_friends = get_suggested_friends(user)
-        print(suggested_friends)
-        serialized_suggested_friends = serializers.CustomUserSerializer(suggested_friends, many=True)
+        serialized_suggested_friends = self.get_serializer(suggested_friends, many=True, context={'request': request})
         return Response({"suggested_friends": serialized_suggested_friends.data}, status=status.HTTP_200_OK)
 
 

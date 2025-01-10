@@ -1,136 +1,158 @@
 {
-    "username": {
-        "type": "textfield",
-        "label": "Jak chcesz się nazywać?"
-    },
-    "password": {
-        "type": "textfield",
-        "label": "Podaj hasło."
-    },
-    "email": {
-        "type": "textfield",
-        "label": "Podaj adres Email."
-    },
-    "sex": {
-        "type": "radio",
-        "label": "Podaj swoją płeć.",
-        "options": [
-            {
-                "name": "Mężczyzna",
-                "value": "Male"
-            },
-            {
-                "name": "Kobieta",
-                "value": "Female"
-            }
-        ]
-    },
-    "birthday": {
-        "type": "date",
-        "label": "Podaj datę swoich urodzin."
-    },
-    "bio": {
-        "type": "textarea",
-        "label": "Opowiedz coś o sobie."
-    },
-    "profile_image": {
-        "type": "photo",
-        "label": "Wybierz zdjęcie profilowe."
-    },
-    "passions": {
-        "type": "select",
-        "label": "Jakie są twoje pasje?",
-        "passions": {
-            "1": {
-              "name": "Piłka nożna"
-            },
-            "2": {
-              "name": "Koszykówka"
-            },
-            "3": {
-              "name": "Siatkówka"
-            },
-            "4": {
-              "name": "Bieganie"
-            },
-            "5": {
-              "name": "Siłownia"
-            },
-            "6": {
-              "name": "Piłka ręczna"
-            }, 
-            "7": {
-              "name": "Anime"
-            },
-            "8": {
-              "name": "D&D"
-            },
-            "9": {
-              "name": "Koncerty"
-            },
-            "10": {
-              "name": "Szachy"
-            },
-            "11": {
-              "name": "Gry komputerowe"
-            },
-            "12": {
-              "name": "Gry planszowe"
-            },
-            "13": {
-              "name": "Malowanie"
-            },
-            "14": {
-              "name": "Gra na instrumentach"
-            },
-            "15": {
-              "name": "Muzyka"
-            },
-            "16": {
-              "name": "Teatr"
-            },
-            "17": {
-              "name": "Kino"
-            },
-            "18": {
-              "name": "Filmy/Netflix"
-            },
-            "19": {
-              "name": "Gotowanie"
-            },
-            "20": {
-              "name": "Książki"
-            },
-            "21": {
-              "name": "Historia"
-            },
-            "22": {
-              "name": "Polityka"
-            },
-            "23": {
-              "name": "Fizyka"
-            },
-            "24": {
-              "name": "Chemia"
-            },
-            "25": {
-              "name": "Matematyka"
-            },
-            "26": {
-              "name": "Pisanie wierszy"
-            },
-            "27": {
-              "name": "Pisanie piosenek"
-            },
-            "28": {
-              "name": "Zwierzęta"
-            },
-            "29": {
-              "name": "Rower"
-            },
-            "30": {
-              "name": "Astrologia"
-            }
-        }
-    }
+  "username": {
+      "type": "textfield",
+      "label": "Jak chcesz się nazywać?"
+  },
+  "sex": {
+      "type": "radio",
+      "label": "Podaj swoją płeć.",
+      "options": [
+          {
+              "name": "Mężczyzna",
+              "value": 0
+          },
+          {
+              "name": "Kobieta",
+              "value": 1
+          }
+      ]
+  },
+  "birthday": {
+      "type": "date",
+      "label": "Podaj datę swoich urodzin."
+  },
+  "bio": {
+      "type": "textarea",
+      "label": "Opowiedz coś o sobie."
+  },
+  "profile_image": {
+      "type": "photo",
+      "label": "Wybierz zdjęcie profilowe."
+  },
+  "passions": {
+      "type": "select",
+      "label": "Jakie są twoje pasje?",
+      "options": [
+          {
+              "name": "Piłka nożna",
+              "value": 1
+          },
+          {
+              "name": "Koszykówka",
+              "value": 2
+          },
+          {
+              "name": "Siatkówka",
+              "value": 3
+          },
+          {
+              "name": "Bieganie",
+              "value": 4
+          },
+          {
+              "name": "Siłownia",
+              "value": 5
+          },
+          {
+              "name": "Piłka ręczna",
+              "value": 6
+          },
+          {
+              "name": "Anime",
+              "value": 7
+          },
+          {
+              "name": "D&D",
+              "value": 8
+          },
+          {
+              "name": "Koncerty",
+              "value": 9
+          },
+          {
+              "name": "Szachy",
+              "value": 10
+          },
+          {
+              "name": "Gry komputerowe",
+              "value": 11
+          },
+          {
+              "name": "Gry planszowe",
+              "value": 12
+          },
+          {
+              "name": "Malowanie",
+              "value": 13
+          },
+          {
+              "name": "Gra na instrumentach",
+              "value": 14
+          },
+          {
+              "name": "Muzyka",
+              "value": 15
+          },
+          {
+              "name": "Teatr",
+              "value": 16
+          },
+          {
+              "name": "Kino",
+              "value": 17
+          },
+          {
+              "name": "Filmy/Netflix",
+              "value": 18
+          },
+          {
+              "name": "Gotowanie",
+              "value": 19
+          },
+          {
+              "name": "Książki",
+              "value": 20
+          },
+          {
+              "name": "Historia",
+              "value": 21
+          },
+          {
+              "name": "Polityka",
+              "value": 22
+          },
+          {
+              "name": "Fizyka",
+              "value": 23
+          },
+          {
+              "name": "Chemia",
+              "value": 24
+          },
+          {
+              "name": "Matematyka",
+              "value": 25
+          },
+          {
+              "name": "Pisanie wierszy",
+              "value": 26
+          },
+          {
+              "name": "Pisanie piosenek",
+              "value": 27
+          },
+          {
+              "name": "Zwierzęta",
+              "value": 28
+          },
+          {
+              "name": "Rower",
+              "value": 29
+          },
+          {
+              "name": "Astrologia",
+              "value": 30
+          }
+      ]
+  }
 }
