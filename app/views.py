@@ -16,6 +16,7 @@ from .models import CustomUser, Event, Location
 from .permissions import IsOwnerOrReadOnly
 from . import serializers
 
+from .compute_suggested_friends.compute import get_suggested_friends
 
 class UserViewSet(
     mixins.CreateModelMixin,
@@ -50,7 +51,7 @@ class UserViewSet(
     @action(detail=False, methods=['get'], url_path='get-profile')
     def get_profile(self, request):
         user = request.user
-        serialized_user = serializers.CustomUserSerializer(user)
+        serialized_user = serializers.CustomUserSerializer(user, context={'request': request})
         return Response(serialized_user.data)
 
     @action(detail=False, methods=['put'], url_path='update-profile')
@@ -123,7 +124,7 @@ class UserViewSet(
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    @action(detail=False, methods=['get'], url_path='get_location')
+    @action(detail=False, methods=['get'], url_path='get-location')
     def get_location(self, request):
         user = request.user
 
@@ -132,6 +133,14 @@ class UserViewSet(
             return Response({"location": serializer.data}, status=status.HTTP_200_OK)
 
         return Response({"error": "Location not found for this user."}, status=status.HTTP_404_NOT_FOUND)
+
+    @action(detail=False, methods=['get'], url_path='suggested-friends')
+    def get_suggested_friends(self, request):
+        user = request.user
+        suggested_friends = get_suggested_friends(user)
+        print(suggested_friends)
+        serialized_suggested_friends = serializers.CustomUserSerializer(suggested_friends, many=True)
+        return Response({"suggested_friends": serialized_suggested_friends.data}, status=status.HTTP_200_OK)
 
 
 class EventViewSet(viewsets.ModelViewSet):

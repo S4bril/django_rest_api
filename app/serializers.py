@@ -47,6 +47,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
     profile_image = Base64ImageField(required=False, write_only=True)
     image_url = serializers.SerializerMethodField()
     sex = serializers.SerializerMethodField()
+    # passions = serializers.SerializerMethodField() # todo
 
     class Meta:
         model = CustomUser
