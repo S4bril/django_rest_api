@@ -6,11 +6,11 @@ import django
 from tqdm import tqdm
 from termcolor import colored
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'foundyou_api')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'fu_api')))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
 django.setup()
 
-from app.models import CustomUser, Event, Location
+from fu_api.models import CustomUser, Event, Location
 
 JSON_FILE = "app/json_forms/events.json"
 POSITIVE_COLOR = "green"
@@ -34,11 +34,11 @@ def add_events_to_db(user, events):
         
         if lat and long:
             location, created = Location.objects.get_or_create(
-                latitude=latitude, longitude=longitude
+                latitude=lat, longitude=long
             )
         else:
             location = None
-        event = Event.objects.create(**e)
+        # event = Event.objects.create(**e)
         user.owned_events = location
         user.save()
 

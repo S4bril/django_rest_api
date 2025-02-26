@@ -2,11 +2,11 @@ import os
 import sys
 import django
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'foundyou_api')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'config')))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
 django.setup()
 
-from app.models import CustomUser
+from fu_api.models import CustomUser
 
 def compute_data_vector(user):
     data_vector = 30 * [0]

@@ -3,3 +3,4 @@ media/profile_images/
 nohup.out
 static/
 db.sqlite3
+__pycache__

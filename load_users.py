@@ -6,11 +6,11 @@ import django
 from tqdm import tqdm
 from termcolor import colored
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'foundyou_api')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'config')))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
 django.setup()
 
-from app.models import CustomUser, Location
+from fu_api.models import CustomUser, Location
 
 JSON_FILE = "app/json_forms/users.json"
 POSITIVE_COLOR = "green"

@@ -25,4 +25,5 @@ termcolor==2.5.0
 tqdm==4.67.1
 tzdata==2024.2
 urllib3==2.2.3
-uWSGI==2.0.28
+scikit-learn==1.6.1
+numpy==2.2.0

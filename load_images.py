@@ -3,11 +3,11 @@ import sys
 import django
 from django.core.files import File
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'foundyou_api')))
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'foundyou_api.settings')
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'config')))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 django.setup()
 
-from app.models import CustomUser
+from fu_api.models import CustomUser
 
 def assign_default_profile_image():
     default_image_man_path = 'media/profile_images/default_man_1.jpg'
