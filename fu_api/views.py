@@ -1,22 +1,50 @@
 import os
 import json
-
 from django.contrib.auth import authenticate
 from django.shortcuts import get_object_or_404
 from django.conf import settings
-
 from rest_framework import viewsets, mixins, status
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.views import APIView
-
+from rest_framework.generics import (
+    ListAPIView,
+    CreateAPIView,
+    RetrieveUpdateDestroyAPIView
+)
 from .models import CustomUser, Event, Location
 from .permissions import IsOwnerOrReadOnly
-from . import serializers
-
+from .serializers import (
+    CustomUserSerializer,
+    FriendSerializer,
+    LocationSerializer,
+    EventSerializer
+)
 from .compute_suggested_friends.compute import get_suggested_friends
+
+
+class UserDetailView(RetrieveUpdateDestroyAPIView):
+    serializer_class = CustomUserSerializer
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+
+    def get_object(self):
+        return self.request.user
+
+
+class UserCreateView(CreateAPIView):
+    serializer_class = CustomUserSerializer
+    permission_classes = [AllowAny]
+
+
+class UserFriendsListView(ListAPIView):
+    serializer_class = FriendSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return self.request.user.friends.all()
+
 
 class UserViewSet(
     mixins.CreateModelMixin,
@@ -24,7 +52,7 @@ class UserViewSet(
     viewsets.GenericViewSet
 ):
     queryset = CustomUser.objects.all()
-    serializer_class = serializers.CustomUserSerializer
+    serializer_class = CustomUserSerializer
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
     def get_permissions(self):
@@ -51,7 +79,7 @@ class UserViewSet(
     @action(detail=False, methods=['get'], url_path='get-profile')
     def get_profile(self, request):
         user = request.user
-        serialized_user = serializers.CustomUserSerializer(user, context={'request': request})
+        serialized_user = CustomUserSerializer(user, context={'request': request})
         return Response(serialized_user.data)
 
     @action(detail=False, methods=['put'], url_path='update-profile')
@@ -69,7 +97,7 @@ class UserViewSet(
     def list_friends(self, request):
         user = request.user
         friends = user.friends.all()
-        serialized_friends = serializers.FriendSerializer(friends, many=True, context={'request': request})
+        serialized_friends = FriendSerializer(friends, many=True, context={'request': request})
         return Response({"friends": serialized_friends.data}, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=['delete'], url_path='friends/remove/(?P<friend_id>[^/.]+)')
@@ -102,7 +130,7 @@ class UserViewSet(
     def update_location(self, request):
         user = request.user
 
-        serializer = serializers.LocationSerializer(data=request.data)
+        serializer = LocationSerializer(data=request.data)
 
         if serializer.is_valid():
             lat = serializer.validated_data['latitude']
@@ -128,7 +156,7 @@ class UserViewSet(
         user = request.user
 
         if user.location:
-            serializer = serializers.LocationSerializer(user.location)
+            serializer = LocationSerializer(user.location)
             return Response({"location": serializer.data}, status=status.HTTP_200_OK)
 
         return Response({"error": "Location not found for this user."}, status=status.HTTP_404_NOT_FOUND)
@@ -143,7 +171,7 @@ class UserViewSet(
 
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
-    serializer_class = serializers.EventSerializer
+    serializer_class = EventSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
@@ -156,42 +184,6 @@ class EventViewSet(viewsets.ModelViewSet):
     def all_events(self):
         return self.queryset
 
-
-class LoginView(APIView):
-    permission_classes = [AllowAny]
-
-    def post(self, request, *args, **kwargs):
-        email = request.data.get("email")
-        password = request.data.get("password")
-        user = authenticate(username=email, password=password)
-
-        if user:
-            refresh = RefreshToken.for_user(user)
-            return Response({
-                "refresh": str(refresh),
-                "access": str(refresh.access_token),
-            })
-        return Response({"detail": "Invalid credentials"}, status=401)
-
-
-class LogoutView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request):
-        refresh_token = request.data.get("refresh")
-
-        if not refresh_token:
-            return Response({"detail": "Refresh token is required."}, status=status.HTTP_400_BAD_REQUEST)
-
-        try:
-            token = RefreshToken(refresh_token)
-            user_id = token["user_id"]
-            token.blacklist()
-
-            return Response({"detail": f"{CustomUser.objects.get(id=user_id)} logged out successfully"})
-
-        except Exception as e:
-            return Response({"detail": f"Invalid token: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
 
 class GetFormView(APIView):
     permission_classes = [AllowAny]

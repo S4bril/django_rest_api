@@ -11,7 +11,7 @@
 | **DELETE**      | `/user/`                         | Delete a user.                        | Yes                | None                                                                                       |
 | **GET**         | `/user/friends/`                 | List user's friends                   | Yes                | None                                                                                       |
 | **DELETE**      | `/user/friends/<id>/`            | Remove a friend.                      | Yes                | `{ "friend_id": <int> }`                                                                   |
-| **DELETE**      | `/user/friends/add-friend/<id>/` | Add a friend.                         | Yes                | None                                                                                       |
+| **PUT**      | `/user/friends/add-friend/<id>/` | Add a friend.                         | Yes                | None                                                                                       |
 | **PUT**         | `/user/location/`                | Update user's location.               | Yes                | `{"latitude": float, "longitude": float}`                                                  |
 | **GET**         | `/user/get_location/`            | Get user's location.                  | Yes                | None                                                                                       |
 | **POST**        | `/events/`                       | Create a new event.                   | Yes                | `{ "title", "description", "latitude", "longitude": float, ... }`                          |
