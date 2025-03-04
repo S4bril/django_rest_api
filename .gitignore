@@ -1,6 +1,3 @@
-venv/
-media/profile_images/
-nohup.out
-static/
+media
 db.sqlite3
 __pycache__

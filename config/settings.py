@@ -8,7 +8,6 @@ SECRET_KEY = 'django-insecure-7gg8%oq=$#&r%=v++cysgc=1ti#98up&0@kh!qqn&7flzx$ec^
 
 DEBUG = True
 
-# ALLOWED_HOSTS = ['ec2-18-194-68-124.eu-central-1.compute.amazonaws.com', '18.194.68.124']
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
@@ -83,19 +82,17 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "fu_api.CustomUser" 
 
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication'
     ],
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.IsAuthenticated'
-    # ]
 }
 
 SIMPLE_JWT = {
@@ -104,9 +101,6 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,
 }
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
