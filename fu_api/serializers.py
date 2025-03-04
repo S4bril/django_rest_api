@@ -123,7 +123,7 @@ class FriendSerializer(serializers.ModelSerializer):
         fields = ['username', 'sex', 'bio', 'image_url', 'age']
 
     def get_sex(self, obj):
-        return obj.get_sex_display()
+        return obj.get_sex_id_display()
     
     def get_image_url(self, obj):
         request = self.context.get('request')

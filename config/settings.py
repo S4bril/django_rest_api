@@ -82,6 +82,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+STATIC_URL = 'static/'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "fu_api.CustomUser" 
@@ -93,6 +95,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication'
     ],
+
 }
 
 SIMPLE_JWT = {
@@ -105,7 +108,4 @@ SIMPLE_JWT = {
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-SWAGGER_SETTINGS = {
-    'SECURITY_DEFINITIONS': None,
-    'USE_SESSION_AUTH': False,
-}
+FORM_PATH = os.path.join(BASE_DIR, 'fu_api', 'json_forms', 'form.json')

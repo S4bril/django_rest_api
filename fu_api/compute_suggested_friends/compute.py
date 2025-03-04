@@ -35,7 +35,6 @@ def compute_data_vector(user):
 
 def get_suggested_friends(user):
     potential_friends = get_valid_potential_friends_from_db(user)
-    print(potential_friends[0])
     
     if not potential_friends:
         return []
@@ -51,6 +50,4 @@ def get_suggested_friends(user):
     
     top_friends = [potential_friends[int(i)] for i in indices[0]]
 
-    print(top_friends)
-    
     return top_friends
