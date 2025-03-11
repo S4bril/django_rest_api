@@ -7,8 +7,11 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView, 
     TokenObtainPairView
 )
-from fu_api.views import (
-    EventViewSet,
+from fu_api.views.friend_request.views import FriendRequestAcceptView, FriendRequestListCreateView, FriendRequestRejectView
+from fu_api.views.views import (
+    EventLocationDetailView,
+    EventsListCreateView,
+    EventsDetailView,
     FormRetrieveView,
     UsersListCreateView,
     UsersRetrieveView,
@@ -18,8 +21,6 @@ from fu_api.views import (
     UserSuggestedFriendsRetrieveView
 )
 
-router = DefaultRouter()
-router.register(r'events', EventViewSet, basename='event')
 
 urlpatterns = [
     path('api/users/', UsersListCreateView.as_view()),
@@ -29,6 +30,13 @@ urlpatterns = [
     path('api/me/friends/', UserFriendsListView.as_view()),
     path('api/me/location/', UserLocationDetailView.as_view()),
     path('api/me/suggested-friends/', UserSuggestedFriendsRetrieveView.as_view()),
+    path('api/me/friend-requests/', FriendRequestListCreateView.as_view()),
+    path('api/me/friend-requests/<int:pk>/accept/', FriendRequestAcceptView.as_view()),
+    path('api/me/friend-requests/<int:pk>/reject/', FriendRequestRejectView.as_view()),
+
+    path('api/events/', EventsListCreateView.as_view()),
+    path('api/events/<int:pk>/', EventsDetailView.as_view()),
+    path('api/events/<int:pk>/location/', EventLocationDetailView.as_view()),
 
     path('api/token/', TokenObtainPairView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view()),

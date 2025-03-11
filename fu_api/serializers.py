@@ -6,7 +6,7 @@ from django.core.files.base import ContentFile
 
 from rest_framework import serializers
 
-from .models import CustomUser, Event, Location
+from .models import CustomUser, Event, FriendRequest, Location
 
 from datetime import date
 
@@ -37,14 +37,23 @@ class Base64ImageField(serializers.ImageField):
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ['id', 'title', 'description', 'owner', 'participants', 'created_at', 'updated_at']
+        fields = ['id', 'title', 'description', 'owner', 'participants', 'created_at', 'updated_at']#, 'location']
         read_only_fields = ['owner', 'created_at', 'updated_at']
+
+    # def create(self, validated_data):
+    #     location_data = validated_data.pop('location')
+    #     location_serializer = LocationSerializer(data=location_data)
+    #     location_serializer.is_valid(raise_exception=True)
+    #     location = location_serializer.save()
+
+    #     event = Event.objects.create(location=location, **validated_data)
+    #     return event
 
 
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
-        fields = ['id', 'latitude', 'longitude', 'updated_at']
+        fields = ['latitude', 'longitude']
 
     def validate(self, data):
         latitude = data.get('latitude')
@@ -140,3 +149,7 @@ class FriendSerializer(serializers.ModelSerializer):
             return age
         return None
 
+class FriendRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FriendRequest
+        fields = '__all__'
