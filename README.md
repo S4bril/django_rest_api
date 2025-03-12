@@ -1,21 +1,48 @@
-# API Endpoints
+# Step-by-Step Instructions to Run Your Django Server on Windows
 
-| **HTTP Method** | **Endpoint**                     | **Description**                       | **Authentication** | **Request Body Params**                                                                    |
-| --------------- | -------------------------------- | ------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------ |
-| **GET**         | `/login/`                        | Log in user.                          | Yes                | `{"username", "password"}`                                                                 |
-| **GET**         | `/token/refresh/`                | Refresh jwt token.                    | No                 | `{"refresh"}`                                                                              |
-| **GET**         | `/logout/`                       | Logout user.                          | Yes                | None                                                                                       |
-| **POST**        | `/user/`                         | Create a new user.                    | No                 | `{ "username", "email", "password", "sex", "birthday", "bio", "profile_image": "base64" }` |
-| **GET**         | `/user/get-profile/`             | Retrieve logged in user's profile     | Yes                | None                                                                                       |
-| **PUT**         | `/user/`                         | Update user details.                  | Yes                | `{ "email", "bio", ... }`                                                                  |
-| **DELETE**      | `/user/`                         | Delete a user.                        | Yes                | None                                                                                       |
-| **GET**         | `/user/friends/`                 | List user's friends                   | Yes                | None                                                                                       |
-| **DELETE**      | `/user/friends/<id>/`            | Remove a friend.                      | Yes                | `{ "friend_id": <int> }`                                                                   |
-| **PUT**      | `/user/friends/add-friend/<id>/` | Add a friend.                         | Yes                | None                                                                                       |
-| **PUT**         | `/user/location/`                | Update user's location.               | Yes                | `{"latitude": float, "longitude": float}`                                                  |
-| **GET**         | `/user/get_location/`            | Get user's location.                  | Yes                | None                                                                                       |
-| **POST**        | `/events/`                       | Create a new event.                   | Yes                | `{ "title", "description", "latitude", "longitude": float, ... }`                          |
-| **GET**         | `/events/`                       | List all events.                      | Yes                | `?search=<query>` (optional)                                                               |
-| **GET**         | `/events/<id>/`                  | Retrieve details of a specific event. | Yes                | None                                                                                       |
-| **PUT**         | `/events/<id>/`                  | Update event details.                 | Yes                | `{ "title": "string", "description": "string", ... }`                                      |
-| **DELETE**      | `/events/<id>/`                  | Delete an event.                      | Yes                | None                                                                                       |
+1. **Install Python (if not already installed):**
+   - Download Python 3 from [python.org](https://www.python.org/downloads/).
+   - After installation, verify by running in Command Prompt or PowerShell:
+     ```bash
+     python --version
+     ```
+
+2. **Set Up a Virtual Environment (Recommended):**
+   - In your project directory, create a virtual environment:
+     ```bash
+     python -m venv venv
+     ```
+   - Activate the virtual environment:
+     - In Command Prompt:
+       ```bash
+       venv\Scripts\activate
+       ```
+     - In PowerShell:
+       ```bash
+       .\venv\Scripts\Activate.ps1
+       ```
+
+3. **Install Dependencies:**
+   - Install your project dependencies (listed in your `requirements.txt`):
+     ```bash
+     pip install -r requirements.txt
+     ```
+
+4. **Apply Migrations (if needed):**
+   - Run migrations to create/update your database schema:
+     ```bash
+     python manage.py migrate
+     ```
+
+5. **Run the Development Server:**
+   - Start the Django development server:
+     ```bash
+     python manage.py runserver
+     ```
+   - By default, the server will run at `http://127.0.0.1:8000/`.
+
+6. **Link to Postman**
+   - https://found-you-restful-api.postman.co/workspace/Found-you-RESTful-API-Workspace~795661ab-c817-4981-8df9-ce6ac9370605/overview
+   - Choose environment 
+   ![alt text](image.png)
+   - Before each request script obtaining access token will run so there is no need for manually copy and pasting the token.

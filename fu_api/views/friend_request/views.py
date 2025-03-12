@@ -18,6 +18,9 @@ class FriendRequestListCreateView(generics.ListCreateAPIView):
         receiver_id = request.data.get('receiver')
         receiver = CustomUser.objects.get(id=receiver_id)
 
+        if receiver in request.user.friends.all():
+            return Response({'detail': 'User is already your friend'}, status=status.HTTP_400_BAD_REQUEST)
+
         if FriendRequest.objects.filter(sender=request.user, receiver=receiver, status='pending').exists():
             return Response({'detail': 'Friend request already sent'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -33,12 +36,12 @@ class FriendRequestListCreateView(generics.ListCreateAPIView):
         return Response(FriendRequestSerializer(friend_request).data, status=status.HTTP_201_CREATED)
 
 
-# class FriendRequestListView(generics.ListAPIView):
-#     serializer_class = FriendRequestSerializer
-#     permission_classes = [permissions.IsAuthenticated]
+class SentFriendRequestListView(generics.ListAPIView):
+    serializer_class = FriendRequestSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
-#     def get_queryset(self):
-#         return FriendRequest.objects.filter(receiver=self.request.user).order_by('-created_at')
+    def get_queryset(self):
+        return FriendRequest.objects.filter(sender=self.request.user).order_by('-created_at')
 
 
 class FriendRequestAcceptView(generics.UpdateAPIView):

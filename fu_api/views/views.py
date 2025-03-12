@@ -2,7 +2,7 @@ import os
 import json
 from django.conf import settings
 from django.shortcuts import get_object_or_404
-from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED
+from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_404_NOT_FOUND, HTTP_400_BAD_REQUEST
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -50,6 +50,22 @@ class UserFriendsListView(ListAPIView):
 
     def get_queryset(self):
         return self.request.user.friends.all()
+
+
+class RemoveFriendView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, pk, *args, **kwargs):
+        try:
+            friend = CustomUser.objects.get(pk=pk)
+        except CustomUser.DoesNotExist:
+            return Response({'detail': 'Friend not found'}, status=HTTP_404_NOT_FOUND)
+
+        if friend not in request.user.friends.all():
+            return Response({'detail': 'User is not your friend'}, status=HTTP_400_BAD_REQUEST)
+
+        request.user.friends.remove(friend)
+        return Response({'detail': 'Friend removed successfully'}, status=HTTP_200_OK)
 
 
 class UserLocationDetailView(RetrieveUpdateDestroyAPIView):

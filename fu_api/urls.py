@@ -7,8 +7,9 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView, 
     TokenObtainPairView
 )
-from fu_api.views.friend_request.views import FriendRequestAcceptView, FriendRequestListCreateView, FriendRequestRejectView
+from fu_api.views.friend_request.views import FriendRequestAcceptView, FriendRequestListCreateView, FriendRequestRejectView, SentFriendRequestListView
 from fu_api.views.views import (
+    RemoveFriendView,
     EventLocationDetailView,
     EventsListCreateView,
     EventsDetailView,
@@ -28,11 +29,14 @@ urlpatterns = [
 
     path('api/me/', UserDetailView.as_view()),
     path('api/me/friends/', UserFriendsListView.as_view()),
+    path('api/me/friends/<int:pk>/remove/', RemoveFriendView.as_view(), name='remove_friend'),
     path('api/me/location/', UserLocationDetailView.as_view()),
     path('api/me/suggested-friends/', UserSuggestedFriendsRetrieveView.as_view()),
-    path('api/me/friend-requests/', FriendRequestListCreateView.as_view()),
-    path('api/me/friend-requests/<int:pk>/accept/', FriendRequestAcceptView.as_view()),
-    path('api/me/friend-requests/<int:pk>/reject/', FriendRequestRejectView.as_view()),
+
+    path('api/friend-requests/', FriendRequestListCreateView.as_view()),
+    path('api/friend-requests/sent/', SentFriendRequestListView.as_view()),
+    path('api/friend-requests/<int:pk>/accept/', FriendRequestAcceptView.as_view()),
+    path('api/friend-requests/<int:pk>/reject/', FriendRequestRejectView.as_view()),
 
     path('api/events/', EventsListCreateView.as_view()),
     path('api/events/<int:pk>/', EventsDetailView.as_view()),
