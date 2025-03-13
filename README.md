@@ -1,4 +1,4 @@
-# Step-by-Step Instructions to Run Your Django Server on Windows
+# Step-by-Step Instructions to Run Django Server on Windows
 
 1. **Install Python (if not already installed):**
    - Download Python 3 from [python.org](https://www.python.org/downloads/).

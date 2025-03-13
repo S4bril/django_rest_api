@@ -2,24 +2,20 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path
-from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (
     TokenRefreshView, 
     TokenObtainPairView
 )
-from fu_api.views.friend_request.views import FriendRequestAcceptView, FriendRequestListCreateView, FriendRequestRejectView, SentFriendRequestListView
-from fu_api.views.views import (
-    RemoveFriendView,
-    EventLocationDetailView,
-    EventsListCreateView,
-    EventsDetailView,
-    FormRetrieveView,
-    UsersListCreateView,
-    UsersRetrieveView,
-    UserDetailView,
-    UserFriendsListView,
-    UserLocationDetailView,
-    UserSuggestedFriendsRetrieveView
+from fu_api.views.events.location_view import EventLocationDetailView
+from fu_api.views.events.event_views import EventsDetailView, EventsListCreateView
+from fu_api.views.forms.form_view import FormRetrieveView
+from fu_api.views.friend_request.friend_request_views import FriendRequestAcceptView, FriendRequestListCreateView, FriendRequestRejectView, SentFriendRequestListView
+from fu_api.views.suggested_friends.suggested_friends_view import UserSuggestedFriendsRetrieveView
+from fu_api.views.user_profile.friends_views import RemoveFriendView, UserFriendsListView
+from fu_api.views.user_profile.profile_managment_view import UserDetailView
+from fu_api.views.users.users_views import UsersListCreateView, UsersRetrieveView
+from fu_api.views.user_profile.location_view import (
+    UserLocationDetailView
 )
 
 
