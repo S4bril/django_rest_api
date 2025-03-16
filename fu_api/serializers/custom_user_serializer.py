@@ -1,27 +1,18 @@
-import os
-import json
 import base64
+import json
+import os
 
+from django.conf import settings
 from django.core.files.base import ContentFile
-
 from rest_framework import serializers
+from fu_api.models.custom_user_model import CustomUser
 
-from .models import CustomUser, Event, Location
-
-from datetime import date
-
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-json_file_path = os.path.join(BASE_DIR, 'json_forms/passions.json')
-
-with open(json_file_path, 'r') as file:
-    PASSIONS = json.load(file)['passions']
 
 class Base64ImageField(serializers.ImageField):
     def to_internal_value(self, data):
         if isinstance(data, str):
             if data.startswith('/9j'):
-                imgstr = data   
+                imgstr = data
                 ext = 'jpeg'
             elif data.startswith('iVBORw0KGgo'):
                 imgstr = data
@@ -32,30 +23,6 @@ class Base64ImageField(serializers.ImageField):
         image_data = base64.b64decode(imgstr)
         data = ContentFile(image_data, name=f'temp.{ext}')
         return super().to_internal_value(data)
-
-
-class EventSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Event
-        fields = ['id', 'title', 'description', 'owner', 'participants', 'created_at', 'updated_at']
-        read_only_fields = ['owner', 'created_at', 'updated_at']
-
-
-class LocationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Location
-        fields = ['id', 'latitude', 'longitude', 'updated_at']
-
-    def validate(self, data):
-        latitude = data.get('latitude')
-        longitude = data.get('longitude')
-
-        if (-180.0 > longitude > 180.0):
-            raise serializers.ValidationError("longitude has to be in range from -180 degrees to 180 degrees")
-
-        if (-90.0 > latitude > 90.0):
-            raise serializers.ValidationError("latitude has to be in range from -90.0 degrees to 90.0 degrees")
-        return data
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -95,48 +62,23 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
-    
+
         instance.save()
-    
+
         return instance
-    
+
     def get_image_url(self, obj):
         if obj.profile_image:
             return self.context['request'].build_absolute_uri(obj.profile_image.url)
         return None
-    
+
     def get_passions(self, obj):
         passions_ids = obj.passions
-        passions_names = [PASSIONS.get(str(p_id), {}).get('name', 'Unknown') for p_id in passions_ids]
+        passions_file_path = os.path.join(settings.BASE_DIR, "fu_api", "json_forms", "passions.json")
+        with open(passions_file_path, 'r', encoding="utf-8") as file:
+            passions = json.load(file)['passions']
+        passions_names = [passions.get(str(p_id), {}).get('name', 'Unknown') for p_id in passions_ids]
         return passions_names
-    
+
     def get_friend_count(self, obj):
         return obj.friends.count()
-
-
-class FriendSerializer(serializers.ModelSerializer):
-    image_url = serializers.SerializerMethodField()
-    sex = serializers.SerializerMethodField()
-    age = serializers.SerializerMethodField()
-    class Meta:
-        model = CustomUser
-        fields = ['username', 'sex', 'bio', 'image_url', 'age']
-
-    def get_sex(self, obj):
-        return obj.get_sex_display()
-    
-    def get_image_url(self, obj):
-        request = self.context.get('request')
-        if request and obj.profile_image:
-            return request.build_absolute_uri(obj.profile_image.url)
-        return None
-
-    def get_age(self, obj):
-        if obj.birthday:
-            today = date.today()
-            age = today.year - obj.birthday.year - (
-                (today.month, today.day) < (obj.birthday.month, obj.birthday.day)
-            )
-            return age
-        return None
-

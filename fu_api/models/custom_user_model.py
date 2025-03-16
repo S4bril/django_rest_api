@@ -1,0 +1,45 @@
+import os
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+from django.utils.timezone import now
+
+
+class CustomUser(AbstractUser):
+    username = models.CharField(max_length=150, blank=False, null=False)
+    email = models.EmailField(unique=True, blank=False, null=False)
+    sex_id = models.IntegerField(choices=[(0, 'Mężczyzna'), (1, 'Kobieta'),], blank=False, null=False)
+    birthday = models.DateField(blank=False, null=False)
+    bio = models.TextField(blank=False, null=False)
+    created_at = models.DateTimeField(default=now)
+    friends = models.ManyToManyField("self", blank=True, symmetrical=True)
+    profile_image = models.ImageField(upload_to='profile_images/', blank=True, null=True)
+    rejected_users = models.ManyToManyField("self", blank=True, symmetrical=True)
+
+    location = models.OneToOneField(
+        'Location',
+        related_name='user',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
+
+    passions = models.JSONField(
+        blank=False,
+        null=False,
+        default=list,
+    )
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
+
+    def __str__(self):
+        return f"{self.username}"
+
+    def delete(self, *args, **kwargs): #maybe do this with signals
+        if self.profile_image:
+            if os.path.isfile(self.profile_image.path):
+                os.remove(self.profile_image.path)
+
+        if self.location:
+            self.location.delete()
+        super().delete(*args, **kwargs)

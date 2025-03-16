@@ -3,14 +3,13 @@ import sys
 import json
 import django
 
-from tqdm import tqdm
-from termcolor import colored
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'fu_api')))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
 django.setup()
 
-from fu_api.models import CustomUser, Event, Location
+from fu_api.models.custom_user_model import CustomUser
+from fu_api.models.event_model import Event
+from fu_api.models.loaction_model import Location
 
 JSON_FILE = "app/json_forms/events.json"
 POSITIVE_COLOR = "green"
