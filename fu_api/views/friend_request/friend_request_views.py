@@ -19,10 +19,10 @@ class FriendRequestListCreateView(generics.ListCreateAPIView):
         if receiver in request.user.friends.all():
             return Response({'detail': 'User is already your friend'}, status=status.HTTP_400_BAD_REQUEST)
 
-        if FriendRequest.objects.filter(sender=request.user, receiver=receiver, status='pending').exists():
+        elif FriendRequest.objects.filter(sender=request.user, receiver=receiver, status='pending').exists():
             return Response({'detail': 'Friend request already sent'}, status=status.HTTP_400_BAD_REQUEST)
 
-        if FriendRequest.objects.filter(sender=request.user, receiver=receiver, status='rejected').exists():
+        elif FriendRequest.objects.filter(sender=request.user, receiver=receiver, status='rejected').exists():
             return Response({'detail': 'Friend request rejected'}, status=status.HTTP_400_BAD_REQUEST)
 
         friend_request = FriendRequest.objects.create(sender=request.user, receiver=receiver)
@@ -50,7 +50,11 @@ class FriendRequestAcceptView(generics.UpdateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def update(self, request, *args, **kwargs):
-        friend_request = FriendRequest.objects.get(id=self.kwargs['pk'], receiver=request.user, status='pending')
+        try:
+            friend_request = FriendRequest.objects.get(id=self.kwargs['pk'], receiver=request.user, status='pending')
+        except FriendRequest.DoesNotExist:
+            return Response({'detail': 'Friend request not found or already handled.'}, status=status.HTTP_400_BAD_REQUEST)
+
         friend_request.accept()
 
         # Notification.objects.create(
@@ -68,7 +72,10 @@ class FriendRequestRejectView(generics.UpdateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def update(self, request, *args, **kwargs):
-        friend_request = FriendRequest.objects.get(id=self.kwargs['pk'], receiver=request.user, status='pending')
+        try:
+            friend_request = FriendRequest.objects.get(id=self.kwargs['pk'], receiver=request.user, status='pending')
+        except FriendRequest.DoesNotExist:
+            return Response({'detail': 'Friend request not found or already handled.'}, status=status.HTTP_400_BAD_REQUEST)
         friend_request.reject()
 
         return Response({'detail': 'Friend request rejected'}, status=status.HTTP_200_OK)

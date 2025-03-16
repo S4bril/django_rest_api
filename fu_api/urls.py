@@ -6,6 +6,11 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView, 
     TokenObtainPairView
 )
+from fu_api.views.messages.chat_members_view import ChatRoomMembersView
+from fu_api.views.messages.add_member_view import AddMemberView
+from fu_api.views.messages.remove_member_view import RemoveMemberView
+from fu_api.views.messages.chat_view import ChatRoomListCreateView
+from fu_api.views.messages.message_view import MessageListCreateView
 from fu_api.views.events.location_view import EventLocationDetailView
 from fu_api.views.events.event_views import EventsDetailView, EventsListCreateView
 from fu_api.views.forms.form_view import FormRetrieveView
@@ -25,7 +30,7 @@ urlpatterns = [
 
     path('api/me/', UserDetailView.as_view()),
     path('api/me/friends/', UserFriendsListView.as_view()),
-    path('api/me/friends/<int:pk>/remove/', RemoveFriendView.as_view(), name='remove_friend'),
+    path('api/me/friends/<int:pk>/remove/', RemoveFriendView.as_view()),
     path('api/me/location/', UserLocationDetailView.as_view()),
     path('api/me/suggested-friends/', UserSuggestedFriendsRetrieveView.as_view()),
 
@@ -33,6 +38,12 @@ urlpatterns = [
     path('api/friend-requests/sent/', SentFriendRequestListView.as_view()),
     path('api/friend-requests/<int:pk>/accept/', FriendRequestAcceptView.as_view()),
     path('api/friend-requests/<int:pk>/reject/', FriendRequestRejectView.as_view()),
+
+    path('api/chats/', ChatRoomListCreateView.as_view()),
+    path('api/chats/<int:chat_room_id>/members/', ChatRoomMembersView.as_view()),
+    path('api/chats/<int:chat_room_id>/messages/', MessageListCreateView.as_view()),
+    path('api/chats/<int:chat_room_id>/add-member/', AddMemberView.as_view()),
+    path('api/chats/<int:chat_room_id>/delete-member/', RemoveMemberView.as_view()),
 
     path('api/events/', EventsListCreateView.as_view()),
     path('api/events/<int:pk>/', EventsDetailView.as_view()),

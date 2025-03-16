@@ -15,21 +15,11 @@ class FriendRequest(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('sender', 'receiver')
+        unique_together = ('sender', 'receiver', 'status')
 
     def save(self, *args, **kwargs):
         if self.sender == self.receiver:
             raise ValueError("Users cannot send friend requests to themselves.")
-        
-        existing_request = FriendRequest.objects.filter(sender=self.sender, receiver=self.receiver).first()
-
-        if existing_request:
-            if existing_request.status == 'rejected':
-                existing_request.delete()
-            elif existing_request.status == 'accepted' and self.receiver not in self.sender.friends.all():
-                existing_request.delete()
-            else:
-                raise ValueError("Friend request already sent or still active.")
         super().save(*args, **kwargs)
 
     def accept(self):
