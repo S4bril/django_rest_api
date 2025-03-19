@@ -15,6 +15,8 @@ from fu_api.views.events.location_view import EventLocationDetailView
 from fu_api.views.events.event_views import EventsDetailView, EventsListCreateView
 from fu_api.views.forms.form_view import FormRetrieveView
 from fu_api.views.friend_request.friend_request_views import FriendRequestAcceptView, FriendRequestListCreateView, FriendRequestRejectView, SentFriendRequestListView
+from fu_api.views.notifications.list_notification_view import NotificationListView
+from fu_api.views.notifications.mark_notification_read_view import MarkNotificationReadView
 from fu_api.views.suggested_friends.suggested_friends_view import UserSuggestedFriendsRetrieveView
 from fu_api.views.user_profile.friends_views import RemoveFriendView, UserFriendsListView
 from fu_api.views.user_profile.profile_managment_view import UserDetailView
@@ -44,6 +46,9 @@ urlpatterns = [
     path('api/chats/<int:chat_room_id>/messages/', MessageListCreateView.as_view()),
     path('api/chats/<int:chat_room_id>/add-member/', AddMemberView.as_view()),
     path('api/chats/<int:chat_room_id>/delete-member/', RemoveMemberView.as_view()),
+
+    path("api/notifications/", NotificationListView.as_view(), name="notification-list"),
+    path("api/notifications/<int:notification_id>/read/", MarkNotificationReadView.as_view(), name="mark-notification-read"),
 
     path('api/events/', EventsListCreateView.as_view()),
     path('api/events/<int:pk>/', EventsDetailView.as_view()),

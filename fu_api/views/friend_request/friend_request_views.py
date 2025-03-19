@@ -2,6 +2,7 @@ from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from fu_api.models.friend_request_model import FriendRequest
 from fu_api.models.custom_user_model import CustomUser
+from fu_api.models.notification_model import Notification
 from fu_api.serializers.friend_request_serializer import FriendRequestSerializer
 
 
@@ -27,12 +28,12 @@ class FriendRequestListCreateView(generics.ListCreateAPIView):
 
         friend_request = FriendRequest.objects.create(sender=request.user, receiver=receiver)
 
-        # Notification.objects.create(
-        #     user=receiver,
-        #     sender=request.user,
-        #     notification_type='friend_request',
-        #     message=f"{request.user.username} sent you a friend request."
-        # )
+        Notification.objects.create(
+            user=receiver,
+            sender=request.user,
+            type='friend_request',
+            message=f"{request.user.username} sent you a friend request."
+        )
 
         return Response(FriendRequestSerializer(friend_request).data, status=status.HTTP_201_CREATED)
 
@@ -57,12 +58,12 @@ class FriendRequestAcceptView(generics.UpdateAPIView):
 
         friend_request.accept()
 
-        # Notification.objects.create(
-        #     user=friend_request.sender,
-        #     sender=request.user,
-        #     notification_type='friend_request',
-        #     message=f"{request.user.username} accepted your friend request!"
-        # )
+        Notification.objects.create(
+            user=friend_request.sender,
+            sender=request.user,
+            type='friend_request',
+            message=f"{request.user.username} accepted your friend request!"
+        )
 
         return Response({'detail': 'Friend request accepted'}, status=status.HTTP_200_OK)
 

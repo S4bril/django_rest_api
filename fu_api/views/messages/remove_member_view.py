@@ -16,15 +16,15 @@ class RemoveMemberView(APIView):
             return Response({"error": f"Chat room with id: {chat_room_id} not found or is not a group."}, status=404)
 
         try:
-            user = CustomUser.objects.get(id=user_id)
+            member = CustomUser.objects.get(id=user_id)
         except CustomUser.DoesNotExist:
             return Response({"error": f"User with id: {user_id} not found"}, status=404)
 
         if request.user not in chat_room.members.all():
             return Response({"error": "You are not a member of this chat"}, status=403)
 
-        if user not in chat_room.members.all():
+        if member not in chat_room.members.all():
             return Response({"error": "User is not in this chat"}, status=400)
 
-        chat_room.members.remove(user)
+        chat_room.members.remove(member)
         return Response({"message": "Member removed successfully"}, status=200)
