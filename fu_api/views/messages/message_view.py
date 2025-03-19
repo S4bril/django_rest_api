@@ -3,6 +3,7 @@ from rest_framework.generics import ListCreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from fu_api.models.chat_room_model import ChatRoom
 from fu_api.models.message_model import Message 
+from fu_api.models.notification_model import Notification
 from fu_api.serializers.message_serializer import MessageSerializer
 
 
@@ -19,3 +20,12 @@ class MessageListCreateView(ListCreateAPIView):
         if self.request.user not in chat_room.members.all():
             return response({'error': 'You are not a member of this chat'}, status=403)
         serializer.save(sender=self.request.user, chat_room=chat_room)
+
+        for member in chat_room.members.all():
+            if member != self.request.user:
+                Notification.objects.create(
+                    user=member,
+                    sender=self.request.user,
+                    type='message',
+                    message=f"You have a new unread message!"
+                )

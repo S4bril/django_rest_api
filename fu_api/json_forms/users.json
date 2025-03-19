@@ -102,7 +102,7 @@
     {
         "username": "lukasz_kowalski",
         "password": "password",
-        "email": "lukasz.kowalski@example.pl",
+        "email": "lukasz.kowalski@example.com",
         "sex_id": 0,
         "birthday": "1991-05-17",
         "bio": "Uwielbiam odkrywać nowinki technologiczne!",
@@ -112,7 +112,7 @@
     {
         "username": "olga_nowak",
         "password": "password",
-        "email": "olga.nowak@example.pl",
+        "email": "olga.nowak@example.com",
         "sex_id": 1,
         "birthday": "1992-07-23",
         "bio": "Lubię czytać powieści i malować.",
@@ -122,7 +122,7 @@
     {
         "username": "piotr_jablonski",
         "password": "password",
-        "email": "piotr.jablonski@example.pl",
+        "email": "piotr.jablonski@example.com",
         "sex_id": 0,
         "birthday": "1985-11-12",
         "bio": "Pasjonat sportów drużynowych.",
@@ -132,7 +132,7 @@
     {
         "username": "agnieszka_wozniak",
         "password": "password",
-        "email": "agnieszka.wozniak@example.pl",
+        "email": "agnieszka.wozniak@example.com",
         "sex_id": 1,
         "birthday": "1988-02-08",
         "bio": "Miłośniczka sztuki i literatury.",
@@ -142,7 +142,7 @@
     {
         "username": "karolina_michalska",
         "password": "password",
-        "email": "karolina.michalska@example.pl",
+        "email": "karolina.michalska@example.com",
         "sex_id": 1,
         "birthday": "1993-04-29",
         "bio": "Podróżuję i fotografuję.",
@@ -152,7 +152,7 @@
     {
         "username": "sebastian_kaczmarek",
         "password": "password",
-        "email": "sebastian.kaczmarek@example.pl",
+        "email": "sebastian.kaczmarek@example.com",
         "sex_id": 0,
         "birthday": "1990-10-19",
         "bio": "Zapalony gracz komputerowy.",
@@ -162,7 +162,7 @@
     {
         "username": "katarzyna_zielinska",
         "password": "password",
-        "email": "katarzyna.zielinska@example.pl",
+        "email": "katarzyna.zielinska@example.com",
         "sex_id": 1,
         "birthday": "1989-06-10",
         "bio": "Lubię gotować i poznawać nowe przepisy.",
@@ -172,7 +172,7 @@
     {
         "username": "mateusz_rogalski",
         "password": "password",
-        "email": "mateusz.rogalski@example.pl",
+        "email": "mateusz.rogalski@example.com",
         "sex_id": 0,
         "birthday": "1987-03-14",
         "bio": "Fascynuję się historią.",
@@ -182,7 +182,7 @@
     {
         "username": "ada_wilczek",
         "password": "password",
-        "email": "ada.wilczek@example.pl",
+        "email": "ada.wilczek@example.com",
         "sex_id": 1,
         "birthday": "1995-12-03",
         "bio": "Uwielbiam fitness i zdrowy styl życia.",
@@ -192,7 +192,7 @@
     {
         "username": "pawel_lukaszewicz",
         "password": "password",
-        "email": "pawel.lukaszewicz@example.pl",
+        "email": "pawel.lukaszewicz@example.com",
         "sex_id": 0,
         "birthday": "1994-08-21",
         "bio": "Gry komputerowe to moja pasja.",
@@ -202,7 +202,7 @@
     {
         "username": "marta_krzak",
         "password": "password",
-        "email": "marta.krzak@example.pl",
+        "email": "marta.krzak@example.com",
         "sex_id": 1,
         "birthday": "1992-05-10",
         "bio": "Lubię filmy i książki.",
@@ -212,7 +212,7 @@
     {
         "username": "krzysztof_wisniewski",
         "password": "password",
-        "email": "krzysztof.wisniewski@example.pl",
+        "email": "krzysztof.wisniewski@example.com",
         "sex_id": 0,
         "birthday": "1989-09-16",
         "bio": "Zawsze gotowy do nowych wyzwań.",
@@ -222,7 +222,7 @@
     {
         "username": "eugenia_wojcik",
         "password": "password",
-        "email": "eugenia.wojcik@example.pl",
+        "email": "eugenia.wojcik@example.com",
         "sex_id": 1,
         "birthday": "1986-01-12",
         "bio": "Pasjonatka mody.",
@@ -232,7 +232,7 @@
     {
         "username": "jakub_olejniczak",
         "password": "password",
-        "email": "jakub.olejniczak@example.pl",
+        "email": "jakub.olejniczak@example.com",
         "sex_id": 0,
         "birthday": "1990-11-02",
         "bio": "Jestem fanem piłki nożnej.",
@@ -242,7 +242,7 @@
     {
         "username": "anna_szewczyk",
         "password": "password",
-        "email": "anna.szewczyk@example.pl",
+        "email": "anna.szewczyk@example.com",
         "sex_id": 1,
         "birthday": "1993-04-15",
         "bio": "Uwielbiam tworzyć muzykę.",
@@ -252,7 +252,7 @@
     {
         "username": "michal_bak",
         "password": "password",
-        "email": "michal.bak@example.pl",
+        "email": "michal.bak@example.com",
         "sex_id": 0,
         "birthday": "1991-03-30",
         "bio": "Gra na instrumentach to moje życie.",
@@ -262,7 +262,7 @@
     {
         "username": "klaudia_majewska",
         "password": "password",
-        "email": "klaudia.majewska@example.pl",
+        "email": "klaudia.majewska@example.com",
         "sex_id": 1,
         "birthday": "1994-10-04",
         "bio": "Kocham zwierzęta i podróże.",
@@ -272,7 +272,7 @@
     {
         "username": "tomasz_nowicki",
         "password": "password",
-        "email": "tomasz.nowicki@example.pl",
+        "email": "tomasz.nowicki@example.com",
         "sex_id": 0,
         "birthday": "1987-01-28",
         "bio": "Fascynat filmów i seriali.",
@@ -282,7 +282,7 @@
     {
         "username": "karolina_jakubowska",
         "password": "password",
-        "email": "karolina.jakubowska@example.pl",
+        "email": "karolina.jakubowska@example.com",
         "sex_id": 1,
         "birthday": "1992-09-25",
         "bio": "Jestem miłośniczką książek.",
@@ -292,7 +292,7 @@
     {
         "username": "adam_kaczmarek",
         "password": "password",
-        "email": "adam.kaczmarek@example.pl",
+        "email": "adam.kaczmarek@example.com",
         "sex_id": 0,
         "birthday": "1992-08-21",
         "bio": "Miłośnik muzyki elektronicznej.",
@@ -302,7 +302,7 @@
     {
         "username": "beata_wisniewska",
         "password": "password",
-        "email": "beata.wisniewska@example.pl",
+        "email": "beata.wisniewska@example.com",
         "sex_id": 1,
         "birthday": "1986-12-13",
         "bio": "Podróżniczka i fotografka.",
@@ -312,7 +312,7 @@
     {
         "username": "jacek_kowalski",
         "password": "password",
-        "email": "jacek.kowalski@example.pl",
+        "email": "jacek.kowalski@example.com",
         "sex_id": 0,
         "birthday": "1990-03-10",
         "bio": "Uwielbiam gotować.",
@@ -322,7 +322,7 @@
     {
         "username": "klaudia_borkowska",
         "password": "password",
-        "email": "klaudia.borkowska@example.pl",
+        "email": "klaudia.borkowska@example.com",
         "sex_id": 1,
         "birthday": "1991-11-02",
         "bio": "Pasja do malowania.",
@@ -332,7 +332,7 @@
     {
         "username": "mariusz_rutkowski",
         "password": "password",
-        "email": "mariusz.rutkowski@example.pl",
+        "email": "mariusz.rutkowski@example.com",
         "sex_id": 0,
         "birthday": "1988-01-14",
         "bio": "Fan sportów ekstremalnych.",
@@ -342,7 +342,7 @@
     {
         "username": "marta_kruk",
         "password": "password",
-        "email": "marta.kruk@example.pl",
+        "email": "marta.kruk@example.com",
         "sex_id": 1,
         "birthday": "1993-09-25",
         "bio": "Zakochana w książkach.",
@@ -352,7 +352,7 @@
     {
         "username": "dawid_gorski",
         "password": "password",
-        "email": "dawid.gorski@example.pl",
+        "email": "dawid.gorski@example.com",
         "sex_id": 0,
         "birthday": "1985-05-03",
         "bio": "Amator gier planszowych.",
@@ -362,7 +362,7 @@
     {
         "username": "patrycja_szumska",
         "password": "password",
-        "email": "patrycja.szumska@example.pl",
+        "email": "patrycja.szumska@example.com",
         "sex_id": 1,
         "birthday": "1990-07-08",
         "bio": "Pasjonatka filmów niezależnych.",
@@ -372,7 +372,7 @@
     {
         "username": "michal_janowski",
         "password": "password",
-        "email": "michal.janowski@example.pl",
+        "email": "michal.janowski@example.com",
         "sex_id": 0,
         "birthday": "1994-11-11",
         "bio": "Wielki fan piłki nożnej.",
@@ -382,7 +382,7 @@
     {
         "username": "emilia_zawisza",
         "password": "password",
-        "email": "emilia.zawisza@example.pl",
+        "email": "emilia.zawisza@example.com",
         "sex_id": 1,
         "birthday": "1989-02-19",
         "bio": "Uwielbiam pisać wiersze.",
@@ -392,7 +392,7 @@
     {
         "username": "paweł_wojtowski",
         "password": "password",
-        "email": "pawel.wojtowski@example.pl",
+        "email": "pawel.wojtowski@example.com",
         "sex_id": 0,
         "birthday": "1995-04-22",
         "bio": "Fascynuję się historią i polityką.",
@@ -402,7 +402,7 @@
     {
         "username": "karol_malinowski",
         "password": "password",
-        "email": "karol.malinowski@example.pl",
+        "email": "karol.malinowski@example.com",
         "sex_id": 0,
         "birthday": "1988-10-14",
         "bio": "Fan muzyki rockowej.",
@@ -412,7 +412,7 @@
     {
         "username": "anna_majewska",
         "password": "password",
-        "email": "anna.majewska@example.pl",
+        "email": "anna.majewska@example.com",
         "sex_id": 1,
         "birthday": "1992-03-30",
         "bio": "Kocham teatry i kino.",
@@ -422,7 +422,7 @@
     {
         "username": "grzegorz_krupa",
         "password": "password",
-        "email": "grzegorz.krupa@example.pl",
+        "email": "grzegorz.krupa@example.com",
         "sex_id": 0,
         "birthday": "1984-12-17",
         "bio": "Pasjonat astronomii.",
@@ -432,7 +432,7 @@
     {
         "username": "ania_lis",
         "password": "password",
-        "email": "ania.lis@example.pl",
+        "email": "ania.lis@example.com",
         "sex_id": 1,
         "birthday": "1994-06-11",
         "bio": "Piesza turystyka i jazda na rowerze.",
@@ -442,7 +442,7 @@
     {
         "username": "adam_wachowski",
         "password": "password",
-        "email": "adam.wachowski@example.pl",
+        "email": "adam.wachowski@example.com",
         "sex_id": 0,
         "birthday": "1989-07-27",
         "bio": "Miłośnik gier komputerowych.",
@@ -452,7 +452,7 @@
     {
         "username": "marta_szewczyk",
         "password": "password",
-        "email": "marta.szewczyk@example.pl",
+        "email": "marta.szewczyk@example.com",
         "sex_id": 1,
         "birthday": "1993-01-16",
         "bio": "Uwielbiam kino i teatr.",
@@ -462,7 +462,7 @@
     {
         "username": "damian_nowakowski",
         "password": "password",
-        "email": "damian.nowakowski@example.pl",
+        "email": "damian.nowakowski@example.com",
         "sex_id": 0,
         "birthday": "1986-10-23",
         "bio": "Fascynuję się polityką i historią.",
@@ -472,7 +472,7 @@
     {
         "username": "alicja_witkowska",
         "password": "password",
-        "email": "alicja.witkowska@example.pl",
+        "email": "alicja.witkowska@example.com",
         "sex_id": 1,
         "birthday": "1995-12-01",
         "bio": "Fanka muzyki klasycznej.",
@@ -482,7 +482,7 @@
     {
         "username": "mateusz_sobczak",
         "password": "password",
-        "email": "mateusz.sobczak@example.pl",
+        "email": "mateusz.sobczak@example.com",
         "sex_id": 0,
         "birthday": "1995-01-12",
         "bio": "Miłośnik gier komputerowych.",
@@ -492,7 +492,7 @@
     {
         "username": "patryk_kulig",
         "password": "password",
-        "email": "patryk.kulig@example.pl",
+        "email": "patryk.kulig@example.com",
         "sex_id": 0,
         "birthday": "1992-04-09",
         "bio": "Interesuję się piłką nożną.",
@@ -502,7 +502,7 @@
     {
         "username": "michal_siwiec",
         "password": "password",
-        "email": "michal.siwiec@example.pl",
+        "email": "michal.siwiec@example.com",
         "sex_id": 0,
         "birthday": "1987-11-02",
         "bio": "Zawsze mam czas na gry planszowe.",
@@ -512,7 +512,7 @@
     {
         "username": "julia_wojcik",
         "password": "password",
-        "email": "julia.wojcik@example.pl",
+        "email": "julia.wojcik@example.com",
         "sex_id": 1,
         "birthday": "1994-08-15",
         "bio": "Kocham zwierzęta.",
@@ -522,7 +522,7 @@
     {
         "username": "krzysztof_rutkowski",
         "password": "password",
-        "email": "krzysztof.rutkowski@example.pl",
+        "email": "krzysztof.rutkowski@example.com",
         "sex_id": 0,
         "birthday": "1984-12-17",
         "bio": "Fan sportów siłowych.",
@@ -532,7 +532,7 @@
     {
         "username": "aneta_novak",
         "password": "password",
-        "email": "aneta.novak@example.pl",
+        "email": "aneta.novak@example.com",
         "sex_id": 1,
         "birthday": "1991-06-23",
         "bio": "Uwielbiam podróże.",
@@ -542,7 +542,7 @@
     {
         "username": "andrzej_laskowski",
         "password": "password",
-        "email": "andrzej.laskowski@example.pl",
+        "email": "andrzej.laskowski@example.com",
         "sex_id": 0,
         "birthday": "1983-09-30",
         "bio": "Pasja do matematyki.",
@@ -552,7 +552,7 @@
     {
         "username": "agata_nowa",
         "password": "password",
-        "email": "agata.nowa@example.pl",
+        "email": "agata.nowa@example.com",
         "sex_id": 1,
         "birthday": "1986-07-10",
         "bio": "Interesuję się teatrem.",
@@ -562,7 +562,7 @@
     {
         "username": "adam_pawlak",
         "password": "password",
-        "email": "adam.pawlak@example.pl",
+        "email": "adam.pawlak@example.com",
         "sex_id": 0,
         "birthday": "1990-02-24",
         "bio": "Zakochany w szachach.",
@@ -572,7 +572,7 @@
     {
         "username": "agnieszka_michalska",
         "password": "password",
-        "email": "agnieszka.michalska@example.pl",
+        "email": "agnieszka.michalska@example.com",
         "sex_id": 1,
         "birthday": "1994-11-18",
         "bio": "Uwielbiam gotować.",
@@ -582,7 +582,7 @@
     {
         "username": "tomasz_bielecki",
         "password": "password",
-        "email": "tomasz.bielecki@example.pl",
+        "email": "tomasz.bielecki@example.com",
         "sex_id": 0,
         "birthday": "1991-09-12",
         "bio": "Zainteresowania: muzyka.",
@@ -592,7 +592,7 @@
     {
         "username": "emilia_krupa",
         "password": "password",
-        "email": "emilia.krupa@example.pl",
+        "email": "emilia.krupa@example.com",
         "sex_id": 1,
         "birthday": "1996-05-22",
         "bio": "Uwielbiam filmy.",
@@ -602,7 +602,7 @@
     {
         "username": "marek_bartosz",
         "password": "password",
-        "email": "marek.bartosz@example.pl",
+        "email": "marek.bartosz@example.com",
         "sex_id": 0,
         "birthday": "1991-09-12",
         "bio": "Zainteresowania: muzyka.",
@@ -612,7 +612,7 @@
     {
         "username": "izabela_grzesiak",
         "password": "password",
-        "email": "izabela.grzesiak@example.pl",
+        "email": "izabela.grzesiak@example.com",
         "sex_id": 1,
         "birthday": "1989-12-03",
         "bio": "Fanka dobrego kina.",
@@ -622,7 +622,7 @@
     {
         "username": "zuzanna_sobota",
         "password": "password",
-        "email": "zuzanna.sobota@example.pl",
+        "email": "zuzanna.sobota@example.com",
         "sex_id": 1,
         "birthday": "1995-07-01",
         "bio": "Wszystko o naturze i zwierzętach.",
@@ -632,7 +632,7 @@
     {
         "username": "jakub_wysocki",
         "password": "password",
-        "email": "jakub.wysocki@example.pl",
+        "email": "jakub.wysocki@example.com",
         "sex_id": 0,
         "birthday": "1992-06-10",
         "bio": "Interesuję się polityką.",
@@ -642,7 +642,7 @@
     {
         "username": "martyna_kaczmarek",
         "password": "password",
-        "email": "martyna.kaczmarek@example.pl",
+        "email": "martyna.kaczmarek@example.com",
         "sex_id": 1,
         "birthday": "1993-09-15",
         "bio": "Miłośniczka literatury.",
@@ -652,7 +652,7 @@
     {
         "username": "grzegorz_wilk",
         "password": "password",
-        "email": "grzegorz.wilk@example.pl",
+        "email": "grzegorz.wilk@example.com",
         "sex_id": 0,
         "birthday": "1984-03-09",
         "bio": "Fan piłki ręcznej.",
@@ -662,7 +662,7 @@
     {
         "username": "monika_oliwa",
         "password": "password",
-        "email": "monika.oliwa@example.pl",
+        "email": "monika.oliwa@example.com",
         "sex_id": 1,
         "birthday": "1987-10-25",
         "bio": "Miłośniczka kina.",
@@ -672,7 +672,7 @@
     {
         "username": "rafal_michalowski",
         "password": "password",
-        "email": "rafal.michalowski@example.pl",
+        "email": "rafal.michalowski@example.com",
         "sex_id": 0,
         "birthday": "1990-07-14",
         "bio": "Wielki fan astronomii.",
@@ -682,7 +682,7 @@
     {
         "username": "agnieszka_wilk",
         "password": "password",
-        "email": "agnieszka.wilk@example.pl",
+        "email": "agnieszka.wilk@example.com",
         "sex_id": 1,
         "birthday": "1985-01-28",
         "bio": "Interesuję się zdrowym stylem życia.",
@@ -692,7 +692,7 @@
     {
         "username": "stefan_rudzinski",
         "password": "password",
-        "email": "stefan.rudzinski@example.pl",
+        "email": "stefan.rudzinski@example.com",
         "sex_id": 0,
         "birthday": "1994-05-14",
         "bio": "Zainteresowany historią.",
@@ -702,7 +702,7 @@
     {
         "username": "ewelina_rozanska",
         "password": "password",
-        "email": "ewelina.rozanska@example.pl",
+        "email": "ewelina.rozanska@example.com",
         "sex_id": 1,
         "birthday": "1992-01-17",
         "bio": "Interesuję się modą.",
@@ -712,7 +712,7 @@
     {
         "username": "grzegorz_bogdanowicz",
         "password": "password",
-        "email": "grzegorz.bogdanowicz@example.pl",
+        "email": "grzegorz.bogdanowicz@example.com",
         "sex_id": 0,
         "birthday": "1988-03-02",
         "bio": "Pasjonat książek i muzyki.",
@@ -722,7 +722,7 @@
     {
         "username": "agnieszka_wloch",
         "password": "password",
-        "email": "agnieszka.wloch@example.pl",
+        "email": "agnieszka.wloch@example.com",
         "sex_id": 1,
         "birthday": "1993-10-10",
         "bio": "Uwielbiam grzebać w ogrodzie.",

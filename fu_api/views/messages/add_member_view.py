@@ -3,6 +3,7 @@ from rest_framework import permissions
 from rest_framework.response import Response
 from fu_api.models.chat_room_model import ChatRoom
 from fu_api.models.custom_user_model import CustomUser
+from fu_api.models.notification_model import Notification
 
 
 class AddMemberView(APIView):
@@ -31,7 +32,14 @@ class AddMemberView(APIView):
             return Response({"error": "User is already in the chat"}, status=400)
 
         chat_room.members.add(new_member)
-        #NOTIFICATION
+
+        Notification.objects.create(
+            user=new_member,
+            sender=request.user,
+            notification_type='chat_invite',
+            message=f"You have been added to the chat: {chat_room.name}."
+        )
+
         return Response({"message": "Member added successfully"}, status=200)
 
 
