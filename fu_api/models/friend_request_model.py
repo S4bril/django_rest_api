@@ -1,5 +1,7 @@
 from django.db import models
+from django.forms import ValidationError
 from fu_api.models.custom_user_model import CustomUser
+from fu_api.models.notification_model import Notification
 
 
 class FriendRequest(models.Model):
@@ -23,14 +25,19 @@ class FriendRequest(models.Model):
         super().save(*args, **kwargs)
 
     def accept(self):
+        if self.status != 'pending':
+            raise ValidationError("Cannot accept non-pending request")
+        if self.sender.friends.filter(id=self.receiver.id).exists():
+            raise ValidationError("Users are already friends")
         self.status = 'accepted'
         self.sender.friends.add(self.receiver)
-        self.receiver.friends.add(self.sender)
         self.save()
+        self._create_notification(self, "accepted")
 
     def reject(self):
         self.status = 'rejected'
         self.save()
+        self._create_notification(self, "rejected")
 
     def __str__(self):
         return f"FriendRequest from {self.sender.username} to {self.receiver.username} [{self.status}]"
