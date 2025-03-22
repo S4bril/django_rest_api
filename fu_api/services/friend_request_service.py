@@ -1,8 +1,6 @@
+from django.forms import ValidationError
 from fu_api.models.friend_request_model import FriendRequest
 from fu_api.models.notification_model import Notification
-
-
-from django.forms import ValidationError
 
 
 class FriendRequestService:
@@ -20,17 +18,22 @@ class FriendRequestService:
         if FriendRequest.objects.filter(sender=sender, receiver=receiver, status='pending').exists():
             raise ValidationError("Friend request already sent.")
 
-        if FriendRequest.objects.filter(sender=sender, receiver=receiver, status='rejected').exists():
-            raise ValidationError("Friend request was previously rejected.")
-
         friend_request = FriendRequest.objects.create(sender=sender, receiver=receiver)
 
         cls._create_pending_notification(friend_request)
 
         return friend_request
 
-    @classmethod
-    def accept_request(cls, friend_request):
+    def change_status(cls, friend_request, new_status):
+        if new_status not in ['accepted', 'rejected']:
+            raise ValidationError("Status must be either 'accepted' or 'rejected'.")
+        if new_status == 'accepted':
+            return cls._accept_request(friend_request)
+        else:
+            return cls._reject_request(friend_request)
+
+    @staticmethod
+    def _accept_request(cls, friend_request):
         if friend_request.status != 'pending':
             raise ValidationError("Cannot accept non-pending request")
 
@@ -41,8 +44,10 @@ class FriendRequestService:
 
         cls._create_update_status_notification(friend_request, 'accepted')
 
-    @classmethod
-    def reject_request(cls, friend_request):
+    @staticmethod
+    def _reject_request(cls, friend_request):
+        if friend_request.status != 'pending':
+            raise ValidationError("Cannot reject non-pending request")
         friend_request.status = 'rejected'
         friend_request.save()
         cls._create_update_status_notification(friend_request, 'rejected')
@@ -63,8 +68,8 @@ class FriendRequestService:
     @staticmethod
     def _create_pending_notification(request):
         Notification.objects.create(
-            user=request.sender,
-            sender=request.receiver,
+            user=request.receiver,
+            sender=request.sender,
             type='friend_request',
             message=f"{request.receiver.username} sent you friend request."
         )

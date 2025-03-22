@@ -2,8 +2,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import permissions
 from rest_framework.generics import ListCreateAPIView, ListAPIView, UpdateAPIView
 from fu_api.models.friend_request_model import FriendRequest
-from fu_api.features.friend_request.serializers import FriendRequestSerializer
-from fu_api.features.friend_request.serializers import FriendRequestUpdateSerializer
+from fu_api.features.friend_request.serializers import FriendRequestSerializer, FriendRequestUpdateSerializer
 
 
 class FriendRequestListCreateView(ListCreateAPIView):
@@ -12,7 +11,7 @@ class FriendRequestListCreateView(ListCreateAPIView):
 
     def get_queryset(self):
         return FriendRequest.objects.filter(receiver=self.request.user).order_by('-created_at')
-    
+
     def perform_create(self, serializer):
         serializer.save()
 
