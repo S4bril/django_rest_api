@@ -24,8 +24,6 @@ class FriendRequest(models.Model):
 
     def accept(self):
         self.status = 'accepted'
-        self.sender.friends.add(self.receiver)
-        self.receiver.friends.add(self.sender)
         self.save()
 
     def reject(self):
