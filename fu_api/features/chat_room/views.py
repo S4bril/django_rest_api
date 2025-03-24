@@ -1,9 +1,9 @@
 from django.shortcuts import get_object_or_404
-from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import ListAPIView, ListCreateAPIView
 from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import status
 from fu_api.features.common.serializers.friend_serializers import FriendSerializer
 from fu_api.models.chat_room_model import ChatRoom
 from fu_api.features.chat_room.serializers import ChatRoomSerializer
@@ -28,67 +28,63 @@ class ChatRoomMembersView(ListAPIView):
 
     def get_queryset(self):
         chat_room_id = self.kwargs['chat_room_id']
-        chat_room = get_object_or_404(ChatRoom, pk=chat_room_id)
-
-        if self.request.user not in chat_room.members.all():
-            raise PermissionDenied("You are not a member of this chat.")
+        chat_room = get_object_or_404(ChatRoom, pk=chat_room_id, members=self.request.user)
 
         return chat_room.members.all()
 
 
-class AddMemberView(APIView):
+class ChatMemberAddView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
-    def post(self, request, chat_room_id):
-        user_id = request.data.get("user_id")
-        new_member = get_object_or_404(CustomUser, id=user_id)
-        chat_room = get_object_or_404(ChatRoom, id=chat_room_id, is_group=True)
+    def post(self, request, chat_room_id, pk):
+        chat_room = get_object_or_404(ChatRoom, id=chat_room_id, is_group=True, members=request.user)
+        target_user = get_object_or_404(CustomUser, id=pk)
 
-        if request.user in new_member.blocked_users.all():
-            return Response({"error": f"You are blocked by {new_member.username}"}, status=400)
+        if request.user in target_user.blocked_users.all():
+            return Response({"error": f"You are blocked by {target_user.username}."}, status=status.HTTP_403_FORBIDDEN)
 
-        if new_member not in request.user.friends.all():
-            return Response({"error": f"User with id: {user_id} is not your friend"}, status=400)
+        if target_user in request.user.blocked_users.all():
+            return Response({"error": f"You have blocked {target_user.username}. Unblock to add them."}, status=status.HTTP_400_BAD_REQUEST)
 
-        if request.user not in chat_room.members.all():
-            return Response({"error": "You are not in this group"}, status=403)
+        if target_user in chat_room.members.all():
+            return Response({"error": "User is already in the chat."}, status=status.HTTP_400_BAD_REQUEST)
 
-        if new_member in chat_room.members.all():
-            return Response({"error": "User is already in the chat"}, status=400)
-
-        chat_room.members.add(new_member)
+        chat_room.members.add(target_user)
 
         Notification.objects.create(
-            user=new_member,
+            user=target_user,
             sender=request.user,
-            notification_type='chat_invite',
+            type="chat_invite",
             message=f"You have been added to the chat: {chat_room.name}."
         )
 
-        return Response({"message": "Member added successfully"}, status=200)
+        return Response({"message": "Member added successfully."}, status=status.HTTP_200_OK)
 
 
-class RemoveMemberView(APIView):
+class ChatMemberRemoveView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, chat_room_id, pk):
+        chat_room = get_object_or_404(ChatRoom, id=chat_room_id, is_group=True, members=request.user)
+        target_user = get_object_or_404(CustomUser, id=pk)
+
+        if target_user not in chat_room.members.all():
+            return Response({"error": "User is not in this chat."}, status=status.HTTP_400_BAD_REQUEST)
+
+        chat_room.members.remove(target_user)
+        return Response({"message": "Member removed successfully."}, status=status.HTTP_200_OK)
+
+
+class LeaveChatRoomView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, chat_room_id):
-        user_id = request.data.get("user_id")
-        chat_room = get_object_or_404(ChatRoom, id=chat_room_id, is_group=True)
-        member = get_object_or_404(CustomUser, id=user_id)
+        chat_room = get_object_or_404(ChatRoom, id=chat_room_id, is_group=True, members=request.user)
 
-        if request.user not in chat_room.members.all():
-            return Response({"error": "You are not a member of this chat"}, status=403)
+        chat_room.members.remove(request.user)
 
-        if member not in chat_room.members.all():
-            return Response({"error": "User is not in this chat"}, status=400)
+        if chat_room.members.count() == 0:
+            chat_room.delete()
+            return Response({"message": "You were the last member. The chat room has been deleted."}, status=status.HTTP_200_OK)
 
-        chat_room.members.remove(member)
-
-        Notification.objects.create(
-            user=member,
-            sender=request.user,
-            notification_type='chat_invite',
-            message=f"You have been removed from the chat: {chat_room.name}."
-        )
-
-        return Response({"message": "Member removed successfully"}, status=200)
+        return Response({"message": "You have left the chat."}, status=status.HTTP_200_OK)

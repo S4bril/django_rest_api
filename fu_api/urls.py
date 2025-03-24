@@ -6,7 +6,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView, 
     TokenObtainPairView
 )
-from fu_api.features.chat_room.views import AddMemberView, ChatRoomListCreateView, ChatRoomMembersView, RemoveMemberView
+from fu_api.features.chat_room.views import ChatMemberAddView, ChatMemberRemoveView, ChatRoomListCreateView, ChatRoomMembersView, LeaveChatRoomView
 from fu_api.features.events.views import EventLocationDetailView, EventsDetailView, EventsListCreateView
 from fu_api.features.forms.views import FormRetrieveView
 from fu_api.features.friend_request.views import FriendRequestListCreateView, FriendRequestUpdateView, SentFriendRequestListView
@@ -32,10 +32,11 @@ urlpatterns = [
     path('api/friend-requests/<int:pk>/', FriendRequestUpdateView.as_view()),
 
     path('api/chats/', ChatRoomListCreateView.as_view()),
+    path('api/chats/<int:chat_room_id>/leave/', LeaveChatRoomView.as_view()),
     path('api/chats/<int:chat_room_id>/members/', ChatRoomMembersView.as_view()),
+    path('api/chats/<int:chat_room_id>/members/<int:pk>/add/', ChatMemberAddView.as_view()),
+    path('api/chats/<int:chat_room_id>/members/<int:pk>/remove/', ChatMemberRemoveView.as_view()),
     path('api/chats/<int:chat_room_id>/messages/', MessageListCreateView.as_view()),
-    path('api/chats/<int:chat_room_id>/add-member/', AddMemberView.as_view()),
-    path('api/chats/<int:chat_room_id>/delete-member/', RemoveMemberView.as_view()),
 
     path("api/notifications/", NotificationListView.as_view(), name="notification-list"),
     path("api/notifications/<int:notification_id>/read/", MarkNotificationReadView.as_view(), name="mark-notification-read"),
