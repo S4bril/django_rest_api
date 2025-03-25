@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 from fu_api.models.custom_user_model import CustomUser
 from fu_api.models.chat_room_model import ChatRoom
@@ -17,8 +16,12 @@ class ChatRoomSerializer(serializers.ModelSerializer):
         members = data.get("members", [])
         is_group = data.get("is_group", False)
 
-        if user.id in members:
-            raise serializers.ValidationError({"members": "You cannot add yourself to the members list."})
+        if not is_group:
+            if len(members) != 1:
+                raise serializers.ValidationError({"members": "A private chat room must have exactly one member.(Creator of group is added automatically)"})
+            else:
+                if user.id in members:
+                    raise serializers.ValidationError({"members": "You cannot create private room with yourself."})
 
         blocked_ids = []
         for member_id in members:
@@ -33,9 +36,6 @@ class ChatRoomSerializer(serializers.ModelSerializer):
                 "members": "Some users blocked you.",
                 "blocked_by": f"{blocked_ids}" 
             })
-
-        if is_group and len(members) < 1:
-            raise serializers.ValidationError({"members": "A group chat must have at least one member."})
 
         return data
 
