@@ -1,11 +1,11 @@
-from django.test import TestCase
+from rest_framework.test import APITestCase
 from rest_framework.test import APIClient
 from rest_framework import status
 from fu_api.features.common.tests.custom_user_factory import create_test_user
 from fu_api.models.chat_room_model import ChatRoom
 
 
-class TestChatRoomListCreateView(TestCase):
+class TestChatRoomListCreateView(APITestCase):
     def setUp(self):
         self.client = APIClient()
 

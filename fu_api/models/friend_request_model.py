@@ -14,9 +14,6 @@ class FriendRequest(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        unique_together = ('sender', 'receiver', 'status')
-
     def save(self, *args, **kwargs):
         if self.sender == self.receiver:
             raise ValueError("Users cannot send friend requests to themselves.")
