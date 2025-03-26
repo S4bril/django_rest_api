@@ -1,15 +1,15 @@
 from rest_framework.test import APITestCase
 from rest_framework import status
-
 from fu_api.features.common.tests.custom_user_factory import create_test_user
 from fu_api.models.chat_room_model import ChatRoom
 
+
 class TestChatRoomMembersView(APITestCase):
     def setUp(self):
-        self.user1 = create_test_user(username="user1")
-        self.user2 = create_test_user(username="user2")
-        self.user3 = create_test_user(username="user3")
-        self.user4 = create_test_user(username="user4")
+        self.user1 = create_test_user("user1")
+        self.user2 = create_test_user("user2")
+        self.user3 = create_test_user("user3")
+        self.user4 = create_test_user("user4")
 
         self.chat_room = ChatRoom.objects.create(name="Room")
         self.chat_room.members.add(self.user1, self.user2, self.user3, self.user4)

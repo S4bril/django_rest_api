@@ -4,6 +4,7 @@ from fu_api.features.common.tests.custom_user_factory import create_test_user
 from fu_api.models.chat_room_model import ChatRoom
 from fu_api.models.notification_model import Notification
 
+
 class TestChatMemberAddView(APITestCase):
     def setUp(self):
         self.request_user = create_test_user("requester")
