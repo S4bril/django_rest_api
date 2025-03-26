@@ -33,7 +33,7 @@ class ChatRoomSerializer(serializers.ModelSerializer):
                     blocked_ids.append(member_id)
         if blocked_ids:
             raise serializers.ValidationError({
-                "members": "Some users blocked you.",
+                "members": "Some users blocked you or there are blocked.",
                 "blocked_by": f"{blocked_ids}" 
             })
 

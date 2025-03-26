@@ -13,7 +13,8 @@ class CustomUser(AbstractUser):
     created_at = models.DateTimeField(default=now)
     friends = models.ManyToManyField("self", blank=True, symmetrical=True)
     profile_image = models.ImageField(upload_to='profile_images/', blank=True, null=True)
-    blocked_users = models.ManyToManyField("self", blank=True, symmetrical=True)
+    blocked_users = models.ManyToManyField("self", blank=True, symmetrical=False)
+    rejected_users = models.ManyToManyField("self", blank=True, symmetrical=True)
 
     location = models.OneToOneField(
         'Location',

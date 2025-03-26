@@ -1,4 +1,3 @@
-from django.urls import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
 from fu_api.features.common.tests.custom_user_factory import create_test_user
@@ -54,13 +53,13 @@ class TestChatMemberAddView(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.assertEqual(response.data["error"], "You are blocked by target.")
 
-    # def test_requester_blocks_target_user(self):
-    #     self.request_user.blocked_users.add(self.target_user)
-    #     url = self.get_url(self.group_chat.id, self.target_user.id)
-    #     response = self.client.post(url)
+    def test_requester_blocks_target_user(self):
+        self.request_user.blocked_users.add(self.target_user)
+        url = self.get_url(self.group_chat.id, self.target_user.id)
+        response = self.client.post(url)
 
-    #     self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-    #     self.assertEqual(response.data["error"], "You have blocked target. Unblock to add them.")
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(response.data["error"], "You have blocked target. Unblock to add them.")
 
     def test_user_already_in_chat(self):
         self.group_chat.members.add(self.target_user)
