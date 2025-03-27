@@ -7,6 +7,7 @@ from fu_api.features.common.serializers.friend_serializers import FriendSerializ
 from fu_api.features.suggested_friends.services import get_suggested_friends
 from fu_api.models.custom_user_model import CustomUser
 
+
 class UserSuggestedFriendsRetrieveView(APIView):
     permission_classes = [IsAuthenticated]
 
