@@ -20,6 +20,7 @@ from fu_api.features.users.views import UsersListCreateView, UsersRetrieveView
 urlpatterns = [
     path('api/users/', UsersListCreateView.as_view()),
     path('api/users/<int:pk>/', UsersRetrieveView.as_view()),
+    path('api/users/<int:user_id>/block/', BlockUserView.as_view(), name='block-user'),
 
     path('api/me/', UserDetailView.as_view()),
     path('api/me/friends/', UserFriendsListView.as_view()),
@@ -41,8 +42,6 @@ urlpatterns = [
 
     path("api/notifications/", NotificationListView.as_view(), name="notification-list"),
     path("api/notifications/<int:notification_id>/read/", MarkNotificationReadView.as_view(), name="mark-notification-read"),
-
-    path('users/<int:user_id>/block/', BlockUserView.as_view(), name='block-user'),
 
     path('api/events/', EventsListCreateView.as_view()),
     path('api/events/<int:pk>/', EventsDetailView.as_view()),
