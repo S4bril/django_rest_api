@@ -1,11 +1,9 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import generics, permissions, status
 from fu_api.features.notifications.serializers import NotificationSerializer
 from fu_api.models.notification_model import Notification
-
-
-from rest_framework import generics, permissions, status
 
 
 class NotificationListView(generics.ListAPIView):
