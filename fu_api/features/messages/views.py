@@ -12,7 +12,7 @@ class MessageListCreateView(ListCreateAPIView):
 
     def get_queryset(self):
         chat_room_id = self.kwargs['chat_room_id']
-        return get_object_or_404(Message, chat_room_id=chat_room_id)
+        return Message.objects.filter(chat_room_id=chat_room_id).order_by('-timestamp')
 
     def perform_create(self, serializer):
         serializer.save()

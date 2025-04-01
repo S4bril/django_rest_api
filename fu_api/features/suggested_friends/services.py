@@ -16,7 +16,7 @@ NUMBER_OF_OTPUT_USERS = 10
 
 def get_valid_potential_friends_from_db(user):
     try:
-        excluded_users = user.friends.all() | user.blocked_users.all() | CustomUser.objects.filter(id=user.id)
+        excluded_users = user.friends.all() | user.rejected_users.all() | CustomUser.objects.filter(id=user.id)
         suggested_users = (
             CustomUser.objects.exclude(id__in=excluded_users.values_list('id', flat=True))
             [:NUMBER_OF_POTENTIAL_FRIENDS]

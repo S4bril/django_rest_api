@@ -12,7 +12,7 @@ from fu_api.features.forms.views import FormRetrieveView
 from fu_api.features.friend_request.views import FriendRequestListCreateView, FriendRequestUpdateView, SentFriendRequestListView
 from fu_api.features.messages.views import MessageListCreateView
 from fu_api.features.notifications.views import MarkNotificationReadView, NotificationListView
-from fu_api.features.suggested_friends.views import UserSuggestedFriendsRetrieveView
+from fu_api.features.suggested_friends.views import UserRejectView, UserSuggestedFriendsRetrieveView
 from fu_api.features.user_block.views import BlockUserView
 from fu_api.features.user_profile.views import RemoveFriendView, UserDetailView, UserFriendsListView, UserLocationDetailView
 from fu_api.features.users.views import UsersListCreateView, UsersRetrieveView
@@ -20,12 +20,14 @@ from fu_api.features.users.views import UsersListCreateView, UsersRetrieveView
 urlpatterns = [
     path('api/users/', UsersListCreateView.as_view()),
     path('api/users/<int:pk>/', UsersRetrieveView.as_view()),
+    path('api/users/<int:user_id>/block/', BlockUserView.as_view(), name='block-user'),
 
     path('api/me/', UserDetailView.as_view()),
     path('api/me/friends/', UserFriendsListView.as_view()),
     path('api/me/friends/<int:pk>/remove/', RemoveFriendView.as_view()),
     path('api/me/location/', UserLocationDetailView.as_view()),
     path('api/me/suggested-friends/', UserSuggestedFriendsRetrieveView.as_view()),
+    path('api/me/suggested-friends/<int:pk>/reject/', UserRejectView.as_view()),
 
     path('api/friend-requests/', FriendRequestListCreateView.as_view()),
     path('api/friend-requests/sent/', SentFriendRequestListView.as_view()),
@@ -40,8 +42,6 @@ urlpatterns = [
 
     path("api/notifications/", NotificationListView.as_view(), name="notification-list"),
     path("api/notifications/<int:notification_id>/read/", MarkNotificationReadView.as_view(), name="mark-notification-read"),
-
-    path('users/<int:user_id>/block/', BlockUserView.as_view(), name='block-user'),
 
     path('api/events/', EventsListCreateView.as_view()),
     path('api/events/<int:pk>/', EventsDetailView.as_view()),
