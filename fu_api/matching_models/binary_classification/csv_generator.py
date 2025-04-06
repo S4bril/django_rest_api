@@ -1,2 +1,2 @@
 class CsvGenerator():
-    
+    pass
