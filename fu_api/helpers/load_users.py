@@ -2,7 +2,7 @@ import json
 from tqdm import tqdm
 from termcolor import colored
 from fu_api.models.custom_user_model import CustomUser
-from fu_api.models.loaction_model import Location
+from fu_api.models.location_model import Location
 
 JSON_FILE = "fu_api/json_forms/users.json"
 GREEN = "green"

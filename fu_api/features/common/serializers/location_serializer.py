@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from fu_api.models.loaction_model import Location
+from fu_api.models.location_model import Location
 
 
 class LocationSerializer(serializers.ModelSerializer):

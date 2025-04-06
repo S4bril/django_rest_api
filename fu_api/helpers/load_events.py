@@ -9,7 +9,7 @@ django.setup()
 
 from fu_api.models.custom_user_model import CustomUser
 from fu_api.models.event_model import Event
-from fu_api.models.loaction_model import Location
+from fu_api.models.location_model import Location
 
 JSON_FILE = "app/json_forms/events.json"
 POSITIVE_COLOR = "green"
