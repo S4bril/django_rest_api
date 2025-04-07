@@ -1,4 +1,3 @@
-import copy
 from itertools import combinations
 import json
 import math
@@ -40,8 +39,20 @@ class PairsGenerator():
             lat2 = float(user2["location"][0])
             lon2 = float(user2["location"][1])
 
-            distance = math.sqrt((lat2 - lat1)**2 + (lon2 - lon1)**2)
+            # distance = math.sqrt((lat2 - lat1)**2 + (lon2 - lon1)**2)
+            distance = self._haversine(lat1, lon1, lat2, lon2)
             pair.append({"distance": round(distance, 2)})
+
+    def _haversine(self, lat1, lon1, lat2, lon2):
+        lat1, lon1, lat2, lon2 = map(math.radians, [lat1, lon1, lat2, lon2])
+
+        dlat = lat2 - lat1
+        dlon = lon2 - lon1
+        a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
+        c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+
+        R = 6371
+        return R * c
 
     def _load_users(self, path):
         with open(path, "r", encoding="utf-8") as file:

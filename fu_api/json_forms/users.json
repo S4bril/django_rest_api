@@ -1,932 +1,2604 @@
 [
     {
-        "username": "jan_kowalski",
-        "password": "password",
-        "email": "jan.kowalski@example.com",
-        "sex_id": 0,
-        "birthday": "1990-01-15",
-        "bio": "Uwielbiam grać w piłkę nożną.",
-        "passions": [1, 5, 8],
-        "location": [52.229, 21.012]
-    },
-    {
-        "username": "anna_nowak",
-        "password": "password",
-        "email": "anna.nowak@example.com",
-        "sex_id": 1,
-        "birthday": "1985-06-20",
-        "bio": "Gotowanie to moja pasja.",
-        "passions": [19, 20, 28],
-        "location": [50.064, 19.945]
-    },
-    {
-        "username": "michal_wisniewski",
-        "password": "password",
-        "email": "michal.wisniewski@example.com",
-        "sex_id": 0,
-        "birthday": "1995-08-10",
-        "bio": "Lubię biegać i jeździć na rowerze.",
-        "passions": [4, 29],
-        "location": [51.107, 17.038]
-    },
-    {
-        "username": "katarzyna_wrobel",
-        "password": "password",
-        "email": "katarzyna.wrobel@example.com",
-        "sex_id": 1,
-        "birthday": "1998-03-12",
-        "bio": "Jestem wielką fanką anime i planszówek.",
-        "passions": [7, 12, 11],
-        "location": [53.428, 14.553]
-    },
-    {
-        "username": "adam_lewandowski",
-        "password": "password",
-        "email": "adam.lewandowski@example.com",
-        "sex_id": 0,
-        "birthday": "2000-11-25",
-        "bio": "Uwielbiam malować i słuchać muzyki.",
-        "passions": [13, 15, 14],
-        "location": [54.352, 18.646]
-    },
-    {
-        "username": "sylwia_kaczmarek",
-        "password": "password",
-        "email": "sylwia.kaczmarek@example.com",
-        "sex_id": 1,
-        "birthday": "1992-05-07",
-        "bio": "Uwielbiam historię i szachy.",
-        "passions": [21, 10],
-        "location": [50.868, 20.627]
-    },
-    {
-        "username": "piotr_zielinski",
-        "password": "password",
-        "email": "piotr.zielinski@example.com",
-        "sex_id": 0,
-        "birthday": "1994-12-19",
-        "bio": "Gram w D&D i piszę piosenki.",
-        "passions": [8, 27, 26],
-        "location": [52.406, 16.925]
-    },
-    {
-        "username": "magdalena_pietrzak",
-        "password": "password",
-        "email": "magdalena.pietrzak@example.com",
-        "sex_id": 1,
-        "birthday": "1989-09-02",
-        "bio": "Uwielbiam oglądać filmy i zgłębiać astrologię.",
-        "passions": [18, 30, 17],
-        "location": [51.935, 15.506]
-    },
-    {
-        "username": "tomasz_szymanski",
-        "password": "password",
-        "email": "tomasz.szymanski@example.com",
-        "sex_id": 0,
-        "birthday": "1997-07-14",
-        "bio": "Uwielbiam gry komputerowe i Netflix.",
-        "passions": [11, 18],
-        "location": [50.289, 18.677]
-    },
-    {
-        "username": "paulina_kowalczyk",
-        "password": "password",
-        "email": "paulina.kowalczyk@example.com",
-        "sex_id": 1,
-        "birthday": "1991-02-28",
-        "bio": "Lubię teatr, koncerty i politykę.",
-        "passions": [16, 9, 22],
-        "location": [53.013, 18.598]
-    },
-    {
-        "username": "lukasz_kowalski",
-        "password": "password",
-        "email": "lukasz.kowalski@example.com",
-        "sex_id": 0,
-        "birthday": "1991-05-17",
-        "bio": "Uwielbiam odkrywać nowinki technologiczne!",
-        "passions": [1, 5, 11, 6],
-        "location": [52.2298, 21.0118]
-    },
-    {
-        "username": "olga_nowak",
-        "password": "password",
-        "email": "olga.nowak@example.com",
-        "sex_id": 1,
-        "birthday": "1992-07-23",
-        "bio": "Lubię czytać powieści i malować.",
-        "passions": [20, 13, 18, 10],
-        "location": [51.5074, 19.1278]
-    },
-    {
-        "username": "piotr_jablonski",
-        "password": "password",
-        "email": "piotr.jablonski@example.com",
-        "sex_id": 0,
-        "birthday": "1985-11-12",
-        "bio": "Pasjonat sportów drużynowych.",
-        "passions": [1, 2, 4, 5],
-        "location": [50.0614, 19.9383]
-    },
-    {
-        "username": "agnieszka_wozniak",
-        "password": "password",
-        "email": "agnieszka.wozniak@example.com",
-        "sex_id": 1,
-        "birthday": "1988-02-08",
-        "bio": "Miłośniczka sztuki i literatury.",
-        "passions": [16, 13, 20],
-        "location": [54.6872, 25.2798]
-    },
-    {
-        "username": "karolina_michalska",
-        "password": "password",
-        "email": "karolina.michalska@example.com",
-        "sex_id": 1,
-        "birthday": "1993-04-29",
-        "bio": "Podróżuję i fotografuję.",
-        "passions": [19, 8, 17, 5],
-        "location": [52.4064, 16.9252]
-    },
-    {
-        "username": "sebastian_kaczmarek",
-        "password": "password",
-        "email": "sebastian.kaczmarek@example.com",
-        "sex_id": 0,
-        "birthday": "1990-10-19",
-        "bio": "Zapalony gracz komputerowy.",
-        "passions": [11, 12, 13],
-        "location": [50.6757, 21.0059]
-    },
-    {
-        "username": "katarzyna_zielinska",
-        "password": "password",
-        "email": "katarzyna.zielinska@example.com",
-        "sex_id": 1,
-        "birthday": "1989-06-10",
-        "bio": "Lubię gotować i poznawać nowe przepisy.",
-        "passions": [19, 4, 7],
-        "location": [51.1079, 17.0385]
-    },
-    {
-        "username": "mateusz_rogalski",
-        "password": "password",
-        "email": "mateusz.rogalski@example.com",
-        "sex_id": 0,
-        "birthday": "1987-03-14",
-        "bio": "Fascynuję się historią.",
-        "passions": [21, 23, 22],
-        "location": [51.7592, 19.4566]
-    },
-    {
-        "username": "ada_wilczek",
-        "password": "password",
-        "email": "ada.wilczek@example.com",
-        "sex_id": 1,
-        "birthday": "1995-12-03",
-        "bio": "Uwielbiam fitness i zdrowy styl życia.",
-        "passions": [6, 5],
-        "location": [51.1097, 17.0292]
-    },
-    {
-        "username": "pawel_lukaszewicz",
-        "password": "password",
-        "email": "pawel.lukaszewicz@example.com",
-        "sex_id": 0,
-        "birthday": "1994-08-21",
-        "bio": "Gry komputerowe to moja pasja.",
-        "passions": [11, 12, 1],
-        "location": [52.2298, 21.0118]
-    },
-    {
-        "username": "marta_krzak",
-        "password": "password",
-        "email": "marta.krzak@example.com",
-        "sex_id": 1,
-        "birthday": "1992-05-10",
-        "bio": "Lubię filmy i książki.",
-        "passions": [18, 20, 17],
-        "location": [50.0499, 19.9449]
-    },
-    {
-        "username": "krzysztof_wisniewski",
-        "password": "password",
-        "email": "krzysztof.wisniewski@example.com",
-        "sex_id": 0,
-        "birthday": "1989-09-16",
-        "bio": "Zawsze gotowy do nowych wyzwań.",
-        "passions": [9, 7, 3],
-        "location": [53.3498, 14.5500]
-    },
-    {
-        "username": "eugenia_wojcik",
-        "password": "password",
-        "email": "eugenia.wojcik@example.com",
-        "sex_id": 1,
-        "birthday": "1986-01-12",
-        "bio": "Pasjonatka mody.",
-        "passions": [13, 14, 16],
-        "location": [50.0623, 19.9375]
-    },
-    {
-        "username": "jakub_olejniczak",
-        "password": "password",
-        "email": "jakub.olejniczak@example.com",
-        "sex_id": 0,
-        "birthday": "1990-11-02",
-        "bio": "Jestem fanem piłki nożnej.",
-        "passions": [1, 5],
-        "location": [50.6292, 19.9983]
-    },
-    {
-        "username": "anna_szewczyk",
-        "password": "password",
-        "email": "anna.szewczyk@example.com",
-        "sex_id": 1,
-        "birthday": "1993-04-15",
-        "bio": "Uwielbiam tworzyć muzykę.",
-        "passions": [14, 15],
-        "location": [52.2298, 21.0118]
-    },
-    {
-        "username": "michal_bak",
-        "password": "password",
-        "email": "michal.bak@example.com",
-        "sex_id": 0,
-        "birthday": "1991-03-30",
-        "bio": "Gra na instrumentach to moje życie.",
-        "passions": [14, 13, 10],
-        "location": [51.1079, 17.0385]
-    },
-    {
-        "username": "klaudia_majewska",
-        "password": "password",
-        "email": "klaudia.majewska@example.com",
-        "sex_id": 1,
-        "birthday": "1994-10-04",
-        "bio": "Kocham zwierzęta i podróże.",
-        "passions": [28, 19, 3],
-        "location": [52.4064, 16.9252]
-    },
-    {
-        "username": "tomasz_nowicki",
-        "password": "password",
-        "email": "tomasz.nowicki@example.com",
-        "sex_id": 0,
-        "birthday": "1987-01-28",
-        "bio": "Fascynat filmów i seriali.",
-        "passions": [17, 18],
-        "location": [51.7592, 19.4566]
-    },
-    {
-        "username": "karolina_jakubowska",
-        "password": "password",
-        "email": "karolina.jakubowska@example.com",
-        "sex_id": 1,
-        "birthday": "1992-09-25",
-        "bio": "Jestem miłośniczką książek.",
-        "passions": [20, 21],
-        "location": [50.6757, 21.0059]
-    },
-    {
-        "username": "adam_kaczmarek",
-        "password": "password",
-        "email": "adam.kaczmarek@example.com",
-        "sex_id": 0,
-        "birthday": "1992-08-21",
-        "bio": "Miłośnik muzyki elektronicznej.",
-        "passions": [15, 5, 11],
-        "location": [51.1079, 17.0385]
-    },
-    {
-        "username": "beata_wisniewska",
-        "password": "password",
-        "email": "beata.wisniewska@example.com",
-        "sex_id": 1,
-        "birthday": "1986-12-13",
-        "bio": "Podróżniczka i fotografka.",
-        "passions": [19, 13, 18],
-        "location": [50.6757, 21.0059]
-    },
-    {
-        "username": "jacek_kowalski",
-        "password": "password",
-        "email": "jacek.kowalski@example.com",
-        "sex_id": 0,
-        "birthday": "1990-03-10",
-        "bio": "Uwielbiam gotować.",
-        "passions": [19, 5],
-        "location": [52.4064, 16.9252]
-    },
-    {
-        "username": "klaudia_borkowska",
-        "password": "password",
-        "email": "klaudia.borkowska@example.com",
-        "sex_id": 1,
-        "birthday": "1991-11-02",
-        "bio": "Pasja do malowania.",
-        "passions": [13, 3, 6],
-        "location": [50.6292, 19.9983]
-    },
-    {
-        "username": "mariusz_rutkowski",
-        "password": "password",
-        "email": "mariusz.rutkowski@example.com",
-        "sex_id": 0,
-        "birthday": "1988-01-14",
-        "bio": "Fan sportów ekstremalnych.",
-        "passions": [1, 2, 6],
-        "location": [53.3498, 14.5500]
-    },
-    {
-        "username": "marta_kruk",
-        "password": "password",
-        "email": "marta.kruk@example.com",
-        "sex_id": 1,
-        "birthday": "1993-09-25",
-        "bio": "Zakochana w książkach.",
-        "passions": [20, 21, 12],
-        "location": [51.5074, 19.1278]
-    },
-    {
-        "username": "dawid_gorski",
-        "password": "password",
-        "email": "dawid.gorski@example.com",
-        "sex_id": 0,
-        "birthday": "1985-05-03",
-        "bio": "Amator gier planszowych.",
-        "passions": [12, 8],
-        "location": [52.2298, 21.0118]
-    },
-    {
-        "username": "patrycja_szumska",
-        "password": "password",
-        "email": "patrycja.szumska@example.com",
-        "sex_id": 1,
-        "birthday": "1990-07-08",
-        "bio": "Pasjonatka filmów niezależnych.",
-        "passions": [17, 18, 16],
-        "location": [50.0614, 19.9383]
-    },
-    {
-        "username": "michal_janowski",
-        "password": "password",
-        "email": "michal.janowski@example.com",
-        "sex_id": 0,
-        "birthday": "1994-11-11",
-        "bio": "Wielki fan piłki nożnej.",
-        "passions": [1, 9],
-        "location": [51.7592, 19.4566]
-    },
-    {
-        "username": "emilia_zawisza",
-        "password": "password",
-        "email": "emilia.zawisza@example.com",
-        "sex_id": 1,
-        "birthday": "1989-02-19",
-        "bio": "Uwielbiam pisać wiersze.",
-        "passions": [26, 20],
-        "location": [51.1079, 17.0385]
-    },
-    {
-        "username": "paweł_wojtowski",
-        "password": "password",
-        "email": "pawel.wojtowski@example.com",
-        "sex_id": 0,
-        "birthday": "1995-04-22",
-        "bio": "Fascynuję się historią i polityką.",
-        "passions": [21, 22, 23],
-        "location": [52.4064, 16.9252]
-    },
-    {
-        "username": "karol_malinowski",
-        "password": "password",
-        "email": "karol.malinowski@example.com",
-        "sex_id": 0,
-        "birthday": "1988-10-14",
-        "bio": "Fan muzyki rockowej.",
-        "passions": [15, 9],
-        "location": [50.6292, 19.9983]
-    },
-    {
-        "username": "anna_majewska",
-        "password": "password",
-        "email": "anna.majewska@example.com",
-        "sex_id": 1,
-        "birthday": "1992-03-30",
-        "bio": "Kocham teatry i kino.",
-        "passions": [16, 17],
-        "location": [50.6757, 21.0059]
-    },
-    {
-        "username": "grzegorz_krupa",
-        "password": "password",
-        "email": "grzegorz.krupa@example.com",
-        "sex_id": 0,
-        "birthday": "1984-12-17",
-        "bio": "Pasjonat astronomii.",
-        "passions": [30, 23],
-        "location": [52.2298, 21.0118]
-    },
-    {
-        "username": "ania_lis",
-        "password": "password",
-        "email": "ania.lis@example.com",
-        "sex_id": 1,
-        "birthday": "1994-06-11",
-        "bio": "Piesza turystyka i jazda na rowerze.",
-        "passions": [29, 6],
-        "location": [51.7592, 19.4566]
-    },
-    {
-        "username": "adam_wachowski",
-        "password": "password",
-        "email": "adam.wachowski@example.com",
-        "sex_id": 0,
-        "birthday": "1989-07-27",
-        "bio": "Miłośnik gier komputerowych.",
-        "passions": [11, 12],
-        "location": [52.4064, 16.9252]
-    },
-    {
-        "username": "marta_szewczyk",
-        "password": "password",
-        "email": "marta.szewczyk@example.com",
-        "sex_id": 1,
-        "birthday": "1993-01-16",
-        "bio": "Uwielbiam kino i teatr.",
-        "passions": [17, 16],
-        "location": [51.1079, 17.0385]
-    },
-    {
-        "username": "damian_nowakowski",
-        "password": "password",
-        "email": "damian.nowakowski@example.com",
-        "sex_id": 0,
-        "birthday": "1986-10-23",
-        "bio": "Fascynuję się polityką i historią.",
-        "passions": [21, 22],
-        "location": [50.6292, 19.9983]
-    },
-    {
-        "username": "alicja_witkowska",
-        "password": "password",
-        "email": "alicja.witkowska@example.com",
-        "sex_id": 1,
-        "birthday": "1995-12-01",
-        "bio": "Fanka muzyki klasycznej.",
-        "passions": [15, 5],
-        "location": [51.5074, 19.1278]
-    },
-    {
-        "username": "mateusz_sobczak",
-        "password": "password",
-        "email": "mateusz.sobczak@example.com",
-        "sex_id": 0,
-        "birthday": "1995-01-12",
-        "bio": "Miłośnik gier komputerowych.",
-        "passions": [11, 12, 1, 9],
-        "location": [52.4064, 16.9252]
-    },
-    {
-        "username": "patryk_kulig",
-        "password": "password",
-        "email": "patryk.kulig@example.com",
-        "sex_id": 0,
-        "birthday": "1992-04-09",
-        "bio": "Interesuję się piłką nożną.",
-        "passions": [1, 5, 6],
-        "location": [50.6757, 21.0059]
-    },
-    {
-        "username": "michal_siwiec",
-        "password": "password",
-        "email": "michal.siwiec@example.com",
-        "sex_id": 0,
-        "birthday": "1987-11-02",
-        "bio": "Zawsze mam czas na gry planszowe.",
-        "passions": [12, 8, 17],
-        "location": [51.1079, 17.0385]
-    },
-    {
-        "username": "julia_wojcik",
-        "password": "password",
-        "email": "julia.wojcik@example.com",
-        "sex_id": 1,
-        "birthday": "1994-08-15",
-        "bio": "Kocham zwierzęta.",
-        "passions": [28, 2, 3],
-        "location": [52.2298, 21.0118]
-    },
-    {
-        "username": "krzysztof_rutkowski",
-        "password": "password",
-        "email": "krzysztof.rutkowski@example.com",
-        "sex_id": 0,
-        "birthday": "1984-12-17",
-        "bio": "Fan sportów siłowych.",
-        "passions": [5, 6, 15, 23],
-        "location": [50.6292, 19.9983]
-    },
-    {
-        "username": "aneta_novak",
-        "password": "password",
-        "email": "aneta.novak@example.com",
-        "sex_id": 1,
-        "birthday": "1991-06-23",
-        "bio": "Uwielbiam podróże.",
-        "passions": [19, 18, 9],
-        "location": [51.5074, 19.1278]
-    },
-    {
-        "username": "andrzej_laskowski",
-        "password": "password",
-        "email": "andrzej.laskowski@example.com",
-        "sex_id": 0,
-        "birthday": "1983-09-30",
-        "bio": "Pasja do matematyki.",
-        "passions": [25, 5, 22],
-        "location": [52.2298, 21.0118]
-    },
-    {
-        "username": "agata_nowa",
-        "password": "password",
-        "email": "agata.nowa@example.com",
-        "sex_id": 1,
-        "birthday": "1986-07-10",
-        "bio": "Interesuję się teatrem.",
-        "passions": [16, 2, 5],
-        "location": [50.0614, 19.9383]
-    },
-    {
-        "username": "adam_pawlak",
-        "password": "password",
-        "email": "adam.pawlak@example.com",
-        "sex_id": 0,
-        "birthday": "1990-02-24",
-        "bio": "Zakochany w szachach.",
-        "passions": [10, 19, 3],
-        "location": [50.6757, 21.0059]
-    },
-    {
-        "username": "agnieszka_michalska",
-        "password": "password",
-        "email": "agnieszka.michalska@example.com",
-        "sex_id": 1,
-        "birthday": "1994-11-18",
-        "bio": "Uwielbiam gotować.",
-        "passions": [19, 28, 18],
-        "location": [51.1079, 17.0385]
-    },
-    {
-        "username": "tomasz_bielecki",
-        "password": "password",
-        "email": "tomasz.bielecki@example.com",
-        "sex_id": 0,
-        "birthday": "1991-09-12",
-        "bio": "Zainteresowania: muzyka.",
-        "passions": [15, 16, 5],
-        "location": [52.2298, 21.0118]
-    },
-    {
-        "username": "emilia_krupa",
-        "password": "password",
-        "email": "emilia.krupa@example.com",
-        "sex_id": 1,
-        "birthday": "1996-05-22",
-        "bio": "Uwielbiam filmy.",
-        "passions": [17, 9, 10],
-        "location": [51.7592, 19.4566]
-    },
-    {
-        "username": "marek_bartosz",
-        "password": "password",
-        "email": "marek.bartosz@example.com",
-        "sex_id": 0,
-        "birthday": "1991-09-12",
-        "bio": "Zainteresowania: muzyka.",
-        "passions": [15, 19, 12],
-        "location": [52.4064, 16.9252]
-    },
-    {
-        "username": "izabela_grzesiak",
-        "password": "password",
-        "email": "izabela.grzesiak@example.com",
-        "sex_id": 1,
-        "birthday": "1989-12-03",
-        "bio": "Fanka dobrego kina.",
-        "passions": [17, 18, 2],
-        "location": [50.6757, 21.0059]
-    },
-    {
-        "username": "zuzanna_sobota",
-        "password": "password",
-        "email": "zuzanna.sobota@example.com",
-        "sex_id": 1,
-        "birthday": "1995-07-01",
-        "bio": "Wszystko o naturze i zwierzętach.",
-        "passions": [28, 19, 11],
-        "location": [52.2298, 21.0118]
-    },
-    {
-        "username": "jakub_wysocki",
-        "password": "password",
-        "email": "jakub.wysocki@example.com",
-        "sex_id": 0,
-        "birthday": "1992-06-10",
-        "bio": "Interesuję się polityką.",
-        "passions": [22, 15, 25],
-        "location": [50.6757, 21.0059]
-    },
-    {
-        "username": "martyna_kaczmarek",
-        "password": "password",
-        "email": "martyna.kaczmarek@example.com",
-        "sex_id": 1,
-        "birthday": "1993-09-15",
-        "bio": "Miłośniczka literatury.",
-        "passions": [20, 28, 18],
-        "location": [51.1079, 17.0385]
-    },
-    {
-        "username": "grzegorz_wilk",
-        "password": "password",
-        "email": "grzegorz.wilk@example.com",
-        "sex_id": 0,
-        "birthday": "1984-03-09",
-        "bio": "Fan piłki ręcznej.",
-        "passions": [6, 3, 5],
-        "location": [50.6757, 21.0059]
-    },
-    {
-        "username": "monika_oliwa",
-        "password": "password",
-        "email": "monika.oliwa@example.com",
-        "sex_id": 1,
-        "birthday": "1987-10-25",
-        "bio": "Miłośniczka kina.",
-        "passions": [17, 19, 12],
-        "location": [50.6757, 21.0059]
-    },
-    {
-        "username": "rafal_michalowski",
-        "password": "password",
-        "email": "rafal.michalowski@example.com",
-        "sex_id": 0,
-        "birthday": "1990-07-14",
-        "bio": "Wielki fan astronomii.",
-        "passions": [30, 1, 12],
-        "location": [51.1079, 17.0385]
-    },
-    {
-        "username": "agnieszka_wilk",
-        "password": "password",
-        "email": "agnieszka.wilk@example.com",
-        "sex_id": 1,
-        "birthday": "1985-01-28",
-        "bio": "Interesuję się zdrowym stylem życia.",
-        "passions": [5, 28, 15],
-        "location": [52.2298, 21.0118]
-    },
-    {
-        "username": "stefan_rudzinski",
-        "password": "password",
-        "email": "stefan.rudzinski@example.com",
-        "sex_id": 0,
-        "birthday": "1994-05-14",
-        "bio": "Zainteresowany historią.",
-        "passions": [21, 17, 8],
-        "location": [51.1079, 17.0385]
-    },
-    {
-        "username": "ewelina_rozanska",
-        "password": "password",
-        "email": "ewelina.rozanska@example.com",
-        "sex_id": 1,
-        "birthday": "1992-01-17",
-        "bio": "Interesuję się modą.",
-        "passions": [16, 28, 3],
-        "location": [50.0614, 19.9383]
-    },
-    {
-        "username": "grzegorz_bogdanowicz",
-        "password": "password",
-        "email": "grzegorz.bogdanowicz@example.com",
-        "sex_id": 0,
-        "birthday": "1988-03-02",
-        "bio": "Pasjonat książek i muzyki.",
-        "passions": [15, 20, 19],
-        "location": [50.6757, 21.0059]
-    },
-    {
-        "username": "agnieszka_wloch",
-        "password": "password",
-        "email": "agnieszka.wloch@example.com",
-        "sex_id": 1,
-        "birthday": "1993-10-10",
-        "bio": "Uwielbiam grzebać w ogrodzie.",
-        "passions": [6, 15, 3],
-        "location": [52.4064, 16.9252]
-    },
-    {
-        "username": "marta_lewandowska",
-        "password": "password",
-        "email": "marta.lewandowska@example.com",
-        "sex_id": 1,
-        "birthday": "1993-05-03",
-        "bio": "Uwielbiam odkrywać nowe miejsca, nawet jeśli to tylko małe kawiarnie w moim mieście.",
-        "passions": [12, 14, 4],
-        "location": [52.4064, 16.9252]
-    },
-    {
-        "username": "wojciech_adamczyk",
-        "password": "password",
-        "email": "wojciech.adamczyk@example.com",
-        "sex_id": 0,
-        "birthday": "1988-11-21",
-        "bio": "Z zawodu jestem programistą, a po godzinach oddaję się pasji do fantasy i gier RPG.",
-        "passions": [8, 13, 11],
-        "location": [50.0614, 19.9366]
-    },
-    {
-        "username": "agnieszka_witkowska",
-        "password": "password",
-        "email": "agnieszka.witkowska@example.com",
-        "sex_id": 1,
-        "birthday": "1999-04-09",
-        "bio": "Od zawsze ciągnęło mnie do sztuki. Maluję, kiedy tylko mam wolną chwilę.",
-        "passions": [10, 3, 7],
-        "location": [51.1079, 17.0385]
-    },
-    {
-        "username": "piotr_jankowski",
-        "password": "password",
-        "email": "piotr.jankowski@example.com",
-        "sex_id": 0,
-        "birthday": "1990-10-17",
-        "bio": "Książki historyczne i dokumenty to mój sposób na relaks po pracy.",
-        "passions": [21, 20, 2],
-        "location": [54.5189, 18.5319]
-    },
-    {
-        "username": "julia_michalska",
-        "password": "password",
-        "email": "julia.michalska@example.com",
-        "sex_id": 1,
-        "birthday": "2001-02-13",
-        "bio": "Czasem gram na gitarze, czasem po prostu słucham ulubionych playlist. Zależy od nastroju.",
-        "passions": [1, 14, 15],
-        "location": [53.4285, 14.5528]
-    },
-    {
-        "username": "dawid_tomaszewski",
-        "password": "password",
-        "email": "dawid.tomaszewski@example.com",
-        "sex_id": 0,
-        "birthday": "1995-07-25",
-        "bio": "Lubię długie spacery, dobre jedzenie i dziwne podcasty o psychologii.",
-        "passions": [19, 15, 6],
-        "location": [50.0412, 21.9991]
-    },
-    {
-        "username": "emilia_baran",
-        "password": "password",
-        "email": "emilia.baran@example.com",
-        "sex_id": 1,
-        "birthday": "1996-08-30",
-        "bio": "Sport zawsze był częścią mojego życia – kiedy nie biegam, to oglądam siatkówkę.",
-        "passions": [4, 3, 2],
-        "location": [52.2298, 21.0118]
-    },
-    {
-        "username": "mateusz_grabowski",
-        "password": "password",
-        "email": "mateusz.grabowski@example.com",
-        "sex_id": 0,
-        "birthday": "1992-03-16",
-        "bio": "Nie potrafię usiedzieć w miejscu – każda okazja do podróży to dobra okazja.",
-        "passions": [12, 7, 6],
-        "location": [51.7592, 19.4559]
-    },
-    {
-        "username": "aleksandra_olszewska",
-        "password": "password",
-        "email": "aleksandra.olszewska@example.com",
-        "sex_id": 1,
-        "birthday": "1994-09-06",
-        "bio": "Nie wyobrażam sobie tygodnia bez teatru albo dobrej książki. Uwielbiam emocje, które wywołują.",
-        "passions": [16, 20, 5],
-        "location": [52.2297, 21.0122]
-    },
-    {
-        "username": "krzysztof_rutkowicz",
-        "password": "password",
-        "email": "krzysztof.rutkowicz@example.com",
-        "sex_id": 0,
-        "birthday": "1987-12-01",
-        "bio": "Rower to mój drugi dom. Zwiedzam Polskę na dwóch kółkach i nie planuję przestać.",
-        "passions": [9, 12, 6],
-        "location": [53.1325, 23.1688]
-    },
-    {
-        "username": "przemysław_maculewicz",
-        "password": "password",
-        "email": "przemysław.maculewicz@example.com",
-        "sex_id": 0,
-        "birthday": "1998-07-31",
-        "bio": "Nie wyobrażam sobie życia bez muzyki.",
-        "passions": [8, 21, 5],
-        "location": [53.050592, 20.902335]
-    },
-    {
-        "username": "tymoteusz_schubert",
-        "password": "password",
-        "email": "tymoteusz.schubert@example.com",
-        "sex_id": 0,
-        "birthday": "1993-05-06",
-        "bio": "Od zawsze interesowałam/em się muzyka. Gdy tylko mam wolną chwilę, gram w gry. Uwielbiam oglądam filmy.",
-        "passions": [17, 20, 1],
-        "location": [52.086848, 21.3034]
-    },
-    {
-        "username": "tola_niesporek",
-        "password": "password",
-        "email": "tola.niesporek@example.com",
-        "sex_id": 1,
-        "birthday": "1994-10-19",
-        "bio": "Gotowanie to moja forma terapii.",
-        "passions": [9, 1, 6],
-        "location": [52.839767, 17.470555]
-    },
-    {
-        "username": "konstanty_orkisz",
-        "password": "password",
-        "email": "konstanty.orkisz@example.com",
-        "sex_id": 0,
-        "birthday": "1990-03-16",
-        "bio": "Podróżuję, kiedy tylko mogę.",
-        "passions": [4, 3, 13],
-        "location": [49.53194, 22.644443]
-    },
-    {
-        "username": "róża_potaczek",
-        "password": "password",
-        "email": "róża.potaczek@example.com",
-        "sex_id": 1,
-        "birthday": "1993-09-22",
-        "bio": "Nic nie sprawia mi większej radości niż gotowanie. Staram się maluję tak często, jak to możliwe.",
-        "passions": [10, 20, 12],
-        "location": [52.175437, 21.186633]
-    },
-    {
-        "username": "łukasz_rode",
-        "password": "password",
-        "email": "łukasz.rode@example.com",
-        "sex_id": 0,
-        "birthday": "2006-02-06",
-        "bio": "Jestem osobą ciekawą świata. Szczególnie fascynuje mnie sport, a w wolnym czasie oglądam filmy.",
-        "passions": [9, 15, 12],
-        "location": [49.894598, 17.623761]
-    },
-    {
-        "username": "ewa_hołubowicz",
-        "password": "password",
-        "email": "ewa.hołubowicz@example.com",
-        "sex_id": 1,
-        "birthday": "1995-06-14",
-        "bio": "Od zawsze interesowałam/em się technologia. Gdy tylko mam wolną chwilę, uczę się nowych przepisów. Uwielbiam piszę.",
-        "passions": [6, 15, 13],
-        "location": [50.484713, 23.43899]
-    },
-    {
-        "username": "mateusz_malon",
-        "password": "password",
-        "email": "mateusz.malon@example.com",
-        "sex_id": 0,
-        "birthday": "1991-11-17",
-        "bio": "Od zawsze interesowałam/em się film. Gdy tylko mam wolną chwilę, czytam książki. Uwielbiam gram na gitarze.",
-        "passions": [13, 9, 3],
-        "location": [50.160406, 23.617679]
-    },
-    {
-        "username": "elżbieta_kostek",
-        "password": "password",
-        "email": "elżbieta.kostek@example.com",
-        "sex_id": 1,
-        "birthday": "1995-11-01",
-        "bio": "Książki to moja codzienność.",
-        "passions": [13, 15, 5],
-        "location": [50.456841, 16.515601]
-    },
-    {
-        "username": "nicole_dziechciarz",
-        "password": "password",
-        "email": "nicole.dziechciarz@example.com",
-        "sex_id": 1,
-        "birthday": "2005-09-03",
-        "bio": "Nic nie sprawia mi większej radości niż gry planszowe. Staram się spotykam się z przyjaciółmi tak często, jak to możliwe.",
-        "passions": [17, 16, 3],
-        "location": [53.156802, 22.78325]
+      "username": "Łukasz Dębowski",
+      "password": "password",
+      "email": "lukasz.debowski@example.pl",
+      "sex_id": 0,
+      "birthday": "1998-03-22",
+      "bio": "Inżynier robotyk, który po godzinach zakłada pelerynę i prowadzi livestreamy z sesji D&D. Uwielbiam łączyć kuchnię molekularną z przepisami babci – ostatnio stworzyłem pierogi w żelowej kapsule. Szukam kogoś do nocnych obserwacji nieba... i dyskusji o absurdach 'Rancza'.",
+      "passions": [
+        41,
+        8,
+        19,
+        44,
+        36
+      ],
+      "location": [
+        51.1079,
+        17.0385
+      ]
+    },
+    {
+      "username": "Zuzanna Kwiatkowska",
+      "password": "password",
+      "email": "zuzanna.kwiatkowska@mail.pl",
+      "sex_id": 1,
+      "birthday": "2001-11-05",
+      "bio": "Studentka historii sztuki z obsesją na punkcie parkouru. Biegam po dachach kamienic w Łodzi, ale tylko w rytm Chopina. Kolekcjonuję XIX-wieczne fotografie... i memy o kotach. Moja misja? Znaleźć osobę, która nauczy mnie programować w zamian za lekcje tanga.",
+      "passions": [
+        21,
+        46,
+        34,
+        31,
+        40
+      ],
+      "location": [
+        51.7592,
+        19.4559
+      ]
+    },
+    {
+      "username": "ZofiaMarciniak",
+      "password": "password",
+      "email": "zofia.marciniak@mail.pl",
+      "sex_id": 1,
+      "birthday": "1998-11-23",
+      "bio": "Neurobiolożka, która w przerwach od badania mózgów kręci ceramiczne wazony w stylu barokowym. Nocą piszę fanfiki o kosmicznych kotach. Uczę się islandzkiego, bo podobno brzmi jak zaklęcia.",
+      "passions": [
+        23,
+        49,
+        39,
+        31
+      ],
+      "location": [
+        54.352,
+        18.6466
+      ]
+    },
+    {
+      "username": "MarekKowal",
+      "password": "password",
+      "email": "marek.kowal@mail.pl",
+      "sex_id": 0,
+      "birthday": "1992-11-05",
+      "bio": "Informatyk, który w weekendy zamienia klawiaturę na wędkę. Uwielbiam opowiadać żarty o błędach w kodzie i słuchać jazzu przy łowieniu karpi. Szukam kogoś do dyskusji o teorii chaosu.",
+      "passions": [
+        31,
+        47,
+        23
+      ],
+      "location": [
+        52.4064,
+        16.9252
+      ]
+    },
+    {
+      "username": "ZofiaNowak",
+      "password": "password",
+      "email": "zofia.nowak@example.pl",
+      "sex_id": 1,
+      "birthday": "1988-03-22",
+      "bio": "Architektka ogrodów, która nocą przeradza się w poetkę. Piszę wiersze o różach i ukrytych znaczeniach w reklamach detergentów. Marzę o podróży na Islandię.",
+      "passions": [
+        13,
+        26,
+        39,
+        44
+      ],
+      "location": [
+        50.0614,
+        19.9383
+      ]
+    },
+    {
+      "username": "KrzysztofDąb",
+      "password": "password",
+      "email": "krzysztof.dab@post.pl",
+      "sex_id": 0,
+      "birthday": "2001-07-14",
+      "bio": "Zawodowy gracz esportowy, który w przerwach między turniejami piecze chleby na zakwasie. Uczę się języka migowego, żeby rozmawiać z drzewami.",
+      "passions": [
+        36,
+        19,
+        42,
+        48
+      ],
+      "location": [
+        54.352,
+        18.6466
+      ]
+    },
+    {
+      "username": "AlicjaWilk",
+      "password": "password",
+      "email": "alicja.wilk@mail.pl",
+      "sex_id": 1,
+      "birthday": "1999-12-30",
+      "bio": "Studentka robotyki z obsesją na punkcie średniowiecznych tańców. W piątki organizuję turnieje szachowe w przebraniach z Gry o Tron. Zbieram kamienie z Mazur.",
+      "passions": [
+        41,
+        10,
+        40,
+        21
+      ],
+      "location": [
+        53.1325,
+        23.1688
+      ]
+    },
+    {
+      "username": "TomaszLis",
+      "password": "password",
+      "email": "tomasz.lis@mail.pl",
+      "sex_id": 0,
+      "birthday": "1983-05-18",
+      "bio": "Były strażak, teraz hoduję alpaki i maluję abstrakcyjne obrazy olejne. Wierzę, że najlepsze pomysły przychodzą podczas jogi na dachu stodoły.",
+      "passions": [
+        13,
+        28,
+        50,
+        34
+      ],
+      "location": [
+        51.1079,
+        17.0385
+      ]
+    },
+    {
+      "username": "HannaJawor",
+      "password": "password",
+      "email": "hanna.jawor@example.pl",
+      "sex_id": 1,
+      "birthday": "1995-09-09",
+      "bio": "Prawniczka od prawa kosmicznego, która w wolnym czasie konstruuje katapulty do rzucania pierogami. Uwielbiam filmy klasy B i zapachy starych bibliotek.",
+      "passions": [
+        22,
+        42,
+        17,
+        20
+      ],
+      "location": [
+        50.2649,
+        19.0238
+      ]
+    },
+    {
+      "username": "PiotrSosna",
+      "password": "password",
+      "email": "piotr.sosna@post.pl",
+      "sex_id": 0,
+      "birthday": "2004-02-11",
+      "bio": "Młody astronom-amator, który gra na akordeonie w metrze. Kolekcjonuję bilety komunikacji miejskiej z całego świata. Wierzę, że życie to mem.",
+      "passions": [
+        44,
+        14,
+        39,
+        45
+      ],
+      "location": [
+        52.2297,
+        21.0122
+      ]
+    },
+    {
+      "username": "MagdaBór",
+      "password": "password",
+      "email": "magda.bor@mail.pl",
+      "sex_id": 1,
+      "birthday": "1990-10-31",
+      "bio": "Wegetariańska szefowa kuchni, która projektuje kostiumy dla lalek vintage. W ramach relaksu czytam podręczniki do chemii kwantowej. Szukam partnera do gry w Dungeons & Dragons.",
+      "passions": [
+        19,
+        37,
+        8,
+        24,
+        32
+      ],
+      "location": [
+        51.2465,
+        22.5684
+      ]
+    },
+    {
+      "username": "MarekKowalczyk",
+      "password": "password",
+      "email": "marek.kowalczyk@mail.pl",
+      "sex_id": 0,
+      "birthday": "1992-03-18",
+      "bio": "Inżynier robotyki, który po godzinach komponuje muzykę na thereminie. Uwielbiam nocne wędrówki po Bieszczadach i dyskusje o teorii chaosu. Szukam kogoś, kto podzieli się ze mną przepisem na idealny chleb żytni.",
+      "passions": [
+        41,
+        14,
+        39,
+        19
+      ],
+      "location": [
+        49.2992,
+        19.9496
+      ]
+    },
+    {
+      "username": "ZofiaWiatr",
+      "password": "password",
+      "email": "zofia.wiatr@example.pl",
+      "sex_id": 1,
+      "birthday": "1985-11-05",
+      "bio": "Była dziennikarka śledcza, teraz hoduję alpaki i maluję surrealistyczne pejzaże. W weekendy organizuję turnieje szachowe w starym młynie. Moja słabość? Kawa po turecku i podcasty o czarnych dziurach.",
+      "passions": [
+        13,
+        10,
+        44,
+        35
+      ],
+      "location": [
+        51.1079,
+        17.0385
+      ]
+    },
+    {
+      "username": "KrzysztofGrot",
+      "password": "password",
+      "email": "k.grot@mail.pl",
+      "sex_id": 0,
+      "birthday": "2001-07-23",
+      "bio": "Zawodowy gracz League of Legends, który w ramach detoksu szydełkuje czapki dla bezdomnych kotów. Marzę o przepłynięciu Wisły kajakiem i napisaniu powieści grozy osadzonej w Olecku.",
+      "passions": [
+        36,
+        28,
+        42,
+        20
+      ],
+      "location": [
+        54.0333,
+        19.7833
+      ]
+    },
+    {
+      "username": "AlicjaKrupa",
+      "password": "password",
+      "email": "krupa.ali@example.pl",
+      "sex_id": 1,
+      "birthday": "1998-09-12",
+      "bio": "Studentka astrofizyki z obsesją na punkcie średniowiecznych tańców dworskich. W piątki prowadzę warsztaty z mindfulness w opuszczonym kościele. Ostatnio eksperymentuję z fermentacją buraków.",
+      "passions": [
+        44,
+        40,
+        38,
+        37
+      ],
+      "location": [
+        50.0614,
+        19.9383
+      ]
+    },
+    {
+      "username": "TomaszBłysk",
+      "password": "password",
+      "email": "tomasz.blysk@mail.pl",
+      "sex_id": 0,
+      "birthday": "1983-04-30",
+      "bio": "Strażak-akrobata, który kolekcjonuje stare radia lampowe. W wolnych chwilach układam wiersze haiku o życiu w Szczecinie. Szukam partnera do nauki języka migowego i wspinaczki po industrialnych ruinach.",
+      "passions": [
+        33,
+        26,
+        34,
+        9
+      ],
+      "location": [
+        53.4285,
+        14.5528
+      ]
+    },
+    {
+      "username": "NinaCis",
+      "password": "password",
+      "email": "nina.cis@example.pl",
+      "sex_id": 1,
+      "birthday": "1995-12-14",
+      "bio": "Architektka ogrodów, która nocami zamienia się w DJ-ke gabberową. Hoduję mięsożerne rośliny i trenuję capoeirę w opuszczonym hangarze. Moje ostatnie odkrycie? Filozofia stoicka w połączeniu z latte art.",
+      "passions": [
+        42,
+        15,
+        46,
+        21
+      ],
+      "location": [
+        52.4064,
+        16.9252
+      ]
+    },
+    {
+      "username": "BartoszPrąd",
+      "password": "password",
+      "email": "bartosz.prad@mail.pl",
+      "sex_id": 0,
+      "birthday": "2003-02-28",
+      "bio": "Młody programista specjalizujący się w AI, który równolegle prowadzi kanał ASMR z odgłosami starej drukarki. W weekendy jeżdżę na mazurskie jeziora szukać zatopionych wraków. Uwielbiam zapach oleju lnianego i dźwięk deszczu.",
+      "passions": [
+        31,
+        34,
+        39,
+        47
+      ],
+      "location": [
+        53.7784,
+        20.4801
+      ]
+    },
+    {
+      "username": "HannaZorza",
+      "password": "password",
+      "email": "h.zorza@example.pl",
+      "sex_id": 1,
+      "birthday": "1990-06-19",
+      "bio": "Była pilotka szybowcowa, teraz projektuję biżuterię z części komputerowych. Organizuję potajemne wieczory poezji slam w opuszczonych fabrykach. Moja tajna broń? Domowej roboty nalewka z tarniny.",
+      "passions": [
+        32,
+        39,
+        26,
+        45
+      ],
+      "location": [
+        50.2945,
+        18.6714
+      ]
+    },
+    {
+      "username": "MikołajWrzos",
+      "password": "password",
+      "email": "m.wrzos@mail.pl",
+      "sex_id": 0,
+      "birthday": "1988-08-08",
+      "bio": "Leśnik-fotograf, który układa elektroakustyczne remixy pieśni ludowych. W piwnicy mam kolekcję 200 gatunków herbat. Ostatnio uczę się kaligrafii hebrajskiej i buduję tratwy z butelek PET.",
+      "passions": [
+        34,
+        40,
+        20,
+        42
+      ],
+      "location": [
+        54.352,
+        18.6466
+      ]
+    },
+    {
+      "username": "LilkaMgła",
+      "password": "password",
+      "email": "lilka.mgla@example.pl",
+      "sex_id": 1,
+      "birthday": "1999-10-31",
+      "bio": "Pogromczyni mitów miejskich z zamiłowaniem do wiktoriańskiej mody żałobnej. W ramach medytacji układam mozaiki ze stłuczonych luster. Moje specjalne umiejętność? Rozmawianie z wronami i czytanie map z XIX wieku.",
+      "passions": [
+        21,
+        32,
+        48,
+        7
+      ],
+      "location": [
+        51.2465,
+        22.5684
+      ]
+    },
+    {
+      "username": "OskarLis",
+      "password": "password",
+      "email": "oskar.lis@mail.pl",
+      "sex_id": 0,
+      "birthday": "1993-05-22",
+      "bio": "Informatyk z zamiłowaniem do średniowiecznych bitew rekonstrukcyjnych. Wieczorami piszę fanfiki o romansach maszyn parowych. Moja ambicja? Przepłynąć Bałtyk na dmuchanym materacu.",
+      "passions": [
+        31,
+        21,
+        42,
+        39
+      ],
+      "location": [
+        54.4416,
+        18.56
+      ]
+    },
+    {
+      "username": "KalinaMarzec",
+      "password": "password",
+      "email": "kalina.marzec@example.pl",
+      "sex_id": 1,
+      "birthday": "2000-12-07",
+      "bio": "Studentka weterynarii, która prowadzi podcast o życiu grzybów. W weekendy rywalizuję w zawodach parkour po dachach kamienic. Moja tajemnica? Potrafię rozszyfrować sny za pomocą tablicy Mendelejewa.",
+      "passions": [
+        28,
+        46,
+        24,
+        35
+      ],
+      "location": [
+        51.9356,
+        15.5064
+      ]
+    },
+    {
+      "username": "IgnacyWąż",
+      "password": "password",
+      "email": "ignacy.waz@mail.pl",
+      "sex_id": 0,
+      "birthday": "1987-07-14",
+      "bio": "Konserwator zabytków, który nocami gra na didgeridoo w opuszczonym bunkrze. Kolekcjonuję mapy zaginionych miast i eksperymentuję z kuchnią molekularną. Szukam śmiałka do eksploracji podziemnych tuneli w Łodzi.",
+      "passions": [
+        21,
+        14,
+        19,
+        44
+      ],
+      "location": [
+        51.7592,
+        19.456
+      ]
+    },
+    {
+      "username": "DariaKłąb",
+      "password": "password",
+      "email": "daria.klab@example.pl",
+      "sex_id": 1,
+      "birthday": "1996-04-01",
+      "bio": "Była żołnierka, teraz projektuję suknie ślubne z recyclowanych spadochronów. Uczę się języka islandzkiego przez TikTok i hoduję kaktusy w kształcie bohaterów Sienkiewicza. Ostatnio zakochałam się w jodze na linie.",
+      "passions": [
+        50,
+        32,
+        39,
+        20
+      ],
+      "location": [
+        50.8117,
+        19.1203
+      ]
+    },
+    {
+      "username": "LeonSzum",
+      "password": "password",
+      "email": "leon.szum@mail.pl",
+      "sex_id": 0,
+      "birthday": "2004-11-17",
+      "bio": "Młody iluzjonista-amator, który dziennie wypija 7 filiżanek yerba mate. Specjalizuję się w ucieczkach z klatek pełnych książek historycznych. Marzę o założeniu kapeli grającej na odkurzaczach.",
+      "passions": [
+        16,
+        21,
+        9,
+        42
+      ],
+      "location": [
+        52.4084,
+        16.9337
+      ]
+    },
+    {
+      "username": "WeronikaSosna",
+      "password": "password",
+      "email": "weronika.sosna@example.pl",
+      "sex_id": 1,
+      "birthday": "1982-09-25",
+      "bio": "Geolożka wulkanów, która w wolnym czasie haftuje portrety dinozaurów. Organizuję wyścigi rowerowe po torach kolejowych. Moje credo? Życie to jeden wielki eksperyment chemiczny.",
+      "passions": [
+        24,
+        29,
+        13,
+        33
+      ],
+      "location": [
+        49.9622,
+        20.6003
+      ]
+    },
+    {
+      "username": "KacperGrom",
+      "password": "password",
+      "email": "kacper.grom@mail.pl",
+      "sex_id": 0,
+      "birthday": "1991-02-11",
+      "bio": "Operator dronów, który układa wiersze o życiu kosmitów w śląskich familokach. Kolekcjonuję stare telewizory i trenuję ninjutsu w lesie. Ostatnio próbuję przekłuć teorię względności przez pryzmat pierogów.",
+      "passions": [
+        34,
+        23,
+        26,
+        42
+      ],
+      "location": [
+        50.2649,
+        19.0238
+      ]
+    },
+    {
+      "username": "NadiaTrawa",
+      "password": "password",
+      "email": "nadia.trawa@example.pl",
+      "sex_id": 1,
+      "birthday": "1998-03-30",
+      "bio": "Architektka mostów, która prowadzi sekretny klub miłośników morskich potworów. W weekendy śpiewam w chórze gregoriańskim i testuję prototypy latających rowerów. Moja obsesja? Magnetyzm w codziennych przedmiotach.",
+      "passions": [
+        41,
+        15,
+        44,
+        39
+      ],
+      "location": [
+        52.5487,
+        19.7085
+      ]
+    },
+    {
+      "username": "TymonKres",
+      "password": "password",
+      "email": "tymon.kres@mail.pl",
+      "sex_id": 0,
+      "birthday": "2002-08-09",
+      "bio": "Fizyk jądrowy z zacięciem do street artu. Maluję murale przedstawiające równania kwantowe w podwórkach Pragi. W wolnych chwilach konstruuję maszyny do robienia baniek mydlanych wielkości człowieka.",
+      "passions": [
+        23,
+        32,
+        42,
+        9
+      ],
+      "location": [
+        52.254,
+        21.0345
+      ]
+    },
+    {
+      "username": "MiraBurza",
+      "password": "password",
+      "email": "mira.burza@example.pl",
+      "sex_id": 1,
+      "birthday": "1989-10-13",
+      "bio": "Była dyplomatka, teraz hoduję pszczoły w środku miasta i piszę kryminały o zaginionych tramwajach. Uczę się języka migowego dla ptaków i kolekcjonuję stare rozkłady jazby PKP. Moja zasada? Żadnego dnia bez absurdalnego pytania.",
+      "passions": [
+        28,
+        20,
+        39,
+        35
+      ],
+      "location": [
+        50.0647,
+        19.945
+      ]
+    },
+    {
+      "username": "AdaSzron",
+      "password": "password",
+      "email": "ada.szron@mail.pl",
+      "sex_id": 1,
+      "birthday": "1994-06-08",
+      "bio": "Programistka, która w ramach relaksu tworzy cyfrowe kolaże z fragmentów starych map. W weekendy organizuję podchody dla dorosłych w opuszczonych fabrykach. Moja misja? Udowodnić, że matematyka może być piękna jak poezja.",
+      "passions": [
+        31,
+        32,
+        42
+      ],
+      "location": [
+        51.1079,
+        17.0385
+      ]
+    },
+    {
+      "username": "WiktorMgła",
+      "password": "password",
+      "email": "wiktor.mgla@example.pl",
+      "sex_id": 0,
+      "birthday": "1986-01-15",
+      "bio": "Muzyk grający na okarynie, który bada wpływ dźwięków na wzrost roślin. Kolekcjonuję XIX-wieczne mikroskopy i gotuję zupy z chwastów. Ostatnio uczę się języka wilamowskiego.",
+      "passions": [
+        14,
+        23,
+        44
+      ],
+      "location": [
+        53.4285,
+        14.5528
+      ]
+    },
+    {
+      "username": "LilaKłąb",
+      "password": "password",
+      "email": "lila.klab@mail.pl",
+      "sex_id": 1,
+      "birthday": "2005-03-03",
+      "bio": "Młoda poetka eksperymentująca z wierszami generowanymi przez AI. Trenuję parkour po dachach bibliotek i zbieram kamienie z napisami w nieznanych językach. Moje marzenie? Stworzyć operę o fotosyntezie.",
+      "passions": [
+        26,
+        46,
+        41
+      ],
+      "location": [
+        50.0614,
+        19.9383
+      ]
+    },
+    {
+      "username": "KazimierzBłoto",
+      "password": "password",
+      "email": "kazik.bloto@example.pl",
+      "sex_id": 0,
+      "birthday": "1980-12-24",
+      "bio": "Hydrolog z pasją do tworzenia instrumentów z lodowych brył. W piwnicy mam kolekcję 150 odmian mchu. W wolnych chwilach rekonstruuję średniowieczne przepisy na piwo.",
+      "passions": [
+        24,
+        40,
+        49
+      ],
+      "location": [
+        54.352,
+        18.6466
+      ]
+    },
+    {
+      "username": "ZuzannaWir",
+      "password": "password",
+      "email": "zuzanna.wir@mail.pl",
+      "sex_id": 1,
+      "birthday": "1997-07-19",
+      "bio": "Była komandoska, teraz prowadzę warsztaty z garncarstwa dla więźniów. Kolekcjonuję odgłosy burz i piszę bajki o cybernetycznych smokach. Ostatnio hoduję kryształy w kształcie fraktali.",
+      "passions": [
+        49,
+        43,
+        36
+      ],
+      "location": [
+        50.2945,
+        18.6714
+      ]
+    },
+    {
+      "username": "MarcelSzept",
+      "password": "password",
+      "email": "marcel.szept@example.pl",
+      "sex_id": 0,
+      "birthday": "2002-04-12",
+      "bio": "Student filozofii, który nocami gra na harfie w tunelach metra. Projektuję ubrania z materiałów odblaskowych i badam życie mrówek w miejskich śmietnikach. Moja obsesja? Telefony z klapką.",
+      "passions": [
+        15,
+        21,
+        34
+      ],
+      "location": [
+        52.2297,
+        21.0122
+      ]
+    },
+    {
+      "username": "NelaPiorun",
+      "password": "password",
+      "email": "nela.piorun@mail.pl",
+      "sex_id": 1,
+      "birthday": "1999-11-30",
+      "bio": "Elektryczka z zamiłowaniem do haftu matematycznego. Organizuję wyścigi wrotkarskie po schodach wieżowców. Ostatnio buduję modele elektrowni atomowych z klocków LEGO.",
+      "passions": [
+        5,
+        25,
+        42
+      ],
+      "location": [
+        51.2465,
+        22.5684
+      ]
+    },
+    {
+      "username": "BrunoKipiel",
+      "password": "password",
+      "email": "bruno.kipiel@example.pl",
+      "sex_id": 0,
+      "birthday": "1993-08-22",
+      "bio": "Marynarz śródlądowy, który pisze sonety o zapachach polskich dworców. Kolekcjonuję korki od wina i trenuję judo w kombinezonie nurkowym. Szukam partnera do stworzenia katalogu chmur nad Wisłą.",
+      "passions": [
+        39,
+        26,
+        33
+      ],
+      "location": [
+        53.1325,
+        23.1688
+      ]
+    },
+    {
+      "username": "IgaSarna",
+      "password": "password",
+      "email": "iga.sarna@mail.pl",
+      "sex_id": 1,
+      "birthday": "1984-05-07",
+      "bio": "Leśniczka komponująca muzykę na liściach i kamieniach. Prowadzę wykłady o mimikrze w modzie i hoduję motyle w kształcie liter. Moja tajemnica? Znam na pamięć wszystkie rozkłady jazdy PKP z 1987 roku.",
+      "passions": [
+        28,
+        14,
+        39
+      ],
+      "location": [
+        49.2992,
+        19.9496
+      ]
+    },
+    {
+      "username": "CyprianKruk",
+      "password": "password",
+      "email": "cyprian.kruk@example.pl",
+      "sex_id": 0,
+      "birthday": "2000-10-05",
+      "bio": "Grafficiarz specjalizujący się w portretach historycznych władców na transformatorach. W weekendy prowadzę wykopki archeologiczne w McDonald'sach. Ostatnio uczę się kaligrafii światłem UV.",
+      "passions": [
+        32,
+        21,
+        46
+      ],
+      "location": [
+        50.8117,
+        19.1203
+      ]
+    },
+    {
+      "username": "MarekNowak",
+      "password": "password",
+      "email": "marek.nowak@mail.pl",
+      "sex_id": 0,
+      "birthday": "1987-05-12",
+      "bio": "Namiętny programista, który łączy miłość do klasycznych filmów z marzeniem o podróżach w czasie. Eksperymentuje z nowoczesną technologią, odkrywając staroświecką literaturę.",
+      "passions": [
+        31,
+        20,
+        39
+      ],
+      "location": [
+        52.2297,
+        21.0122
+      ]
+    },
+    {
+      "username": "AnnaKowalska",
+      "password": "password",
+      "email": "anna.kowalska@mail.pl",
+      "sex_id": 1,
+      "birthday": "1992-11-03",
+      "bio": "Zawodowa graficzka, która tworzy surrealistyczne obrazy inspirowane polskimi legendami. W wolnych chwilach recytuje poezję i eksperymentuje z dźwiękami ulicznego życia.",
+      "passions": [
+        13,
+        34,
+        39
+      ],
+      "location": [
+        50.0619,
+        19.9368
+      ]
+    },
+    {
+      "username": "PiotrZielinski",
+      "password": "password",
+      "email": "piotr.zielinski@mail.pl",
+      "sex_id": 0,
+      "birthday": "1985-03-22",
+      "bio": "Miłośnik szachów i podróży po nieznanych zakątkach Polski, który wieczorami oddaje się grze na gitarze. Łączy tradycję z nowoczesnością w każdym aspekcie życia.",
+      "passions": [
+        10,
+        39,
+        15
+      ],
+      "location": [
+        54.352,
+        18.6466
+      ]
+    },
+    {
+      "username": "KatarzynaWisniewska",
+      "password": "password",
+      "email": "katarzyna.wisniewska@mail.pl",
+      "sex_id": 1,
+      "birthday": "1998-07-19",
+      "bio": "Weekendowa wojowniczka siłowni, która nocami oddaje się pisaniu haiku o miłości i tęsknocie. Znana z ekstrawaganckich pomysłów i zamiłowania do klasycznych filmów.",
+      "passions": [
+        5,
+        26,
+        17
+      ],
+      "location": [
+        51.1079,
+        17.0385
+      ]
+    },
+    {
+      "username": "TomaszLewandowski",
+      "password": "password",
+      "email": "tomasz.lewandowski@mail.pl",
+      "sex_id": 0,
+      "birthday": "1990-12-08",
+      "bio": "Miłośnik intensywnych dyskusji o polityce i historii, który zanurza się w tajemnicach wszechświata. Po godzinach oddaje się gotowaniu i eksperymentom kulinarnym.",
+      "passions": [
+        19,
+        21,
+        22,
+        23
+      ],
+      "location": [
+        52.4064,
+        16.9252
+      ]
+    },
+    {
+      "username": "MagdalenaWojciak",
+      "password": "password",
+      "email": "magdalena.wojciak@mail.pl",
+      "sex_id": 1,
+      "birthday": "2002-04-30",
+      "bio": "Zawodowa miłośniczka gier planszowych, która spędza noce na strategicznych rozgrywkach. Pasjonatka minimalizmu, dla której wystarczy dobra książka i filiżanka aromatycznej kawy.",
+      "passions": [
+        12,
+        20,
+        35
+      ],
+      "location": [
+        50.0412,
+        21.999
+      ]
+    },
+    {
+      "username": "RobertKaminski",
+      "password": "password",
+      "email": "robert.kaminski@mail.pl",
+      "sex_id": 0,
+      "birthday": "1983-09-15",
+      "bio": "Entuzjastyczny podróżnik i miłośnik D&D, który łączy świat fantazji z rzeczywistością. Wieczorami zagłębia się w tajniki robotyki i astronomii.",
+      "passions": [
+        8,
+        41,
+        44
+      ],
+      "location": [
+        52.2297,
+        21.0122
+      ]
+    },
+    {
+      "username": "EwaNowicka",
+      "password": "password",
+      "email": "ewa.nowicka@mail.pl",
+      "sex_id": 1,
+      "birthday": "1997-02-10",
+      "bio": "Artystyczna dusza, która czerpie inspiracje z polskich filmów i teatru, potrafiąc rozbawić humorem nawet w deszczowy dzień. Kontrastuje spokój z niespodziewaną energią.",
+      "passions": [
+        16,
+        18,
+        34
+      ],
+      "location": [
+        52.2297,
+        21.0122
+      ]
+    },
+    {
+      "username": "LukaszMazur",
+      "password": "password",
+      "email": "lukasz.mazur@mail.pl",
+      "sex_id": 0,
+      "birthday": "1982-06-25",
+      "bio": "Pasjonat rowerowych wypraw po mazurskich jeziorach oraz nocnych maratonów szachowych. Zawsze gotów na nowe wyzwania, zarówno na dwóch kółkach, jak i przy starych planszach.",
+      "passions": [
+        29,
+        10,
+        12
+      ],
+      "location": [
+        53.828,
+        22.364
+      ]
+    },
+    {
+      "username": "JuliaKowalczyk",
+      "password": "password",
+      "email": "julia.kowalczyk@mail.pl",
+      "sex_id": 1,
+      "birthday": "2000-10-05",
+      "bio": "Cicha obserwatorka codzienności, która z pasją zgłębia tajniki chemii i eksperymentalnego gotowania. Łączy naukową precyzję z artystycznym chaosem.",
+      "passions": [
+        24,
+        19,
+        26
+      ],
+      "location": [
+        51.7592,
+        19.456
+      ]
+    },
+    {
+      "username": "MarekSosen",
+      "password": "password",
+      "email": "marek.sosen@mail.pl",
+      "sex_id": 0,
+      "birthday": "1994-07-12",
+      "bio": "Programista, który po godzinach tańczy poloneza w stroju z epoki napoleońskiej. W piwnicy hoduję kaktusy w kształcie bohaterów 'Lalki' Prusa. Ostatnio uczę się języka esperanto przez aplikację do medytacji.",
+      "passions": [
+        31,
+        40,
+        42
+      ],
+      "location": [
+        50.0647,
+        19.945
+      ]
+    },
+    {
+      "username": "AlicjaWiatr",
+      "password": "password",
+      "email": "alicja.wiatr@example.pl",
+      "sex_id": 1,
+      "birthday": "1989-11-25",
+      "bio": "Biolog morska pisząca horrorowe haiku o głębinowych stworzeniach. Kolekcjonuję stare aparaty fotograficzne i organizuję nocne sesje jogi na plaży. Moja obsesja? Znalezienie związku między algorytmami a falą tsunami.",
+      "passions": [
+        28,
+        26,
+        34
+      ],
+      "location": [
+        52.2297,
+        21.0122
+      ]
+    },
+    {
+      "username": "KamilSzron",
+      "password": "password",
+      "email": "kamil.szron@mail.pl",
+      "sex_id": 0,
+      "birthday": "2002-02-14",
+      "bio": "Szef kuchni molekularnej, który konstruuje roboty z części odkurzaczy. W weekendy ścigam się na rolkach po opuszczonych parkingach. Marzę o napisaniu opery o chemicznych reakcjach miłości.",
+      "passions": [
+        19,
+        46,
+        24
+      ],
+      "location": [
+        51.1079,
+        17.0385
+      ]
+    },
+    {
+      "username": "ZofiaKamień",
+      "password": "password",
+      "email": "zofia.kamien@example.pl",
+      "sex_id": 1,
+      "birthday": "1996-09-03",
+      "bio": "Architektka domów na drzewach z recyklingowanych okien. W wolnym czasie układam mozaiki z płyt CD i słucham black metalu z lat 80. Moja tajemnica? Znam na pamięć wszystkie linie autobusowe w Poznaniu.",
+      "passions": [
+        42,
+        15,
+        28
+      ],
+      "location": [
+        52.4064,
+        16.9252
+      ]
+    },
+    {
+      "username": "TadeuszMorze",
+      "password": "password",
+      "email": "tadeusz.morze@mail.pl",
+      "sex_id": 0,
+      "birthday": "1982-04-18",
+      "bio": "Kapitan jachtowy malujący portrety meduz akwarelami. Kolekcjonuję mapy nieistniejących wysp i prowadzę podcast o życiu ślimaków. Ostatnio eksperymentuję z gotowaniem na parze lodowca.",
+      "passions": [
+        13,
+        39,
+        47
+      ],
+      "location": [
+        54.352,
+        18.6466
+      ]
+    },
+    {
+      "username": "NinaOgien",
+      "password": "password",
+      "email": "nina.ogien@example.pl",
+      "sex_id": 1,
+      "birthday": "1991-12-30",
+      "bio": "Strażaczka pisząca bajki o płomieniach z charakterem. W weekendy uczę sokoły sztuki origami i zbieram kamienie z tatuażami natury. Moje credo? Każdy pożar ma swoją poezję.",
+      "passions": [
+        5,
+        20,
+        50
+      ],
+      "location": [
+        51.7592,
+        19.456
+      ]
+    },
+    {
+      "username": "BartoszLas",
+      "password": "password",
+      "email": "bartosz.las@mail.pl",
+      "sex_id": 0,
+      "birthday": "1985-03-22",
+      "bio": "Leśnik komponujący muzykę z odgłosów drzew. Projektuję meble z korzeni i trenuję aikido wśród wilków. Ostatnio badam, jak szum wodospadów wpływa na kodowanie w Pythonie.",
+      "passions": [
+        28,
+        15,
+        31
+      ],
+      "location": [
+        52.7333,
+        23.2167
+      ]
+    },
+    {
+      "username": "HannaKsieżyc",
+      "password": "password",
+      "email": "hanna.ksiezyc@example.pl",
+      "sex_id": 1,
+      "birthday": "1998-06-09",
+      "bio": "Astronomka z zacięciem do stand-upu o czarnych dziurach. W piwnicy mam kolekcję meteorytów i hoduję grzyby świecące w ciemności. Moja ambicja? Zorganizować koncert na orbicie okołoziemskiej.",
+      "passions": [
+        44,
+        45,
+        16
+      ],
+      "location": [
+        53.0138,
+        18.5984
+      ]
+    },
+    {
+      "username": "PiotrBurza",
+      "password": "password",
+      "email": "piotr.burza@mail.pl",
+      "sex_id": 0,
+      "birthday": "2001-01-05",
+      "bio": "Łowca burz piszący sonety o piorunach. Projektuję ubrania z folii termicznej i zbieram odgłosy wiatru z całej Polski. Ostatnio uczę się języka migowego dla delfinów.",
+      "passions": [
+        23,
+        26,
+        39
+      ],
+      "location": [
+        53.4285,
+        14.5528
+      ]
+    },
+    {
+      "username": "KarolinaPtak",
+      "password": "password",
+      "email": "karolina.ptak@example.pl",
+      "sex_id": 1,
+      "birthday": "1992-08-17",
+      "bio": "Ornitolożka tworząca cyfrowe kolaże z piór. Prowadzę warsztaty z budowania tratw z butelek i śpiewam w chórze metalowym. Moja obsesja? Odkrycie, dlaczego wróble unikają jazzu.",
+      "passions": [
+        32,
+        28,
+        34
+      ],
+      "location": [
+        53.1325,
+        23.1688
+      ]
+    },
+    {
+      "username": "AdrianSikora",
+      "password": "password",
+      "email": "adrian.sikora@mail.pl",
+      "sex_id": 0,
+      "birthday": "1994-01-17",
+      "bio": "Fanatyczny miłośnik koszykówki, który wieczorami projektuje domy z kartonu. Rano medytuje, wieczorem gra w turniejach D&D. Łączy ciszę z chaosem.",
+      "passions": [
+        2,
+        8,
+        42,
+        48
+      ],
+      "location": [
+        50.2649,
+        19.0238
+      ]
+    },
+    {
+      "username": "NataliaDuda",
+      "password": "password",
+      "email": "natalia.duda@mail.pl",
+      "sex_id": 1,
+      "birthday": "1989-08-29",
+      "bio": "Miłośniczka kuchni wegańskiej, która w każdej potrawie widzi opowieść. Prowadzi bloga o jedzeniu i raz w miesiącu śpiewa operowo na dachu kamienicy.",
+      "passions": [
+        37,
+        35,
+        14
+      ],
+      "location": [
+        53.1325,
+        23.1688
+      ]
+    },
+    {
+      "username": "MichalCzerwinski",
+      "password": "password",
+      "email": "michal.czerwinski@mail.pl",
+      "sex_id": 0,
+      "birthday": "1984-06-11",
+      "bio": "Zapalony fan fizyki kwantowej, który kolekcjonuje stare dyktafony i tworzy ambientową muzykę z odgłosów PRL-u. Wie, jak przeliczyć tachiony na rytmy.",
+      "passions": [
+        23,
+        15,
+        49
+      ],
+      "location": [
+        50.8661,
+        20.6286
+      ]
+    },
+    {
+      "username": "OliwiaBaran",
+      "password": "password",
+      "email": "oliwia.baran@mail.pl",
+      "sex_id": 1,
+      "birthday": "1999-12-04",
+      "bio": "Estetka życia codziennego — robi zdjęcia wiatru, medytuje z kawką, a wieczorami gra w planszówki z sąsiadami. Minimalizm spotyka sielskość.",
+      "passions": [
+        34,
+        12,
+        48
+      ],
+      "location": [
+        51.2465,
+        22.5684
+      ]
+    },
+    {
+      "username": "JakubKrupa",
+      "password": "password",
+      "email": "jakub.krupa@mail.pl",
+      "sex_id": 0,
+      "birthday": "1996-03-07",
+      "bio": "Entuzjasta parkouru, który w dzieciństwie śpiewał w zespole ludowym. Teraz skacze po miejskich dachach i bada tajniki dialektów kaszubskich.",
+      "passions": [
+        46,
+        40,
+        21
+      ],
+      "location": [
+        54.5189,
+        18.5319
+      ]
+    },
+    {
+      "username": "ZofiaMichalska",
+      "password": "password",
+      "email": "zofia.michalska@mail.pl",
+      "sex_id": 1,
+      "birthday": "2001-05-21",
+      "bio": "Miłośniczka mindfulness i garncarstwa, która wieczorami gra w szachy z kotem o imieniu Kopernik. Czasem wyjeżdża na weekend tylko po to, by milczeć w górach.",
+      "passions": [
+        48,
+        49,
+        10
+      ],
+      "location": [
+        49.6951,
+        21.7714
+      ]
+    },
+    {
+      "username": "DamianOstrowski",
+      "password": "password",
+      "email": "damian.ostrowski@mail.pl",
+      "sex_id": 0,
+      "birthday": "1991-09-02",
+      "bio": "Inżynier, który wieczorami pisze fanfiki o cyberkrasnoludach. Łączy precyzję techniki z chaosem wyobraźni. W weekendy wspina się po skałach i robi zdjęcia mechom.",
+      "passions": [
+        31,
+        33,
+        34
+      ],
+      "location": [
+        50.0614,
+        19.9383
+      ]
+    },
+    {
+      "username": "KarolinaPawlowska",
+      "password": "password",
+      "email": "karolina.pawlowska@mail.pl",
+      "sex_id": 1,
+      "birthday": "1995-10-14",
+      "bio": "Tancerka ludowa z sercem do robotyki i duszą poetki. Pisze wiersze o technologii i tańczy poloneza przy odgłosach drukarek 3D.",
+      "passions": [
+        40,
+        41,
+        26
+      ],
+      "location": [
+        53.0138,
+        18.5984
+      ]
+    },
+    {
+      "username": "PawelWalczak",
+      "password": "password",
+      "email": "pawel.walczak@mail.pl",
+      "sex_id": 0,
+      "birthday": "1988-07-30",
+      "bio": "Amator wędkarstwa i kina noir, który pisze bloga o samotnych nocach nad rzeką. Znajduje poezję w ciszy i tajemnicy w każdym odbiciu wody.",
+      "passions": [
+        47,
+        17,
+        35
+      ],
+      "location": [
+        51.9194,
+        19.1451
+      ]
+    },
+    {
+      "username": "AleksandraSzulc",
+      "password": "password",
+      "email": "aleksandra.szulc@mail.pl",
+      "sex_id": 1,
+      "birthday": "1993-02-26",
+      "bio": "Fotografka uliczna, która analizuje zjawiska astronomiczne i prowadzi warsztaty z medytacji w stylu zen. Jej zdjęcia pokazują kosmos ukryty w codzienności.",
+      "passions": [
+        34,
+        44,
+        48
+      ],
+      "location": [
+        51.4027,
+        21.1471
+      ]
+    },
+    {
+      "username": "JanMglisty",
+      "password": "password",
+      "email": "jan.mglisty@mail.pl",
+      "sex_id": 0,
+      "birthday": "1997-04-11",
+      "bio": "Piekarz spełniony w wypieku chleba z mąki orkiszowej, który nocami studiuje mapy gwiazdozbiorów. Organizuję wyścigi wędkarskie po zamarzniętych jeziorach. Moja obsesja? Zbieranie dźwięków tykających zegarów.",
+      "passions": [
+        19,
+        44,
+        39
+      ],
+      "location": [
+        53.1231,
+        18.0084
+      ]
+    },
+    {
+      "username": "EwaŻuraw",
+      "password": "password",
+      "email": "ewa.zuraw@example.pl",
+      "sex_id": 1,
+      "birthday": "1988-12-03",
+      "bio": "Konserwatorka obrazów z pasją do graffiti w opuszczonych dworcach. Uczę sroki mówić po kaszubsku i kolekcjonuję klucze do nieistniejących drzwi. Ostatnio eksperymentuję z lodowymi rzeźbami.",
+      "passions": [
+        13,
+        46,
+        32
+      ],
+      "location": [
+        54.5189,
+        18.5305
+      ]
+    },
+    {
+      "username": "WojciechStal",
+      "password": "password",
+      "email": "wojciech.stal@mail.pl",
+      "sex_id": 0,
+      "birthday": "2003-06-28",
+      "bio": "Młody koder AI, który rekonstruuje średniowieczne zbroje z kartonu. W weekendy śpiewam w chórze heavy metalowym i zbieram odciski liści. Marzę o stworzeniu algorytmu do przewidywania śnieżyc.",
+      "passions": [
+        31,
+        21,
+        42
+      ],
+      "location": [
+        50.2649,
+        19.0238
+      ]
+    },
+    {
+      "username": "LauraKoral",
+      "password": "password",
+      "email": "laura.koral@example.pl",
+      "sex_id": 1,
+      "birthday": "1995-02-14",
+      "bio": "Pływaczka synchroniczna z obsesją na punkcie morskich głębin. Projektuję biżuterię z mikroskopijnych koralowców i piszę limeryki o falach. Moja tajemnica? Znam na pamięć wszystkie stacje metra w Warszawie.",
+      "passions": [
+        33,
+        34,
+        47
+      ],
+      "location": [
+        52.2316,
+        21.0062
+      ]
+    },
+    {
+      "username": "MikołajGrom",
+      "password": "password",
+      "email": "mikolaj.grom@mail.pl",
+      "sex_id": 0,
+      "birthday": "1981-09-09",
+      "bio": "Elektryk z zamiłowaniem do renowacji starych radioteleskopów. Kolekcjonuję błyskawice w słoikach i uczę się języka migowego dla chmur. Ostatnio badam, jak burze wpływają na smak kiszonek.",
+      "passions": [
+        23,
+        34,
+        48
+      ],
+      "location": [
+        49.3,
+        19.95
+      ]
+    },
+    {
+      "username": "NataliaSzept",
+      "password": "password",
+      "email": "natalia.szept@example.pl",
+      "sex_id": 1,
+      "birthday": "1999-07-21",
+      "bio": "Fotografka podwodna, która układa wiersze o planktonie. W piwnicy hoduję meduzy w akwarium i organizuję nocne sesje gier planszowych w lesie. Moje credo? Cisza ma kolor błękitu.",
+      "passions": [
+        34,
+        12,
+        28
+      ],
+      "location": [
+        50.0614,
+        19.9383
+      ]
+    },
+    {
+      "username": "KrzysztofWir",
+      "password": "password",
+      "email": "krzysztof.wir@mail.pl",
+      "sex_id": 0,
+      "birthday": "1990-10-31",
+      "bio": "Inżynier dźwięku nagrywający szum wiatru w pustych fabrykach. Kolekcjonuję stare telefony komórkowe i trenuję capoeirę na plaży. Ostatnio konstruuję maszynę do generowania zapachu nostalgia.",
+      "passions": [
+        15,
+        46,
+        42
+      ],
+      "location": [
+        54.4416,
+        18.56
+      ]
+    },
+    {
+      "username": "AgnieszkaRosa",
+      "password": "password",
+      "email": "agnieszka.rosa@example.pl",
+      "sex_id": 1,
+      "birthday": "2004-05-05",
+      "bio": "Młoda biolożka badająca ślady pamięci w muszlach. Projektuję suknie z porannnej rosy i śpiewam w dialekcie śląskim. Moja ambicja? Odkryć język, którym mówią mrówki.",
+      "passions": [
+        28,
+        24,
+        39
+      ],
+      "location": [
+        50.8117,
+        19.1203
+      ]
+    },
+    {
+      "username": "DominikKres",
+      "password": "password",
+      "email": "dominik.kres@mail.pl",
+      "sex_id": 0,
+      "birthday": "1983-11-19",
+      "bio": "Kowal artystyczny tworzący rzeźby ze zużytych widelców. W weekendy organizuję wyścigi na deskorolkach po schodach kościołów. Ostatnio piszę operę o życiu śrubek.",
+      "passions": [
+        42,
+        14,
+        9
+      ],
+      "location": [
+        51.9356,
+        15.5064
+      ]
+    },
+    {
+      "username": "OlgaCień",
+      "password": "password",
+      "email": "olga.cien@example.pl",
+      "sex_id": 1,
+      "birthday": "1996-01-02",
+      "bio": "Iluzjonistka specjalizująca się w znikających przedmiotach. Kolekcjonuję cienie rzucane przez drzewa i uczę się języka migowego dla roślin. Moja obsesja? Znalezienie równania na idealny zmierzch.",
+      "passions": [
+        16,
+        34,
+        21
+      ],
+      "location": [
+        52.5487,
+        19.7085
+      ]
+    },
+    {
+      "username": "KroplaSosny",
+      "password": "password",
+      "email": "kropla.sosny@mail.pl",
+      "sex_id": 1,
+      "birthday": "1993-04-22",
+      "bio": "Mapa mojego życia: szóste piętro bloku z wielkiej płyty, sterta niezapisanych notesów, zapach oleju lnianego. Uczę się na pamięć rozkładów jazdy autobusów z miast, których nie odwiedziłam. Ostatni projekt: haftowana wersja 'Lalki' Prusa.",
+      "passions": [
+        20,
+        42,
+        39
+      ],
+      "location": [
+        52.4064,
+        16.9252
+      ]
+    },
+    {
+      "username": "AnnaNowak",
+      "password": "password",
+      "email": "anna.nowak@mail.pl",
+      "sex_id": 1,
+      "birthday": "1990-05-15",
+      "bio": "Pracuję jako nauczycielka matematyki. Lubię spacery z psem, czytanie kryminałów i pieczenie ciast. Szukam osób do gry w planszówki.",
+      "passions": [
+        20,
+        12,
+        19
+      ],
+      "location": [
+        52.2297,
+        21.0122
+      ]
+    },
+    {
+      "username": "KazikNocny",
+      "password": "password",
+      "email": "kazik.nocny@example.pl",
+      "sex_id": 0,
+      "birthday": "1985-11-22",
+      "bio": "Zawodowy kierowca TIR-a. W trasie słucham audiobooków i zbieram pocztówki z parkingów. Marzę o własnym warzywniaku.",
+      "passions": [
+        39,
+        20,
+        47
+      ],
+      "location": [
+        51.1079,
+        17.0385
+      ]
+    },
+    {
+      "username": "MagdaGwiazda",
+      "password": "password",
+      "email": "magda.gwiazda@mail.pl",
+      "sex_id": 1,
+      "birthday": "1998-03-08",
+      "bio": "Moje życie to labirynt: w dzień projektuję strony internetowe, w nocy układam wiersze z losowych słów na opakowaniach herbaty. Ostatnio uczę się języka migowego dla roślin.",
+      "passions": [
+        31,
+        26,
+        42
+      ],
+      "location": [
+        50.0614,
+        19.9383
+      ]
+    },
+    {
+      "username": "TomekKrawiec",
+      "password": "password",
+      "email": "tomek.krawiec@example.pl",
+      "sex_id": 0,
+      "birthday": "1995-09-12",
+      "bio": "Pracuję w sklepie sportowym. Weekendy spędzam na grach komputerowych i spotkaniach ze znajomymi. Lubię pizzę i piwo.",
+      "passions": [
+        11,
+        9,
+        18
+      ],
+      "location": [
+        54.352,
+        18.6466
+      ]
+    },
+    {
+      "username": "AnnaKowalczyk",
+      "password": "password",
+      "email": "anna.kowalczyk@mail.pl",
+      "sex_id": 1,
+      "birthday": "1992-08-15",
+      "bio": "Piąta rano. Rozkładam mapę Polski na podłodze i łączę miasta nitką. Szukam wzorów, które przypominają migrenę.",
+      "passions": [
+        39,
+        42,
+        20
+      ],
+      "location": [
+        52.2297,
+        21.0122
+      ]
+    },
+    {
+      "username": "PiotrNowak",
+      "password": "password",
+      "email": "piotr.nowak@example.pl",
+      "sex_id": 0,
+      "birthday": "1988-03-22",
+      "bio": "Lubię bieganie, dobrą kawę i filmy dokumentalne. W weekendy spotykam się ze znajomymi na grilla.",
+      "passions": [
+        4,
+        18,
+        9
+      ],
+      "location": [
+        50.0647,
+        19.945
+      ]
+    },
+    {
+      "username": "MariaWójcik",
+      "password": "password",
+      "email": "maria.wojcik@mail.pl",
+      "sex_id": 1,
+      "birthday": "1995-11-05",
+      "bio": "Trzy prawdy o mnie: urodziłam się w pociągu, znam 7 sposobów na parzenie herbaty, wierzę w duchy starych drukarek.",
+      "passions": [
+        20,
+        42,
+        35
+      ],
+      "location": [
+        51.1079,
+        17.0385
+      ]
+    },
+    {
+      "username": "KrzysztofLis",
+      "password": "password",
+      "email": "krzysztof.lis@example.pl",
+      "sex_id": 0,
+      "birthday": "1999-07-14",
+      "bio": "Wczoraj programista, dziś pszczelarz, jutro – kto wie? Szukam inspiracji w dźwiękach starych maszyn.",
+      "passions": [
+        31,
+        28,
+        39
+      ],
+      "location": [
+        54.352,
+        18.6466
+      ]
+    },
+    {
+      "username": "AgnieszkaDąb",
+      "password": "password",
+      "email": "agnieszka.dab@mail.pl",
+      "sex_id": 1,
+      "birthday": "1985-12-30",
+      "bio": "Pracuję w szkole, ucząc historii. Wieczorami oglądam seriale i czytam książki o podróżach.",
+      "passions": [
+        21,
+        18,
+        20
+      ],
+      "location": [
+        53.4285,
+        14.5528
+      ]
+    },
+    {
+      "username": "MarcinSzewczyk",
+      "password": "password",
+      "email": "marcin.szewczyk@example.pl",
+      "sex_id": 0,
+      "birthday": "1993-04-18",
+      "bio": "Nocne eskapady po dachach. Kolekcja kamieni z napisami w języku wiatrów. Szukam tych, którzy rozumieją ciszę.",
+      "passions": [
+        46,
+        34,
+        44
+      ],
+      "location": [
+        50.8117,
+        19.1203
+      ]
+    },
+    {
+      "username": "KatarzynaKaczor",
+      "password": "password",
+      "email": "katarzyna.kaczor@mail.pl",
+      "sex_id": 1,
+      "birthday": "2001-01-09",
+      "bio": "Lubię gotować, słuchać muzyki klasycznej i spacerować po lesie. Marzę o podróży do Japonii.",
+      "passions": [
+        19,
+        15,
+        39
+      ],
+      "location": [
+        52.4064,
+        16.9252
+      ]
+    },
+    {
+      "username": "TomaszWilk",
+      "password": "password",
+      "email": "tomasz.wilk@example.pl",
+      "sex_id": 0,
+      "birthday": "1997-06-25",
+      "bio": "FAQ: Tak, te tatuaże to równania kwantowe. Nie, nie znam twojego horoskopu. Tak, gram na ukulele w sklepowych alejkach.",
+      "passions": [
+        23,
+        14,
+        42
+      ],
+      "location": [
+        51.7592,
+        19.456
+      ]
+    },
+    {
+      "username": "MagdalenaKruk",
+      "password": "password",
+      "email": "magdalena.kruk@mail.pl",
+      "sex_id": 1,
+      "birthday": "1990-09-12",
+      "bio": "Życie to układanka z brakującymi puzzlami. Zbieram je na strychach kamienic.",
+      "passions": [
+        13,
+        42,
+        20
+      ],
+      "location": [
+        50.0614,
+        19.9383
+      ]
+    },
+    {
+      "username": "PawełZając",
+      "password": "password",
+      "email": "pawel.zajac@example.pl",
+      "sex_id": 0,
+      "birthday": "1983-02-28",
+      "bio": "Pracuję jako mechanik. W wolnym czasie remontuję stary motocykl i oglądam mecze piłki nożnej.",
+      "passions": [
+        1,
+        29,
+        42
+      ],
+      "location": [
+        52.5487,
+        19.7085
+      ]
+    },
+    {
+      "username": "EwaSzymańska",
+      "password": "password",
+      "email": "ewa.szymanska@mail.pl",
+      "sex_id": 1,
+      "birthday": "1994-07-19",
+      "bio": "Mój dzień to labirynt: rano układam kody, wieczorem zszywam słowa w wiersze. W międzyczasie zbieram odgłosy kroków na mokrym bruku.",
+      "passions": [
+        31,
+        26,
+        34
+      ],
+      "location": [
+        52.2297,
+        21.0122
+      ]
+    },
+    {
+      "username": "MichałKowal",
+      "password": "password",
+      "email": "michal.kowal@example.pl",
+      "sex_id": 0,
+      "birthday": "1987-05-03",
+      "bio": "Lubię spacery z psem, czytanie kryminałów i gotowanie włoskich potraw. Szukam osób do wspólnych wycieczek rowerowych.",
+      "passions": [
+        28,
+        20,
+        19,
+        29
+      ],
+      "location": [
+        50.0614,
+        19.9383
+      ]
+    },
+    {
+      "username": "JoannaPtak",
+      "password": "password",
+      "email": "joanna.ptak@mail.pl",
+      "sex_id": 1,
+      "birthday": "2000-12-08",
+      "bio": "Mapa moich marzeń: stacja benzynowa w Bieszczadach, niebieski notes pełen pytań bez odpowiedzi, zapach świeżo zmielonej kawy.",
+      "passions": [
+        39,
+        20,
+        42
+      ],
+      "location": [
+        54.352,
+        18.6466
+      ]
+    },
+    {
+      "username": "AdamNowicki",
+      "password": "password",
+      "email": "adam.nowicki@example.pl",
+      "sex_id": 0,
+      "birthday": "1991-10-11",
+      "bio": "Pracuję jako nauczyciel matematyki. W wolnym czasie gram w szachy i oglądam filmy dokumentalne.",
+      "passions": [
+        10,
+        18,
+        25
+      ],
+      "location": [
+        52.4064,
+        16.9252
+      ]
+    },
+    {
+      "username": "NataliaKwiatkowska",
+      "password": "password",
+      "email": "natalia.kwiatkowska@mail.pl",
+      "sex_id": 1,
+      "birthday": "1998-02-25",
+      "bio": "Cztery rzeczy, które mnie definiują: kolekcja starych kluczy, umiejętność zasypiania w pociągach, wiara w moc przecinków, strach przed równymi liczbami.",
+      "passions": [
+        42,
+        39,
+        26
+      ],
+      "location": [
+        51.1079,
+        17.0385
+      ]
+    },
+    {
+      "username": "KamilWójcik",
+      "password": "password",
+      "email": "kamil.wojcik@example.pl",
+      "sex_id": 0,
+      "birthday": "1989-09-14",
+      "bio": "Jestem pielęgniarką. Lubię jogę, czytanie książek i spotkania z przyjaciółmi.",
+      "passions": [
+        50,
+        20,
+        43
+      ],
+      "location": [
+        51.7592,
+        19.456
+      ]
+    },
+    {
+      "username": "AlicjaLis",
+      "password": "password",
+      "email": "alicja.lis@mail.pl",
+      "sex_id": 1,
+      "birthday": "1996-03-30",
+      "bio": "Nocą przemieniam się w łowcę cieni. Zbieram je do słoików i układam z nich opowieści o zapomnianych podwórkach.",
+      "passions": [
+        34,
+        26,
+        42
+      ],
+      "location": [
+        50.2649,
+        19.0238
+      ]
+    },
+    {
+      "username": "RobertDąb",
+      "password": "password",
+      "email": "robert.dab@example.pl",
+      "sex_id": 0,
+      "birthday": "1993-08-22",
+      "bio": "Pracuję w sklepie sportowym. Uwielbiam gry komputerowe i wspinaczkę górską.",
+      "passions": [
+        11,
+        33
+      ],
+      "location": [
+        49.2992,
+        19.9496
+      ]
+    },
+    {
+      "username": "MonikaGóra",
+      "password": "password",
+      "email": "monika.gora@mail.pl",
+      "sex_id": 1,
+      "birthday": "1984-11-17",
+      "bio": "Moje życie to zbiór niepasujących puzzli: w dzień analizuję dane, w nocy maluję krajobrazy na płytach winylowych.",
+      "passions": [
+        31,
+        13,
+        15
+      ],
+      "location": [
+        53.4285,
+        14.5528
+      ]
+    },
+    {
+      "username": "ŁukaszRzeka",
+      "password": "password",
+      "email": "lukasz.rzeka@example.pl",
+      "sex_id": 0,
+      "birthday": "2002-06-09",
+      "bio": "Jestem studentem informatyki. Lubię siłownię, gry planszowe i podróże pociągiem.",
+      "passions": [
+        5,
+        12,
+        39
+      ],
+      "location": [
+        51.2465,
+        22.5684
+      ]
+    },
+    {
+      "username": "MichałJaworski",
+      "password": "password",
+      "email": "michal.jaworski@example.pl",
+      "sex_id": 0,
+      "birthday": "1987-10-08",
+      "bio": "Pracuję jako architekt. Weekendy spędzam na wędrówkach po górach i czytaniu kryminałów. Lubię eksperymenty kulinarne.",
+      "passions": [
+        33,
+        20,
+        19
+      ],
+      "location": [
+        49.2992,
+        19.9496
+      ]
+    },
+    {
+      "username": "EwelinaKaczmarek",
+      "password": "password",
+      "email": "ewelina.kaczmarek@mail.pl",
+      "sex_id": 1,
+      "birthday": "2000-05-21",
+      "bio": "Poranki: zapach świeżo mielonej kawy, szelest stron książki, cisza przed burzą. Wieczory: szepty miasta ukryte w szkicowniku.",
+      "passions": [
+        20,
+        13,
+        35
+      ],
+      "location": [
+        53.0138,
+        18.5984
+      ]
+    },
+    {
+      "username": "ŁukaszDudek",
+      "password": "password",
+      "email": "lukasz.dudek@example.pl",
+      "sex_id": 0,
+      "birthday": "1991-12-03",
+      "bio": "Trzy rzeczy, których nie znoszę: fałszywy uśmiech, przeterminowane mleko, dźwięk budzica. Trzy rzeczy, które kocham: zapach deszczu, stare kamienie, nuta ciszy.",
+      "passions": [
+        28,
+        34,
+        39
+      ],
+      "location": [
+        52.7333,
+        23.2167
+      ]
+    },
+    {
+      "username": "NataliaOlszewska",
+      "password": "password",
+      "email": "natalia.olszewska@mail.pl",
+      "sex_id": 1,
+      "birthday": "1983-07-29",
+      "bio": "Byłam kelnerką, jestem ogrodniczką, będę… może pilotem balonu? Codziennie uczę się nowego słowa w języku, którego nie znam.",
+      "passions": [
+        39,
+        42,
+        44
+      ],
+      "location": [
+        50.2649,
+        19.0238
+      ]
+    },
+    {
+      "username": "KamilWróbel",
+      "password": "password",
+      "email": "kamil.wrobel@example.pl",
+      "sex_id": 0,
+      "birthday": "1998-01-14",
+      "bio": "Lubię gry komputerowe, pizzę i spotkania ze znajomymi. Marzę o wyjeździe na Alaskę.",
+      "passions": [
+        11,
+        18,
+        39
+      ],
+      "location": [
+        54.4416,
+        18.56
+      ]
+    },
+    {
+      "username": "KarolinaMichalak",
+      "password": "password",
+      "email": "karolina.michalak@mail.pl",
+      "sex_id": 1,
+      "birthday": "1996-06-12",
+      "bio": "Mapa mojego życia: czerwony długopis do podkreślania błędów, niebieski notes do zapisywania marzeń, zielona herbata do gaszenia paniki.",
+      "passions": [
+        26,
+        35,
+        20
+      ],
+      "location": [
+        51.9356,
+        15.5064
+      ]
+    },
+    {
+      "username": "DamianKowal",
+      "password": "password",
+      "email": "damian.kowal@example.pl",
+      "sex_id": 0,
+      "birthday": "1989-04-05",
+      "bio": "Inżynier dźwięku. Kolekcjonuję szumy: od huku wind po pomruki lodówek. W weekendy gram w Dungeons & Dragons.",
+      "passions": [
+        8,
+        34,
+        15
+      ],
+      "location": [
+        53.1325,
+        23.1688
+      ]
+    },
+    {
+      "username": "AlicjaNowicka",
+      "password": "password",
+      "email": "alicja.nowicka@mail.pl",
+      "sex_id": 1,
+      "birthday": "2002-09-19",
+      "bio": "Mam 20 lat i dwa życia: dzienne – studentka ekonomii, nocne – poszukiwaczka opuszczonych domów. Zbieram klucze do nieistniejących drzwi.",
+      "passions": [
+        21,
+        34,
+        42
+      ],
+      "location": [
+        52.254,
+        21.0345
+      ]
+    },
+    {
+      "username": "RobertAdamczyk",
+      "password": "password",
+      "email": "robert.adamczyk@example.pl",
+      "sex_id": 0,
+      "birthday": "1984-11-27",
+      "bio": "Kierowca autobusu miejskiego. Po pracy remontuję stare radia i słucham audycji z lat 80. Lubię proste rzeczy: spacery, dobry film i domową zupę.",
+      "passions": [
+        9,
+        18,
+        34
+      ],
+      "location": [
+        50.8117,
+        19.1203
+      ]
+    },
+    {
+      "username": "JoannaNowak",
+      "password": "password",
+      "email": "joanna.nowak@mail.pl",
+      "sex_id": 1,
+      "birthday": "1990-05-15",
+      "bio": "Nie piszę pamiętnika – wyszywam go na poszewkach. Codzienność haftowana wątkiem z wiatru i wełny islandzkiej.",
+      "passions": [
+        13,
+        48,
+        26
+      ],
+      "location": [
+        52.2298,
+        20.9985
+      ]
+    },
+    {
+      "username": "BartlomiejMazur",
+      "password": "password",
+      "email": "bartlomiej.mazur@example.pl",
+      "sex_id": 0,
+      "birthday": "1985-08-22",
+      "bio": "Moje CV: hodowca mchu, tester hamaków, tłumacz szeptów wiatru. Zamiast LinkedIna mam atlas porostów.",
+      "passions": [
+        47,
+        49,
+        10
+      ],
+      "location": [
+        50.2887,
+        18.6776
+      ]
+    },
+    {
+      "username": "AgnieszkaSzymanska",
+      "password": "password",
+      "email": "agnieszka.szymanska@mail.pl",
+      "sex_id": 1,
+      "birthday": "1988-07-10",
+      "bio": "Zamieniam dźwięki ulicy w muzykę. Przejścia dla pieszych grają mi w głowie od 2007 roku.",
+      "passions": [
+        14,
+        35,
+        15
+      ],
+      "location": [
+        51.25,
+        22.5667
+      ]
+    },
+    {
+      "username": "LukaszKowal",
+      "password": "password",
+      "email": "lukasz.kowal@example.pl",
+      "sex_id": 0,
+      "birthday": "1992-11-30",
+      "bio": "W sobotę uczę się cyrylicy, w niedzielę przebieram się za ogórka kiszonego na imprezy tematyczne. W tygodniu? Piszę poematy techniczne.",
+      "passions": [
+        31,
+        26,
+        41
+      ],
+      "location": [
+        54.352,
+        18.6466
+      ]
+    },
+    {
+      "username": "MagdalenaWojcik",
+      "password": "password",
+      "email": "magdalena.wojcik@mail.pl",
+      "sex_id": 1,
+      "birthday": "1993-04-18",
+      "bio": "Wiersze pisane dymem świec. Herbaty wybieram intuicyjnie. Czasem jestem elfem, czasem tłumaczką ciszy.",
+      "passions": [
+        20,
+        14,
+        13
+      ],
+      "location": [
+        53.4285,
+        14.5528
+      ]
+    },
+    {
+      "username": "KamilLis",
+      "password": "password",
+      "email": "kamil.lis@example.pl",
+      "sex_id": 0,
+      "birthday": "1997-09-05",
+      "bio": "Zbieram kapsle, nagrywam oddechy starych budynków i prowadzę nieistniejący kanał o filozofii pustych półek.",
+      "passions": [
+        15,
+        34,
+        49
+      ],
+      "location": [
+        50.0412,
+        19.2048
+      ]
+    },
+    {
+      "username": "PatrycjaKalinska",
+      "password": "password",
+      "email": "patrycja.kalinska@mail.pl",
+      "sex_id": 1,
+      "birthday": "1996-12-12",
+      "bio": "Trzy rzeczy, które mnie opisują: skrzynka pełna guzików, album z odciskami chmur, przekonanie, że każdy dźwięk ma kolor.",
+      "passions": [
+        35,
+        13,
+        48
+      ],
+      "location": [
+        51.9356,
+        15.5062
+      ]
+    },
+    {
+      "username": "ArturJasinski",
+      "password": "password",
+      "email": "artur.jasinski@example.pl",
+      "sex_id": 0,
+      "birthday": "1984-03-25",
+      "bio": "Wczoraj grałem w siatkówkę, dziś robię origami z rachunków. Zamiast marzeń – wykresy, ale wszystkie prowadzą do nieba.",
+      "passions": [
+        2,
+        13,
+        31
+      ],
+      "location": [
+        51.76,
+        19.46
+      ]
+    },
+    {
+      "username": "JuliaWilk",
+      "password": "password",
+      "email": "julia.wilk@mail.pl",
+      "sex_id": 1,
+      "birthday": "1995-02-28",
+      "bio": "Co mam w plecaku? Toster z PRL-u, mapę Łodzi z 1991 i zeszyt z opowieściami o zepsutych windach.",
+      "passions": [
+        17,
+        10,
+        35
+      ],
+      "location": [
+        51.775,
+        19.451
+      ]
+    },
+    {
+      "username": "MikolajZajac",
+      "password": "password",
+      "email": "mikolaj.zajac@example.pl",
+      "sex_id": 0,
+      "birthday": "1991-10-15",
+      "bio": "Czy wino z czarnego bzu można analizować statystycznie? Robię to. Statystyka emocji to moja pasja i klątwa.",
+      "passions": [
+        23,
+        19,
+        31
+      ],
+      "location": [
+        50.2599,
+        19.0216
+      ]
+    },
+    {
+      "username": "JoannaSzymańska",
+      "password": "password",
+      "email": "joanna.szymanska@mail.pl",
+      "sex_id": 1,
+      "birthday": "1994-05-19",
+      "bio": "Czy można zapisać zapach deszczu na kartce? Eksperymentuję z atramentem z mchu i wodą z kałuż. Moje archiwum: 347 próbek.",
+      "passions": [
+        13,
+        42,
+        34
+      ],
+      "location": [
+        51.2465,
+        22.5684
+      ]
+    },
+    {
+      "username": "NataliaKwiat",
+      "password": "password",
+      "email": "natalia.kwiat@mail.pl",
+      "sex_id": 1,
+      "birthday": "2000-07-27",
+      "bio": "Życie to biblioteka z nieułożonymi książkami. Układam je według kolorów grzbietów i zapachów stron.",
+      "passions": [
+        20,
+        32,
+        42
+      ],
+      "location": [
+        53.0138,
+        18.5984
+      ]
+    },
+    {
+      "username": "AdamGórski",
+      "password": "password",
+      "email": "adam.gorski@example.pl",
+      "sex_id": 0,
+      "birthday": "1996-02-14",
+      "bio": "Wczoraj nauczyciel matematyki, dziś włóczęga z plecakiem. Jutro? Może tłumacz szeptów wierzby płaczącej.",
+      "passions": [
+        25,
+        39,
+        21
+      ],
+      "location": [
+        54.5189,
+        18.5305
+      ]
+    },
+    {
+      "username": "EwelinaLas",
+      "password": "password",
+      "email": "ewelina.las@mail.pl",
+      "sex_id": 1,
+      "birthday": "1987-10-08",
+      "bio": "Mapa moich marzeń: stara stodoła, stado owiec, radio grające tylko audycje o chmurach. Szukam współczesnych nomadów.",
+      "passions": [
+        28,
+        39,
+        34
+      ],
+      "location": [
+        52.7333,
+        23.2167
+      ]
+    },
+    {
+      "username": "KamilWrona",
+      "password": "password",
+      "email": "kamil.wrona@example.pl",
+      "sex_id": 0,
+      "birthday": "2003-04-11",
+      "bio": "Pracuję w IT. Wieczorami gram w gry planszowe i zbieram komiksy z lat 90. Marzę o podróży koleją transsyberyjską.",
+      "passions": [
+        12,
+        11,
+        39
+      ],
+      "location": [
+        52.254,
+        21.0345
+      ]
+    },
+    {
+      "username": "KarolinaJastrząb",
+      "password": "password",
+      "email": "karolina.jastrzab@mail.pl",
+      "sex_id": 1,
+      "birthday": "1991-03-30",
+      "bio": "Trzy sekrety: śpię w skarpetkach w paski, znam na pamięć *Pana Tadeusza*, hoduję kryształy w kształcie gwiazd.",
+      "passions": [
+        20,
+        24,
+        42
+      ],
+      "location": [
+        50.2945,
+        18.6714
+      ]
+    },
+    {
+      "username": "ŁukaszBór",
+      "password": "password",
+      "email": "lukasz.bor@example.pl",
+      "sex_id": 0,
+      "birthday": "1984-08-22",
+      "bio": "Nocne dyżury w szpitalu. Dni wypełnione szelestem starego projektora i ksiąg o ziołolecznictwie. Szukam spokoju w chaosie.",
+      "passions": [
+        20,
+        38,
+        44
+      ],
+      "location": [
+        51.9356,
+        15.5064
+      ]
+    },
+    {
+      "username": "AlicjaMorze",
+      "password": "password",
+      "email": "alicja.morze@mail.pl",
+      "sex_id": 1,
+      "birthday": "1998-11-17",
+      "bio": "Lubię jazdę na rowerze, fotografowanie zachodów słońca i domowe wypieki. Najlepiej odpoczywam nad jeziorem.",
+      "passions": [
+        29,
+        34,
+        19
+      ],
+      "location": [
+        53.7784,
+        20.4801
+      ]
+    },
+    {
+      "username": "RobertMgła",
+      "password": "password",
+      "email": "robert.mgla@example.pl",
+      "sex_id": 0,
+      "birthday": "1982-06-05",
+      "bio": "Kolekcjonuję cienie rzucane przez drzewa o piątej rano. Uczę się języka, którym mówią poranne mgły.",
+      "passions": [
+        28,
+        42,
+        34
+      ],
+      "location": [
+        49.9622,
+        20.6003
+      ]
+    },
+    {
+      "username": "JoannaSowa",
+      "password": "password",
+      "email": "joanna.sowa@mail.pl",
+      "sex_id": 1,
+      "birthday": "1994-05-19",
+      "bio": "Zbieram odgłosy starych maszyn do pisania i układam z nich wiersze. Moja półka: 37 słoików z szumem morza, mapa chmur z 1999 roku.",
+      "passions": [
+        34,
+        26,
+        39
+      ],
+      "location": [
+        54.5189,
+        18.5305
+      ]
+    },
+    {
+      "username": "MarekWiśniewski",
+      "password": "password",
+      "email": "marek.wisniewski@example.pl",
+      "sex_id": 0,
+      "birthday": "1987-11-23",
+      "bio": "Pracuję jako nauczyciel matematyki. Lubię czytać książki historyczne i jeździć na rowerze.",
+      "passions": [
+        25,
+        21,
+        29
+      ],
+      "location": [
+        51.2465,
+        22.5684
+      ]
+    },
+    {
+      "username": "EwaGwiazda",
+      "password": "password",
+      "email": "ewa.gwiazda@mail.pl",
+      "sex_id": 1,
+      "birthday": "2000-08-07",
+      "bio": "Czy deszcz może grać na skrzypcach? Eksperymentuję z dźwiękami natury. Kolekcjonuję kamienie z napisami wiatru.",
+      "passions": [
+        14,
+        34,
+        44
+      ],
+      "location": [
+        50.2945,
+        18.6714
+      ]
+    },
+    {
+      "username": "ŁukaszKowalski",
+      "password": "password",
+      "email": "lukasz.kowalski@example.pl",
+      "sex_id": 0,
+      "birthday": "1991-03-14",
+      "bio": "Inżynier budowlany. W weekendy gram w siatkówkę i spotykam się z przyjaciółmi.",
+      "passions": [
+        3,
+        5,
+        9
+      ],
+      "location": [
+        53.0138,
+        18.5984
+      ]
+    },
+    {
+      "username": "NataliaLis",
+      "password": "password",
+      "email": "natalia.lis@mail.pl",
+      "sex_id": 1,
+      "birthday": "1989-09-30",
+      "bio": "Mój dzień: 5 km biegu, kawa z kardamonem, tłumaczenie wierszy na język migowy. Nocą szukam konstelacji w szybach wieżowców.",
+      "passions": [
+        4,
+        26,
+        44
+      ],
+      "location": [
+        52.254,
+        21.0345
+      ]
+    },
+    {
+      "username": "AdamKaczmarek",
+      "password": "password",
+      "email": "adam.kaczmarek@example.pl",
+      "sex_id": 0,
+      "birthday": "1996-12-10",
+      "bio": "Pracuję w sklepie ogrodniczym. Lubię grillować i oglądać filmy komediowe.",
+      "passions": [
+        19,
+        18,
+        28
+      ],
+      "location": [
+        53.7784,
+        20.4801
+      ]
+    },
+    {
+      "username": "KarolinaMorze",
+      "password": "password",
+      "email": "karolina.morze@mail.pl",
+      "sex_id": 1,
+      "birthday": "1998-04-25",
+      "bio": "Mapa moich marzeń: 12 wysp, 8 języków, 1 statek widmo. Na co dzień układam puzzle z fragmentów starych listów.",
+      "passions": [
+        39,
+        20,
+        42
+      ],
+      "location": [
+        54.4416,
+        18.56
+      ]
+    },
+    {
+      "username": "PiotrBaran",
+      "password": "password",
+      "email": "piotr.baran@example.pl",
+      "sex_id": 0,
+      "birthday": "1984-01-17",
+      "bio": "Kierowca autobusu. W wolnym czasie gram w szachy i czytam kryminały.",
+      "passions": [
+        10,
+        20,
+        9
+      ],
+      "location": [
+        51.9356,
+        15.5064
+      ]
+    },
+    {
+      "username": "MonikaJastrzębska",
+      "password": "password",
+      "email": "monika.jastrzebska@mail.pl",
+      "sex_id": 1,
+      "birthday": "1993-07-08",
+      "bio": "Cisza ma kolor popielaty. Zapisuję ją w słoikach i wystawiam na balkonie. Czasem odpowiadam listami na szum wiatru.",
+      "passions": [
+        26,
+        34,
+        48
+      ],
+      "location": [
+        49.3,
+        19.95
+      ]
+    },
+    {
+      "username": "DawidKwiatkowski",
+      "password": "password",
+      "email": "dawid.kwiatkowski@example.pl",
+      "sex_id": 0,
+      "birthday": "2002-06-12",
+      "bio": "Student informatyki. Lubię gry komputerowe, pizzę i spotkania ze znajomymi.",
+      "passions": [
+        11,
+        18,
+        9
+      ],
+      "location": [
+        52.7333,
+        23.2167
+      ]
+    },
+    {
+      "username": "ŁukaszWojciechowski",
+      "password": "password",
+      "email": "lukasz.wojciechowski@example.pl",
+      "sex_id": 0,
+      "birthday": "1991-10-11",
+      "bio": "Dzień: inżynier mostów. Noc: konstruktor latawców w kształcie równań różniczkowych. Weekend: poszukiwacz śladów dinozaurów w betonie.",
+      "passions": [
+        23,
+        42,
+        33
+      ],
+      "location": [
+        52.4064,
+        16.9252
+      ]
+    },
+    {
+      "username": "NataliaDudek",
+      "password": "password",
+      "email": "natalia.dudek@mail.pl",
+      "sex_id": 1,
+      "birthday": "1998-03-28",
+      "bio": "Oglądam komedie romantyczne, ćwiczę jogę i czytam książki historyczne. Chętnie poznam kogoś do wspólnych wycieczek rowerowych.",
+      "passions": [
+        18,
+        50,
+        29
+      ],
+      "location": [
+        50.2649,
+        19.0238
+      ]
+    },
+    {
+      "username": "KamilPawlak",
+      "password": "password",
+      "email": "kamil.pawlak@example.pl",
+      "sex_id": 0,
+      "birthday": "1982-05-17",
+      "bio": "Mapa moich marzeń: czerwona nitka łączy Gdańsk z Tokio, niebieska – z podwodnymi jaskiniami. Zielona prowadzi donikąd.",
+      "passions": [
+        39,
+        32,
+        44
+      ],
+      "location": [
+        54.4416,
+        18.56
+      ]
+    },
+    {
+      "username": "KarolinaSobczak",
+      "password": "password",
+      "email": "karolina.sobczak@mail.pl",
+      "sex_id": 1,
+      "birthday": "1996-09-01",
+      "bio": "Pracuję w kawiarni. Uwielbiam eksperymentować z latte art i słuchać audiobooków podczas spacerów. Marzę o podróży do Islandii.",
+      "passions": [
+        19,
+        20,
+        39
+      ],
+      "location": [
+        53.4285,
+        14.5528
+      ]
+    },
+    {
+      "username": "DamianKowalczyk",
+      "password": "password",
+      "email": "damian.kowalczyk@example.pl",
+      "sex_id": 0,
+      "birthday": "2003-11-14",
+      "bio": "Trzy kroki do szaleństwa: 1) Taniec na dachu wieżowca. 2) Rozmowa z gołębiem o filozofii. 3) Kolacja z widokiem na opuszczony dworzec.",
+      "passions": [
+        46,
+        9,
+        26
+      ],
+      "location": [
+        52.2297,
+        21.0122
+      ]
+    },
+    {
+      "username": "MonikaWróbel",
+      "password": "password",
+      "email": "monika.wrobel@mail.pl",
+      "sex_id": 1,
+      "birthday": "1989-08-07",
+      "bio": "Zbieram poranne mgły w słoiki i układam z nich opowiadania. Moja półka: 53 butelki z zapachem różnych pór roku.",
+      "passions": [
+        26,
+        34,
+        39
+      ],
+      "location": [
+        49.2992,
+        19.9496
+      ]
+    },
+    {
+      "username": "BartoszZalewski",
+      "password": "password",
+      "email": "bartosz.zalewski@example.pl",
+      "sex_id": 0,
+      "birthday": "1995-02-20",
+      "bio": "Programuję gry komputerowe, gram w siatkówkę i gotuję włoskie dania. Szukam osób do wspólnego grania w planszówki.",
+      "passions": [
+        11,
+        3,
+        12
+      ],
+      "location": [
+        51.7592,
+        19.456
+      ]
     }
-]
+  ]

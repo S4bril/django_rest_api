@@ -1,95 +1,55 @@
 {
     "passions": {
-      "1": {
-        "name": "Piłka nożna"
-      },
-      "2": {
-        "name": "Koszykówka"
-      },
-      "3": {
-        "name": "Siatkówka"
-      },
-      "4": {
-        "name": "Bieganie"
-      },
-      "5": {
-        "name": "Siłownia"
-      },
-      "6": {
-        "name": "Piłka ręczna"
-      }, 
-      "7": {
-        "name": "Anime"
-      },
-      "8": {
-        "name": "D&D"
-      },
-      "9": {
-        "name": "Koncerty"
-      },
-      "10": {
-        "name": "Szachy"
-      },
-      "11": {
-        "name": "Gry komputerowe"
-      },
-      "12": {
-        "name": "Gry planszowe"
-      },
-      "13": {
-        "name": "Malowanie"
-      },
-      "14": {
-        "name": "Gra na instrumentach"
-      },
-      "15": {
-        "name": "Muzyka"
-      },
-      "16": {
-        "name": "Teatr"
-      },
-      "17": {
-        "name": "Kino"
-      },
-      "18": {
-        "name": "Filmy/Netflix"
-      },
-      "19": {
-        "name": "Gotowanie"
-      },
-      "20": {
-        "name": "Książki"
-      },
-      "21": {
-        "name": "Historia"
-      },
-      "22": {
-        "name": "Polityka"
-      },
-      "23": {
-        "name": "Fizyka"
-      },
-      "24": {
-        "name": "Chemia"
-      },
-      "25": {
-        "name": "Matematyka"
-      },
-      "26": {
-        "name": "Pisanie wierszy"
-      },
-      "27": {
-        "name": "Pisanie piosenek"
-      },
-      "28": {
-        "name": "Zwierzęta"
-      },
-      "29": {
-        "name": "Rower"
-      },
-      "30": {
-        "name": "Astrologia"
-      }
+      "1":  {"name": "Piłka nożna"},
+      "2":  {"name": "Koszykówka"},
+      "3":  {"name": "Siatkówka"},
+      "4":  {"name": "Bieganie"},
+      "5":  {"name": "Siłownia"},
+      "6":  {"name": "Piłka ręczna"}, 
+      "7":  {"name": "Anime"},
+      "8":  {"name": "D&D"},
+      "9":  {"name": "Koncerty"},
+      "10": {"name": "Szachy"},
+      "11": {"name": "Gry komputerowe"},
+      "12": {"name": "Gry planszowe"},
+      "13": {"name": "Malowanie"},
+      "14": {"name": "Gra na instrumentach"},
+      "15": {"name": "Muzyka"},
+      "16": {"name": "Teatr"},
+      "17": {"name": "Kino"},
+      "18": {"name": "Filmy/Netflix"},
+      "19": {"name": "Gotowanie"},
+      "20": {"name": "Książki"},
+      "21": {"name": "Historia"},
+      "22": {"name": "Polityka"},
+      "23": {"name": "Fizyka"},
+      "24": {"name": "Chemia"},
+      "25": {"name": "Matematyka"},
+      "26": {"name": "Pisanie wierszy"},
+      "27": {"name": "Pisanie piosenek"},
+      "28": {"name": "Zwierzęta"},
+      "29": {"name": "Rower"},
+      "30": {"name": "Astrologia"},
+      "31": { "name": "Programowanie" },
+      "32": { "name": "Sztuka Cyfrowa" },
+      "33": { "name": "Wspinaczka Skalna" },
+      "34": { "name": "Fotografia" },
+      "35": { "name": "Blogowanie" },
+      "36": { "name": "Esport" },
+      "37": { "name": "Kuchnia Wegańska" },
+      "38": { "name": "Mindfulness" },
+      "39": { "name": "Podróże" },
+      "40": { "name": "Taniec Ludowy" },
+      "41": { "name": "Robotyka" },
+      "42": { "name": "Projekty DIY" },
+      "43": { "name": "Wolontariat" },
+      "44": { "name": "Astronomia" },
+      "45": { "name": "Stand-up" },
+      "46": { "name": "Parkour" },
+      "47": { "name": "Wędkarstwo" },
+      "48": { "name": "Medytacja" },
+      "49": { "name": "Garncarstwo" },
+      "50": { "name": "Yoga" }
     }
   }
   
