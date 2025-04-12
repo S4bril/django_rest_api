@@ -53,7 +53,7 @@ def add_location_to_user(user, user_data):
         user.location = location
         user.save()
     except Exception as e:
-        print(colored(f"Error adding location {user_data.get('location')}: {e}", RED))
+        print(colored(f"Error adding location for {user_data.get("email")} {user_data.get('location')}: {e}", RED))
 
 def add_users_to_db(users):
     added_users = 0
@@ -75,6 +75,7 @@ def add_users_to_db(users):
 
         except Exception as e:
             print(colored(f"Error adding user {user_data.get('username')}: {e}", RED))
+            return
     return added_users
 
 def load_users():

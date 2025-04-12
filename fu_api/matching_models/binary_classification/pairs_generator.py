@@ -67,8 +67,6 @@ class PairGenerator:
                 common = len(user_a.passions & user_b.passions)
                 if common < min_common_passions:
                     continue
-                print(user_a.location)
-                print(user_a.passions)
                 distance = great_circle(
                     user_a.location, 
                     user_b.location

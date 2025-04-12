@@ -29,27 +29,7 @@
       "27": {"name": "Pisanie piosenek"},
       "28": {"name": "Zwierzęta"},
       "29": {"name": "Rower"},
-      "30": {"name": "Astrologia"},
-      "31": { "name": "Programowanie" },
-      "32": { "name": "Sztuka Cyfrowa" },
-      "33": { "name": "Wspinaczka Skalna" },
-      "34": { "name": "Fotografia" },
-      "35": { "name": "Blogowanie" },
-      "36": { "name": "Esport" },
-      "37": { "name": "Kuchnia Wegańska" },
-      "38": { "name": "Mindfulness" },
-      "39": { "name": "Podróże" },
-      "40": { "name": "Taniec Ludowy" },
-      "41": { "name": "Robotyka" },
-      "42": { "name": "Projekty DIY" },
-      "43": { "name": "Wolontariat" },
-      "44": { "name": "Astronomia" },
-      "45": { "name": "Stand-up" },
-      "46": { "name": "Parkour" },
-      "47": { "name": "Wędkarstwo" },
-      "48": { "name": "Medytacja" },
-      "49": { "name": "Garncarstwo" },
-      "50": { "name": "Yoga" }
+      "30": {"name": "Astrologia"}
     }
   }
   

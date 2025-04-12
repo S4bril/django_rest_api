@@ -4,6 +4,7 @@ from fu_api.matching_models.binary_classification.pairs_generator import PairGen
 
 USERS_DATASET = r"fu_api\matching_models\binary_classification\data\users_dataset.csv"
 
+
 class Command(BaseCommand):
     def handle(self, *args, **options):
         users = [User(data) for data in load_users_from_csv(USERS_DATASET)]
@@ -11,9 +12,9 @@ class Command(BaseCommand):
         generator = PairGenerator(users)
 
         pairs = generator.generate_pairs(
-            max_age_diff=7,
-            min_common_passions=2,
-            max_distance_km=30
+            max_age_diff=10,
+            min_common_passions=1,
+            max_distance_km=100
         )
 
         print("Number of pairs: ", len(pairs))
