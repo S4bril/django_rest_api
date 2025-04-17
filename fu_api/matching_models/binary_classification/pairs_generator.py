@@ -1,19 +1,27 @@
+import csv
 from datetime import datetime
+import json
+import os
 import numpy as np
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Tuple
 from geopy.distance import great_circle
 from sentence_transformers import SentenceTransformer
-# from xgboost import XGBClassifier
-# import openai
+from sklearn.metrics import accuracy_score, average_precision_score, classification_report, confusion_matrix, f1_score, precision_score, recall_score, roc_auc_score
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+import openai
+
+from config import settings
 
 
 class User:
     def __init__(self, data: Dict):
-        self.id = data['username']
+        self.id = data['email']
         self.bio = data['bio']
         self.passions = set(data['passions'])
         self.location = tuple(data['location'])
         self.birthdate = datetime.strptime(data['birthday'], "%Y-%m-%d").date()
+        self._embeddings = {}
 
     @property
     def age(self):
@@ -39,12 +47,28 @@ class UserPair:
         self.features: Optional[np.ndarray] = None
         self.label: Optional[float] = None
 
+    def calculate_features(self):
+        common = len(self.user_a.passions & self.user_b.passions)
+        total = len(self.user_a.passions | self.user_b.passions)
+        jaccard = common / total if total > 0 else 0
+
+        age_diff = abs(self.user_a.age - self.user_b.age)
+
+        emb_a = self.user_a.bio_embedding
+        emb_b = self.user_b.bio_embedding
+        cosine_sim = np.dot(emb_a, emb_b) / (np.linalg.norm(emb_a) * np.linalg.norm(emb_b))
+
+        self.features = np.array([jaccard, self.distance, age_diff, cosine_sim])
+
     @property
-    def key(self):
-        return tuple(sorted([self.user_a.id, self.user_b.id]))
+    def distance(self):
+        return round(great_circle(
+            self.user_a.location, 
+            self.user_b.location
+        ).kilometers, 2)
 
 
-class PairGenerator:
+class PairFactory:
     def __init__(self, users: List[User]):
         self.users = users
 
@@ -79,94 +103,153 @@ class PairGenerator:
         return pairs
 
 
-# class APILabeler:
-#     def __init__(self, api_key: str):
-#         openai.api_key = api_key
-#         self.prompt_template = """Rate compatibility (0 or 1) for these two profiles:
+class APILabeler:
+    def __init__(self, api_key: str):
+        openai.api_key = api_key
+        self.prompt_template = """Rate compatibility (0 or 1) for these two profiles:
 
-#         User A:
-#         Bio: {bio_a}
-#         Passions: {passions_a}
+        User A:
+        Bio: {bio_a}
+        Passions: {passions_a}
+        Age: {age_a}
 
-#         User B:
-#         Bio: {bio_b}
-#         Passions: {passions_b}
+        User B:
+        Bio: {bio_b}
+        Passions: {passions_b}
+        Age: {age_b}
 
-#         Answer ONLY with 0 (no match) or 1 (good match). 
-#         Consider shared interests, bio compatibility, and potential connection."""
+        Distance between users: {distance} km
 
-#     def label_pair(self, pair: UserPair) -> float:
-#         response = openai.chat.completions.create(
-#             model="gpt-4o",
-#             messages=[{
-#                 "role": "user",
-#                 "content": self.prompt_template.format(
-#                     bio_a=pair.user_a.bio,
-#                     passions_a=", ".join(map(str, pair.user_a.passions)),
-#                     bio_b=pair.user_b.bio,
-#                     passions_b=", ".join(map(str, pair.user_b.passions))
-#                 )
-#             }],
-#             temperature=0.1,
-#             max_tokens=1
-#         )
-#         return float(response.choices[0].message.content.strip())
+        Answer ONLY with 0 (no match) or 1 (good match). 
+        Consider shared interests, bio compatibility, age difference, distance separating users and potential connection."""
+
+    def label_pair(self, pair: UserPair) -> float:
+        response = openai.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{
+                "role": "user",
+                "content": self.prompt_template.format(
+                    bio_a=pair.user_a.bio,
+                    passions_a=", ".join(self._extract_passions_names(pair.user_a.passions)),
+                    age_a=pair.user_a.age,
+                    bio_b=pair.user_b.bio,
+                    passions_b=", ".join(self._extract_passions_names(pair.user_b.passions)),
+                    age_b=pair.user_b.age,
+                    distance=pair.distance
+                )
+            }],
+            temperature=0.3,
+            logit_bias={
+                "0": 20,
+                "1": 20
+            },
+            max_tokens=1
+        )
+        pair.label = float(response.choices[0].message.content.strip())
+        return pair.label
+
+    def _extract_passions_names(self, passions_ids):
+        passions_file_path = os.path.join(settings.BASE_DIR, "fu_api", "json_forms", "passions.json")
+        with open(passions_file_path, 'r', encoding="utf-8") as file:
+            passions = json.load(file)['passions']
+            return [passions.get(str(p_id), {}).get('name', 'Unknown') for p_id in passions_ids]
 
 
-# class MatchModel:
-#     def __init__(self):
-#         self.model = XGBClassifier()
-#         self.bio_encoder = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
+class FeatureStore:
+    CSV_HEADER = ['jaccard', 'distance', 'age_diff', 'bio_similarity', 'label']
 
-#     def extract_features(self, pair: UserPair) -> np.ndarray:
-#         """Feature engineering pipeline"""
-#         # Passion compatibility
-#         common = len(pair.user_a.passions & pair.user_b.passions)
-#         total = len(pair.user_a.passions | pair.user_b.passions)
-#         jaccard = common / total if total > 0 else 0
+    @staticmethod
+    def save_to_csv(pairs: List[UserPair], filename: str):
+        file_exists = os.path.exists(filename)
+        write_header = not file_exists or os.stat(filename).st_size == 0
 
-#         # Location proximity
-#         distance = great_circle(pair.user_a.location, pair.user_b.location).km
+        with open(filename, 'a' if file_exists else 'w', newline='') as f:
+            writer = csv.writer(f)
+            
+            if write_header:
+                writer.writerow(FeatureStore.CSV_HEADER)
 
-#         # Bio similarity
-#         emb_a = pair.user_a.bio_embedding
-#         emb_b = pair.user_b.bio_embedding
-#         cosine_sim = np.dot(emb_a, emb_b) / (np.linalg.norm(emb_a) * np.linalg.norm(emb_b))
+            for pair in pairs:
+                if pair.features is None:
+                    pair.calculate_features()
+                    
+                writer.writerow([
+                    pair.features[0],  # jaccard
+                    pair.features[1],  # distance
+                    pair.features[2],  # age difference
+                    pair.features[3],  # bio similarity
+                    pair.label
+                ])
 
-#         return np.array([jaccard, distance, cosine_sim])
+    @staticmethod
+    def load_from_csv(filename: str) -> Tuple[np.ndarray, np.ndarray]:
+        data = np.loadtxt(filename, delimiter=',', skiprows=1)
+        X = data[:, :-1]
+        y = data[:, -1]
+        return X, y
 
-#     def train(self, pairs: List[UserPair]):
-#         X = np.array([self.extract_features(p) for p in pairs])
-#         y = np.array([p.label for p in pairs])
-#         self.model.fit(X, y)
 
-#     def predict(self, pair: UserPair) -> float:
-#         return self.model.predict_proba(self.extract_features(pair))[0][1]
+class MatchModel:
+    def __init__(self, feature_file: str, test_size: float = 0.2, random_state: int = 42):
+        self.model = XGBClassifier()
+        self.X, self.y = FeatureStore.load_from_csv(feature_file)
 
-#     def save(self, path: str):
-#         self.model.save_model(path)
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
+            self.X, 
+            self.y,
+            test_size=test_size,
+            random_state=random_state,
+            stratify=self.y
+        )
 
-#     def load(self, path: str):
-#         self.model.load_model(path)
+    def train(self):
+        self.model.fit(self.X_train, self.y_train)
 
-# if __name__ == "__main__":
-#     users = [User(data) for data in load_users_from_csv(r"fu_api\matching_models\binary_classification\data\users_dataset.csv")]
+    def predict(self, X: np.ndarray = None) -> float:
+        if X is None:
+            X = self.X_test
+        return self.model.predict(X)
+    
+    def predict_proba(self, X: np.ndarray = None) -> np.ndarray:
+        if X is None:
+            X = self.X_test
+        return self.model.predict_proba(X)
+    
+    def evaluate(self):
+        y_pred = self.predict()
+        y_proba = self.predict_proba()[:, 1]
 
-#     generator = PairGenerator(users)
-#     pairs = generator.generate_pairs(
-#         strategy='combined',
-#         max_km=100,
-#         min_common=1
-#     )
+        print("Classification Report:")
+        print(classification_report(self.y_test, y_pred))
 
-#     # 3. Label pairs using GPT-4o
-#     labeler = APILabeler("your-api-key")
-#     for pair in pairs:
-#         pair.label = labeler.label_pair(pair)
+        print("\nConfusion Matrix:")
+        print(confusion_matrix(self.y_test, y_pred))
 
-#     # 4. Train model
-#     model = MatchModel()
-#     model.train(pairs)
+        print("\nKey Metrics:")
+        print(f"Accuracy: {accuracy_score(self.y_test, y_pred):.4f}")
+        print(f"Precision: {precision_score(self.y_test, y_pred):.4f}")
+        print(f"Recall: {recall_score(self.y_test, y_pred):.4f}")
+        print(f"F1 Score: {f1_score(self.y_test, y_pred):.4f}")
 
-#     # 5. Save model
-#     model.save("match_model.xgb")
+        print(f"\nROC AUC: {roc_auc_score(self.y_test, y_proba):.4f}")
+        print(f"Average Precision: {average_precision_score(self.y_test, y_proba):.4f}")
+
+    def cross_validate(self, cv: int = 5):
+        """Perform cross-validation"""
+        from sklearn.model_selection import cross_val_score
+        scores = cross_val_score(
+            self.model,
+            self.X,
+            self.y,
+            cv=cv,
+            scoring='accuracy'
+        )
+        print(f"Cross-Validation Results ({cv} folds):")
+        print(f"Mean Accuracy: {scores.mean():.4f}")
+        print(f"Std Deviation: {scores.std():.4f}")
+
+    def save(self, path: str):
+        self.model.save_model(path)
+
+    def load(self, path: str):
+        self.model.load_model(path)
