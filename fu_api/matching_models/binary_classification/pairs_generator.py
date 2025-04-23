@@ -3,6 +3,7 @@ from datetime import datetime
 import json
 import os
 import numpy as np
+import pandas as pd
 from typing import List, Dict, Optional, Tuple
 from geopy.distance import great_circle
 from sentence_transformers import SentenceTransformer
@@ -10,6 +11,7 @@ from sklearn.metrics import accuracy_score, average_precision_score, classificat
 from sklearn.model_selection import train_test_split
 from xgboost import XGBClassifier
 import openai
+from imblearn.under_sampling import RandomUnderSampler
 
 from config import settings
 
@@ -124,6 +126,10 @@ class APILabeler:
         Consider shared interests, bio compatibility, age difference, distance separating users and potential connection."""
 
     def label_pair(self, pair: UserPair) -> float:
+        if pair.distance >= 100.0 or abs(pair.user_a.age - pair.user_b.age) >= 10 or len(pair.user_a.passions & pair.user_b.passions) == 0:
+            pair.label = 0.0
+            return 0.0
+        return None
         response = openai.chat.completions.create(
             model="gpt-4o-mini",
             messages=[{
@@ -138,7 +144,7 @@ class APILabeler:
                     distance=pair.distance
                 )
             }],
-            temperature=0.3,
+            temperature=0.4,
             logit_bias={
                 "0": 20,
                 "1": 20
@@ -192,7 +198,17 @@ class FeatureStore:
 class MatchModel:
     def __init__(self, feature_file: str, test_size: float = 0.2, random_state: int = 42):
         self.model = XGBClassifier()
-        self.X, self.y = FeatureStore.load_from_csv(feature_file)
+        
+        data = pd.read_csv(feature_file)
+        
+        feature_columns = FeatureStore.CSV_HEADER[:-1]
+        target_column = FeatureStore.CSV_HEADER[-1]
+        
+        X = data[feature_columns]
+        y = data[target_column]
+        
+        undersampler = RandomUnderSampler(random_state=random_state)
+        self.X, self.y = undersampler.fit_resample(X, y)
 
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
             self.X, 
@@ -203,7 +219,7 @@ class MatchModel:
         )
 
     def train(self):
-        self.model.fit(self.X_train, self.y_train)
+        self.model.fit(self.X, self.y)
 
     def predict(self, X: np.ndarray = None) -> float:
         if X is None:

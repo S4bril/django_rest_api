@@ -50,7 +50,7 @@ class MatchRecommendationView(APIView):
         dmatrix = xgb.DMatrix(np.array(features))
         probabilities = self.model.predict(dmatrix)
 
-        sorted_indices = np.argsort(probabilities)[::-1][:10]
+        sorted_indices = np.argsort(probabilities)[::-1][:100]
         results = []
         for idx in sorted_indices:
             results.append({
