@@ -1,2 +1,0 @@
-class CsvGenerator():
-    pass

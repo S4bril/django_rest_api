@@ -47,10 +47,10 @@ class MatchRecommendationView(APIView):
         if not features:
             return Response({"message": "No valid matches found"}, status=status.HTTP_200_OK)
 
-        dmatrix = xgb.DMatrix(np.array(features))
+        dmatrix = xgb.DMatrix(np.array(features), feature_names=["jaccard", "distance", "age_diff", "bio_similarity"])
         probabilities = self.model.predict(dmatrix)
 
-        sorted_indices = np.argsort(probabilities)[::-1][:100]
+        sorted_indices = np.argsort(probabilities)[::-1]#[:100]
         results = []
         for idx in sorted_indices:
             results.append({
@@ -62,7 +62,7 @@ class MatchRecommendationView(APIView):
 
     def get_valid_candidates(self, user):
         excluded = Q(id=user.id) | Q(friends=user) | Q(rejected_users=user)
-        return CustomUser.objects.exclude(excluded).select_related('location')#[:100]  # Limit for performance
+        return CustomUser.objects.exclude(excluded).select_related('location')[:10]  # Limit for performance
 
     def create_feature_vector(self, user1, user2):
         passions1 = set(user1.passions)

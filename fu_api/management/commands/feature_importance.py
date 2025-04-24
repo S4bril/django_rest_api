@@ -1,12 +1,14 @@
-from django.core.management.base import BaseCommand
 import pandas as pd
 import xgboost as xgb
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from django.core.management.base import BaseCommand
+
 
 MODEL_PATH = r"match_model.xgb"
 IMPORTANCE_TYPE = "weight"
+
 
 class Command(BaseCommand):
     help = "Generate a feature importance plot for the XGBoost model."
