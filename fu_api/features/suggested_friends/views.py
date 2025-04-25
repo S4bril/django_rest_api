@@ -3,8 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
-from fu_api.features.common.serializers.friend_serializers import FriendSerializer
-from fu_api.features.suggested_friends.services import get_suggested_friends
+from fu_api.features.suggested_friends.matchers.factory import MatcherFactory
 from fu_api.models.custom_user_model import CustomUser
 
 
@@ -12,9 +11,14 @@ class UserSuggestedFriendsRetrieveView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        suggested_friends = get_suggested_friends(request.user)
-        serialized_suggested_friends = FriendSerializer(suggested_friends, many=True)
-        return Response({"suggested_friends": serialized_suggested_friends.data}, status=status.HTTP_200_OK)
+        method = request.query_params.get("method", "knn")
+        try:
+            matcher = MatcherFactory.get_matcher(method=method)
+        except ValueError as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+        suggested_friends = matcher.get_matches(request.user)
+        return Response({"suggested_friends": suggested_friends}, status=status.HTTP_200_OK)
 
 
 class UserRejectView(APIView):

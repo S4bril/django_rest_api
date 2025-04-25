@@ -1,23 +1,46 @@
-import json
+import csv
 from tqdm import tqdm
 from termcolor import colored
 from fu_api.models.custom_user_model import CustomUser
-from fu_api.models.loaction_model import Location
+from fu_api.models.location_model import Location
 
-JSON_FILE = "fu_api/json_forms/users.json"
+CSV_FILE = "fu_api/json_forms/users.csv"
 GREEN = "green"
 RED = "red"
 
-def load_users_from_json(file_path):
+def load_users_from_csv(file_path):
     try:
         with open(file_path, "r", encoding="utf-8") as file:
-            users = json.load(file)
+            reader = csv.DictReader(file)
+            users = []
+            for row in reader:
+                user = dict(row)
+
+                raw_passions = user.get("passions", "")
+                if isinstance(raw_passions, str):
+                    user["passions"] = [int(pid) for pid in raw_passions.split(";") if pid.strip().isdigit()]
+                else:
+                    user["passions"] = []
+
+                raw_location = user.get("location", "")
+                if isinstance(raw_location, str) and "," in raw_location:
+                    try:
+                        lat_str, lon_str = raw_location.split(",")
+                        user["location"] = [float(lat_str.strip()), float(lon_str.strip())]
+                    except ValueError:
+                        user["location"] = []
+                else:
+                    user["location"] = []
+
+                user["sex_id"] = int(user.get("sex_id", 0)) if user.get("sex_id", "").isdigit() else None
+
+                users.append(user)
             return users
     except FileNotFoundError:
         print(f"Error: File {file_path} not found.")
         return []
-    except json.JSONDecodeError:
-        print(f"Error: File {file_path} contains invalid JSON.")
+    except csv.Error as e:
+        print(f"CSV parsing error: {e}")
         return []
 
 def add_location_to_user(user, user_data):
@@ -30,7 +53,7 @@ def add_location_to_user(user, user_data):
         user.location = location
         user.save()
     except Exception as e:
-        print(colored(f"Error adding location {user_data.get('location')}: {e}", RED))
+        print(colored(f"Error adding location for {user_data.get("email")} {user_data.get('location')}: {e}", RED))
 
 def add_users_to_db(users):
     added_users = 0
@@ -52,10 +75,11 @@ def add_users_to_db(users):
 
         except Exception as e:
             print(colored(f"Error adding user {user_data.get('username')}: {e}", RED))
+            return
     return added_users
 
 def load_users():
-    users = load_users_from_json(JSON_FILE)
+    users = load_users_from_csv(CSV_FILE)
     added_users = 0
     print(f"{len(users)} users to add")
     if users:
@@ -65,7 +89,7 @@ def load_users():
     print(colored(f"Job is done. Number of added users: {added_users}", GREEN))
 
 def remove_users():
-    users = load_users_from_json(JSON_FILE)
+    users = load_users_from_csv(CSV_FILE)
     deleted_users = 0
     for user_data in tqdm(users, desc="Removing test users from DB"):
         try:

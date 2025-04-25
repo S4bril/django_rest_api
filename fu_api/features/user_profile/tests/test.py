@@ -2,7 +2,7 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 from fu_api.features.common.tests.custom_user_factory import create_test_user
 from fu_api.models.custom_user_model import CustomUser
-from fu_api.models.loaction_model import Location
+from fu_api.models.location_model import Location
 
 
 class UserDetailViewTests(APITestCase):
