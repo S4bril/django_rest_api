@@ -4,13 +4,12 @@ from fu_api.models.custom_user_model import CustomUser
 
 
 class BaseMatcher(ABC):
-    NUMBER_OF_POTENTIAL_FRIENDS = 70
 
-    def get_valid_candidates(self, user):
+    def get_valid_candidates(self, user, number_of_users):
         excluded = Q(id=user.id) | Q(friends=user) | Q(rejected_users=user)
         return CustomUser.objects.exclude(
             id__in=CustomUser.objects.filter(excluded).values_list('id', flat=True)
-        )[:self.NUMBER_OF_POTENTIAL_FRIENDS]
+        )[:number_of_users]
 
     @abstractmethod
     def compute_feature_vector(self, user, candidate):

@@ -1,13 +1,15 @@
-# matchers/xgb_matcher.py
-
 import numpy as np
 import xgboost as xgb
 from datetime import date
 from geopy.distance import great_circle
 from sentence_transformers import SentenceTransformer
+from fu_api.features.common.serializers.friend_serializers import FriendSerializer
 from .base import BaseMatcher
 
 FEATURE_NAMES = ["jaccard", "distance", "age_diff", "bio_similarity"]
+
+NUMBER_OF_VALIDATED_USERS = 50
+NUMBER_OF_OUTPUT_USERS = 10
 
 class XGBMatcher(BaseMatcher):
     def __init__(self, model_path="match_model.xgb"):
@@ -41,9 +43,12 @@ class XGBMatcher(BaseMatcher):
         emb1 = self.bio_encoder.encode(bio1 or "")
         emb2 = self.bio_encoder.encode(bio2 or "")
         return np.dot(emb1, emb2) / (np.linalg.norm(emb1) * np.linalg.norm(emb2))
+    
+    def serialize_matches(self, matches):
+        return FriendSerializer(matches, many=True)
 
     def get_matches(self, user):
-        candidates = self.get_valid_candidates(user)
+        candidates = self.get_valid_candidates(user, NUMBER_OF_VALIDATED_USERS)
         features = []
         valid_candidates = []
         for candidate in candidates:
@@ -60,4 +65,11 @@ class XGBMatcher(BaseMatcher):
         dmatrix = xgb.DMatrix(np.array(features), feature_names=FEATURE_NAMES)
         probabilities = self.model.predict(dmatrix)
         sorted_indices = np.argsort(probabilities)[::-1]
-        return [valid_candidates[i] for i in sorted_indices]
+
+        serialized_matches = []
+        for idx in sorted_indices[:NUMBER_OF_OUTPUT_USERS]:
+            candidate = valid_candidates[idx]
+            candidate_serialized = FriendSerializer(candidate).data
+            candidate_serialized["match_probability"] = float(probabilities[idx])
+            serialized_matches.append(candidate_serialized)
+        return serialized_matches
