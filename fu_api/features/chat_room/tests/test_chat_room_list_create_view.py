@@ -89,6 +89,7 @@ class TestChatRoomListCreateView(APITestCase):
         self.assertEqual(ChatRoom.objects.count(), 1)
         chat_room = ChatRoom.objects.first()
         self.assertIn(self.user1, chat_room.members.all())
+        self.assertIn(self.user1, chat_room.admins.all())
 
     def test_create_correct_chat_room(self):
         bodies = [
@@ -107,11 +108,15 @@ class TestChatRoomListCreateView(APITestCase):
             response = self.client.post(self.url, body, format="json")
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+            if body["is_group"]:
+                chat_room = ChatRoom.objects.latest('id')
+                self.assertIn(self.user1, chat_room.admins.all())
+
         self.assertEqual(ChatRoom.objects.count(), 2)
 
     def test_serializer_data_structure(self):
         chat_room = ChatRoom.objects.create(name="Room")
         chat_room.members.add(self.user1)
         member_data = self.client.get(self.url).data[0]
-        expected_fields = {"id", "name", "is_group"}
+        expected_fields = {"id", "name", "is_group", "admins"}
         self.assertEqual(set(member_data.keys()), expected_fields)

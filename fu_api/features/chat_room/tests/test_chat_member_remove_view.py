@@ -15,6 +15,7 @@ class TestChatMemberRemoveView(APITestCase):
             is_group=True
         )
         self.group_chat.members.add(self.request_user)
+        self.group_chat.admins.add(self.request_user)
 
         self.private_chat = ChatRoom.objects.create(
             name="Private Chat", 
@@ -71,3 +72,22 @@ class TestChatMemberRemoveView(APITestCase):
         url = self.get_url(self.group_chat.id, 1000)
         response = self.client.post(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_non_admin_cannot_remove_member(self):
+        self.group_chat.members.add(self.target_user)
+        self.group_chat.members.add(self.other_user)
+        self.client.force_authenticate(user=self.other_user)
+
+        url = self.get_url(self.group_chat.id, self.target_user.id)
+        response = self.client.post(url)
+
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.data["error"], "Only admins can remove members.")
+
+    def test_admin_can_remove_member(self):
+        self.group_chat.members.add(self.target_user)
+        url = self.get_url(self.group_chat.id, self.target_user.id)
+        response = self.client.post(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertNotIn(self.target_user, self.group_chat.members.all())

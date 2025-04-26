@@ -6,10 +6,11 @@ from fu_api.models.notification_model import Notification
 
 class ChatRoomSerializer(serializers.ModelSerializer):
     members = serializers.ListField(child=serializers.IntegerField(), write_only=True)
+    admins = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = ChatRoom
-        fields = ["id", "name", "is_group", "members"]
+        fields = ["id", "name", "is_group", "members", "admins"]
 
     def validate(self, data):
         user = self.context["request"].user
@@ -45,6 +46,9 @@ class ChatRoomSerializer(serializers.ModelSerializer):
 
         chat_room = ChatRoom.objects.create(**validated_data)
         chat_room.members.add(user, *CustomUser.objects.filter(id__in=members_ids))
+
+        if chat_room.is_group:
+            chat_room.admins.add(user)
 
         for member in chat_room.members.all():
             if member != user:
