@@ -2,7 +2,6 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 from fu_api.features.common.tests.custom_user_factory import create_test_user
 from fu_api.models.chat_room_model import ChatRoom
-from fu_api.models.notification_model import Notification
 
 class TestPromoteToAdminView(APITestCase):
     def setUp(self):
