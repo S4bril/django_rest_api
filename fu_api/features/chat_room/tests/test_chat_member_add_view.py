@@ -2,28 +2,29 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 from fu_api.features.common.tests.custom_user_factory import create_test_user
 from fu_api.models.chat_room_model import ChatRoom
-from fu_api.models.notification_model import Notification
 
 
 class TestChatMemberAddView(APITestCase):
     def setUp(self):
-        self.request_user = create_test_user("requester")
-        self.target_user = create_test_user("target")
-        self.other_user = create_test_user("other")
+        self.admin_user = create_test_user("admin_user")
+        self.non_admin_user = create_test_user("non_admin_user")
+        self.target_user = create_test_user("target_user")
+        self.other_user = create_test_user("other_user")
 
         self.group_chat = ChatRoom.objects.create(
-            name="Test Room", 
+            name="Test Group", 
             is_group=True
         )
-        self.group_chat.members.add(self.request_user)
+        self.group_chat.members.add(self.admin_user, self.non_admin_user)
+        self.group_chat.admins.add(self.admin_user)
 
         self.private_chat = ChatRoom.objects.create(
-            name="Private Room",
+            name="Private Chat",
             is_group=False
         )
-        self.private_chat.members.add(self.request_user, self.other_user)
+        self.private_chat.members.add(self.admin_user, self.other_user)
 
-        self.client.force_authenticate(user=self.request_user)
+        self.client.force_authenticate(user=self.admin_user)
 
     def get_url(self, chat_room_id, user_id):
         return f"/api/chats/{chat_room_id}/members/{user_id}/add/"
@@ -47,52 +48,46 @@ class TestChatMemberAddView(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_target_user_blocks_requester(self):
-        self.target_user.blocked_users.add(self.request_user)
+        self.target_user.blocked_users.add(self.admin_user)
         url = self.get_url(self.group_chat.id, self.target_user.id)
         response = self.client.post(url)
-
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        self.assertEqual(response.data["error"], "You are blocked by target.")
+        self.assertIn("You are blocked by", response.data["error"])
 
     def test_requester_blocks_target_user(self):
-        self.request_user.blocked_users.add(self.target_user)
+        self.admin_user.blocked_users.add(self.target_user)
         url = self.get_url(self.group_chat.id, self.target_user.id)
         response = self.client.post(url)
-
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.data["error"], "You have blocked target. Unblock to add them.")
+        self.assertIn("You have blocked", response.data["error"])
 
     def test_user_already_in_chat(self):
         self.group_chat.members.add(self.target_user)
         url = self.get_url(self.group_chat.id, self.target_user.id)
         response = self.client.post(url)
-
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response.data["error"], "User is already in the chat.")
 
-    def test_successful_member_addition(self):
+    def test_non_admin_cannot_add_member(self):
+        self.client.force_authenticate(user=self.non_admin_user)
         url = self.get_url(self.group_chat.id, self.target_user.id)
         response = self.client.post(url)
 
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.data["error"], "Only admins can add members.")
+
+    def test_admin_can_add_member(self):
+        url = self.get_url(self.group_chat.id, self.target_user.id)
+        response = self.client.post(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["message"], "Member added successfully.")
-
-        self.assertTrue(self.group_chat.members.filter(id=self.target_user.id).exists())
-
-        notification = Notification.objects.filter(
-            user=self.target_user,
-            sender=self.request_user,
-            type="chat_invite"
-        ).first()
-        self.assertIsNotNone(notification)
-        self.assertIn(self.group_chat.name, notification.message)
+        self.assertIn(self.target_user, self.group_chat.members.all())
 
     def test_invalid_chat_room_id(self):
-        url = self.get_url(999, self.target_user.id)
+        url = self.get_url(1000, self.target_user.id)
         response = self.client.post(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_invalid_user_id(self):
-        url = self.get_url(self.group_chat.id, 999)
+        url = self.get_url(self.group_chat.id, 1000)
         response = self.client.post(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

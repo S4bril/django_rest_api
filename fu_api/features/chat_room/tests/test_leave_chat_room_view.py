@@ -47,6 +47,7 @@ class TestLeaveChatRoomView(APITestCase):
 
     def test_successful_leave_with_remaining_members(self):
         self.group_chat.members.add(self.user2)
+        self.group_chat.admins.add(self.user2)
 
         url = self.get_url(self.group_chat.id)
         response = self.client.post(url)
@@ -54,7 +55,18 @@ class TestLeaveChatRoomView(APITestCase):
         self.assertEqual(response.data["message"], "You have left the chat.")
 
         self.assertNotIn(self.user1, self.group_chat.members.all())
+        self.assertNotIn(self.user1, self.group_chat.admins.all())
         self.assertEqual(self.group_chat.members.count(), 1)
+
+    def test_last_admin_leaving_assigns_new_admin(self):
+        self.group_chat.members.add(self.user2)
+        url = self.get_url(self.group_chat.id)
+
+        _ = self.client.post(url)
+        updated_chat = ChatRoom.objects.get(id=self.group_chat.id)
+
+        self.assertEqual(updated_chat.admins.count(), 1)
+        self.assertEqual(updated_chat.admins.first(), self.user2)
 
     def test_last_member_leaving_deletes_chat(self):
         url = self.get_url(self.group_chat.id)

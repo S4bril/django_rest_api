@@ -46,6 +46,9 @@ class ChatRoomSerializer(serializers.ModelSerializer):
         chat_room = ChatRoom.objects.create(**validated_data)
         chat_room.members.add(user, *CustomUser.objects.filter(id__in=members_ids))
 
+        if chat_room.is_group:
+            chat_room.admins.add(user)
+
         for member in chat_room.members.all():
             if member != user:
                 Notification.objects.create(
@@ -55,3 +58,24 @@ class ChatRoomSerializer(serializers.ModelSerializer):
                     message=f"You have been added to the chat: {chat_room.name}."
                 )
         return chat_room
+
+
+class ChatRoomMemberSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
+    is_admin = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'image_url', 'is_admin']
+
+    def get_image_url(self, obj):
+        request = self.context.get('request')
+        if request and obj.profile_image:
+            return request.build_absolute_uri(obj.profile_image.url)
+        return None
+
+    def get_is_admin(self, obj):
+        chat_room = self.context.get('chat_room')
+        if chat_room:
+            return chat_room.admins.filter(id=obj.id).exists()
+        return False
