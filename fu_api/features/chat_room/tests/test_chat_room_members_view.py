@@ -47,5 +47,5 @@ class TestChatRoomMembersView(APITestCase):
     def test_serializer_data_structure(self):
         response = self.client.get(self.url)
         member_data = response.data[0]
-        expected_fields = {"username", "sex", "bio", "image_url", "age", "passions"}
+        expected_fields = {"username", "image_url", "is_admin"}
         self.assertEqual(set(member_data.keys()), expected_fields)

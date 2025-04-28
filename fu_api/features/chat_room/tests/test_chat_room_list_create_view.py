@@ -118,5 +118,5 @@ class TestChatRoomListCreateView(APITestCase):
         chat_room = ChatRoom.objects.create(name="Room")
         chat_room.members.add(self.user1)
         member_data = self.client.get(self.url).data[0]
-        expected_fields = {"id", "name", "is_group", "admins"}
+        expected_fields = {"id", "name", "is_group"}
         self.assertEqual(set(member_data.keys()), expected_fields)

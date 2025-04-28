@@ -6,11 +6,10 @@ from fu_api.models.notification_model import Notification
 
 class ChatRoomSerializer(serializers.ModelSerializer):
     members = serializers.ListField(child=serializers.IntegerField(), write_only=True)
-    admins = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = ChatRoom
-        fields = ["id", "name", "is_group", "members", "admins"]
+        fields = ["id", "name", "is_group", "members"]
 
     def validate(self, data):
         user = self.context["request"].user
@@ -59,3 +58,24 @@ class ChatRoomSerializer(serializers.ModelSerializer):
                     message=f"You have been added to the chat: {chat_room.name}."
                 )
         return chat_room
+
+
+class ChatRoomMemberSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
+    is_admin = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'image_url', 'is_admin']
+
+    def get_image_url(self, obj):
+        request = self.context.get('request')
+        if request and obj.profile_image:
+            return request.build_absolute_uri(obj.profile_image.url)
+        return None
+
+    def get_is_admin(self, obj):
+        chat_room = self.context.get('chat_room')
+        if chat_room:
+            return chat_room.admins.filter(id=obj.id).exists()
+        return False
