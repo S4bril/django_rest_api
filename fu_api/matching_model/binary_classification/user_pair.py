@@ -1,7 +1,7 @@
 from typing import Optional
 import numpy as np
 from geopy.distance import great_circle
-from fu_api.matching_models.binary_classification.user import User
+from fu_api.matching_model.binary_classification.user import User
 
 
 class UserPair:

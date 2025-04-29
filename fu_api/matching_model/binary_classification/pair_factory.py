@@ -1,7 +1,7 @@
 from geopy.distance import great_circle
 from typing import List
-from fu_api.matching_models.binary_classification.user_pair import UserPair
-from fu_api.matching_models.binary_classification.user import User
+from fu_api.matching_model.binary_classification.user_pair import UserPair
+from fu_api.matching_model.binary_classification.user import User
 
 
 class PairFactory:
