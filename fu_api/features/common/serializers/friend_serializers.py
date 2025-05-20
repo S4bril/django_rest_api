@@ -14,7 +14,7 @@ class FriendSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'sex', 'bio', 'image_url', 'age', 'passions']
+        fields = ['id', 'username', 'sex', 'bio', 'image_url', 'age', 'passions']
 
     def get_sex(self, obj):
         return obj.get_sex_id_display()
