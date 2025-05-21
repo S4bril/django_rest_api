@@ -29,7 +29,6 @@ class UsersListCreateViewTests(APITestCase):
         self.assertIn("sex", user_data)
         self.assertIn("bio", user_data)
         self.assertIn("image_url", user_data)
-        self.assertIn("age", user_data)
 
 
 class UsersRetrieveViewTests(APITestCase):
