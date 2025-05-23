@@ -4,7 +4,6 @@ from fu_api.models.custom_user_model import CustomUser
 
 
 class BaseMatcher(ABC):
-
     def get_valid_candidates(self, user, number_of_users):
         excluded = Q(id=user.id) | Q(friends=user) | Q(rejected_users=user)
         return CustomUser.objects.exclude(
