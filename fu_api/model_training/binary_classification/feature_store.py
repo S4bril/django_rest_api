@@ -2,7 +2,7 @@ import numpy as np
 import csv
 import os
 from typing import List, Tuple
-from fu_api.matching_models.binary_classification.user_pair import UserPair
+from fu_api.model_training.binary_classification.user_pair import UserPair
 
 
 class FeatureStore:

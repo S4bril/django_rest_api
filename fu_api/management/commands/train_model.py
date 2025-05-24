@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from fu_api.matching_models.binary_classification.match_model import MatchModel
+from fu_api.model_training.binary_classification.match_model import MatchModel
 
 
 class Command(BaseCommand):

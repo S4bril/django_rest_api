@@ -1,10 +1,10 @@
 from tqdm import tqdm
 from django.core.management.base import BaseCommand
 from fu_api.helpers.load_users import load_users_from_csv
-from fu_api.matching_models.binary_classification.api_labeler import APILabeler
-from fu_api.matching_models.binary_classification.feature_store import FeatureStore
-from fu_api.matching_models.binary_classification.pair_factory import PairFactory
-from fu_api.matching_models.binary_classification.user import User
+from fu_api.model_training.binary_classification.api_labeler import APILabeler
+from fu_api.model_training.binary_classification.feature_store import FeatureStore
+from fu_api.model_training.binary_classification.pair_factory import PairFactory
+from fu_api.model_training.binary_classification.user import User
 
 
 USERS_DATASET = r"fu_api\matching_models\binary_classification\data\users_dataset.csv"
