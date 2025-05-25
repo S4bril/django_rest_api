@@ -46,9 +46,8 @@ class SuggestedFriendSerializer(serializers.ModelSerializer):
         return None
 
     def get_passions(self, obj):
-        passions_ids = obj.passions
         passions_file_path = os.path.join(settings.BASE_DIR, "fu_api", "json_forms", "passions.json")
         with open(passions_file_path, 'r', encoding="utf-8") as file:
             passions = json.load(file)['passions']
-        passions_names = [passions.get(str(p_id), {}).get('name', 'Unknown') for p_id in passions_ids]
+        passions_names = [passions.get(str(p_id), {}).get('name', 'Unknown') for p_id in obj.passions_ids]
         return passions_names

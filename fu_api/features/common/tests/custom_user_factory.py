@@ -7,7 +7,7 @@ def create_test_user(username, **kwargs):
         "sex_id": 0,
         "birthday": "2002-10-26",
         "bio": "",
-        "passions": [1, 2, 3, 4],
+        "passions_ids": [1, 2, 3, 4],
         "bio_embedding": [0.0],
     }
     defaults.update(kwargs)

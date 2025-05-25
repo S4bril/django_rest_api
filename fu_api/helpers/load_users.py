@@ -69,7 +69,7 @@ def add_users_to_db(users):
                 sex_id=user_data["sex_id"],
                 birthday=user_data["birthday"],
                 bio=user_data["bio"],
-                passions=user_data["passions"],
+                passions_ids=user_data["passions"],
                 bio_embedding=model.encode(user_data["bio"]).tolist()
             )
             user.set_password(user_data["password"])

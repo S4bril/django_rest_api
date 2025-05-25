@@ -15,7 +15,7 @@ class IndividualFeatureEngineer:
 
     def compute_passions_vector(self, user):
         passions_vector = [0] * 50
-        for p_id in user.passions:
+        for p_id in user.passions_ids:
             if 0 <= p_id < 50:
                 passions_vector[p_id] = 1
         return passions_vector

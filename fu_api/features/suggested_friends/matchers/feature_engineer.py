@@ -19,8 +19,8 @@ class FeatureEngineer:
                 raise ValueError(f"Invalid feature: {feature}. Available features: {list(self.available_features.keys())}")
 
     def compute_jaccard(self, user, candidate):
-        passions1 = set(user.passions)
-        passions2 = set(candidate.passions)
+        passions1 = set(user.passions_ids)
+        passions2 = set(candidate.passions_ids)
         if not passions1 and not passions2:
             return 0
         return len(passions1 & passions2) / len(passions1 | passions2)

@@ -25,7 +25,7 @@ class CustomUser(AbstractUser):
         blank=True,
     )
 
-    passions = models.JSONField(
+    passions_ids = models.JSONField(
         blank=False,
         null=False,
         default=list,

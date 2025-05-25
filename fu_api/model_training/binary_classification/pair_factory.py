@@ -24,7 +24,7 @@ class PairFactory:
                 if abs(user_a.age - user_b.age) > max_age_diff:
                     continue
 
-                common = len(user_a.passions & user_b.passions)
+                common = len(user_a.passions_ids & user_b.passions_ids)
                 if common < min_common_passions:
                     continue
                 distance = great_circle(

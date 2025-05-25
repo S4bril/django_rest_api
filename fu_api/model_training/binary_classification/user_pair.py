@@ -12,8 +12,8 @@ class UserPair:
         self.label: Optional[float] = None
 
     def calculate_features(self):
-        common = len(self.user_a.passions & self.user_b.passions)
-        total = len(self.user_a.passions | self.user_b.passions)
+        common = len(self.user_a_ids & self.user_b.passions_ids)
+        total = len(self.user_a.passions_ids | self.user_b.passions_ids)
         jaccard = common / total if total > 0 else 0
 
         age_diff = abs(self.user_a.age - self.user_b.age)
