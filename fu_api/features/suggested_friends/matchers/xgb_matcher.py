@@ -37,7 +37,6 @@ class XGBMatcher(BaseMatcher):
         dmatrix = xgb.DMatrix(np.array(features), feature_names=FEATURE_NAMES)
         probabilities = self.model.predict(dmatrix)
         sorted_indices = np.argsort(probabilities)[::-1]
-        
         serialized_matches = []
         for idx in sorted_indices[:NUMBER_OF_OUTPUT_USERS]:
             candidate = valid_candidates[idx]

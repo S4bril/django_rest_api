@@ -13,15 +13,17 @@ class SuggestedFriendSerializer(serializers.ModelSerializer):
     age = serializers.SerializerMethodField()
     passions = serializers.SerializerMethodField()
     distance = serializers.SerializerMethodField()
+    friend_count = serializers.SerializerMethodField()
 
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'sex', 'bio', 'image_url', 'age', 'passions', 'distance']
+        fields = ['id', 'username', 'sex', 'bio', 'image_url', 'age', 'passions', 'distance', 'friend_count']
+
+    def get_friend_count(self, obj):
+        return obj.friends.count()
 
     def get_distance(self, obj):
-        current_user = self.context.get('current_user') 
-        if not current_user or not current_user.location or not obj.location:
-            return None
+        current_user = self.context.get('current_user')
         feature_engineer = FeatureEngineer()
         return feature_engineer.compute_distance(current_user, obj)
 

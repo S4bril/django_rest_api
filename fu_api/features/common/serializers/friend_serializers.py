@@ -3,6 +3,7 @@ import json
 import os
 from rest_framework import serializers
 from config import settings
+from fu_api.features.suggested_friends.matchers.feature_engineer import FeatureEngineer
 from fu_api.models import CustomUser
 
 

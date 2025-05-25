@@ -15,6 +15,7 @@ class CustomUser(AbstractUser):
     profile_image = models.ImageField(upload_to='profile_images/', blank=True, null=True)
     blocked_users = models.ManyToManyField("self", blank=True, symmetrical=False)
     rejected_users = models.ManyToManyField("self", blank=True, symmetrical=True)
+    bio_embedding = models.JSONField(null=False, blank=False)
 
     location = models.OneToOneField(
         'Location',

@@ -5,8 +5,11 @@ import os
 from django.conf import settings
 from django.core.files.base import ContentFile
 from rest_framework import serializers
+from sentence_transformers import SentenceTransformer
 from fu_api.models.custom_user_model import CustomUser
 
+
+bio_encoder = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
 
 class Base64ImageField(serializers.ImageField):
     def to_internal_value(self, data):
@@ -25,7 +28,7 @@ class Base64ImageField(serializers.ImageField):
         return super().to_internal_value(data)
 
 
-class CustomUserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     profile_image = Base64ImageField(write_only=True)
     image_url = serializers.SerializerMethodField()
@@ -44,9 +47,14 @@ class CustomUserSerializer(serializers.ModelSerializer):
         return obj.get_sex_id_display()
 
     def create(self, validated_data):
-        _ = validated_data.pop('friends', None)
         password = validated_data.pop('password')
-        user = CustomUser(**validated_data)
+        bio_text = validated_data.get('bio', '')
+
+        bio_embedding = bio_encoder.encode(bio_text).tolist()
+        validated_data['bio_embedding'] = bio_embedding
+
+        user = super().create(validated_data)
+
         user.set_password(password)
         user.save()
         return user
@@ -55,7 +63,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
         if 'password' in validated_data:
             instance.set_password(validated_data.pop('password', None))
 
-        if 'image' in validated_data:
+        if 'image' in validated_data: #romve old one?
             profile_image = validated_data.pop('profile_image', None)
             if profile_image:
                 instance.profile_image = profile_image

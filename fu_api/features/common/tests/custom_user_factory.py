@@ -8,6 +8,7 @@ def create_test_user(username, **kwargs):
         "birthday": "2002-10-26",
         "bio": "",
         "passions": [1, 2, 3, 4],
+        "bio_embedding": [0.0],
     }
     defaults.update(kwargs)
     user = CustomUser.objects.create_user(username=username, **defaults)

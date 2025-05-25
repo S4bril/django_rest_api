@@ -15,11 +15,10 @@ from fu_api.features.notifications.views import MarkNotificationReadView, Notifi
 from fu_api.features.suggested_friends.views import UserRejectView, UserSuggestedFriendsRetrieveView
 from fu_api.features.user_block.views import BlockUserView
 from fu_api.features.user_profile.views import RemoveFriendView, UserDetailView, UserFriendsListView, UserLocationDetailView
-from fu_api.features.users.views import UsersListCreateView, UsersRetrieveView
+from fu_api.features.users.views import UsersCreateView
 
 urlpatterns = [
-    path('api/users/', UsersListCreateView.as_view()),
-    path('api/users/<int:pk>/', UsersRetrieveView.as_view()),
+    path('api/users/', UsersCreateView.as_view()),
     path('api/users/<int:user_id>/block/', BlockUserView.as_view(), name='block-user'),
 
     path('api/me/', UserDetailView.as_view()),

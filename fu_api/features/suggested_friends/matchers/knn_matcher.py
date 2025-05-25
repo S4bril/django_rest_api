@@ -1,6 +1,6 @@
 from sklearn.neighbors import NearestNeighbors
 from sklearn.preprocessing import StandardScaler
-from fu_api.features.suggested_friends.matchers.feature_engineer import FeatureEngineer
+from fu_api.features.suggested_friends.matchers.vector_engineer import IndividualFeatureEngineer
 from fu_api.features.suggested_friends.serializers import SuggestedFriendSerializer
 from .base import BaseMatcher
 
@@ -10,19 +10,19 @@ NUMBER_OF_OUTPUT_USERS = 100
 
 class KNNMatcher(BaseMatcher):
     def __init__(self, features=None):
-        self.feature_engineer = FeatureEngineer(features)
+        self.feature_engineer = IndividualFeatureEngineer()
         self.scaler = StandardScaler()
 
-    def compute_feature_vector(self, user, candidate):
-        return self.feature_engineer.get_feature_vector(user, candidate)
+    def compute_feature_vector(self, user):
+        return self.feature_engineer.get_feature_vector(user)
 
     def get_matches(self, user):
         candidates = self.get_valid_candidates(user, NUMBER_OF_VALIDATED_USERS)
         if not candidates:
             return []
 
-        candidate_vectors = [self.compute_feature_vector(user, c) for c in candidates]
-        user_vector = self.compute_feature_vector(user, user)
+        candidate_vectors = [self.compute_feature_vector(c) for c in candidates]
+        user_vector = self.compute_feature_vector(user)
 
         scaled_vectors = self.scaler.fit_transform(candidate_vectors + [user_vector])
         user_scaled = scaled_vectors[-1].reshape(1, -1)

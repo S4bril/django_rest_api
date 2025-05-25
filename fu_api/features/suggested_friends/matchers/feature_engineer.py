@@ -1,6 +1,4 @@
 from datetime import date
-from geopy.distance import great_circle
-from sentence_transformers import SentenceTransformer
 import numpy as np
 
 DEFAULT_FEATURES = ['jaccard', 'distance', 'age_diff', 'bio_similarity']
@@ -9,7 +7,6 @@ DEFAULT_FEATURES = ['jaccard', 'distance', 'age_diff', 'bio_similarity']
 class FeatureEngineer:
     def __init__(self, enabled_features=None):
         self.enabled_features = enabled_features or DEFAULT_FEATURES
-        self.bio_encoder = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
 
         self.available_features = {
             'jaccard': self.compute_jaccard,
@@ -30,11 +27,14 @@ class FeatureEngineer:
 
     def compute_distance(self, user, candidate):
         if not user.location or not candidate.location:
-            return 1000
-        return great_circle(
-            (user.location.latitude, user.location.longitude),
-            (candidate.location.latitude, candidate.location.longitude)
-        ).kilometers
+            return None
+
+        return self._haversine(
+            user.location.latitude,
+            user.location.longitude,
+            candidate.location.latitude,
+            candidate.location.longitude
+        )
 
     def compute_age_diff(self, user, candidate):
         def calculate_age(birthdate):
@@ -43,10 +43,8 @@ class FeatureEngineer:
         return abs(calculate_age(user.birthday) - calculate_age(candidate.birthday))
 
     def compute_bio_similarity(self, user, candidate):
-        bio1 = user.bio or ""
-        bio2 = candidate.bio or ""
-        emb1 = self.bio_encoder.encode(bio1)
-        emb2 = self.bio_encoder.encode(bio2)
+        emb1 = user.bio_embedding
+        emb2 = candidate.bio_embedding
         return np.dot(emb1, emb2) / (np.linalg.norm(emb1) * np.linalg.norm(emb2))
 
     def get_feature_vector(self, user, candidate):
@@ -54,3 +52,16 @@ class FeatureEngineer:
         for feature in self.enabled_features:
             features.append(self.available_features[feature](user, candidate))
         return features
+
+    def _haversine(self, lat1, lon1, lat2, lon2):
+        R = 6371.0
+
+        dlat = np.radians(lat2 - lat1)
+        dlon = np.radians(lon2 - lon1)
+        lat1 = np.radians(lat1)
+        lat2 = np.radians(lat2)
+
+        a = np.sin(dlat / 2)**2 + np.cos(lat1) * np.cos(lat2) * np.sin(dlon / 2)**2
+        c = 2 * np.atan2(np.sqrt(a), np.sqrt(1 - a))
+
+        return R * c
