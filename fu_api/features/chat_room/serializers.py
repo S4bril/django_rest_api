@@ -55,7 +55,7 @@ class ChatRoomSerializer(serializers.ModelSerializer):
                     user=member,
                     sender=user,
                     type="chat_invite",
-                    message=f"You have been added to the chat: {chat_room.name}."
+                    message=f"Dodano Cię do czatu: {chat_room.name}."
                 )
         return chat_room
 

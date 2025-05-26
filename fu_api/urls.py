@@ -12,7 +12,7 @@ from fu_api.features.forms.views import FormRetrieveView
 from fu_api.features.friend_request.views import FriendRequestListCreateView, FriendRequestUpdateView, SentFriendRequestListView
 from fu_api.features.messages.views import MessageListCreateView
 from fu_api.features.notifications.views import MarkNotificationReadView, NotificationListView
-from fu_api.features.suggested_friends.views import UserRejectView, UserSuggestedFriendsRetrieveView
+from fu_api.features.suggested_friends.views import MatchesListView, NearYouListView, UserLikeListCreateView, UserRejectView, UserSuggestedFriendsRetrieveView
 from fu_api.features.user_block.views import BlockUserView
 from fu_api.features.user_profile.views import RemoveFriendView, UserDetailView, UserFriendsListView, UserLocationDetailView
 from fu_api.features.users.views import UsersCreateView
@@ -25,8 +25,12 @@ urlpatterns = [
     path('api/me/friends/', UserFriendsListView.as_view()),
     path('api/me/friends/<int:pk>/remove/', RemoveFriendView.as_view()),
     path('api/me/location/', UserLocationDetailView.as_view()),
-    path('api/me/suggested-friends/', UserSuggestedFriendsRetrieveView.as_view()),
-    path('api/me/suggested-friends/<int:pk>/reject/', UserRejectView.as_view()),
+
+    path('api/suggested-friends/', UserSuggestedFriendsRetrieveView.as_view()),
+    path('api/suggested-friends/reject/<int:pk>/', UserRejectView.as_view()),
+    path('api/suggested-friends/like/', UserLikeListCreateView.as_view()),
+    path('api/suggested-friends/matches/', MatchesListView.as_view()),
+    path('api/suggested-friends/near-you/', NearYouListView.as_view()),
 
     path('api/friend-requests/', FriendRequestListCreateView.as_view()),
     path('api/friend-requests/sent/', SentFriendRequestListView.as_view()),

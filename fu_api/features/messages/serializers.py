@@ -36,6 +36,6 @@ class MessageSerializer(serializers.ModelSerializer):
                     user=member,
                     sender=user,
                     type='message',
-                    message=f"You have a new unread message in {chat_room.name}."
+                    message=f"Masz nieprzeczytane wiadomości od: {chat_room.name}."
                 )
         return message

@@ -7,6 +7,8 @@ class Notification(models.Model):
         ("friend_request", "Friend Request"),
         ("message", "Message"),
         ("chat_invite", "Chat Invite"),
+        ("like", "Like"),
+        ("match", "Match"),
     ]
 
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="notifications")
