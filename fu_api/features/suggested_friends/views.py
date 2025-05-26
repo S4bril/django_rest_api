@@ -5,8 +5,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView, ListAPIView
+from fu_api.features.common.serializers.friend_serializers import FriendSerializer
 from fu_api.features.suggested_friends.matchers.factory import MatcherFactory
-from fu_api.features.suggested_friends.serializers import LikeSerializer, MatchSerializer
+from fu_api.features.suggested_friends.matchers.feature_engineer import FeatureEngineer
+from fu_api.features.suggested_friends.serializers import LikeSerializer, MatchSerializer, FriendSerializer
 from fu_api.models.custom_user_model import CustomUser
 from fu_api.models.like_model import Like
 from fu_api.models.match_model import Match
@@ -63,7 +65,33 @@ class MatchesListView(ListAPIView):
 
 
 class NearYouListView(ListAPIView):
-    pass
+    serializer_class = FriendSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def get_queryset(self):
+        user = self.request.user
+
+        if user.location.latitude is None or user.location.longitude is None:
+            return CustomUser.objects.none()
+
+        feature_engineer = FeatureEngineer()
+
+        candidates = CustomUser.objects.exclude(id=user.id)
+
+        users_with_distance = [
+            (candidate, feature_engineer.compute_distance(user, candidate))
+            for candidate in candidates
+            if candidate.location.latitude is not None and candidate.location.longitude is not None
+        ]
+
+        closest_users = sorted(users_with_distance, key=lambda x: x[1])[:10]
+
+        return [user for user, _ in closest_users]
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context["current_user"] = self.request.user
+        return context
 
 
 class UserRejectView(APIView):

@@ -1,7 +1,7 @@
 from sklearn.neighbors import NearestNeighbors
 from sklearn.preprocessing import StandardScaler
 from fu_api.features.suggested_friends.matchers.vector_engineer import IndividualFeatureEngineer
-from fu_api.features.suggested_friends.serializers import SuggestedFriendSerializer
+from fu_api.features.suggested_friends.serializers import FriendSerializer
 from .base import BaseMatcher
 
 NUMBER_OF_VALIDATED_USERS = 100
@@ -32,7 +32,7 @@ class KNNMatcher(BaseMatcher):
         knn.fit(candidates_scaled)
         _, indices = knn.kneighbors(user_scaled)
 
-        return SuggestedFriendSerializer(
+        return FriendSerializer(
             [candidates[int(i)] for i in indices[0]], 
             many=True,
             context={"current_user": user}

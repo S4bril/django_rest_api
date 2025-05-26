@@ -1,7 +1,7 @@
 import numpy as np
 import xgboost as xgb
 from fu_api.features.suggested_friends.matchers.feature_engineer import FeatureEngineer
-from fu_api.features.suggested_friends.serializers import SuggestedFriendSerializer
+from fu_api.features.suggested_friends.serializers import FriendSerializer
 from .base import BaseMatcher
 
 FEATURE_NAMES = ["jaccard", "distance", "age_diff", "bio_similarity"]
@@ -40,7 +40,7 @@ class XGBMatcher(BaseMatcher):
         serialized_matches = []
         for idx in sorted_indices[:NUMBER_OF_OUTPUT_USERS]:
             candidate = valid_candidates[idx]
-            candidate_serialized = SuggestedFriendSerializer(candidate, context={"current_user": user}).data
+            candidate_serialized = FriendSerializer(candidate, context={"current_user": user}).data
             candidate_serialized["match_probability"] = float(probabilities[idx])
             serialized_matches.append(candidate_serialized)
         return serialized_matches
