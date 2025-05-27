@@ -6,12 +6,12 @@ from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 from fu_api.features.common.serializers.friend_serializers import FriendSerializer
 from fu_api.features.common.serializers.location_serializer import LocationSerializer
-from fu_api.features.user_profile.serializers import CustomUserSerializer
+from fu_api.features.user_profile.serializers import UserSerializer
 from fu_api.models.custom_user_model import CustomUser
 
 
 class UserDetailView(RetrieveUpdateDestroyAPIView):
-    serializer_class = CustomUserSerializer
+    serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
 
     def get_object(self):

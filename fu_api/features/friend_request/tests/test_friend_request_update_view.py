@@ -55,7 +55,7 @@ class TestFriendRequestUpdateView(APITestCase):
 
         notification = Notification.objects.filter(user=self.sender).first()
         self.assertIsNotNone(notification)
-        self.assertIn("accepted", notification.message)
+        self.assertIn("zaakceptował/a", notification.message)
 
     def test_reject_request(self):
         response = self.client.patch(self.url, {"status": "rejected"})
@@ -67,7 +67,7 @@ class TestFriendRequestUpdateView(APITestCase):
 
         notification = Notification.objects.filter(user=self.sender).first()
         self.assertIsNotNone(notification)
-        self.assertIn("rejected", notification.message)
+        self.assertIn("odrzucił/a", notification.message)
 
     def test_cannot_modify_sender(self):
         response = self.client.patch(self.url, {"sender": self.other_user.id})

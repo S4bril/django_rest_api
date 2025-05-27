@@ -66,7 +66,7 @@ class ChatMemberAddView(APIView):
             user=target_user,
             sender=request.user,
             type="chat_invite",
-            message=f"You have been added to the chat: {chat_room.name}."
+            message=f"Dodano Cię do czatu: {chat_room.name}."
         )
 
         return Response({"message": "Member added successfully."}, status=status.HTTP_200_OK)

@@ -1,46 +1,44 @@
 from rest_framework.test import APITestCase
 from rest_framework import status
-from fu_api.features.common.tests.custom_user_factory import create_test_user
+
+from fu_api.models.custom_user_model import CustomUser
 
 
-class UsersListCreateViewTests(APITestCase):
+class UsersCreateViewTest(APITestCase):
     def setUp(self):
-        self.user1 = create_test_user("user1")
-        self.user2 = create_test_user("user2")
         self.url = "/api/users/"
 
-    def test_list_users_unauthorized(self):
-        response = self.client.get(self.url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        all_usernames = [data["username"] for data in response.data]
-        self.assertIn("user1", all_usernames)
-        self.assertIn("user2", all_usernames)
+    def test_registration(self):
+        data = {
+            "email": "test@example.com",
+            "username": "user1",
+            "password": "securepassword123",
+            "birthday": "2002-01-01",
+            "sex_id": 0,
+            "bio": "I love writng unit tests.",
+            "passions_ids": [1, 2, 3],
+        }
+        expected_response = {
+            "email": "test@example.com",
+            "username": "user1",
+            "birthday": "2002-01-01",
+            "bio": "I love writng unit tests.",
+            "image_url": None,
+            "passions": [
+                "Piłka nożna",
+                "Koszykówka",
+                "Siatkówka"
+            ],
+            "friend_count": 0,
+            "sex": "Mężczyzna"
+        }
 
-    def test_serialized_data_structure(self):
-        response = self.client.get(self.url)
-        user_data = next(u for u in response.data if u["username"] == "user1")
 
-        self.assertIn("username", user_data)
-        self.assertIn("sex", user_data)
-        self.assertIn("bio", user_data)
-        self.assertIn("image_url", user_data)
+        response = self.client.post(self.url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+        for field in expected_response:
+            self.assertEqual(expected_response[field], response.data[field])
 
-class UsersRetrieveViewTests(APITestCase):
-    def setUp(self):
-        self.user = create_test_user("user")
-
-    def get_url(self, user_id):
-        return f"/api/users/{user_id}/"
-
-    def test_retrieve_user_success(self):
-        url = self.get_url(self.user.id)
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["username"], "user")
-        self.assertEqual(response.data["sex"], "Mężczyzna")
-
-    def test_retrieve_nonexistent_user(self):
-        invalid_url = self.get_url(user_id=1000)
-        response = self.client.get(invalid_url)
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        user = CustomUser.objects.get(email="test@example.com")
+        self.assertTrue(hasattr(user, "bio_embedding"))

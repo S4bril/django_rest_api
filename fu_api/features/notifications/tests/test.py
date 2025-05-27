@@ -52,8 +52,8 @@ class NotificationViewTests(APITestCase):
         self.assertEqual(len(response.data), 2)
 
         notification = response.data[0]
-        self.assertIn("sender_username", notification)
-        self.assertEqual(notification["sender_username"], "user2")
+        self.assertIn("sender", notification)
+        self.assertEqual(notification["sender"]["username"], "user2")
 
         all_ids = [response.data[0]["id"], response.data[1]["id"]]
 

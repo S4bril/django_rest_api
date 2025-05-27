@@ -4,7 +4,7 @@ from imblearn.under_sampling import RandomUnderSampler
 from sklearn.metrics import accuracy_score, average_precision_score, classification_report, confusion_matrix, f1_score, precision_score, recall_score, roc_auc_score
 from sklearn.model_selection import train_test_split
 from xgboost import XGBClassifier
-from fu_api.matching_models.binary_classification.feature_store import FeatureStore
+from fu_api.model_training.binary_classification.feature_store import FeatureStore
 
 
 class MatchModel:

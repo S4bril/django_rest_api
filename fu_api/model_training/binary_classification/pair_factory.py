@@ -1,7 +1,7 @@
 from geopy.distance import great_circle
 from typing import List
-from fu_api.matching_models.binary_classification.user_pair import UserPair
-from fu_api.matching_models.binary_classification.user import User
+from fu_api.model_training.binary_classification.user_pair import UserPair
+from fu_api.model_training.binary_classification.user import User
 
 
 class PairFactory:
@@ -24,7 +24,7 @@ class PairFactory:
                 if abs(user_a.age - user_b.age) > max_age_diff:
                     continue
 
-                common = len(user_a.passions & user_b.passions)
+                common = len(user_a.passions_ids & user_b.passions_ids)
                 if common < min_common_passions:
                     continue
                 distance = great_circle(

@@ -1,7 +1,7 @@
 from typing import Optional
 import numpy as np
 from geopy.distance import great_circle
-from fu_api.matching_models.binary_classification.user import User
+from fu_api.model_training.binary_classification.user import User
 
 
 class UserPair:
@@ -12,8 +12,8 @@ class UserPair:
         self.label: Optional[float] = None
 
     def calculate_features(self):
-        common = len(self.user_a.passions & self.user_b.passions)
-        total = len(self.user_a.passions | self.user_b.passions)
+        common = len(self.user_a_ids & self.user_b.passions_ids)
+        total = len(self.user_a.passions_ids | self.user_b.passions_ids)
         jaccard = common / total if total > 0 else 0
 
         age_diff = abs(self.user_a.age - self.user_b.age)

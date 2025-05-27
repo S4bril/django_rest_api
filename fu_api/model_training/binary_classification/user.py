@@ -7,7 +7,7 @@ class User:
     def __init__(self, data: Dict):
         self.id = data['email']
         self.bio = data['bio']
-        self.passions = set(data['passions'])
+        self.passions_ids = set(data['passions'])
         self.location = tuple(data['location'])
         self.birthdate = datetime.strptime(data['birthday'], "%Y-%m-%d").date()
         self._embeddings = {}

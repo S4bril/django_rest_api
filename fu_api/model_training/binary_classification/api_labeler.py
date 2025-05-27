@@ -1,5 +1,5 @@
 from config import settings
-from fu_api.matching_models.binary_classification.user_pair import UserPair
+from fu_api.model_training.binary_classification.user_pair import UserPair
 
 
 import openai
@@ -30,7 +30,7 @@ class APILabeler:
         Consider shared interests, bio compatibility, age difference, distance separating users and potential connection."""
 
     def label_with_zero_pair(self, pair: UserPair) -> float:
-        if pair.distance >= 100.0 or abs(pair.user_a.age - pair.user_b.age) >= 10 or len(pair.user_a.passions & pair.user_b.passions) == 0:
+        if pair.distance >= 100.0 or abs(pair.user_a.age - pair.user_b.age) >= 10 or len(pair.user_a.passions_ids & pair.user_b.passions_ids) == 0:
             pair.label = 0.0
             return 0.0
         return None
@@ -42,10 +42,10 @@ class APILabeler:
                 "role": "user",
                 "content": self.prompt_template.format(
                     bio_a=pair.user_a.bio,
-                    passions_a=", ".join(self._extract_passions_names(pair.user_a.passions)),
+                    passions_a=", ".join(self._extract_passions_names(pair.user_a.passions_ids)),
                     age_a=pair.user_a.age,
                     bio_b=pair.user_b.bio,
-                    passions_b=", ".join(self._extract_passions_names(pair.user_b.passions)),
+                    passions_b=", ".join(self._extract_passions_names(pair.user_b.passions_ids)),
                     age_b=pair.user_b.age,
                     distance=pair.distance
                 )

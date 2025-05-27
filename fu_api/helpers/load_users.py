@@ -1,4 +1,6 @@
 import csv
+from datetime import datetime
+from sentence_transformers import SentenceTransformer
 from tqdm import tqdm
 from termcolor import colored
 from fu_api.models.custom_user_model import CustomUser
@@ -7,6 +9,8 @@ from fu_api.models.location_model import Location
 CSV_FILE = "fu_api/json_forms/users.csv"
 GREEN = "green"
 RED = "red"
+
+model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
 
 def load_users_from_csv(file_path):
     try:
@@ -65,7 +69,8 @@ def add_users_to_db(users):
                 sex_id=user_data["sex_id"],
                 birthday=user_data["birthday"],
                 bio=user_data["bio"],
-                passions=user_data["passions"]
+                passions_ids=user_data["passions"],
+                bio_embedding=model.encode(user_data["bio"]).tolist()
             )
             user.set_password(user_data["password"])
             user.save()
