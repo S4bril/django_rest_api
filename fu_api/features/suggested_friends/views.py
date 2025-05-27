@@ -71,7 +71,7 @@ class NearYouListView(ListAPIView):
     def get_queryset(self):
         user = self.request.user
 
-        if user.location.latitude is None or user.location.longitude is None:
+        if user.location is None:
             return CustomUser.objects.none()
 
         feature_engineer = FeatureEngineer()
@@ -81,7 +81,7 @@ class NearYouListView(ListAPIView):
         users_with_distance = [
             (candidate, feature_engineer.compute_distance(user, candidate))
             for candidate in candidates
-            if candidate.location.latitude is not None and candidate.location.longitude is not None
+            if candidate.location is not None
         ]
 
         closest_users = sorted(users_with_distance, key=lambda x: x[1])[:10]
