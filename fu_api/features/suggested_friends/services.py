@@ -10,6 +10,9 @@ class LikeService:
         if sender == receiver:
             raise ValueError("Sender and receiver must be different users.")
         
+        if Like.objects.filter(sender=sender, receiver=receiver).exists():
+            raise ValueError("You already liked this user.")
+        
         if Match.objects.filter(
             Q(first_user=sender, second_user=receiver) |
             Q(first_user=receiver, second_user=sender)
