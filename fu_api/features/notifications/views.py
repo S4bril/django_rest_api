@@ -1,12 +1,13 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import generics, permissions, status
+from rest_framework import permissions, status
+from rest_framework.generics import ListAPIView
 from fu_api.features.notifications.serializers import NotificationSerializer
 from fu_api.models.notification_model import Notification
 
 
-class NotificationListView(generics.ListAPIView):
+class NotificationListView(ListAPIView):
     serializer_class = NotificationSerializer
     permission_classes = [permissions.IsAuthenticated]
 

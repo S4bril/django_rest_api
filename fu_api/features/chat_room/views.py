@@ -17,9 +17,6 @@ class ChatRoomListCreateView(ListCreateAPIView):
     def get_queryset(self):
         return ChatRoom.objects.filter(members=self.request.user)
 
-    def perform_create(self, serializer):
-        serializer.save()
-
 
 class ChatRoomMembersView(ListAPIView):
     serializer_class = ChatRoomMemberSerializer
