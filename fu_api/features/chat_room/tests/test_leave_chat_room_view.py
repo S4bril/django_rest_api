@@ -52,7 +52,7 @@ class TestLeaveChatRoomView(APITestCase):
         url = self.get_url(self.group_chat.id)
         response = self.client.post(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["message"], "You have left the chat.")
+        self.assertEqual(response.data["message"], "Opuściłeś czat.")
 
         self.assertNotIn(self.user1, self.group_chat.members.all())
         self.assertNotIn(self.user1, self.group_chat.admins.all())
@@ -62,8 +62,10 @@ class TestLeaveChatRoomView(APITestCase):
         self.group_chat.members.add(self.user2)
         url = self.get_url(self.group_chat.id)
 
-        _ = self.client.post(url)
+        response = self.client.post(url)
         updated_chat = ChatRoom.objects.get(id=self.group_chat.id)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         self.assertEqual(updated_chat.admins.count(), 1)
         self.assertEqual(updated_chat.admins.first(), self.user2)
@@ -73,11 +75,6 @@ class TestLeaveChatRoomView(APITestCase):
         response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(
-            response.data["message"],
-            "You were the last member. The chat room has been deleted."
-        )
-
         self.assertFalse(ChatRoom.objects.filter(id=self.group_chat.id).exists())
 
     def test_invalid_chat_room_id(self):

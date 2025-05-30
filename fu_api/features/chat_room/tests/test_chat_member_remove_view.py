@@ -51,7 +51,7 @@ class TestChatMemberRemoveView(APITestCase):
         response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.data["error"], "User is not in this chat.")
+        self.assertIn(f"{self.target_user.username} nie należy do tego czatu.", response.data["error_msg"])
 
     def test_successful_removal(self):
         self.group_chat.members.add(self.target_user)
@@ -60,7 +60,7 @@ class TestChatMemberRemoveView(APITestCase):
         response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["message"], "Member removed successfully.")
+        self.assertEqual(response.data["message"], f"{self.target_user.username} został usunięty.")
         self.assertNotIn(self.target_user, self.group_chat.members.all())
 
     def test_invalid_chat_room_id(self):
@@ -81,8 +81,8 @@ class TestChatMemberRemoveView(APITestCase):
         url = self.get_url(self.group_chat.id, self.target_user.id)
         response = self.client.post(url)
 
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        self.assertEqual(response.data["error"], "Only admins can remove members.")
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("Tylko administrator może wykonać tę operację.", response.data["error_msg"])
 
     def test_admin_can_remove_member(self):
         self.group_chat.members.add(self.target_user)

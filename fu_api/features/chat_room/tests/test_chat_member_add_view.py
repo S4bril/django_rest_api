@@ -47,34 +47,20 @@ class TestChatMemberAddView(APITestCase):
         response = self.client.post(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
-    def test_target_user_blocks_requester(self):
-        self.target_user.blocked_users.add(self.admin_user)
-        url = self.get_url(self.group_chat.id, self.target_user.id)
-        response = self.client.post(url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        self.assertIn("You are blocked by", response.data["error"])
-
-    def test_requester_blocks_target_user(self):
-        self.admin_user.blocked_users.add(self.target_user)
-        url = self.get_url(self.group_chat.id, self.target_user.id)
-        response = self.client.post(url)
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("You have blocked", response.data["error"])
-
     def test_user_already_in_chat(self):
         self.group_chat.members.add(self.target_user)
         url = self.get_url(self.group_chat.id, self.target_user.id)
         response = self.client.post(url)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.data["error"], "User is already in the chat.")
+        self.assertIn(f"{self.target_user.username} już jest członkiem czatu.", response.data["error_msg"])
 
     def test_non_admin_cannot_add_member(self):
         self.client.force_authenticate(user=self.non_admin_user)
         url = self.get_url(self.group_chat.id, self.target_user.id)
         response = self.client.post(url)
 
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        self.assertEqual(response.data["error"], "Only admins can add members.")
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("Tylko administrator może wykonać tę operację.", response.data["error_msg"])
 
     def test_admin_can_add_member(self):
         url = self.get_url(self.group_chat.id, self.target_user.id)

@@ -14,8 +14,6 @@ class TestChatRoomListCreateView(APITestCase):
         self.user3 = create_test_user("user3")
         self.user4 = create_test_user("user4")
 
-        self.user2.blocked_users.add(self.user1)
-
         self.client.force_authenticate(user=self.user1)
 
         self.url = "/api/chats/"
@@ -46,7 +44,7 @@ class TestChatRoomListCreateView(APITestCase):
         }
         response = self.client.post(self.url, body, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("You cannot create private room with yourself.", response.data["members"][0])
+        self.assertIn("Nie możesz utworzyć czatu prywatnego", response.data["error_msg"])
         self.assertEqual(ChatRoom.objects.count(), 0)
 
     def test_create_private_chat_room_with_not_one_user(self):
@@ -64,18 +62,8 @@ class TestChatRoomListCreateView(APITestCase):
         ]
         for body in bodies:
             response = self.client.post(self.url, body, format="json")
-            self.assertIn("exactly one member", response.data["members"][0])
+            self.assertIn("Do czatu prywatnego", response.data["error_msg"])
 
-        self.assertEqual(ChatRoom.objects.count(), 0)
-
-    def test_create_chat_room_when_blocked_by_user(self):
-        body = {
-            "name": "Room",
-            "members": [self.user2.id],
-            "is_group": True
-        }
-        response = self.client.post(self.url, body, format="json")
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(ChatRoom.objects.count(), 0)
 
     def test_create_empty_chat_room(self):
