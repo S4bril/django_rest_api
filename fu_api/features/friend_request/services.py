@@ -1,4 +1,5 @@
-from rest_framework.exceptions import ValidationError, PermissionDenied
+from rest_framework.exceptions import PermissionDenied, ValidationError
+
 from fu_api.models.friend_request_model import FriendRequest
 from fu_api.models.notification_model import Notification
 
@@ -17,7 +18,7 @@ class FriendRequestService:
             user=receiver,
             sender=sender,
             type="friend_request",
-            message=f"{sender.username} wysłał Ci zaproszenie do znajomych."
+            message=f"{sender.username} wysłał Ci zaproszenie do znajomych.",
         )
         return friend_req
 
@@ -34,14 +35,16 @@ class FriendRequestService:
             user=friend_req.sender,
             sender=receiver,
             type="friend_request",
-            message=f"{receiver.username} {msg} Twoje zaproszenie."
+            message=f"{receiver.username} {msg} Twoje zaproszenie.",
         )
         return friend_req
 
     @staticmethod
     def _ensure_not_self(sender, receiver):
         if sender == receiver:
-            raise ValidationError({"error_msg": "Nie możesz wysłać zaproszenia do siebie."})
+            raise ValidationError(
+                {"error_msg": "Nie możesz wysłać zaproszenia do siebie."}
+            )
 
     @staticmethod
     def _ensure_not_already_friends(sender, receiver):
@@ -53,18 +56,26 @@ class FriendRequestService:
         if FriendRequest.objects.filter(
             sender=sender, receiver=receiver, status="pending"
         ).exists():
-            raise ValidationError({"error_msg": "Zaproszenie już wysłane i oczekuje na odpowiedź."})
+            raise ValidationError(
+                {"error_msg": "Zaproszenie już wysłane i oczekuje na odpowiedź."}
+            )
 
     @staticmethod
     def _ensure_not_previously_rejected(sender, receiver):
         if FriendRequest.objects.filter(
             sender=sender, receiver=receiver, status="rejected"
         ).exists():
-            raise ValidationError({"error_msg": "Twoje poprzednie zaproszenie zostało odrzucone."})
-    
+            raise ValidationError(
+                {"error_msg": "Twoje poprzednie zaproszenie zostało odrzucone."}
+            )
+
     @staticmethod
     def _ensure_not_blocked(sender, receiver):
         if sender in receiver.blocked_users.all():
-            raise PermissionDenied({"error_msg": f"Zostałeś zablokowany przez {receiver.username}."})
+            raise PermissionDenied(
+                {"error_msg": f"Zostałeś zablokowany przez {receiver.username}."}
+            )
         if receiver in sender.blocked_users.all():
-            raise PermissionDenied({"error_msg": f"Odblokuj {receiver.username}, aby wysłać zaproszenie."})
+            raise PermissionDenied(
+                {"error_msg": f"Odblokuj {receiver.username}, aby wysłać zaproszenie."}
+            )

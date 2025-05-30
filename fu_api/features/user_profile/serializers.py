@@ -6,25 +6,26 @@ from django.conf import settings
 from django.core.files.base import ContentFile
 from rest_framework import serializers
 from sentence_transformers import SentenceTransformer
+
 from fu_api.models.custom_user_model import CustomUser
 
+bio_encoder = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
 
-bio_encoder = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
 
 class Base64ImageField(serializers.ImageField):
     def to_internal_value(self, data):
         if isinstance(data, str):
-            if data.startswith('/9j'):
+            if data.startswith("/9j"):
                 imgstr = data
-                ext = 'jpeg'
-            elif data.startswith('iVBORw0KGgo'):
+                ext = "jpeg"
+            elif data.startswith("iVBORw0KGgo"):
                 imgstr = data
-                ext = 'png'
+                ext = "png"
             else:
                 raise serializers.ValidationError("Unsupported image format")
 
         image_data = base64.b64decode(imgstr)
-        data = ContentFile(image_data, name=f'temp.{ext}')
+        data = ContentFile(image_data, name=f"temp.{ext}")
         return super().to_internal_value(data)
 
 
@@ -35,24 +36,51 @@ class UserSerializer(serializers.ModelSerializer):
     sex = serializers.SerializerMethodField()
     sex_id = serializers.IntegerField(write_only=True, required=True)
     passions = serializers.SerializerMethodField()
-    passions_ids = serializers.ListField(child=serializers.IntegerField(), write_only=True)
+    passions_ids = serializers.ListField(
+        child=serializers.IntegerField(), write_only=True
+    )
     friend_count = serializers.SerializerMethodField()
 
     class Meta:
         model = CustomUser
-        fields = ['id', 'email', 'username', 'birthday', 'bio', 'password', 'profile_image', 'image_url',
-                  'owned_events', 'participated_events', 'passions', 'passions_ids', 'created_at', 'friend_count', 'sex', 'sex_id']
-        read_only_fields = ['id', 'sex', 'passions', 'account_creation_date', 'image_url', 'owned_events', 'participated_events', 'friend_count']
+        fields = [
+            "id",
+            "email",
+            "username",
+            "birthday",
+            "bio",
+            "password",
+            "profile_image",
+            "image_url",
+            "owned_events",
+            "participated_events",
+            "passions",
+            "passions_ids",
+            "created_at",
+            "friend_count",
+            "sex",
+            "sex_id",
+        ]
+        read_only_fields = [
+            "id",
+            "sex",
+            "passions",
+            "account_creation_date",
+            "image_url",
+            "owned_events",
+            "participated_events",
+            "friend_count",
+        ]
 
     def get_sex(self, obj):
         return obj.get_sex_id_display()
 
     def create(self, validated_data):
-        password = validated_data.pop('password')
-        bio_text = validated_data.get('bio', '')
+        password = validated_data.pop("password")
+        bio_text = validated_data.get("bio", "")
 
         bio_embedding = bio_encoder.encode(bio_text).tolist()
-        validated_data['bio_embedding'] = bio_embedding
+        validated_data["bio_embedding"] = bio_embedding
 
         user = super().create(validated_data)
         user.set_password(password)
@@ -60,11 +88,11 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
     def update(self, instance, validated_data):
-        if 'password' in validated_data:
-            instance.set_password(validated_data.pop('password', None))
+        if "password" in validated_data:
+            instance.set_password(validated_data.pop("password", None))
 
-        if 'image' in validated_data: #romve old one?
-            profile_image = validated_data.pop('profile_image', None)
+        if "image" in validated_data:  # romve old one?
+            profile_image = validated_data.pop("profile_image", None)
             if profile_image:
                 instance.profile_image = profile_image
 
@@ -77,14 +105,19 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_image_url(self, obj):
         if obj.profile_image:
-            return self.context['request'].build_absolute_uri(obj.profile_image.url)
+            return self.context["request"].build_absolute_uri(obj.profile_image.url)
         return None
 
     def get_passions(self, obj):
-        passions_file_path = os.path.join(settings.BASE_DIR, "fu_api", "json_forms", "passions.json")
-        with open(passions_file_path, 'r', encoding="utf-8") as file:
-            passions = json.load(file)['passions']
-        passions_names = [passions.get(str(p_id), {}).get('name', 'Unknown') for p_id in obj.passions_ids]
+        passions_file_path = os.path.join(
+            settings.BASE_DIR, "fu_api", "json_forms", "passions.json"
+        )
+        with open(passions_file_path, "r", encoding="utf-8") as file:
+            passions = json.load(file)["passions"]
+        passions_names = [
+            passions.get(str(p_id), {}).get("name", "Unknown")
+            for p_id in obj.passions_ids
+        ]
         return passions_names
 
     def get_friend_count(self, obj):

@@ -1,4 +1,5 @@
 from django.db import models
+
 from fu_api.models.custom_user_model import CustomUser
 
 
@@ -11,8 +12,16 @@ class Notification(models.Model):
         ("match", "Match"),
     ]
 
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="notifications")
-    sender = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, related_name="sent_notifications")
+    user = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, related_name="notifications"
+    )
+    sender = models.ForeignKey(
+        CustomUser,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="sent_notifications",
+    )
     type = models.CharField(max_length=20, choices=NOTIFICATION_TYPES)
     message = models.TextField()
     is_read = models.BooleanField(default=False)

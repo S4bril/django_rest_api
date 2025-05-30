@@ -1,16 +1,22 @@
+import json
+from unittest.mock import mock_open, patch
+
 from django.test import TestCase, override_settings
 from rest_framework.test import APIClient
-from unittest.mock import patch, mock_open
-import json
+
 
 class TestFormRetrieveView(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.url = "/api/form/"
-    
+
     @override_settings(FORM_PATH="/fake/path/form.json")
     @patch("os.path.exists")
-    @patch("builtins.open", new_callable=mock_open, read_data=json.dumps({"fields": ["name", "email"]}))
+    @patch(
+        "builtins.open",
+        new_callable=mock_open,
+        read_data=json.dumps({"fields": ["name", "email"]}),
+    )
     def test_retrieve_form_success(self, mock_file, mock_exists):
         mock_exists.return_value = True
 

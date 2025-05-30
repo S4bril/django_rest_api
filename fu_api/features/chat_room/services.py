@@ -1,9 +1,10 @@
 from rest_framework.exceptions import ValidationError
+
 from fu_api.models.chat_room_model import ChatRoom
 from fu_api.models.custom_user_model import CustomUser
-from fu_api.models.notification_model import Notification
 
-class ChatRoomService():
+
+class ChatRoomService:
     @staticmethod
     def create_chat(creator, name, is_group, member_ids):
         ChatRoomService._ensure_private_chat_constraints(creator, is_group, member_ids)
@@ -15,15 +16,6 @@ class ChatRoomService():
         if is_group:
             chat_room.admins.add(creator)
 
-        for member in chat_room.members.all():
-            if member != creator:
-                Notification.objects.create(
-                    user=member,
-                    sender=creator,
-                    type="chat_invite",
-                    message=f"Dodano Cię do czatu: {chat_room.name}."
-                )
-
         return chat_room
 
     @staticmethod
@@ -33,13 +25,6 @@ class ChatRoomService():
         ChatRoomService._ensure_not_already_member(chat_room, target_user)
 
         chat_room.members.add(target_user)
-
-        Notification.objects.create(
-            user=target_user,
-            sender=request_user,
-            type="chat_invite",
-            message=f"Dodano Cię do czatu: {chat_room.name}."
-        )
 
     @staticmethod
     def remove_member(chat_room, request_user, target_user):
@@ -71,7 +56,9 @@ class ChatRoomService():
     @staticmethod
     def _ensure_admin(chat_room, user):
         if not chat_room.admins.filter(id=user.id).exists():
-            raise ValidationError({"error_msg": "Tylko administrator może wykonać tę operację."})
+            raise ValidationError(
+                {"error_msg": "Tylko administrator może wykonać tę operację."}
+            )
 
     @staticmethod
     def _ensure_reqest_and_target_unique(request_user, target):
@@ -81,22 +68,34 @@ class ChatRoomService():
     @staticmethod
     def _ensure_not_already_member(chat_room, user):
         if chat_room.members.filter(id=user.id).exists():
-            raise ValidationError({"error_msg": f"{user.username} już jest członkiem czatu."})
+            raise ValidationError(
+                {"error_msg": f"{user.username} już jest członkiem czatu."}
+            )
 
     @staticmethod
     def _ensure_not_already_admin(chat_room, user):
         if chat_room.admins.filter(id=user.id).exists():
-            raise ValidationError({"error_msg": f"{user.username} już jest administratorem."})
+            raise ValidationError(
+                {"error_msg": f"{user.username} już jest administratorem."}
+            )
 
     @staticmethod
     def _ensure_member_exists(chat_room, user):
         if not chat_room.members.filter(id=user.id).exists():
-            raise ValidationError({"error_msg": f"{user.username} nie należy do tego czatu."})
+            raise ValidationError(
+                {"error_msg": f"{user.username} nie należy do tego czatu."}
+            )
 
     @staticmethod
     def _ensure_private_chat_constraints(creator, is_group, member_ids):
         if not is_group:
             if len(member_ids) != 1:
-                raise ValidationError({"error_msg": "Do czatu prywatnego trzeba dodać dokładnie jednego użytkownika."})
+                raise ValidationError(
+                    {
+                        "error_msg": "Do czatu prywatnego trzeba dodać dokładnie jednego użytkownika."
+                    }
+                )
             if creator.id in member_ids:
-                raise ValidationError({"error_msg": "Nie możesz utworzyć czatu prywatnego z samym sobą."})
+                raise ValidationError(
+                    {"error_msg": "Nie możesz utworzyć czatu prywatnego z samym sobą."}
+                )

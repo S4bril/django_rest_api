@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from fu_api.features.common.serializers.friend_serializers import FriendSerializer
 from fu_api.models.friend_request_model import FriendRequest
 

@@ -1,13 +1,13 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import permissions, status
+from rest_framework.exceptions import ValidationError
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.response import Response
-from rest_framework.exceptions import ValidationError
 
-from fu_api.models.chat_room_model import ChatRoom
-from fu_api.models.message_model import Message
 from fu_api.features.messages.serializers import MessageSerializer
 from fu_api.features.messages.services import MessageService
+from fu_api.models.chat_room_model import ChatRoom
+from fu_api.models.message_model import Message
 
 
 class MessageListCreateView(ListCreateAPIView):
@@ -31,7 +31,7 @@ class MessageListCreateView(ListCreateAPIView):
             msg = MessageService.send_message(
                 sender=request.user,
                 chat_room=chat_room,
-                content=serializer.validated_data["content"]
+                content=serializer.validated_data["content"],
             )
         except ValidationError as exc:
             raise exc

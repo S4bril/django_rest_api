@@ -1,5 +1,6 @@
-from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework.test import APITestCase
+
 from fu_api.features.common.tests.custom_user_factory import create_test_user
 from fu_api.models.chat_room_model import ChatRoom
 
@@ -11,17 +12,11 @@ class TestChatMemberAddView(APITestCase):
         self.target_user = create_test_user("target_user")
         self.other_user = create_test_user("other_user")
 
-        self.group_chat = ChatRoom.objects.create(
-            name="Test Group", 
-            is_group=True
-        )
+        self.group_chat = ChatRoom.objects.create(name="Test Group", is_group=True)
         self.group_chat.members.add(self.admin_user, self.non_admin_user)
         self.group_chat.admins.add(self.admin_user)
 
-        self.private_chat = ChatRoom.objects.create(
-            name="Private Chat",
-            is_group=False
-        )
+        self.private_chat = ChatRoom.objects.create(name="Private Chat", is_group=False)
         self.private_chat.members.add(self.admin_user, self.other_user)
 
         self.client.force_authenticate(user=self.admin_user)
@@ -52,7 +47,10 @@ class TestChatMemberAddView(APITestCase):
         url = self.get_url(self.group_chat.id, self.target_user.id)
         response = self.client.post(url)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn(f"{self.target_user.username} już jest członkiem czatu.", response.data["error_msg"])
+        self.assertIn(
+            f"{self.target_user.username} już jest członkiem czatu.",
+            response.data["error_msg"],
+        )
 
     def test_non_admin_cannot_add_member(self):
         self.client.force_authenticate(user=self.non_admin_user)
@@ -60,7 +58,9 @@ class TestChatMemberAddView(APITestCase):
         response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("Tylko administrator może wykonać tę operację.", response.data["error_msg"])
+        self.assertIn(
+            "Tylko administrator może wykonać tę operację.", response.data["error_msg"]
+        )
 
     def test_admin_can_add_member(self):
         url = self.get_url(self.group_chat.id, self.target_user.id)

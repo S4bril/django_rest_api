@@ -1,5 +1,6 @@
-from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework.test import APITestCase
+
 from fu_api.features.common.tests.custom_user_factory import create_test_user
 from fu_api.models.chat_room_model import ChatRoom
 from fu_api.models.message_model import Message
@@ -19,14 +20,10 @@ class MessageListCreateViewTests(APITestCase):
         self.group_chat.members.add(self.user1, self.user3)
 
         Message.objects.create(
-            sender=self.user1,
-            chat_room=self.private_chat,
-            content="Hello"
+            sender=self.user1, chat_room=self.private_chat, content="Hello"
         )
         Message.objects.create(
-            sender=self.user2,
-            chat_room=self.private_chat,
-            content="Hi there"
+            sender=self.user2, chat_room=self.private_chat, content="Hi there"
         )
 
         self.client.force_authenticate(self.user1)

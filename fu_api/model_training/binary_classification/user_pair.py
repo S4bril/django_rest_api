@@ -1,6 +1,8 @@
 from typing import Optional
+
 import numpy as np
 from geopy.distance import great_circle
+
 from fu_api.model_training.binary_classification.user import User
 
 
@@ -20,13 +22,14 @@ class UserPair:
 
         emb_a = self.user_a.bio_embedding
         emb_b = self.user_b.bio_embedding
-        cosine_sim = np.dot(emb_a, emb_b) / (np.linalg.norm(emb_a) * np.linalg.norm(emb_b))
+        cosine_sim = np.dot(emb_a, emb_b) / (
+            np.linalg.norm(emb_a) * np.linalg.norm(emb_b)
+        )
 
         self.features = np.array([jaccard, self.distance, age_diff, cosine_sim])
 
     @property
     def distance(self):
-        return round(great_circle(
-            self.user_a.location,
-            self.user_b.location
-        ).kilometers, 2)
+        return round(
+            great_circle(self.user_a.location, self.user_b.location).kilometers, 2
+        )

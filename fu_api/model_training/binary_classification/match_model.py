@@ -1,14 +1,26 @@
 import numpy as np
 import pandas as pd
 from imblearn.under_sampling import RandomUnderSampler
-from sklearn.metrics import accuracy_score, average_precision_score, classification_report, confusion_matrix, f1_score, precision_score, recall_score, roc_auc_score
+from sklearn.metrics import (
+    accuracy_score,
+    average_precision_score,
+    classification_report,
+    confusion_matrix,
+    f1_score,
+    precision_score,
+    recall_score,
+    roc_auc_score,
+)
 from sklearn.model_selection import train_test_split
 from xgboost import XGBClassifier
+
 from fu_api.model_training.binary_classification.feature_store import FeatureStore
 
 
 class MatchModel:
-    def __init__(self, feature_file: str, test_size: float = 0.2, random_state: int = 42):
+    def __init__(
+        self, feature_file: str, test_size: float = 0.2, random_state: int = 42
+    ):
         self.model = XGBClassifier()
 
         data = pd.read_csv(feature_file)
@@ -27,7 +39,7 @@ class MatchModel:
             self.y,
             test_size=test_size,
             random_state=random_state,
-            stratify=self.y
+            stratify=self.y,
         )
 
     def train(self):
@@ -65,13 +77,8 @@ class MatchModel:
     def cross_validate(self, cv: int = 5):
         """Perform cross-validation"""
         from sklearn.model_selection import cross_val_score
-        scores = cross_val_score(
-            self.model,
-            self.X,
-            self.y,
-            cv=cv,
-            scoring='accuracy'
-        )
+
+        scores = cross_val_score(self.model, self.X, self.y, cv=cv, scoring="accuracy")
         print(f"Cross-Validation Results ({cv} folds):")
         print(f"Mean Accuracy: {scores.mean():.4f}")
         print(f"Std Deviation: {scores.std():.4f}")

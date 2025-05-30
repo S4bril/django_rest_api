@@ -1,7 +1,9 @@
-from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework.test import APITestCase
+
 from fu_api.features.common.tests.custom_user_factory import create_test_user
 from fu_api.models.chat_room_model import ChatRoom
+
 
 class TestPromoteToAdminView(APITestCase):
     def setUp(self):
@@ -9,10 +11,7 @@ class TestPromoteToAdminView(APITestCase):
         self.member = create_test_user("member")
         self.non_member = create_test_user("non_member")
 
-        self.group_chat = ChatRoom.objects.create(
-            name="Test Group",
-            is_group=True
-        )
+        self.group_chat = ChatRoom.objects.create(name="Test Group", is_group=True)
         self.group_chat.members.add(self.admin, self.member)
         self.group_chat.admins.add(self.admin)
 
@@ -26,19 +25,26 @@ class TestPromoteToAdminView(APITestCase):
         self.client.force_authenticate(user=self.member)
         response = self.client.post(self.url)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("Tylko administrator może wykonać tę operację.", response.data["error_msg"])
+        self.assertIn(
+            "Tylko administrator może wykonać tę operację.", response.data["error_msg"]
+        )
 
     def test_promote_non_member(self):
         url = self.get_url(self.group_chat.id, self.non_member.id)
         response = self.client.post(url)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn(f"{self.non_member.username} nie należy do tego czatu.", response.data["error_msg"])
+        self.assertIn(
+            f"{self.non_member.username} nie należy do tego czatu.",
+            response.data["error_msg"],
+        )
 
     def test_promote_existing_admin(self):
         self.group_chat.admins.add(self.member)
         response = self.client.post(self.url)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn(f"{self.member} już jest administratorem.", response.data["error_msg"])
+        self.assertIn(
+            f"{self.member} już jest administratorem.", response.data["error_msg"]
+        )
 
     def test_successful_promotion(self):
         response = self.client.post(self.url)

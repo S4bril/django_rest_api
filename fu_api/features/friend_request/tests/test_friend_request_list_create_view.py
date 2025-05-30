@@ -1,6 +1,8 @@
 from datetime import timedelta
-from rest_framework.test import APITestCase
+
 from rest_framework import status
+from rest_framework.test import APITestCase
+
 from fu_api.features.common.tests.custom_user_factory import create_test_user
 from fu_api.models.friend_request_model import FriendRequest
 from fu_api.models.notification_model import Notification
@@ -42,7 +44,9 @@ class TestFriendRequestListCreateView(APITestCase):
     def test_create_request_to_yourself(self):
         response = self.client.post(self.url, {"receiver": self.user1.id})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("Nie możesz wysłać zaproszenia do siebie", response.data["error_msg"])
+        self.assertIn(
+            "Nie możesz wysłać zaproszenia do siebie", response.data["error_msg"]
+        )
 
     def test_receiver_has_blocked_sender(self):
         self.user2.blocked_users.add(self.user1)
@@ -64,29 +68,26 @@ class TestFriendRequestListCreateView(APITestCase):
 
     def test_rejected_request_exists(self):
         FriendRequest.objects.create(
-            sender=self.user1, 
-            receiver=self.user2, 
-            status="rejected"
+            sender=self.user1, receiver=self.user2, status="rejected"
         )
         response = self.client.post(self.url, {"receiver": self.user2.id})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("Twoje poprzednie zaproszenie zostało odrzucone.", response.data["error_msg"])
+        self.assertIn(
+            "Twoje poprzednie zaproszenie zostało odrzucone.",
+            response.data["error_msg"],
+        )
 
     def test_successful_request_creation(self):
         response = self.client.post(self.url, {"receiver": self.user2.id})
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertTrue(
             FriendRequest.objects.filter(
-                sender=self.user1,
-                receiver=self.user2,
-                status="pending"
+                sender=self.user1, receiver=self.user2, status="pending"
             ).exists()
         )
         self.assertTrue(
             Notification.objects.filter(
-                sender=self.user1,
-                user=self.user2,
-                type='friend_request'
+                sender=self.user1, user=self.user2, type="friend_request"
             ).exists()
         )
 

@@ -1,6 +1,8 @@
-from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework.test import APITestCase
+
 from fu_api.features.common.tests.custom_user_factory import create_test_user
+
 
 class TestUserRejectView(APITestCase):
     def setUp(self):
@@ -18,7 +20,9 @@ class TestUserRejectView(APITestCase):
         response = self.client.post(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn(self.user2, self.user1.rejected_users.all())
-        self.assertEqual(response.data["message"], f"{self.user2.username} added to rejected users")
+        self.assertEqual(
+            response.data["message"], f"{self.user2.username} added to rejected users"
+        )
 
     def test_reject_self_error(self):
         url_self = f"/api/suggested-friends/reject/{self.user1.id}/"

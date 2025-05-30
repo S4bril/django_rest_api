@@ -1,16 +1,17 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import permissions, status
-from rest_framework.generics import ListCreateAPIView, ListAPIView, UpdateAPIView
+from rest_framework.exceptions import PermissionDenied, ValidationError
+from rest_framework.generics import ListAPIView, ListCreateAPIView, UpdateAPIView
 from rest_framework.response import Response
-from rest_framework.exceptions import ValidationError, PermissionDenied
-from fu_api.models.friend_request_model import FriendRequest
-from fu_api.models.custom_user_model import CustomUser
+
 from fu_api.features.friend_request.serializers import (
-    FriendRequestSerializer,
     FriendRequestCreateSerializer,
-    FriendRequestUpdateSerializer
+    FriendRequestSerializer,
+    FriendRequestUpdateSerializer,
 )
 from fu_api.features.friend_request.services import FriendRequestService
+from fu_api.models.custom_user_model import CustomUser
+from fu_api.models.friend_request_model import FriendRequest
 
 
 class FriendRequestListCreateView(ListCreateAPIView):
@@ -22,7 +23,9 @@ class FriendRequestListCreateView(ListCreateAPIView):
         return FriendRequestSerializer
 
     def get_queryset(self):
-        return FriendRequest.objects.filter(receiver=self.request.user).order_by('-created_at')
+        return FriendRequest.objects.filter(receiver=self.request.user).order_by(
+            "-created_at"
+        )
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -45,7 +48,9 @@ class SentFriendRequestListView(ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return FriendRequest.objects.filter(sender=self.request.user).order_by('-created_at')
+        return FriendRequest.objects.filter(sender=self.request.user).order_by(
+            "-created_at"
+        )
 
 
 class FriendRequestUpdateView(UpdateAPIView):
@@ -56,13 +61,15 @@ class FriendRequestUpdateView(UpdateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        fr = get_object_or_404(FriendRequest, pk=kwargs["pk"], receiver=request.user, status='pending')
+        fr = get_object_or_404(
+            FriendRequest, pk=kwargs["pk"], receiver=request.user, status="pending"
+        )
 
         try:
             friend_req = FriendRequestService.respond_request(
                 receiver=request.user,
                 friend_req=fr,
-                status=serializer.validated_data["status"]
+                status=serializer.validated_data["status"],
             )
         except (ValidationError, PermissionDenied) as e:
             raise e

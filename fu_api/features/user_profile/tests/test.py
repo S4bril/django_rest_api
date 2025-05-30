@@ -1,5 +1,6 @@
-from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework.test import APITestCase
+
 from fu_api.features.common.tests.custom_user_factory import create_test_user
 from fu_api.models.custom_user_model import CustomUser
 from fu_api.models.location_model import Location
@@ -24,10 +25,7 @@ class UserDetailViewTests(APITestCase):
         self.assertIn("friend_count", response.data)
 
     def test_update_user_profile(self):
-        update_data = {
-            "bio": "Updated bio",
-            "password": "newpassword"
-        }
+        update_data = {"bio": "Updated bio", "password": "newpassword"}
         response = self.client.patch(self.url, update_data)
         self.user.refresh_from_db()
 

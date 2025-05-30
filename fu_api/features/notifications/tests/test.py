@@ -1,5 +1,6 @@
-from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework.test import APITestCase
+
 from fu_api.features.common.tests.custom_user_factory import create_test_user
 from fu_api.models.notification_model import Notification
 
@@ -14,7 +15,7 @@ class NotificationViewTests(APITestCase):
             sender=self.user2,
             type="message",
             message="Test message 1",
-            is_read=False
+            is_read=False,
         )
 
         self.notification2 = Notification.objects.create(
@@ -22,7 +23,7 @@ class NotificationViewTests(APITestCase):
             sender=self.user2,
             type="friend_request",
             message="Test message 2",
-            is_read=True
+            is_read=True,
         )
 
         self.other_user_notification = Notification.objects.create(
@@ -30,7 +31,7 @@ class NotificationViewTests(APITestCase):
             sender=self.user1,
             type="message",
             message="Other user message",
-            is_read=False
+            is_read=False,
         )
 
         self.client.force_authenticate(self.user1)
