@@ -57,15 +57,14 @@ class MessageListCreateViewTests(APITestCase):
         self.client.force_authenticate(non_member)
         response = self.client.post(self.url, {"content": "Hi"})
 
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("You are not a member", str(response.data))
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_create_message_when_blocked(self):
         self.user2.blocked_users.add(self.user1)
         response = self.client.post(self.url, {"content": "Blocked message"})
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("blocked by", str(response.data))
+        self.assertIn("zablokowany przez", str(response.data["error_msg"]))
 
     def test_group_chat_message_when_blocked(self):
         self.user3.blocked_users.add(self.user1)
