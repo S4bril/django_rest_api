@@ -1,8 +1,10 @@
 import csv
 from datetime import datetime
+
 from sentence_transformers import SentenceTransformer
-from tqdm import tqdm
 from termcolor import colored
+from tqdm import tqdm
+
 from fu_api.models.custom_user_model import CustomUser
 from fu_api.models.location_model import Location
 
@@ -10,7 +12,8 @@ CSV_FILE = "fu_api/json_forms/users.csv"
 GREEN = "green"
 RED = "red"
 
-model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
+model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
+
 
 def load_users_from_csv(file_path):
     try:
@@ -22,7 +25,11 @@ def load_users_from_csv(file_path):
 
                 raw_passions = user.get("passions", "")
                 if isinstance(raw_passions, str):
-                    user["passions"] = [int(pid) for pid in raw_passions.split(";") if pid.strip().isdigit()]
+                    user["passions"] = [
+                        int(pid)
+                        for pid in raw_passions.split(";")
+                        if pid.strip().isdigit()
+                    ]
                 else:
                     user["passions"] = []
 
@@ -30,13 +37,20 @@ def load_users_from_csv(file_path):
                 if isinstance(raw_location, str) and "," in raw_location:
                     try:
                         lat_str, lon_str = raw_location.split(",")
-                        user["location"] = [float(lat_str.strip()), float(lon_str.strip())]
+                        user["location"] = [
+                            float(lat_str.strip()),
+                            float(lon_str.strip()),
+                        ]
                     except ValueError:
                         user["location"] = []
                 else:
                     user["location"] = []
 
-                user["sex_id"] = int(user.get("sex_id", 0)) if user.get("sex_id", "").isdigit() else None
+                user["sex_id"] = (
+                    int(user.get("sex_id", 0))
+                    if user.get("sex_id", "").isdigit()
+                    else None
+                )
 
                 users.append(user)
             return users
@@ -47,17 +61,24 @@ def load_users_from_csv(file_path):
         print(f"CSV parsing error: {e}")
         return []
 
+
 def add_location_to_user(user, user_data):
     try:
         location_data = {
             "latitude": user_data["location"][0],
-            "longitude": user_data["location"][1]
+            "longitude": user_data["location"][1],
         }
         location = Location.objects.create(**location_data)
         user.location = location
         user.save()
     except Exception as e:
-        print(colored(f"Error adding location for {user_data.get("email")} {user_data.get('location')}: {e}", RED))
+        print(
+            colored(
+                f"Error adding location for {user_data.get("email")} {user_data.get('location')}: {e}",
+                RED,
+            )
+        )
+
 
 def add_users_to_db(users):
     added_users = 0
@@ -70,7 +91,7 @@ def add_users_to_db(users):
                 birthday=user_data["birthday"],
                 bio=user_data["bio"],
                 passions_ids=user_data["passions"],
-                bio_embedding=model.encode(user_data["bio"]).tolist()
+                bio_embedding=model.encode(user_data["bio"]).tolist(),
             )
             user.set_password(user_data["password"])
             user.save()
@@ -83,6 +104,7 @@ def add_users_to_db(users):
             return
     return added_users
 
+
 def load_users():
     users = load_users_from_csv(CSV_FILE)
     added_users = 0
@@ -92,6 +114,7 @@ def load_users():
     else:
         print("No users to add.")
     print(colored(f"Job is done. Number of added users: {added_users}", GREEN))
+
 
 def remove_users():
     users = load_users_from_csv(CSV_FILE)

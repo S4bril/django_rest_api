@@ -1,5 +1,6 @@
-from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework.test import APITestCase
+
 from fu_api.features.common.tests.custom_user_factory import create_test_user
 from fu_api.models.chat_room_model import ChatRoom
 from fu_api.models.message_model import Message
@@ -19,14 +20,10 @@ class MessageListCreateViewTests(APITestCase):
         self.group_chat.members.add(self.user1, self.user3)
 
         Message.objects.create(
-            sender=self.user1,
-            chat_room=self.private_chat,
-            content="Hello"
+            sender=self.user1, chat_room=self.private_chat, content="Hello"
         )
         Message.objects.create(
-            sender=self.user2,
-            chat_room=self.private_chat,
-            content="Hi there"
+            sender=self.user2, chat_room=self.private_chat, content="Hi there"
         )
 
         self.client.force_authenticate(self.user1)
@@ -57,15 +54,14 @@ class MessageListCreateViewTests(APITestCase):
         self.client.force_authenticate(non_member)
         response = self.client.post(self.url, {"content": "Hi"})
 
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("You are not a member", str(response.data))
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_create_message_when_blocked(self):
         self.user2.blocked_users.add(self.user1)
         response = self.client.post(self.url, {"content": "Blocked message"})
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("blocked by", str(response.data))
+        self.assertIn("zablokowany przez", str(response.data["error_msg"]))
 
     def test_group_chat_message_when_blocked(self):
         self.user3.blocked_users.add(self.user1)

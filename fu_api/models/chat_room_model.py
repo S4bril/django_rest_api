@@ -1,4 +1,5 @@
 from django.db import models
+
 from fu_api.models.custom_user_model import CustomUser
 
 

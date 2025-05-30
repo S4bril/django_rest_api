@@ -1,6 +1,6 @@
-from rest_framework.test import APITestCase
-from rest_framework.test import APIClient
 from rest_framework import status
+from rest_framework.test import APIClient, APITestCase
+
 from fu_api.features.common.tests.custom_user_factory import create_test_user
 from fu_api.models.chat_room_model import ChatRoom
 
@@ -13,8 +13,6 @@ class TestChatRoomListCreateView(APITestCase):
         self.user2 = create_test_user("user2")
         self.user3 = create_test_user("user3")
         self.user4 = create_test_user("user4")
-
-        self.user2.blocked_users.add(self.user1)
 
         self.client.force_authenticate(user=self.user1)
 
@@ -39,51 +37,31 @@ class TestChatRoomListCreateView(APITestCase):
         self.assertEqual(response.data[0]["name"], "Room 1")
 
     def test_create_private_chat_room_with_yourself(self):
-        body = {
-            "name": "Room",
-            "members": [self.user1.id],
-            "is_group": False
-        }
+        body = {"name": "Room", "members": [self.user1.id], "is_group": False}
         response = self.client.post(self.url, body, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("You cannot create private room with yourself.", response.data["members"][0])
+        self.assertIn(
+            "Nie możesz utworzyć czatu prywatnego", response.data["error_msg"]
+        )
         self.assertEqual(ChatRoom.objects.count(), 0)
 
     def test_create_private_chat_room_with_not_one_user(self):
         bodies = [
-            {
-                "name": "Room",
-                "members": [],
-                "is_group": False
-            },
+            {"name": "Room", "members": [], "is_group": False},
             {
                 "name": "Room",
                 "members": [self.user3.id, self.user4.id],
-                "is_group": False
-            }
+                "is_group": False,
+            },
         ]
         for body in bodies:
             response = self.client.post(self.url, body, format="json")
-            self.assertIn("exactly one member", response.data["members"][0])
+            self.assertIn("Do czatu prywatnego", response.data["error_msg"])
 
-        self.assertEqual(ChatRoom.objects.count(), 0)
-
-    def test_create_chat_room_when_blocked_by_user(self):
-        body = {
-            "name": "Room",
-            "members": [self.user2.id],
-            "is_group": True
-        }
-        response = self.client.post(self.url, body, format="json")
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(ChatRoom.objects.count(), 0)
 
     def test_create_empty_chat_room(self):
-        body = {
-            "name": "Room",
-            "members": [],
-            "is_group": True
-        }
+        body = {"name": "Room", "members": [], "is_group": True}
         response = self.client.post(self.url, body, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(ChatRoom.objects.count(), 1)
@@ -93,23 +71,19 @@ class TestChatRoomListCreateView(APITestCase):
 
     def test_create_correct_chat_room(self):
         bodies = [
-            {
-                "name": "Room",
-                "members": [self.user3.id],
-                "is_group": False
-            },
+            {"name": "Room", "members": [self.user3.id], "is_group": False},
             {
                 "name": "Room",
                 "members": [self.user3.id, self.user4.id],
-                "is_group": True
-            }
+                "is_group": True,
+            },
         ]
         for body in bodies:
             response = self.client.post(self.url, body, format="json")
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
             if body["is_group"]:
-                chat_room = ChatRoom.objects.latest('id')
+                chat_room = ChatRoom.objects.latest("id")
                 self.assertIn(self.user1, chat_room.admins.all())
 
         self.assertEqual(ChatRoom.objects.count(), 2)

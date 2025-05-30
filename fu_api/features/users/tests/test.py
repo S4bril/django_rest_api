@@ -1,5 +1,5 @@
-from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework.test import APITestCase
 
 from fu_api.models.custom_user_model import CustomUser
 
@@ -24,15 +24,10 @@ class UsersCreateViewTest(APITestCase):
             "birthday": "2002-01-01",
             "bio": "I love writng unit tests.",
             "image_url": None,
-            "passions": [
-                "Piłka nożna",
-                "Koszykówka",
-                "Siatkówka"
-            ],
+            "passions": ["Piłka nożna", "Koszykówka", "Siatkówka"],
             "friend_count": 0,
-            "sex": "Mężczyzna"
+            "sex": "Mężczyzna",
         }
-
 
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)

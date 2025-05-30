@@ -1,5 +1,6 @@
-from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework.test import APITestCase
+
 from fu_api.features.common.tests.custom_user_factory import create_test_user
 from fu_api.models.chat_room_model import ChatRoom
 

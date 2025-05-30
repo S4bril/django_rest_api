@@ -1,5 +1,6 @@
 from fu_api.features.user_profile.serializers import UserSerializer
 
+
 def create_test_user(username, **kwargs):
     defaults = {
         "email": f"{username}@example.com",
@@ -11,8 +12,8 @@ def create_test_user(username, **kwargs):
         "bio_embedding": [0.0],
     }
     defaults.update(kwargs)
-       
+
     data = {"username": username, **defaults}
     serializer = UserSerializer(data=data)
     serializer.is_valid(raise_exception=True)
-    return serializer.save()                                  
+    return serializer.save()

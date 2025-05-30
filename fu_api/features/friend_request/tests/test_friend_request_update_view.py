@@ -1,5 +1,6 @@
-from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework.test import APITestCase
+
 from fu_api.features.common.tests.custom_user_factory import create_test_user
 from fu_api.models.friend_request_model import FriendRequest
 from fu_api.models.notification_model import Notification
@@ -12,14 +13,10 @@ class TestFriendRequestUpdateView(APITestCase):
         self.other_user = create_test_user(username="other")
 
         self.pending_request = FriendRequest.objects.create(
-            sender=self.sender,
-            receiver=self.receiver,
-            status="pending"
+            sender=self.sender, receiver=self.receiver, status="pending"
         )
         self.accepted_request = FriendRequest.objects.create(
-            sender=self.sender,
-            receiver=self.receiver,
-            status="accepted"
+            sender=self.sender, receiver=self.receiver, status="accepted"
         )
 
         self.client.force_authenticate(user=self.receiver)
@@ -38,10 +35,10 @@ class TestFriendRequestUpdateView(APITestCase):
     def test_invalid_status_update(self):
         response = self.client.patch(self.url, {"status": "pending"})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("Status must be either", response.data[0])
+        self.assertIn("not a valid choice.", response.content.decode())
 
     def test_cannot_update_non_pending_request(self):
-        url = f"/api/friend-requests/{self.accepted_request.id}/" 
+        url = f"/api/friend-requests/{self.accepted_request.id}/"
         response = self.client.patch(url, {"status": "accepted"})
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
@@ -69,15 +66,24 @@ class TestFriendRequestUpdateView(APITestCase):
         self.assertIsNotNone(notification)
         self.assertIn("odrzucił/a", notification.message)
 
-    def test_cannot_modify_sender(self):
-        response = self.client.patch(self.url, {"sender": self.other_user.id})
+    def test_sender_wont_be_changed(self):
+        response = self.client.patch(
+            self.url, {"sender": self.other_user.id, "status": "accepted"}
+        )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(FriendRequest.objects.get(pk=self.pending_request.pk).sender, self.sender)
+        self.assertEqual(
+            FriendRequest.objects.get(pk=self.pending_request.pk).sender, self.sender
+        )
 
-    def test_cannot_modify_receiver(self):
-        response = self.client.patch(self.url, {"receiver": self.other_user.id})
+    def test_receiver_wont_be_changed(self):
+        response = self.client.patch(
+            self.url, {"receiver": self.other_user.id, "status": "accepted"}
+        )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(FriendRequest.objects.get(pk=self.pending_request.pk).receiver, self.receiver)
+        self.assertEqual(
+            FriendRequest.objects.get(pk=self.pending_request.pk).receiver,
+            self.receiver,
+        )
 
     def test_invalid_request_id(self):
         url = "/api/friend-requests/1000/"

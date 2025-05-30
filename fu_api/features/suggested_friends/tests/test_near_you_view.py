@@ -1,13 +1,15 @@
-from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework.test import APITestCase
+
 from fu_api.features.common.tests.custom_user_factory import create_test_user
 from fu_api.models.location_model import Location
+
 
 class TestNearYouListView(APITestCase):
     def setUp(self):
         self.user = create_test_user("user0")
         self.user.location = Location.objects.create(latitude=0.0, longitude=0.0)
-        self.user.save()    
+        self.user.save()
 
         self.candidates = []
         for i in range(1, 15):

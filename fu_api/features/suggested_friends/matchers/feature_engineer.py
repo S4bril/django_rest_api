@@ -1,7 +1,8 @@
 from datetime import date
+
 import numpy as np
 
-DEFAULT_FEATURES = ['jaccard', 'distance', 'age_diff', 'bio_similarity']
+DEFAULT_FEATURES = ["jaccard", "distance", "age_diff", "bio_similarity"]
 
 
 class FeatureEngineer:
@@ -9,14 +10,16 @@ class FeatureEngineer:
         self.enabled_features = enabled_features or DEFAULT_FEATURES
 
         self.available_features = {
-            'jaccard': self.compute_jaccard,
-            'distance': self.compute_distance,
-            'age_diff': self.compute_age_diff,
-            'bio_similarity': self.compute_bio_similarity,
+            "jaccard": self.compute_jaccard,
+            "distance": self.compute_distance,
+            "age_diff": self.compute_age_diff,
+            "bio_similarity": self.compute_bio_similarity,
         }
         for feature in self.enabled_features:
             if feature not in self.available_features:
-                raise ValueError(f"Invalid feature: {feature}. Available features: {list(self.available_features.keys())}")
+                raise ValueError(
+                    f"Invalid feature: {feature}. Available features: {list(self.available_features.keys())}"
+                )
 
     def compute_jaccard(self, user, candidate):
         passions1 = set(user.passions_ids)
@@ -33,13 +36,18 @@ class FeatureEngineer:
             user.location.latitude,
             user.location.longitude,
             candidate.location.latitude,
-            candidate.location.longitude
+            candidate.location.longitude,
         )
 
     def compute_age_diff(self, user, candidate):
         def calculate_age(birthdate):
             today = date.today()
-            return today.year - birthdate.year - ((today.month, today.day) < (birthdate.month, birthdate.day))
+            return (
+                today.year
+                - birthdate.year
+                - ((today.month, today.day) < (birthdate.month, birthdate.day))
+            )
+
         return abs(calculate_age(user.birthday) - calculate_age(candidate.birthday))
 
     def compute_bio_similarity(self, user, candidate):
@@ -61,7 +69,7 @@ class FeatureEngineer:
         lat1 = np.radians(lat1)
         lat2 = np.radians(lat2)
 
-        a = np.sin(dlat / 2)**2 + np.cos(lat1) * np.cos(lat2) * np.sin(dlon / 2)**2
+        a = np.sin(dlat / 2) ** 2 + np.cos(lat1) * np.cos(lat2) * np.sin(dlon / 2) ** 2
         c = 2 * np.atan2(np.sqrt(a), np.sqrt(1 - a))
 
         return R * c

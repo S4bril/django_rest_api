@@ -1,8 +1,11 @@
 from datetime import timedelta
-from rest_framework.test import APITestCase
+
 from rest_framework import status
+from rest_framework.test import APITestCase
+
 from fu_api.features.common.tests.custom_user_factory import create_test_user
 from fu_api.models.friend_request_model import FriendRequest
+
 
 class TestSentFriendRequestListView(APITestCase):
     def setUp(self):
@@ -11,24 +14,16 @@ class TestSentFriendRequestListView(APITestCase):
         self.user3 = create_test_user(username="user3")
 
         self.sent_request1 = FriendRequest.objects.create(
-            sender=self.user1,
-            receiver=self.user2,
-            status="pending"
+            sender=self.user1, receiver=self.user2, status="pending"
         )
         self.sent_request2 = FriendRequest.objects.create(
-            sender=self.user1,
-            receiver=self.user3,
-            status="pending"
+            sender=self.user1, receiver=self.user3, status="pending"
         )
         FriendRequest.objects.create(
-            sender=self.user2,
-            receiver=self.user1,
-            status="pending"
+            sender=self.user2, receiver=self.user1, status="pending"
         )
         FriendRequest.objects.create(
-            sender=self.user2,
-            receiver=self.user3,
-            status="pending"
+            sender=self.user2, receiver=self.user3, status="pending"
         )
 
         self.client.force_authenticate(user=self.user1)
@@ -70,9 +65,8 @@ class TestSentFriendRequestListView(APITestCase):
         all_ids = [req["id"] for req in response.data]
 
         self.assertNotIn(
-            FriendRequest.objects.get(
-                sender=self.user2, receiver=self.user1).id, 
-                all_ids
+            FriendRequest.objects.get(sender=self.user2, receiver=self.user1).id,
+            all_ids,
         )
 
     def test_serializer_data_structure(self):

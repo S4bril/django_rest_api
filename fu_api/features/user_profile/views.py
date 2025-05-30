@@ -1,9 +1,10 @@
 from django.shortcuts import get_object_or_404
+from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.permissions import IsAuthenticated
+
 from fu_api.features.common.serializers.friend_serializers import FriendSerializer
 from fu_api.features.common.serializers.location_serializer import LocationSerializer
 from fu_api.features.user_profile.serializers import UserSerializer
@@ -33,10 +34,12 @@ class RemoveFriendView(APIView):
         friend = get_object_or_404(CustomUser, pk=pk)
 
         if friend not in request.user.friends.all():
-            return Response({'detail': 'User is not your friend'}, status=HTTP_400_BAD_REQUEST)
+            return Response(
+                {"detail": "User is not your friend"}, status=HTTP_400_BAD_REQUEST
+            )
 
         request.user.friends.remove(friend)
-        return Response({'detail': 'Friend removed successfully'}, status=HTTP_200_OK)
+        return Response({"detail": "Friend removed successfully"}, status=HTTP_200_OK)
 
 
 class UserLocationDetailView(RetrieveUpdateDestroyAPIView):
