@@ -26,7 +26,7 @@ class TestFriendRequestListCreateView(APITestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
-        self.assertEqual(response.data[0]["sender"], self.user2.id)
+        self.assertEqual(response.data[0]["sender"]["id"], self.user2.id)
 
     def test_list_ordered_by_created_at_descending(self):
         fr1 = FriendRequest.objects.create(sender=self.user2, receiver=self.user1)
@@ -42,25 +42,25 @@ class TestFriendRequestListCreateView(APITestCase):
     def test_create_request_to_yourself(self):
         response = self.client.post(self.url, {"receiver": self.user1.id})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("You cannot send a friend request to yourself.", response.data["non_field_errors"])
+        self.assertIn("Nie możesz wysłać zaproszenia do siebie", response.data["error_msg"])
 
     def test_receiver_has_blocked_sender(self):
         self.user2.blocked_users.add(self.user1)
         response = self.client.post(self.url, {"receiver": self.user2.id})
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn(f"You are blocked by {self.user2.username}.", response.data["non_field_errors"])
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertIn(f"Zostałeś zablokowany przez user2.", response.data["error_msg"])
 
     def test_receiver_already_friend(self):
         self.user1.friends.add(self.user2)
         response = self.client.post(self.url, {"receiver": self.user2.id})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("User is already your friend.", response.data["non_field_errors"])
+        self.assertIn("Jesteście już znajomymi.", response.data["error_msg"])
 
     def test_pending_request_exists(self):
         FriendRequest.objects.create(sender=self.user1, receiver=self.user2)
         response = self.client.post(self.url, {"receiver": self.user2.id})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("Friend request already sent.", response.data["non_field_errors"])
+        self.assertIn("Zaproszenie już wysłane", response.data["error_msg"])
 
     def test_rejected_request_exists(self):
         FriendRequest.objects.create(
@@ -70,7 +70,7 @@ class TestFriendRequestListCreateView(APITestCase):
         )
         response = self.client.post(self.url, {"receiver": self.user2.id})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("Friend request was previously rejected.", response.data["non_field_errors"])
+        self.assertIn("Twoje poprzednie zaproszenie zostało odrzucone.", response.data["error_msg"])
 
     def test_successful_request_creation(self):
         response = self.client.post(self.url, {"receiver": self.user2.id})
@@ -92,8 +92,7 @@ class TestFriendRequestListCreateView(APITestCase):
 
     def test_invalid_receiver_id(self):
         response = self.client.post(self.url, {"receiver": 1000})
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("Invalid pk", str(response.data["receiver"]))
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_sender_automatically_set(self):
         _ = self.client.post(self.url, {"receiver": self.user2.id})
