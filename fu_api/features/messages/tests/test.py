@@ -79,5 +79,5 @@ class MessageListCreateViewTests(APITestCase):
 
     def test_serializer_data_structure(self):
         member_data = self.client.get(self.url).data[0]
-        expected_fields = {"id", "timestamp", "chat_room", "content", "sender"}
+        expected_fields = {"id", "timestamp", "content", "sender"}
         self.assertEqual(set(member_data.keys()), expected_fields)

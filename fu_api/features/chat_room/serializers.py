@@ -1,15 +1,24 @@
 from rest_framework import serializers
 
+from fu_api.features.messages.serializers import MessageSerializer
 from fu_api.models.chat_room_model import ChatRoom
 from fu_api.models.custom_user_model import CustomUser
 
 
 class ChatRoomSerializer(serializers.ModelSerializer):
     members = serializers.ListField(child=serializers.IntegerField(), write_only=True)
+    newest_message = serializers.SerializerMethodField()
 
     class Meta:
         model = ChatRoom
-        fields = ["id", "name", "is_group", "members"]
+        fields = ["id", "name", "is_group", "members", "newest_message"]
+        read_only_fields = ["new_message"]
+
+    def get_newest_message(self, obj):
+        latest_message = obj.messages.order_by("timestamp").first()
+        if latest_message:
+            return MessageSerializer(latest_message).data
+        return None
 
 
 class ChatRoomMemberSerializer(serializers.ModelSerializer):
