@@ -84,8 +84,10 @@ def add_users_to_db(users):
     added_users = 0
     for user_data in tqdm(users, desc="Adding test users to DB"):
         try:
+            raw_name = user_data["username"].strip()
+            formatted_name = raw_name.title()
             user = CustomUser(
-                username=user_data["username"],
+                username=formatted_name,
                 email=user_data["email"],
                 sex_id=user_data["sex_id"],
                 birthday=user_data["birthday"],
