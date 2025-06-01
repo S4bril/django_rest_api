@@ -4,7 +4,6 @@ from sklearn.preprocessing import StandardScaler
 from fu_api.features.suggested_friends.matchers.vector_engineer import (
     IndividualFeatureEngineer,
 )
-from fu_api.features.suggested_friends.serializers import FriendSerializer
 
 from .base import BaseMatcher
 
@@ -36,8 +35,4 @@ class KNNMatcher(BaseMatcher):
         knn.fit(candidates_scaled)
         _, indices = knn.kneighbors(user_scaled)
 
-        return FriendSerializer(
-            [candidates[int(i)] for i in indices[0]],
-            many=True,
-            context={"current_user": user},
-        ).data
+        return [candidates[int(i)] for i in indices[0]]
