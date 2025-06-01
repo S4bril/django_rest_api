@@ -31,9 +31,16 @@ class UserSuggestedFriendsRetrieveView(APIView):
         except ValueError as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-        suggested_friends = matcher.get_matches(request.user)
+        suggested_friends_objects = matcher.get_matches(request.user)
+
+        serializer = FriendSerializer(
+            suggested_friends_objects,
+            many=True,
+            context={"current_user": request.user, "request": request},
+        )
+
         return Response(
-            {"suggested_friends": suggested_friends}, status=status.HTTP_200_OK
+            {"suggested_friends": serializer.data}, status=status.HTTP_200_OK
         )
 
 
