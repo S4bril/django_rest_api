@@ -9,13 +9,9 @@ from fu_api.models.match_model import Match
 class LikeSerializer(serializers.ModelSerializer):
     sender = FriendSerializer(read_only=True)
 
-    receiver_id = serializers.PrimaryKeyRelatedField(
-        queryset=CustomUser.objects.all(), source="receiver", write_only=True
-    )
-
     class Meta:
         model = Like
-        fields = ["id", "sender", "receiver_id"]
+        fields = ["id", "sender"]
 
 
 class MatchSerializer(serializers.ModelSerializer):

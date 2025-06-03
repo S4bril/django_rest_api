@@ -14,23 +14,25 @@ class TestUserLikeListCreateView(APITestCase):
         self.client.force_authenticate(user=self.user1)
         self.url = "/api/suggested-friends/like/"
 
+    def get_url(self, id):
+        return f"/api/suggested-friends/like/{id}/"
+
     def test_unathorized_access(self):
         self.client.logout()
-        response = self.client.get(self.url)
+        url = self.get_url(self.user2.id)
+        response = self.client.post(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_like_yourself(self):
-        response = self.client.post(
-            self.url, {"receiver_id": self.user1.id}, format="json"
-        )
+        url = self.get_url(self.user1.id)
+        response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("must be different", response.data["detail"])
 
     def test_create_like_success(self):
-        response = self.client.post(
-            self.url, {"receiver_id": self.user2.id}, format="json"
-        )
+        url = self.get_url(self.user2.id)
+        response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertTrue(
@@ -44,10 +46,8 @@ class TestUserLikeListCreateView(APITestCase):
 
     def test_create_match_on_mutual_like(self):
         Like.objects.create(sender=self.user2, receiver=self.user1)
-
-        response = self.client.post(
-            self.url, {"receiver_id": self.user2.id}, format="json"
-        )
+        url = self.get_url(self.user2.id)
+        response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data["detail"], "Match created!")
@@ -72,13 +72,13 @@ class TestUserLikeListCreateView(APITestCase):
 
     def test_duplicate_like_error(self):
         Like.objects.create(sender=self.user1, receiver=self.user2)
-        response = self.client.post(
-            self.url, {"receiver_id": self.user2.id}, format="json"
-        )
+        url = self.get_url(self.user2.id)
+        response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("already liked", response.data["detail"])
 
     def test_ivalid_id(self):
-        response = self.client.post(self.url, {"receiver_id": 1000}, format="json")
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        url = self.get_url(1000)
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
