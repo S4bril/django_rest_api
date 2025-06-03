@@ -1,7 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from rest_framework import status
-from rest_framework.generics import ListAPIView, ListCreateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -44,19 +44,14 @@ class UserSuggestedFriendsRetrieveView(APIView):
         )
 
 
-class UserLikeListCreateView(ListCreateAPIView):
+class UserLikeCreateView(CreateAPIView):
     serializer_class = LikeSerializer
     permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
-        return Like.objects.filter(receiver=self.request.user).order_by("-created_at")
-
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
         sender = request.user
-        receiver = serializer.validated_data["receiver"]
+        receiver_id = self.kwargs.get("pk")
+        receiver = get_object_or_404(CustomUser, id=receiver_id)
 
         try:
             result = LikeService.create_like(sender=sender, receiver=receiver)
@@ -74,6 +69,14 @@ class UserLikeListCreateView(ListCreateAPIView):
                 ).data,
                 status=status.HTTP_201_CREATED,
             )
+
+
+class RecentLikesListView(ListAPIView):
+    serializer_class = LikeSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Like.objects.filter(receiver=self.request.user).order_by("-created_at")
 
 
 class MatchesListView(ListAPIView):
