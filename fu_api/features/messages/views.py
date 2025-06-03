@@ -55,5 +55,5 @@ class MessageListCreateView(ListCreateAPIView):
         except ValidationError as exc:
             raise exc
 
-        serialized = MessageSerializer(msg)
+        serialized = MessageSerializer(msg, context={"request": request})
         return Response(serialized.data, status=status.HTTP_201_CREATED)
