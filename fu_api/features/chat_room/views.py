@@ -1,3 +1,4 @@
+from django.db.models import Max
 from django.shortcuts import get_object_or_404
 from rest_framework import permissions, status
 from rest_framework.exceptions import ValidationError
@@ -10,6 +11,9 @@ from fu_api.features.chat_room.serializers import (
     ChatRoomSerializer,
 )
 from fu_api.features.chat_room.services import ChatRoomService
+from fu_api.features.common.services.new_since_filter_service import (
+    NewSinceFilterService,
+)
 from fu_api.models.chat_room_model import ChatRoom
 from fu_api.models.custom_user_model import CustomUser
 
@@ -19,16 +23,30 @@ class ChatRoomListCreateView(ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return ChatRoom.objects.filter(members=self.request.user)
+        qs = ChatRoom.objects.filter(members=self.request.user)
+        qs = qs.annotate(latest_msg_created_at=Max("messages__created_at"))
+        qs = qs.order_by("-latest_msg_created_at")
 
-    def perform_create(self, serializer):
-        validated_data = serializer.validated_data
-        self.chat_room = ChatRoomService.create_chat(
-            creator=self.request.user,
-            name=validated_data["name"],
-            is_group=validated_data["is_group"],
-            member_ids=validated_data["members"],
-        )
+        return qs
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        try:
+            validated_data = serializer.validated_data
+            chat_room = ChatRoomService.create_chat(
+                creator=self.request.user,
+                name=validated_data["name"],
+                is_group=validated_data["is_group"],
+                member_ids=validated_data["members"],
+            )
+            serializer.instance = chat_room
+        except ValidationError as exc:
+            raise exc
+
+        serialized = ChatRoomSerializer(chat_room)
+        return Response(serialized.data, status=status.HTTP_201_CREATED)
 
 
 class ChatRoomMembersView(ListAPIView):

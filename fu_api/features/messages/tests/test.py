@@ -35,6 +35,11 @@ class MessageListCreateViewTests(APITestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+    def test_user_not_in_chat_gets_404(self):
+        self.client.force_authenticate(self.user3)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
     def test_get_messages_authorized_member(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -78,6 +83,6 @@ class MessageListCreateViewTests(APITestCase):
         self.assertIn("content", response.data)
 
     def test_serializer_data_structure(self):
-        member_data = self.client.get(self.url).data[0]
-        expected_fields = {"id", "timestamp", "chat_room", "content", "sender"}
+        member_data = self.client.get(self.url).data["messages"][0]
+        expected_fields = {"id", "created_at", "content", "sender"}
         self.assertEqual(set(member_data.keys()), expected_fields)

@@ -1,4 +1,4 @@
-from fu_api.features.user_profile.serializers import UserSerializer
+from fu_api.features.common.serializers.user_serializer import FullUserSerializer
 
 
 def create_test_user(username, **kwargs):
@@ -14,6 +14,6 @@ def create_test_user(username, **kwargs):
     defaults.update(kwargs)
 
     data = {"username": username, **defaults}
-    serializer = UserSerializer(data=data)
+    serializer = FullUserSerializer(data=data)
     serializer.is_valid(raise_exception=True)
     return serializer.save()

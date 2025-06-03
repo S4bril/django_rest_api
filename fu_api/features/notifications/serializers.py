@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from fu_api.features.common.serializers.friend_serializers import FriendSerializer
+from fu_api.features.common.serializers.friend_serializer import FriendSerializer
 from fu_api.models.notification_model import Notification
 
 

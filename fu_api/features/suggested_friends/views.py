@@ -6,11 +6,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from fu_api.features.common.serializers.friend_serializers import FriendSerializer
+from fu_api.features.common.serializers.friend_serializer import FriendSerializer
 from fu_api.features.suggested_friends.matchers.factory import MatcherFactory
 from fu_api.features.suggested_friends.matchers.feature_engineer import FeatureEngineer
 from fu_api.features.suggested_friends.serializers import (
-    FriendSerializer,
     LikeSerializer,
     MatchSerializer,
 )

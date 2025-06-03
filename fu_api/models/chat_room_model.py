@@ -8,6 +8,7 @@ class ChatRoom(models.Model):
     is_group = models.BooleanField(default=False)
     members = models.ManyToManyField(CustomUser, related_name="chat_rooms")
     admins = models.ManyToManyField(CustomUser, related_name="admin_chat_rooms")
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name if self.name else f"Chat {self.id}"

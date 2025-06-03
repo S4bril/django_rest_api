@@ -4,6 +4,9 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.response import Response
 
+from fu_api.features.common.services.new_since_filter_service import (
+    NewSinceFilterService,
+)
 from fu_api.features.messages.serializers import MessageSerializer
 from fu_api.features.messages.services import MessageService
 from fu_api.models.chat_room_model import ChatRoom
@@ -15,9 +18,25 @@ class MessageListCreateView(ListCreateAPIView):
     serializer_class = MessageSerializer
 
     def get_queryset(self):
-        return Message.objects.filter(
-            chat_room_id=self.kwargs["chat_room_id"]
-        ).order_by("-timestamp")
+        chat_room = get_object_or_404(
+            ChatRoom,
+            id=self.kwargs["chat_room_id"],
+            members=self.request.user,
+        )
+        return Message.objects.filter(chat_room=chat_room).order_by("-created_at")
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset().order_by("-created_at")
+        result = NewSinceFilterService.filter(request, queryset)
+
+        if result["error"]:
+            return result["error"]
+
+        if not result["has_new"]:
+            return Response({"has_new": False})
+
+        serializer = self.get_serializer(result["queryset"], many=True)
+        return Response({"has_new": True, "messages": serializer.data})
 
     def create(self, request, *args, **kwargs):
         chat_room = get_object_or_404(
