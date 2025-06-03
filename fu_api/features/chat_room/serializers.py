@@ -15,9 +15,9 @@ class ChatRoomSerializer(serializers.ModelSerializer):
         read_only_fields = ["new_message"]
 
     def get_newest_message(self, obj):
-        latest_message = obj.messages.order_by("timestamp").first()
+        latest_message = obj.messages.order_by("-created_at").first()
         if latest_message:
-            return MessageSerializer(latest_message).data
+            return MessageSerializer(latest_message, context=self.context).data
         return None
 
 

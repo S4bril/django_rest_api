@@ -1,3 +1,4 @@
+from django.db.models import Max
 from django.shortcuts import get_object_or_404
 from rest_framework import permissions, status
 from rest_framework.exceptions import ValidationError
@@ -10,7 +11,9 @@ from fu_api.features.chat_room.serializers import (
     ChatRoomSerializer,
 )
 from fu_api.features.chat_room.services import ChatRoomService
-from fu_api.features.common.services.new_since_filter_service import NewSinceFilterService
+from fu_api.features.common.services.new_since_filter_service import (
+    NewSinceFilterService,
+)
 from fu_api.models.chat_room_model import ChatRoom
 from fu_api.models.custom_user_model import CustomUser
 
@@ -20,20 +23,11 @@ class ChatRoomListCreateView(ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return ChatRoom.objects.filter(members=self.request.user)
+        qs = ChatRoom.objects.filter(members=self.request.user)
+        qs = qs.annotate(latest_msg_created_at=Max("messages__created_at"))
+        qs = qs.order_by("-latest_msg_created_at")
 
-    def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        result = NewSinceFilterService.filter(request, queryset, date_field="created_at")
-
-        if result["error"]:
-            return result["error"]
-
-        if not result["has_new"]:
-            return Response({"has_new": False})
-
-        serializer = self.get_serializer(result["queryset"], many=True)
-        return Response({"has_new": True, "chat_rooms": serializer.data})
+        return qs
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

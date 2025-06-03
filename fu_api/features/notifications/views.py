@@ -2,7 +2,10 @@ from django.shortcuts import get_object_or_404
 from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from fu_api.features.common.services.new_since_filter_service import NewSinceFilterService
+
+from fu_api.features.common.services.new_since_filter_service import (
+    NewSinceFilterService,
+)
 from fu_api.features.notifications.serializers import NotificationSerializer
 from fu_api.models.notification_model import Notification
 

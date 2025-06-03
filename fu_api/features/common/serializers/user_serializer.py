@@ -29,7 +29,7 @@ class Base64ImageField(serializers.ImageField):
         return super().to_internal_value(data)
 
 
-class UserSerializer(serializers.ModelSerializer):
+class FullUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     profile_image = Base64ImageField(write_only=True, required=False, allow_null=True)
     image_url = serializers.SerializerMethodField()

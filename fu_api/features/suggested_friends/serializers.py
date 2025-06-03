@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
-from fu_api.features.common.serializers.friend_serializers import FriendSerializer
-from fu_api.models import CustomUser
+from fu_api.features.common.serializers.friend_serializer import FriendSerializer
 from fu_api.models.like_model import Like
 from fu_api.models.match_model import Match
 

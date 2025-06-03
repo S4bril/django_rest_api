@@ -5,14 +5,14 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
 
-from fu_api.features.common.serializers.friend_serializers import FriendSerializer
+from fu_api.features.common.serializers.friend_serializer import FriendSerializer
 from fu_api.features.common.serializers.location_serializer import LocationSerializer
-from fu_api.features.user_profile.serializers import UserSerializer
+from fu_api.features.common.serializers.user_serializer import FullUserSerializer
 from fu_api.models.custom_user_model import CustomUser
 
 
 class UserDetailView(RetrieveUpdateDestroyAPIView):
-    serializer_class = UserSerializer
+    serializer_class = FullUserSerializer
     permission_classes = [IsAuthenticated]
 
     def get_object(self):
