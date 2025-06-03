@@ -27,7 +27,7 @@ class NewSinceFilterService:
             if dt.tzinfo is None:
                 dt = make_aware(dt)
 
-            filtered_qs = queryset.filter(**{f"{date_field}__gt": dt})
+            filtered_qs = queryset.filter(**{f"{date_field}__gte": dt})
             return NewSinceFilterService._build_result(
                 filtered_qs, filtered_qs.exists()
             )
