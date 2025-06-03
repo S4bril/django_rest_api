@@ -31,7 +31,8 @@ from fu_api.features.notifications.views import (
 from fu_api.features.suggested_friends.views import (
     MatchesListView,
     NearYouListView,
-    UserLikeListCreateView,
+    UserLikeCreateView,
+    RecentLikesListView,
     UserRejectView,
     UserSuggestedFriendsRetrieveView,
 )
@@ -53,7 +54,8 @@ urlpatterns = [
     path("api/me/location/", UserLocationDetailView.as_view()),
     path("api/suggested-friends/", UserSuggestedFriendsRetrieveView.as_view()),
     path("api/suggested-friends/reject/<int:pk>/", UserRejectView.as_view()),
-    path("api/suggested-friends/like/", UserLikeListCreateView.as_view()),
+    path("api/suggested-friends/like/<int:pk>/", UserLikeCreateView.as_view()),
+    path("api/suggested-friends/recent-likes/", RecentLikesListView.as_view()),
     path("api/suggested-friends/matches/", MatchesListView.as_view()),
     path("api/suggested-friends/near-you/", NearYouListView.as_view()),
     path("api/friend-requests/", FriendRequestListCreateView.as_view()),
