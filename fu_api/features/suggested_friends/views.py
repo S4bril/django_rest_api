@@ -1,7 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from rest_framework import status
-from rest_framework.generics import ListAPIView, CreateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -59,10 +59,14 @@ class UserLikeCreateView(CreateAPIView):
             return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
         if "match" in result:
-            return Response({"detail": "Match created!"}, status=status.HTTP_201_CREATED)
+            return Response(
+                {"detail": "Match created!"}, status=status.HTTP_201_CREATED
+            )
         else:
             return Response(
-                LikeSerializer(result["like"], context=self.get_serializer_context()).data,
+                LikeSerializer(
+                    result["like"], context=self.get_serializer_context()
+                ).data,
                 status=status.HTTP_201_CREATED,
             )
 

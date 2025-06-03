@@ -1,5 +1,6 @@
-from django.utils import timezone
 from datetime import timedelta
+
+from django.utils import timezone
 from rest_framework import status
 from rest_framework.test import APITestCase
 
@@ -22,10 +23,14 @@ class TestRecentLikesListView(APITestCase):
 
     def test_likes_are_sorted_by_created_at_descending(self):
         like1 = Like.objects.create(
-            sender=self.user2, receiver=self.user1, created_at=timezone.now() - timedelta(days=2)
+            sender=self.user2,
+            receiver=self.user1,
+            created_at=timezone.now() - timedelta(days=2),
         )
         like2 = Like.objects.create(
-            sender=self.user3, receiver=self.user1, created_at=timezone.now() - timedelta(days=1)
+            sender=self.user3,
+            receiver=self.user1,
+            created_at=timezone.now() - timedelta(days=1),
         )
 
         response = self.client.get(self.url)

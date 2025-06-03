@@ -31,8 +31,8 @@ from fu_api.features.notifications.views import (
 from fu_api.features.suggested_friends.views import (
     MatchesListView,
     NearYouListView,
-    UserLikeCreateView,
     RecentLikesListView,
+    UserLikeCreateView,
     UserRejectView,
     UserSuggestedFriendsRetrieveView,
 )
