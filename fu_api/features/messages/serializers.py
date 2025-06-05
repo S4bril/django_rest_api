@@ -5,9 +5,9 @@ from fu_api.models.message_model import Message
 
 
 class MessageSerializer(serializers.ModelSerializer):
-    sender = FriendSerializer(read_only=True)
+    sender_id = serializers.IntegerField(source='sender.id', read_only=True)
 
     class Meta:
         model = Message
-        fields = ["id", "sender", "content", "created_at"]
-        read_only_fields = ["id", "sender", "created_at"]
+        fields = ["id", "sender_id", "content", "created_at"]
+        read_only_fields = ["id", "sender_id", "created_at"]

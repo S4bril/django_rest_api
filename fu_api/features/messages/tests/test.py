@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from fu_api.features.common.tests.custom_user_factory import create_test_user
-from fu_api.models.chat_room_model import ChatRoom
+from fu_api.models.private_chat_room_model import PrivateChatRoom
 from fu_api.models.message_model import Message
 from fu_api.models.notification_model import Notification
 
@@ -13,22 +13,19 @@ class MessageListCreateViewTests(APITestCase):
         self.user2 = create_test_user("user2")
         self.user3 = create_test_user("user3")
 
-        self.private_chat = ChatRoom.objects.create(name="Private", is_group=False)
-        self.private_chat.members.add(self.user1, self.user2)
-
-        self.group_chat = ChatRoom.objects.create(name="Group", is_group=True)
-        self.group_chat.members.add(self.user1, self.user3)
+        self.chat = PrivateChatRoom.objects.create()
+        self.chat.members.add(self.user1, self.user2)
 
         Message.objects.create(
-            sender=self.user1, chat_room=self.private_chat, content="Hello"
+            sender=self.user1, chat_room=self.chat, content="Hello"
         )
         Message.objects.create(
-            sender=self.user2, chat_room=self.private_chat, content="Hi there"
+            sender=self.user2, chat_room=self.chat, content="Hi there"
         )
 
         self.client.force_authenticate(self.user1)
 
-        self.url = f"/api/chats/{self.private_chat.id}/messages/"
+        self.url = f"/api/private-chat/{self.chat.id}/messages/"
 
     def test_unauthorized_access(self):
         self.client.logout()
@@ -68,14 +65,6 @@ class MessageListCreateViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("zablokowany przez", str(response.data["error_msg"]))
 
-    def test_group_chat_message_when_blocked(self):
-        self.user3.blocked_users.add(self.user1)
-        url = f"/api/chats/{self.group_chat.id}/messages/"
-        response = self.client.post(url, {"content": "Group message"})
-
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertTrue(Notification.objects.filter(user=self.user3).exists())
-
     def test_missing_content_field(self):
         response = self.client.post(self.url, {})
 
@@ -84,5 +73,5 @@ class MessageListCreateViewTests(APITestCase):
 
     def test_serializer_data_structure(self):
         member_data = self.client.get(self.url).data["messages"][0]
-        expected_fields = {"id", "created_at", "content", "sender"}
+        expected_fields = {"id", "created_at", "content", "sender_id"}
         self.assertEqual(set(member_data.keys()), expected_fields)

@@ -1,6 +1,6 @@
 from django.db import models
 
-from fu_api.models.chat_room_model import ChatRoom
+from fu_api.models.private_chat_room_model import PrivateChatRoom
 from fu_api.models.custom_user_model import CustomUser
 
 
@@ -9,7 +9,7 @@ class Message(models.Model):
         CustomUser, on_delete=models.CASCADE, related_name="messages"
     )
     chat_room = models.ForeignKey(
-        ChatRoom, on_delete=models.CASCADE, related_name="messages"
+        PrivateChatRoom, on_delete=models.CASCADE, related_name="messages"
     )
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

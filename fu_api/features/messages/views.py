@@ -9,7 +9,7 @@ from fu_api.features.common.services.new_since_filter_service import (
 )
 from fu_api.features.messages.serializers import MessageSerializer
 from fu_api.features.messages.services import MessageService
-from fu_api.models.chat_room_model import ChatRoom
+from fu_api.models.private_chat_room_model import PrivateChatRoom
 from fu_api.models.message_model import Message
 
 
@@ -19,7 +19,7 @@ class MessageListCreateView(ListCreateAPIView):
 
     def get_queryset(self):
         chat_room = get_object_or_404(
-            ChatRoom,
+            PrivateChatRoom,
             id=self.kwargs["chat_room_id"],
             members=self.request.user,
         )
@@ -40,7 +40,7 @@ class MessageListCreateView(ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         chat_room = get_object_or_404(
-            ChatRoom, id=self.kwargs["chat_room_id"], members=request.user
+            PrivateChatRoom, id=self.kwargs["chat_room_id"], members=request.user
         )
 
         serializer = self.get_serializer(data=request.data)
