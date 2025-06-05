@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from fu_api.features.common.tests.custom_user_factory import create_test_user
-from fu_api.models.chat_room_model import ChatRoom
+from fu_api.models.private_chat_room_model import PrivateChatRoom
 from fu_api.models.message_model import Message
 from fu_api.models.notification_model import Notification
 
@@ -13,10 +13,10 @@ class MessageListCreateViewTests(APITestCase):
         self.user2 = create_test_user("user2")
         self.user3 = create_test_user("user3")
 
-        self.private_chat = ChatRoom.objects.create(name="Private", is_group=False)
+        self.private_chat = PrivateChatRoom.objects.create(name="Private", is_group=False)
         self.private_chat.members.add(self.user1, self.user2)
 
-        self.group_chat = ChatRoom.objects.create(name="Group", is_group=True)
+        self.group_chat = PrivateChatRoom.objects.create(name="Group", is_group=True)
         self.group_chat.members.add(self.user1, self.user3)
 
         Message.objects.create(

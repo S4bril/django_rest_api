@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from fu_api.features.common.tests.custom_user_factory import create_test_user
-from fu_api.models.chat_room_model import ChatRoom
+from fu_api.models.private_chat_room_model import PrivateChatRoom
 from fu_api.models.message_model import Message
 
 
@@ -13,7 +13,7 @@ class TestPullMessages(APITestCase):
         self.user1 = create_test_user("user1")
         self.user2 = create_test_user("user2")
 
-        self.chat = ChatRoom.objects.create(name="Private Chat", is_group=False)
+        self.chat = PrivateChatRoom.objects.create(name="Private Chat", is_group=False)
         self.chat.members.add(self.user1, self.user2)
 
         self.msg = Message.objects.create(
