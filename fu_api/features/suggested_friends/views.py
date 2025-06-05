@@ -99,9 +99,21 @@ class NearYouListView(ListAPIView):
         if user.location is None:
             return CustomUser.objects.none()
 
+        exclusion_query = (
+            Q(id=user.id)
+            | Q(friends=user)
+            | Q(rejected_users=user)
+            | Q(blocked_users=user)
+            | Q(
+                id__in=Like.objects.filter(sender=user).values_list(
+                    "receiver_id", flat=True
+                )
+            )
+        )
+
         feature_engineer = FeatureEngineer()
 
-        candidates = CustomUser.objects.exclude(id=user.id)
+        candidates = CustomUser.objects.exclude(exclusion_query)
 
         users_with_distance = [
             (candidate, feature_engineer.compute_distance(user, candidate))
