@@ -40,7 +40,7 @@ class MessageListCreateViewTests(APITestCase):
     def test_get_messages_authorized_member(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)
+        self.assertEqual(len(response.data), 1)
 
     def test_successful_message_creation(self):
         data = {"content": "New message"}

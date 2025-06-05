@@ -11,20 +11,15 @@ from fu_api.models.notification_model import Notification
 
 
 class NotificationListView(APIView):
+    serializer = NotificationSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
-        qs = Notification.objects.filter(user=request.user).order_by("-created_at")
-        result = NewSinceFilterService.filter(request, qs)
+        queryset = Notification.objects.filter(user=request.user)
+        result = NewSinceFilterService.filter(request, queryset)
 
-        if result["error"]:
-            return result["error"]
-
-        if not result["has_new"]:
-            return Response({"has_new": False})
-
-        serializer = NotificationSerializer(result["queryset"], many=True)
-        return Response({"has_new": True, "notifications": serializer.data})
+        serializer = self.serializer(result, many=True)
+        return Response({"notifications": serializer.data})
 
 
 class MarkNotificationReadView(APIView):

@@ -26,9 +26,7 @@ class NotificationPullTests(APITestCase):
 
         response = self.client.get(self.url, {"last_check": last_check})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertIn("has_new", response.data)
-        self.assertFalse(response.data["has_new"])
-        self.assertNotIn("notifications", response.data)
+        self.assertEqual(len(response.data["notifications"]), 0)
 
     def test_pull_with_new_notifications(self):
         before = self.notif.created_at - timedelta(days=1)
@@ -36,9 +34,6 @@ class NotificationPullTests(APITestCase):
 
         response = self.client.get(self.url, {"last_check": last_check})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-        self.assertIn("has_new", response.data)
-        self.assertTrue(response.data["has_new"])
 
         self.assertIn("notifications", response.data)
         self.assertEqual(self.notif.id, response.data["notifications"][0]["id"])
