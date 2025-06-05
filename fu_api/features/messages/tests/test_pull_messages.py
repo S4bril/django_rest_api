@@ -28,9 +28,7 @@ class TestPullMessages(APITestCase):
         last_check = after.isoformat()
         response = self.client.get(self.url, {"last_check": last_check})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertIn("has_new", response.data)
-        self.assertFalse(response.data["has_new"])
-        self.assertNotIn("messages", response.data)
+        self.assertEqual(len(response.data["messages"]), 0)
 
     def test_pull_with_new_messages(self):
         before = self.msg.created_at - timedelta(days=1)
@@ -38,9 +36,6 @@ class TestPullMessages(APITestCase):
 
         response = self.client.get(self.url, {"last_check": last_check})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-        self.assertIn("has_new", response.data)
-        self.assertTrue(response.data["has_new"])
 
         self.assertIn("messages", response.data)
         self.assertEqual(self.msg.id, response.data["messages"][0]["id"])

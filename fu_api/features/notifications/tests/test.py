@@ -50,7 +50,7 @@ class NotificationViewTests(APITestCase):
         response = self.client.get(self.url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)
+        self.assertEqual(len(response.data), 1)
 
         notification = response.data["notifications"][0]
         self.assertIn("sender", notification)

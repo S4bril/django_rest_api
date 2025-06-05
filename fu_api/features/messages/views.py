@@ -23,20 +23,14 @@ class MessageListCreateView(ListCreateAPIView):
             id=self.kwargs["chat_room_id"],
             members=self.request.user,
         )
-        return Message.objects.filter(chat_room=chat_room).order_by("-created_at")
+        return Message.objects.filter(chat_room=chat_room)
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset().order_by("-created_at")
+        queryset = self.get_queryset()
         result = NewSinceFilterService.filter(request, queryset)
 
-        if result["error"]:
-            return result["error"]
-
-        if not result["has_new"]:
-            return Response({"has_new": False})
-
-        serializer = self.get_serializer(result["queryset"], many=True)
-        return Response({"has_new": True, "messages": serializer.data})
+        serializer = self.get_serializer(result, many=True)
+        return Response({"messages": serializer.data})
 
     def create(self, request, *args, **kwargs):
         chat_room = get_object_or_404(
