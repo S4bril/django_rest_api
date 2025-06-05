@@ -13,7 +13,7 @@ class TestPullMessages(APITestCase):
         self.user1 = create_test_user("user1")
         self.user2 = create_test_user("user2")
 
-        self.chat = PrivateChatRoom.objects.create(name="Private Chat", is_group=False)
+        self.chat = PrivateChatRoom.objects.create()
         self.chat.members.add(self.user1, self.user2)
 
         self.msg = Message.objects.create(
@@ -21,7 +21,7 @@ class TestPullMessages(APITestCase):
         )
 
         self.client.force_authenticate(self.user1)
-        self.url = f"/api/chats/{self.chat.id}/messages/"
+        self.url = f"/api/private-chat/{self.chat.id}/messages/"
 
     def test_pull_no_new_messages(self):
         after = self.msg.created_at + timedelta(days=1)

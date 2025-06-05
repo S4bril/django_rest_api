@@ -5,7 +5,8 @@ from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from fu_api.features.private_chat_room.views import (
-    ChatRoomListCreateView,
+    ChatRoomCreateView,
+    ChatRoomListView,
 )
 from fu_api.features.events.views import (
     EventLocationDetailView,
@@ -56,8 +57,9 @@ urlpatterns = [
     path("api/friend-requests/", FriendRequestListCreateView.as_view()),
     path("api/friend-requests/sent/", SentFriendRequestListView.as_view()),
     path("api/friend-requests/<int:pk>/", FriendRequestUpdateView.as_view()),
-    path("api/chats/", ChatRoomListCreateView.as_view()),
-    path("api/chats/<int:chat_room_id>/messages/", MessageListCreateView.as_view()),
+    path("api/private-chat/<int:pk>/", ChatRoomCreateView.as_view()),
+    path("api/private-chat/", ChatRoomListView.as_view()),
+    path("api/private-chat/<int:chat_room_id>/messages/", MessageListCreateView.as_view()),
     path(
         "api/notifications/", NotificationListView.as_view(), name="notification-list"
     ),

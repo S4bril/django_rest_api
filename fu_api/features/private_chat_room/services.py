@@ -3,13 +3,13 @@ from rest_framework.exceptions import ValidationError
 from fu_api.models.private_chat_room_model import PrivateChatRoom
 
 
-class ChatRoomService:
+class PrivateChatRoomService:
     @staticmethod
-    def create_private_chat(creator, name, member):
-        ChatRoomService._ensure_private_chat_not_exists(creator, member)
-        ChatRoomService._ensure_unique(creator, member)
+    def create_private_chat(creator, member):
+        PrivateChatRoomService._ensure_private_chat_not_exists(creator, member)
+        PrivateChatRoomService._ensure_unique(creator, member)
 
-        chat_room = PrivateChatRoom.objects.create(name=name)
+        chat_room = PrivateChatRoom.objects.create()
         chat_room.members.add(creator, member)
 
         return chat_room

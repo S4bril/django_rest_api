@@ -6,17 +6,16 @@ from fu_api.models.private_chat_room_model import PrivateChatRoom
 
 
 class PrivateChatRoomSerializer(serializers.ModelSerializer):
-    member_id = serializers.ListField(child=serializers.IntegerField(), write_only=True)
     member = serializers.SerializerMethodField(read_only=True)
     newest_message = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = PrivateChatRoom
-        fields = ["id", "member_id", "member", "newest_message"]
+        fields = ["id", "member", "newest_message"]
 
     def get_member(self, obj):
         request_user = self.context["request"].user
-        other_member = obj.members.exclude(id=request_user.id)
+        other_member = obj.members.exclude(id=request_user.id).first()
         return FriendSerializer(other_member, context=self.context).data
 
     def get_newest_message(self, obj):

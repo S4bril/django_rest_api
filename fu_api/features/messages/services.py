@@ -20,7 +20,7 @@ class MessageService:
                 user=member,
                 sender=sender,
                 type="message",
-                message=f"Masz nieprzeczytane wiadomości w: {chat_room.name}.",
+                message=f"Masz nieprzeczytane wiadomości od: {sender.username}.",
             )
             for member in recipients
         ]
@@ -35,9 +35,8 @@ class MessageService:
 
     @staticmethod
     def _ensure_not_blocked_in_private(chat_room, user):
-        if not chat_room.is_group:
-            other = chat_room.members.exclude(id=user.id).first()
-            if other and user in other.blocked_users.all():
-                raise ValidationError(
-                    {"error_msg": f"Jesteś zablokowany przez {other.username}."}
-                )
+        other = chat_room.members.exclude(id=user.id).first()
+        if other and user in other.blocked_users.all():
+            raise ValidationError(
+                {"error_msg": f"Jesteś zablokowany przez {other.username}."}
+            )
