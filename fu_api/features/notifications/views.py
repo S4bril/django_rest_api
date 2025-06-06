@@ -19,7 +19,7 @@ class NotificationListView(APIView):
         result = NewSinceFilterService.filter(request, queryset)
 
         serializer = self.serializer(result, many=True)
-        return Response({"notifications": serializer.data})
+        return Response(serializer.data)
 
 
 class MarkNotificationReadView(APIView):

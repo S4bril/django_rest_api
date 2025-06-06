@@ -4,8 +4,8 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from fu_api.features.common.tests.custom_user_factory import create_test_user
-from fu_api.models.private_chat_room_model import PrivateChatRoom
 from fu_api.models.message_model import Message
+from fu_api.models.private_chat_room_model import PrivateChatRoom
 
 
 class TestPullMessages(APITestCase):
@@ -28,7 +28,7 @@ class TestPullMessages(APITestCase):
         last_check = after.isoformat()
         response = self.client.get(self.url, {"last_check": last_check})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data["messages"]), 0)
+        self.assertEqual(len(response.data), 0)
 
     def test_pull_with_new_messages(self):
         before = self.msg.created_at - timedelta(days=1)
@@ -37,5 +37,4 @@ class TestPullMessages(APITestCase):
         response = self.client.get(self.url, {"last_check": last_check})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        self.assertIn("messages", response.data)
-        self.assertEqual(self.msg.id, response.data["messages"][0]["id"])
+        self.assertEqual(self.msg.id, response.data[0]["id"])
