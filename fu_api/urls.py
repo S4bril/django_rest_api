@@ -4,10 +4,6 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from fu_api.features.private_chat_room.views import (
-    ChatRoomCreateView,
-    ChatRoomListView,
-)
 from fu_api.features.events.views import (
     EventLocationDetailView,
     EventsDetailView,
@@ -23,6 +19,10 @@ from fu_api.features.messages.views import MessageListCreateView
 from fu_api.features.notifications.views import (
     MarkNotificationReadView,
     NotificationListView,
+)
+from fu_api.features.private_chat_room.views import (
+    ChatRoomCreateView,
+    ChatRoomListView,
 )
 from fu_api.features.suggested_friends.views import (
     MatchesListView,
@@ -59,7 +59,9 @@ urlpatterns = [
     path("api/friend-requests/<int:pk>/", FriendRequestUpdateView.as_view()),
     path("api/private-chat/<int:pk>/", ChatRoomCreateView.as_view()),
     path("api/private-chat/", ChatRoomListView.as_view()),
-    path("api/private-chat/<int:chat_room_id>/messages/", MessageListCreateView.as_view()),
+    path(
+        "api/private-chat/<int:chat_room_id>/messages/", MessageListCreateView.as_view()
+    ),
     path(
         "api/notifications/", NotificationListView.as_view(), name="notification-list"
     ),

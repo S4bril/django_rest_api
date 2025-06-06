@@ -9,8 +9,8 @@ from fu_api.features.private_chat_room.serializers import (
     PrivateChatRoomSerializer,
 )
 from fu_api.features.private_chat_room.services import PrivateChatRoomService
-from fu_api.models.private_chat_room_model import PrivateChatRoom
 from fu_api.models.custom_user_model import CustomUser
+from fu_api.models.private_chat_room_model import PrivateChatRoom
 
 
 class ChatRoomCreateView(CreateAPIView):
@@ -30,7 +30,9 @@ class ChatRoomCreateView(CreateAPIView):
         except ValidationError as exc:
             raise exc
 
-        serialized = self.get_serializer(chat_room, context=self.get_serializer_context())
+        serialized = self.get_serializer(
+            chat_room, context=self.get_serializer_context()
+        )
         return Response(serialized.data, status=status.HTTP_201_CREATED)
 
 

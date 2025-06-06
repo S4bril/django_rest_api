@@ -40,9 +40,7 @@ class TestChatRoomListCreateViews(APITestCase):
     def test_create_private_chat_room_with_yourself(self):
         response = self.client.post(self.url1)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn(
-            "Nie możesz utworzyć chatu", response.data["error_msg"]
-        )
+        self.assertIn("Nie możesz utworzyć chatu", response.data["error_msg"])
         self.assertEqual(PrivateChatRoom.objects.count(), 0)
 
     def test_create_correct_chat_room(self):
