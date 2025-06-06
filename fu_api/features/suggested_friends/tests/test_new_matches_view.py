@@ -15,13 +15,11 @@ class TestMatchesListView(APITestCase):
         self.user3 = create_test_user("user3")
 
         Match.objects.create(
-            first_user=self.user1,
-            second_user=self.user2,
+            user1=self.user1,
+            user2=self.user2,
             created_at=now() - timedelta(days=1),
         )
-        Match.objects.create(
-            first_user=self.user3, second_user=self.user1, created_at=now()
-        )
+        Match.objects.create(user1=self.user3, user2=self.user1, created_at=now())
 
         self.client.force_authenticate(user=self.user1)
         self.url = "/api/suggested-friends/matches/"

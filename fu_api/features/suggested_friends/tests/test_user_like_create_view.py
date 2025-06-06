@@ -54,8 +54,8 @@ class TestUserLikeListCreateView(APITestCase):
 
         self.assertTrue(
             Match.objects.filter(
-                first_user__in=[self.user1, self.user2],
-                second_user__in=[self.user1, self.user2],
+                user1__in=[self.user1, self.user2],
+                user2__in=[self.user1, self.user2],
             ).exists()
         )
         self.assertFalse(
