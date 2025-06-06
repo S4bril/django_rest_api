@@ -32,6 +32,7 @@ from fu_api.features.suggested_friends.views import (
     UserRejectView,
     UserSuggestedFriendsRetrieveView,
 )
+from fu_api.features.token.views import CustomTokenObtainPairView
 from fu_api.features.user_block.views import BlockUserView
 from fu_api.features.user_profile.views import (
     RemoveFriendView,
@@ -73,7 +74,7 @@ urlpatterns = [
     path("api/events/", EventsListCreateView.as_view()),
     path("api/events/<int:pk>/", EventsDetailView.as_view()),
     path("api/events/<int:pk>/location/", EventLocationDetailView.as_view()),
-    path("api/token/", TokenObtainPairView.as_view()),
+    path("api/token/", CustomTokenObtainPairView.as_view()),
     path("api/token/refresh/", TokenRefreshView.as_view()),
     path("api/form/", FormRetrieveView.as_view()),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
