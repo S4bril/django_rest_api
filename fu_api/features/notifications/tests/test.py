@@ -50,15 +50,15 @@ class NotificationViewTests(APITestCase):
         response = self.client.get(self.url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
+        self.assertEqual(len(response.data), 2)
 
-        notification = response.data["notifications"][0]
+        notification = response.data[0]
         self.assertIn("sender", notification)
         self.assertEqual(notification["sender"]["username"], "user2")
 
         all_ids = [
-            response.data["notifications"][0]["id"],
-            response.data["notifications"][1]["id"],
+            response.data[0]["id"],
+            response.data[1]["id"],
         ]
 
         self.assertIn(self.notification1.id, all_ids)

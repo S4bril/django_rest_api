@@ -1,7 +1,7 @@
 from django.db import models
 
-from fu_api.models.private_chat_room_model import PrivateChatRoom
 from fu_api.models.custom_user_model import CustomUser
+from fu_api.models.private_chat_room_model import PrivateChatRoom
 
 
 class Message(models.Model):

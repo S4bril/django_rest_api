@@ -9,8 +9,8 @@ from fu_api.features.common.services.new_since_filter_service import (
 )
 from fu_api.features.messages.serializers import MessageSerializer
 from fu_api.features.messages.services import MessageService
-from fu_api.models.private_chat_room_model import PrivateChatRoom
 from fu_api.models.message_model import Message
+from fu_api.models.private_chat_room_model import PrivateChatRoom
 
 
 class MessageListCreateView(ListCreateAPIView):
@@ -30,7 +30,7 @@ class MessageListCreateView(ListCreateAPIView):
         result = NewSinceFilterService.filter(request, queryset)
 
         serializer = self.get_serializer(result, many=True)
-        return Response({"messages": serializer.data})
+        return Response(serializer.data)
 
     def create(self, request, *args, **kwargs):
         chat_room = get_object_or_404(

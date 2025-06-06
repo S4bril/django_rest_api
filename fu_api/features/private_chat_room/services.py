@@ -16,7 +16,11 @@ class PrivateChatRoomService:
 
     @staticmethod
     def _ensure_private_chat_not_exists(creator, member):
-        if PrivateChatRoom.objects.filter(members=creator).filter(members=member).exists():
+        if (
+            PrivateChatRoom.objects.filter(members=creator)
+            .filter(members=member)
+            .exists()
+        ):
             raise ValidationError(
                 {"error_msg": f"Już istnieje chat z {member.username}"}
             )
@@ -26,4 +30,4 @@ class PrivateChatRoomService:
         if creator == member:
             raise ValidationError(
                 {"error_msg": f"Nie możesz utworzyć chatu z samym sobą."}
-            ) 
+            )

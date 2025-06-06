@@ -2,9 +2,9 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from fu_api.features.common.tests.custom_user_factory import create_test_user
-from fu_api.models.private_chat_room_model import PrivateChatRoom
 from fu_api.models.message_model import Message
 from fu_api.models.notification_model import Notification
+from fu_api.models.private_chat_room_model import PrivateChatRoom
 
 
 class MessageListCreateViewTests(APITestCase):
@@ -16,9 +16,7 @@ class MessageListCreateViewTests(APITestCase):
         self.chat = PrivateChatRoom.objects.create()
         self.chat.members.add(self.user1, self.user2)
 
-        Message.objects.create(
-            sender=self.user1, chat_room=self.chat, content="Hello"
-        )
+        Message.objects.create(sender=self.user1, chat_room=self.chat, content="Hello")
         Message.objects.create(
             sender=self.user2, chat_room=self.chat, content="Hi there"
         )
@@ -40,7 +38,7 @@ class MessageListCreateViewTests(APITestCase):
     def test_get_messages_authorized_member(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
+        self.assertEqual(len(response.data), 2)
 
     def test_successful_message_creation(self):
         data = {"content": "New message"}
@@ -72,6 +70,6 @@ class MessageListCreateViewTests(APITestCase):
         self.assertIn("content", response.data)
 
     def test_serializer_data_structure(self):
-        member_data = self.client.get(self.url).data["messages"][0]
+        member_data = self.client.get(self.url).data[0]
         expected_fields = {"id", "created_at", "content", "sender_id"}
         self.assertEqual(set(member_data.keys()), expected_fields)
