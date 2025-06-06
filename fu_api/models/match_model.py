@@ -3,18 +3,22 @@ from django.utils.timezone import now
 
 
 class Match(models.Model):
-    first_user = models.OneToOneField(
+    user1 = models.ForeignKey(
         "CustomUser",
-        related_name="sent_match",
+        related_name="matches_initiated",
         on_delete=models.CASCADE,
-        null=False,
-        blank=False,
     )
-    second_user = models.OneToOneField(
+    user2 = models.ForeignKey(
         "CustomUser",
-        related_name="received_match",
+        related_name="matches_received",
         on_delete=models.CASCADE,
-        null=False,
-        blank=False,
     )
     created_at = models.DateTimeField(default=now)
+
+    class Meta:
+        unique_together = (("user1", "user2"),)
+
+    def save(self, *args, **kwargs):
+        if self.user1.id > self.user2.id:
+            self.user1, self.user2 = self.user2, self.user1
+        super().save(*args, **kwargs)

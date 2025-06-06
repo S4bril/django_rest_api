@@ -15,8 +15,7 @@ class LikeService:
             raise ValueError("You already liked this user.")
 
         if Match.objects.filter(
-            Q(first_user=sender, second_user=receiver)
-            | Q(first_user=receiver, second_user=sender)
+            Q(user1=sender, user2=receiver) | Q(user1=receiver, user2=sender)
         ).exists():
             raise ValueError("You are already matched with this user.")
 
@@ -28,7 +27,7 @@ class LikeService:
             # needed for excluding from suggested friends:
             sender.friends.add(receiver)
 
-            match = Match.objects.create(first_user=sender, second_user=receiver)
+            match = Match.objects.create(user1=sender, user2=receiver)
 
             Notification.objects.create(
                 user=receiver,

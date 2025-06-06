@@ -1,85 +1,87 @@
 import random
-from datetime import timedelta
+
+from django.core.exceptions import ValidationError
 from django.db import migrations
-from django.utils import timezone
-from django.core.exceptions import ObjectDoesNotExist
 
+from fu_api.features.suggested_friends.services import LikeService
 from fu_api.models.custom_user_model import CustomUser
-from fu_api.models.notification_model import Notification
-from fu_api.models.private_chat_room_model import PrivateChatRoom
-
+from fu_api.models.like_model import Like
+from fu_api.models.match_model import Match
 
 NUM_TO_LIKE = 20
 NUM_TO_BE_LIKED = 20
+NUM_TO_MATCH = 10
 
 
 def seed_user1_relationships(apps, schema_editor):
-    """
-    Dla usera o id=1:
-      a) user1 „polubi” losowych użytkowników → tworzymy Notification typu 'like',
-      b) user1 zostanie „polubiony” przez losowych użytkowników → również Notification typu 'like',
-         ale odwrotnie: sender=other, user=user1,
-      c) user1 zostanie sparowany/przyjacielem (i „zmatchowany”) z kolejnymi losowymi
-         użytkownikami, wyłączając tych, którzy pojawili się w a) lub b) → tworzymy ChatRoom (is_group=False).
-    """
-
-    user1 = CustomUser.objects.get(pk=1)
+    try:
+        user1 = CustomUser.objects.get(pk=1)
+    except CustomUser.DoesNotExist:
+        return
 
     all_others = list(CustomUser.objects.exclude(pk=1))
 
+    _seed_likes_by_user1(user1, all_others)
+
+    remaining = [
+        u
+        for u in all_others
+        if not Like.objects.filter(sender=user1, receiver=u).exists()
+    ]
+    _seed_likes_to_user1(user1, remaining)
+
+    liked_ids = set(
+        Like.objects.filter(sender=user1).values_list("receiver_id", flat=True)
+    )
+    liked_by_ids = set(
+        Like.objects.filter(receiver=user1).values_list("sender_id", flat=True)
+    )
+    excluded_ids = liked_ids.union(liked_by_ids) | {user1.id}
+
+    pool_for_match = [u for u in all_others if u.id not in excluded_ids]
+    _seed_matches(user1, pool_for_match)
 
 
-    liked_users = random.sample(all_others, NUM_TO_LIKE)
+def _seed_likes_by_user1(user1, pool):
+    to_like = random.sample(pool, min(len(pool), NUM_TO_LIKE))
+    for u in to_like:
+        if Like.objects.filter(sender=user1, receiver=u).exists():
+            continue
+        try:
+            LikeService.create_like(sender=user1, receiver=u)
+        except ValidationError:
+            continue
 
-    for u in liked_users:
-        Notification.objects.create(
-            user=u,
-            sender=user1,
-            type="like",
-            message=f"User {user1.username} polubił użytkownika {u.username}",
-            created_at=timezone.now() - timedelta(minutes=random.randint(0, 60)),
-        )
 
-    remaining = [u for u in all_others if u not in liked_users]
-    liked_by_users = random.sample(remaining, NUM_TO_BE_LIKED)
+def _seed_likes_to_user1(user1, pool):
+    to_be_liked = random.sample(pool, min(len(pool), NUM_TO_BE_LIKED))
+    for u in to_be_liked:
+        if Like.objects.filter(sender=u, receiver=user1).exists():
+            continue
+        try:
+            LikeService.create_like(sender=u, receiver=user1)
+        except ValidationError:
+            continue
 
-    for u in liked_by_users:
-        Notification.objects.create(
-            user=user1,
-            sender=u,
-            type="like",
-            message=f"Użytkownik {u.username} polubił usera {user1.username}",
-            created_at=timezone.now() - timedelta(minutes=random.randint(0, 60)),
-        )
 
-    excluded = set(liked_users) | set(liked_by_users) | {user1}
-    pool_for_matches = [u for u in all_others if u not in excluded]
-
-    num_to_match = min(3, len(pool_for_matches))
-    matched_users = random.sample(pool_for_matches, num_to_match)
-
-    for u in matched_users:
-        chat = PrivateChatRoom.objects.create(name=None, is_group=False)
-        chat.members.add(user1, u)
-        Notification.objects.create(
-            user=user1,
-            sender=u,
-            type="match",
-            message=f"Użytkownik {u.username} i {user1.username} są teraz przyjaciółmi!",
-            created_at=timezone.now(),
-        )
-        Notification.objects.create(
-            user=u,
-            sender=user1,
-            type="match",
-            message=f"Użytkownik {user1.username} i {u.username} są teraz przyjaciółmi!",
-            created_at=timezone.now(),
-        )
+def _seed_matches(user1, pool):
+    to_match = random.sample(pool, min(len(pool), NUM_TO_MATCH))
+    for u in to_match:
+        if (
+            Match.objects.filter(user1=user1, user2=u).exists()
+            or Match.objects.filter(user1=u, user2=user1).exists()
+        ):
+            continue
+        try:
+            Match.objects.create(user1=user1, user2=u)
+            user1.friends.add(u)
+        except ValidationError:
+            continue
 
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("fu_api", "0003_assign_profile_images")
+        ("fu_api", "0003_assign_profile_images"),
     ]
 
     operations = [

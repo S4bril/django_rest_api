@@ -84,7 +84,7 @@ class MatchesListView(ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Match.objects.filter(Q(first_user=user) | Q(second_user=user)).order_by(
+        return Match.objects.filter(Q(user1=user) | Q(user2=user)).order_by(
             "-created_at"
         )
 
