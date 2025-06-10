@@ -43,6 +43,6 @@ class ChatRoomListView(ListAPIView):
     def get_queryset(self):
         qs = PrivateChatRoom.objects.filter(members=self.request.user)
         qs = qs.annotate(latest_msg_created_at=Max("messages__created_at"))
-        qs = qs.order_by("latest_msg_created_at")
+        qs = qs.order_by("-latest_msg_created_at")
 
         return qs

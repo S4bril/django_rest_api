@@ -19,7 +19,7 @@ class PrivateChatRoomSerializer(serializers.ModelSerializer):
         return FriendSerializer(other_member, context=self.context).data
 
     def get_newest_message(self, obj):
-        latest_message = obj.messages.order_by("-created_at").first()
+        latest_message = obj.messages.order_by("created_at").first()
         if latest_message:
             return MessageSerializer(latest_message, context=self.context).data
         return None

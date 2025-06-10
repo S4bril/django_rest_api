@@ -18,17 +18,15 @@ class NewSinceFilterService:
 
         if last_check_str:
             dt = NewSinceFilterService._parse_datetime_or_raise(last_check_str)
-            return queryset.filter(**{f"{date_field}__gt": dt}).order_by(
-                date_field
-            )[: NewSinceFilterService.PAGE_SIZE]
+            queryset = queryset.filter(**{f"{date_field}__gt": dt})
+            return list(reversed(queryset.order_by(f"{date_field}")))
 
-        if before_str:
+        elif before_str:
             dt = NewSinceFilterService._parse_datetime_or_raise(before_str)
-            return queryset.filter(**{f"{date_field}__lt": dt}).order_by(
-                date_field
-            )[: NewSinceFilterService.PAGE_SIZE]
+            queryset =  queryset.filter(**{f"{date_field}__lt": dt})
 
-        return queryset.order_by(date_field)[: NewSinceFilterService.PAGE_SIZE]
+        queryset = queryset.order_by(f"{date_field}")[:NewSinceFilterService.PAGE_SIZE]
+        return list(reversed(queryset))
 
     @staticmethod
     def _parse_datetime_or_raise(value):
