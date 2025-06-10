@@ -27,11 +27,11 @@ class MessageListCreateView(ListCreateAPIView):
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        result = NewSinceFilterService.filter(request, queryset)
 
-        last_checked = request.query_params.get("last_check")
-        if last_checked:
-            result = result.exclude(sender=request.user)
+        if request.query_params.get("last_check"):
+            queryset = queryset.exclude(sender=request.user)
+
+        result = NewSinceFilterService.filter(request, queryset)
 
         serializer = self.get_serializer(result, many=True)
         return Response(serializer.data)
