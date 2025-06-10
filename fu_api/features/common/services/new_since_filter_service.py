@@ -18,9 +18,9 @@ class NewSinceFilterService:
 
         if last_check_str:
             dt = NewSinceFilterService._parse_datetime_or_raise(last_check_str)
-            return queryset.filter(**{f"{date_field}__gt": dt}).order_by(date_field)[
-                : NewSinceFilterService.PAGE_SIZE
-            ]
+            return queryset.filter(**{f"{date_field}__gt": dt}).order_by(
+                f"-{date_field}"
+            )[: NewSinceFilterService.PAGE_SIZE]
 
         if before_str:
             dt = NewSinceFilterService._parse_datetime_or_raise(before_str)

@@ -29,7 +29,7 @@ class MessageListCreateView(ListCreateAPIView):
         queryset = self.get_queryset()
         result = NewSinceFilterService.filter(request, queryset)
 
-        last_checked = request.query_params.get("last_checked")
+        last_checked = request.query_params.get("last_check")
         if last_checked:
             result = result.exclude(sender=request.user)
 
