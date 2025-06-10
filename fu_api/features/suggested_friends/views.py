@@ -75,7 +75,7 @@ class RecentLikesListView(ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Like.objects.filter(receiver=self.request.user).order_by("-created_at")
+        return Like.objects.filter(receiver=self.request.user).order_by("created_at")
 
 
 class MatchesListView(ListAPIView):
@@ -85,7 +85,7 @@ class MatchesListView(ListAPIView):
     def get_queryset(self):
         user = self.request.user
         return Match.objects.filter(Q(user1=user) | Q(user2=user)).order_by(
-            "-created_at"
+            "created_at"
         )
 
 
