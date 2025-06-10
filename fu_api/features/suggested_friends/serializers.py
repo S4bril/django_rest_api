@@ -24,4 +24,4 @@ class MatchSerializer(serializers.ModelSerializer):
         request_user = self.context["request"].user
         other_user = obj.user2 if obj.user1 == request_user else obj.user1
 
-        return FriendSerializer(other_user).data
+        return FriendSerializer(other_user, context=self.context).data
