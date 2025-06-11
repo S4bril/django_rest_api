@@ -2,11 +2,13 @@ import json
 import os
 from datetime import date
 
+from django.db.models import Q
 from rest_framework import serializers
 
 from config import settings
 from fu_api.features.suggested_friends.matchers.feature_engineer import FeatureEngineer
 from fu_api.models import CustomUser
+from fu_api.models.match_model import Match
 
 
 class FriendSerializer(serializers.ModelSerializer):
@@ -15,7 +17,7 @@ class FriendSerializer(serializers.ModelSerializer):
     age = serializers.SerializerMethodField()
     passions = serializers.SerializerMethodField()
     distance = serializers.SerializerMethodField()
-    friend_count = serializers.SerializerMethodField()
+    match_count = serializers.SerializerMethodField()
 
     class Meta:
         model = CustomUser
@@ -28,11 +30,11 @@ class FriendSerializer(serializers.ModelSerializer):
             "age",
             "passions",
             "distance",
-            "friend_count",
+            "match_count",
         ]
 
-    def get_friend_count(self, obj):
-        return obj.friends.count()
+    def get_match_count(self, obj):
+        return Match.objects.filter(Q(user1=obj) | Q(user2=obj)).count()
 
     def get_distance(self, obj):
         current_user = self.context.get("current_user")

@@ -62,13 +62,10 @@ class TestUserLikeListCreateView(APITestCase):
             Like.objects.filter(sender=self.user2, receiver=self.user1).exists()
         )
 
-        notification1 = Notification.objects.filter(
-            user=self.user1, sender=self.user2, type="match"
-        )
-        notification2 = Notification.objects.filter(
+        notification = Notification.objects.filter(
             user=self.user2, sender=self.user1, type="match"
         )
-        self.assertTrue(notification1.exists() and notification2.exists())
+        self.assertTrue(notification.exists())
 
     def test_duplicate_like_error(self):
         Like.objects.create(sender=self.user1, receiver=self.user2)

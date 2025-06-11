@@ -25,7 +25,9 @@ class NewSinceFilterService:
             dt = NewSinceFilterService._parse_datetime_or_raise(before_str)
             queryset = queryset.filter(**{f"{date_field}__lt": dt})
 
-        queryset = queryset.order_by(f"-{date_field}")[:NewSinceFilterService.PAGE_SIZE]
+        queryset = queryset.order_by(f"-{date_field}")[
+            : NewSinceFilterService.PAGE_SIZE
+        ]
         return list(reversed(queryset))
 
     @staticmethod

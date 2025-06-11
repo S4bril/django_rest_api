@@ -74,7 +74,6 @@ def _seed_matches(user1, pool):
             continue
         try:
             Match.objects.create(user1=user1, user2=u)
-            user1.friends.add(u)
         except ValidationError:
             continue
 

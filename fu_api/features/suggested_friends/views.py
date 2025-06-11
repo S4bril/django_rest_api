@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from fu_api.features.common.get_matched_ids import get_ids_of_people_matched_with_user
 from fu_api.features.common.serializers.friend_serializer import FriendSerializer
 from fu_api.features.suggested_friends.matchers.factory import MatcherFactory
 from fu_api.features.suggested_friends.matchers.feature_engineer import FeatureEngineer
@@ -101,7 +102,6 @@ class NearYouListView(ListAPIView):
 
         exclusion_query = (
             Q(id=user.id)
-            | Q(friends=user)
             | Q(rejected_users=user)
             | Q(blocked_users=user)
             | Q(
@@ -109,6 +109,7 @@ class NearYouListView(ListAPIView):
                     "receiver_id", flat=True
                 )
             )
+            | Q(id__in=get_ids_of_people_matched_with_user(user))
         )
 
         feature_engineer = FeatureEngineer()

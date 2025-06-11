@@ -13,24 +13,21 @@ class NotificationViewTests(APITestCase):
         self.notification1 = Notification.objects.create(
             user=self.user1,
             sender=self.user2,
-            type="message",
-            message="Test message 1",
+            type="first_message",
             is_read=False,
         )
 
         self.notification2 = Notification.objects.create(
             user=self.user1,
             sender=self.user2,
-            type="friend_request",
-            message="Test message 2",
+            type="like",
             is_read=True,
         )
 
         self.other_user_notification = Notification.objects.create(
             user=self.user2,
             sender=self.user1,
-            type="message",
-            message="Other user message",
+            type="match",
             is_read=False,
         )
 

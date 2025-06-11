@@ -1,6 +1,9 @@
 from datetime import date
 
 import numpy as np
+from django.db.models import Count, Q
+
+from fu_api.models.match_model import Match
 
 
 class IndividualFeatureEngineer:
@@ -10,7 +13,7 @@ class IndividualFeatureEngineer:
             "location_coords": self.compute_location_coords,
             "age": self.compute_age,
             "bio_embedding": self.compute_bio_embedding,
-            "friend_count": self.compute_friend_count,
+            "match_count": self.compute_match_count,
         }
 
     def compute_passions_vector(self, user):
@@ -36,8 +39,8 @@ class IndividualFeatureEngineer:
     def compute_bio_embedding(self, user):
         return user.bio_embedding
 
-    def compute_friend_count(self, user):
-        return [user.friends.count()]
+    def compute_match_count(self, user):
+        return [Match.objects.filter(Q(user1=user) | Q(user2=user)).count()]
 
     def get_feature_vector(self, user):
         vector = []

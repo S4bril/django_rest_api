@@ -20,21 +20,26 @@ class TestPullMessages(APITestCase):
             sender=self.user1, chat_room=self.chat, content="first"
         )
 
+        self.msg2 = Message.objects.create(
+            sender=self.user2, chat_room=self.chat, content="second"
+        )
+
         self.client.force_authenticate(self.user1)
         self.url = f"/api/private-chat/{self.chat.id}/messages/"
 
     def test_pull_no_new_messages(self):
-        after = self.msg.created_at + timedelta(days=1)
-        last_check = after.isoformat()
+        time = self.msg.created_at + timedelta(days=1)
+        last_check = time.isoformat()
         response = self.client.get(self.url, {"last_check": last_check})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 0)
 
     def test_pull_with_new_messages(self):
-        before = self.msg.created_at - timedelta(days=1)
-        last_check = before.isoformat()
+        last_check = self.msg.created_at - timedelta(days=1)
+        last_check = last_check.isoformat()
 
         response = self.client.get(self.url, {"last_check": last_check})
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        self.assertEqual(self.msg.id, response.data[0]["id"])
+        self.assertEqual(self.msg2.id, response.data[0]["id"])

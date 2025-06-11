@@ -19,7 +19,6 @@ class CustomUser(AbstractUser):
     birthday = models.DateField(blank=False, null=False)
     bio = models.TextField(blank=False, null=False)
     created_at = models.DateTimeField(default=now)
-    friends = models.ManyToManyField("self", blank=True, symmetrical=True)
     profile_image = models.ImageField(
         upload_to="profile_images/", blank=True, null=True
     )

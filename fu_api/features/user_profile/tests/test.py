@@ -22,7 +22,7 @@ class UserDetailViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["username"], "user")
         self.assertIn("image_url", response.data)
-        self.assertIn("friend_count", response.data)
+        self.assertIn("match_count", response.data)
 
     def test_update_user_profile(self):
         update_data = {"bio": "Updated bio", "password": "newpassword"}
@@ -37,67 +37,6 @@ class UserDetailViewTests(APITestCase):
         response = self.client.delete(self.url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(CustomUser.objects.filter(username="testuser").exists())
-
-
-class UserFriendsListViewTests(APITestCase):
-    def setUp(self):
-        self.user = create_test_user("user")
-        self.friend1 = create_test_user("friend1")
-        self.friend2 = create_test_user("friend2")
-        self.user.friends.add(self.friend1, self.friend2)
-        self.url = "/api/me/friends/"
-        self.client.force_authenticate(self.user)
-
-    def test_unauthorized_access(self):
-        self.client.logout()
-        response = self.client.get(self.url)
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-
-    def test_list_friends(self):
-        response = self.client.get(self.url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)
-        self.assertEqual({f["username"] for f in response.data}, {"friend1", "friend2"})
-
-    def test_empty_friends_list(self):
-        self.user.friends.clear()
-        response = self.client.get(self.url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 0)
-
-
-class RemoveFriendViewTests(APITestCase):
-    def setUp(self):
-        self.user = create_test_user(username="user")
-        self.friend = create_test_user(username="friend")
-        self.user.friends.add(self.friend)
-        self.client.force_authenticate(self.user)
-
-    def get_url(self, friend_id):
-        return f"/api/me/friends/{friend_id}/remove/"
-
-    def test_unauthorized_access(self):
-        self.client.logout()
-        url = self.get_url(self.friend.id)
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-
-    def test_remove_friend_success(self):
-        url = self.get_url(self.friend.id)
-        response = self.client.delete(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertNotIn(self.friend, self.user.friends.all())
-
-    def test_remove_non_friend(self):
-        self.user.friends.remove(self.friend)
-        url = self.get_url(self.friend.id)
-        response = self.client.delete(url)
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-
-    def test_remove_invalid_user(self):
-        invalid_url = self.get_url(1000)
-        response = self.client.delete(invalid_url)
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
 
 class UserLocationDetailViewTests(APITestCase):

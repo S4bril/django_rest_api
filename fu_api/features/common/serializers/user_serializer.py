@@ -4,10 +4,12 @@ import os
 
 from django.conf import settings
 from django.core.files.base import ContentFile
+from django.db.models import Q
 from rest_framework import serializers
 from sentence_transformers import SentenceTransformer
 
 from fu_api.models.custom_user_model import CustomUser
+from fu_api.models.match_model import Match
 
 bio_encoder = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
 
@@ -39,7 +41,7 @@ class FullUserSerializer(serializers.ModelSerializer):
     passions_ids = serializers.ListField(
         child=serializers.IntegerField(), write_only=True
     )
-    friend_count = serializers.SerializerMethodField()
+    match_count = serializers.SerializerMethodField()
 
     class Meta:
         model = CustomUser
@@ -52,12 +54,10 @@ class FullUserSerializer(serializers.ModelSerializer):
             "password",
             "profile_image",
             "image_url",
-            "owned_events",
-            "participated_events",
             "passions",
             "passions_ids",
             "created_at",
-            "friend_count",
+            "match_count",
             "sex",
             "sex_id",
         ]
@@ -67,9 +67,7 @@ class FullUserSerializer(serializers.ModelSerializer):
             "passions",
             "account_creation_date",
             "image_url",
-            "owned_events",
-            "participated_events",
-            "friend_count",
+            "match_count",
         ]
 
     def get_sex(self, obj):
@@ -120,5 +118,5 @@ class FullUserSerializer(serializers.ModelSerializer):
         ]
         return passions_names
 
-    def get_friend_count(self, obj):
-        return obj.friends.count()
+    def get_match_count(self, obj):
+        return Match.objects.filter(Q(user1=obj) | Q(user2=obj)).count()

@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 
 from fu_api.features.common.tests.custom_user_factory import create_test_user
+from fu_api.models.match_model import Match
 from fu_api.models.private_chat_room_model import PrivateChatRoom
 
 
@@ -40,10 +41,11 @@ class TestChatRoomListCreateViews(APITestCase):
     def test_create_private_chat_room_with_yourself(self):
         response = self.client.post(self.url1)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("Nie możesz utworzyć chatu", response.data["error_msg"])
+        self.assertIn("Możesz utworzyć chat tylko ze swoim matchem.", response.data["error_msg"])
         self.assertEqual(PrivateChatRoom.objects.count(), 0)
 
     def test_create_correct_chat_room(self):
+        Match.objects.create(user1=self.user1, user2=self.user3)
         response = self.client.post(self.url2, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 

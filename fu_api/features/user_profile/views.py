@@ -1,14 +1,10 @@
-from django.shortcuts import get_object_or_404
-from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework import status
+from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST
-from rest_framework.views import APIView
 
-from fu_api.features.common.serializers.friend_serializer import FriendSerializer
 from fu_api.features.common.serializers.location_serializer import LocationSerializer
 from fu_api.features.common.serializers.user_serializer import FullUserSerializer
-from fu_api.models.custom_user_model import CustomUser
 
 
 class UserDetailView(RetrieveUpdateDestroyAPIView):
@@ -17,29 +13,6 @@ class UserDetailView(RetrieveUpdateDestroyAPIView):
 
     def get_object(self):
         return self.request.user
-
-
-class UserFriendsListView(ListAPIView):
-    serializer_class = FriendSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return self.request.user.friends.all()
-
-
-class RemoveFriendView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def delete(self, request, pk, *args, **kwargs):
-        friend = get_object_or_404(CustomUser, pk=pk)
-
-        if friend not in request.user.friends.all():
-            return Response(
-                {"detail": "User is not your friend"}, status=HTTP_400_BAD_REQUEST
-            )
-
-        request.user.friends.remove(friend)
-        return Response({"detail": "Friend removed successfully"}, status=HTTP_200_OK)
 
 
 class UserLocationDetailView(RetrieveUpdateDestroyAPIView):
@@ -58,6 +31,6 @@ class UserLocationDetailView(RetrieveUpdateDestroyAPIView):
             location = serializer.save()
             user.location = location
             user.save()
-            return Response(serializer.data, status=HTTP_201_CREATED)
+            return Response(serializer.data, status.HTTP_201_CREATED)
         else:
             return super().update(request, *args, **kwargs)

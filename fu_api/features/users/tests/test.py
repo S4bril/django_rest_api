@@ -25,7 +25,7 @@ class UsersCreateViewTest(APITestCase):
             "bio": "I love writng unit tests.",
             "image_url": None,
             "passions": ["Piłka nożna", "Koszykówka", "Siatkówka"],
-            "friend_count": 0,
+            "match_count": 0,
             "sex": "Mężczyzna",
         }
 
