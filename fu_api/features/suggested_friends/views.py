@@ -100,15 +100,14 @@ class NearYouListView(ListAPIView):
         if user.location is None:
             return CustomUser.objects.none()
 
+        liked_by_user = Like.objects.filter(sender=user).values_list("receiver_id", flat=True)
+        liked_me = Like.objects.filter(receiver=user).values_list("sender_id", flat=True)
         exclusion_query = (
             Q(id=user.id)
             | Q(rejected_users=user)
             | Q(blocked_users=user)
-            | Q(
-                id__in=Like.objects.filter(sender=user).values_list(
-                    "receiver_id", flat=True
-                )
-            )
+            | Q(id__in=liked_by_user)
+            | Q(id__in=liked_me)
             | Q(id__in=get_ids_of_people_matched_with_user(user))
         )
 
@@ -122,7 +121,7 @@ class NearYouListView(ListAPIView):
             if candidate.location is not None
         ]
 
-        closest_users = sorted(users_with_distance, key=lambda x: x[1])[:10]
+        closest_users = sorted(users_with_distance, key=lambda x: x[1])
 
         return [user for user, _ in closest_users]
 
