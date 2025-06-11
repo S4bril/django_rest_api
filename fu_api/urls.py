@@ -25,6 +25,7 @@ from fu_api.features.suggested_friends.views import (
 from fu_api.features.token.views import CustomTokenObtainPairView
 from fu_api.features.user_block.views import BlockUserView
 from fu_api.features.user_profile.views import (
+    ChangePasswordView,
     UserDetailView,
     UserLocationDetailView,
 )
@@ -34,6 +35,7 @@ urlpatterns = [
     path("api/users/", UsersCreateView.as_view()),
     path("api/users/<int:user_id>/block/", BlockUserView.as_view(), name="block-user"),
     path("api/me/", UserDetailView.as_view()),
+    path("api/change-password/", ChangePasswordView.as_view(), name="change-password"),
     path("api/me/location/", UserLocationDetailView.as_view()),
     path("api/suggested-friends/", UserSuggestedFriendsRetrieveView.as_view()),
     path("api/suggested-friends/reject/<int:pk>/", UserRejectView.as_view()),
