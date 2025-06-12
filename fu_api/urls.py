@@ -5,7 +5,7 @@ from django.urls import path
 from rest_framework_simplejwt.views import TokenRefreshView
 
 from fu_api.features.forms.views import FormRetrieveView
-from fu_api.features.messages.views import MessageListCreateView
+from fu_api.features.messages.views import MarkMessageAsReadView, MessageListCreateView
 from fu_api.features.notifications.views import (
     MarkNotificationReadView,
     NotificationListView,
@@ -47,6 +47,9 @@ urlpatterns = [
     path("api/private-chat/", ChatRoomListView.as_view()),
     path(
         "api/private-chat/<int:chat_room_id>/messages/", MessageListCreateView.as_view()
+    ),
+    path(
+        "api/mark-msg-read/<int:message_id>/", MarkMessageAsReadView.as_view()
     ),
     path(
         "api/notifications/", NotificationListView.as_view(), name="notification-list"

@@ -3,6 +3,7 @@ from rest_framework import permissions, status
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from fu_api.features.common.services.new_since_filter_service import (
     NewSinceFilterService,
@@ -55,3 +56,13 @@ class MessageListCreateView(ListCreateAPIView):
 
         serialized = MessageSerializer(msg, context={"request": request})
         return Response(serialized.data, status=status.HTTP_201_CREATED)
+
+
+class MarkMessageAsReadView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, message_id):
+        message = get_object_or_404(Message, id=message_id)
+        message.is_read = True
+        message.save()
+        return Response({'detail': 'Message marked as read.'}, status=status.HTTP_200_OK)
