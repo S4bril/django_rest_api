@@ -1,0 +1,69 @@
+@startuml
+!theme plain
+skinparam groupInheritance 3
+
+package "Binary Classification Module" {
+  class User {
+    - id: str
+    - bio: str
+    - passions_ids: Set[int]
+    - location: Tuple[float, float]
+    - birthdate: datetime.date
+    - _embeddings: Dict[str, ndarray]
+    + age: int [property]
+    + bio_embedding: ndarray [property]
+    __init__(data: Dict)
+  }
+
+  class UserPair {
+    - user_a: User
+    - user_b: User
+    - features: Optional[ndarray]
+    - label: Optional[float]
+    + calculate_features()
+    + distance: float [property]
+    __init__(user_a: User, user_b: User)
+  }
+
+  class PairFactory {
+    - users: List[User]
+    + generate_pairs(
+        max_age_diff: int = 5,
+        min_common_passions: int = 1,
+        max_distance_km: float = 50.0
+      ) -> List[UserPair]
+    __init__(users: List[User])
+  }
+
+  class APILabeler {
+    - api_key: str
+    - prompt_template: str
+    + label_with_zero_pair(pair: UserPair) -> float
+    + label_pair(pair: UserPair) -> float
+    - _extract_passions_names(passions_ids) -> List[str]
+    __init__(api_key: str)
+  }
+
+  class FeatureStore {
+    + CSV_HEADER: List[str] = ["jaccard", "distance", "age_diff", "bio_similarity", "label"]
+    + save_to_csv(pairs: List[UserPair], filename: str)
+    + load_from_csv(filename: str) -> Tuple[ndarray, ndarray]
+  }
+
+  class MatchModel {
+    - model: XGBClassifier
+    + train()
+    + evaluate()
+    + save(path: str)
+    + load(path: str)
+    __init__(feature_file: str, test_size: float = 0.2, random_state: int = 42)
+  }
+}
+
+User "1" *-- "2" UserPair
+PairFactory "1" o-- "*" User
+PairFactory --> UserPair : creates
+APILabeler --> UserPair : labels
+UserPair --> FeatureStore : provides data
+FeatureStore --> MatchModel : provides training data
+@enduml

@@ -23,7 +23,7 @@ class Command(BaseCommand):
         print("Number of pairs: ", len(pairs))
 
         labeler = APILabeler(
-            api_key="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"
+            api_key="sk-proj-..."
         )
         for pair in tqdm(pairs):
             labeler.label_pair(pair)
