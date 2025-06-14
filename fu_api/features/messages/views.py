@@ -63,6 +63,27 @@ class MarkMessageAsReadView(APIView):
 
     def post(self, request, message_id):
         message = get_object_or_404(Message, id=message_id)
+
+        if message.sender == request.user:
+            return Response(
+                {"detail": "Nie możesz oznaczyć własnej wiadomości jako przeczytaną."},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
         message.is_read = True
-        message.save()
-        return Response({'detail': 'Message marked as read.'}, status=status.HTTP_200_OK)
+        message.save(update_fields=["is_read"])
+        return Response({"detail": "Wiadomość przeczytana."}, status=status.HTTP_200_OK)
+
+
+class CheckIfExistsUnreadMessage(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+
+        has_unread = Message.objects.filter(
+            chat_room__members=user,
+            is_read=False
+        ).exclude(sender=user).exists()
+
+        return Response({'has_unread': has_unread}, status=status.HTTP_200_OK)

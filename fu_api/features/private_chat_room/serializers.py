@@ -8,10 +8,11 @@ from fu_api.models.private_chat_room_model import PrivateChatRoom
 class PrivateChatRoomSerializer(serializers.ModelSerializer):
     member = serializers.SerializerMethodField(read_only=True)
     newest_message = serializers.SerializerMethodField(read_only=True)
+    is_read = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = PrivateChatRoom
-        fields = ["id", "member", "newest_message"]
+        fields = ["id", "member", "newest_message", "is_read"]
 
     def get_member(self, obj):
         request_user = self.context["request"].user
@@ -19,7 +20,12 @@ class PrivateChatRoomSerializer(serializers.ModelSerializer):
         return FriendSerializer(other_member, context=self.context).data
 
     def get_newest_message(self, obj):
-        latest_message = obj.messages.order_by("created_at").first()
+        latest_message = obj.messages.order_by("-created_at").first()
         if latest_message:
             return MessageSerializer(latest_message, context=self.context).data
         return None
+
+    def get_is_read(self, obj):
+        user = self.context["request"].user
+        has_unread = obj.messages.filter(is_read=False).exclude(sender=user).exists()
+        return not has_unread

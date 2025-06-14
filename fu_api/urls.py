@@ -5,7 +5,7 @@ from django.urls import path
 from rest_framework_simplejwt.views import TokenRefreshView
 
 from fu_api.features.forms.views import FormRetrieveView
-from fu_api.features.messages.views import MarkMessageAsReadView, MessageListCreateView
+from fu_api.features.messages.views import CheckIfExistsUnreadMessage, MarkMessageAsReadView, MessageListCreateView
 from fu_api.features.notifications.views import (
     MarkNotificationReadView,
     NotificationListView,
@@ -45,6 +45,7 @@ urlpatterns = [
     path("api/suggested-friends/near-you/", NearYouListView.as_view()),
     path("api/private-chat/<int:pk>/", ChatRoomCreateView.as_view()),
     path("api/private-chat/", ChatRoomListView.as_view()),
+    path("api/private-chat/unread-exists/", CheckIfExistsUnreadMessage.as_view()),
     path(
         "api/private-chat/<int:chat_room_id>/messages/", MessageListCreateView.as_view()
     ),
