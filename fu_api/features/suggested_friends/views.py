@@ -21,6 +21,9 @@ from fu_api.models.match_model import Match
 from .services import LikeService
 
 
+PAGE_SIZE = 6
+
+
 class UserSuggestedFriendsRetrieveView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -40,7 +43,7 @@ class UserSuggestedFriendsRetrieveView(APIView):
         )
 
         return Response(
-            {"suggested_friends": serializer.data}, status=status.HTTP_200_OK
+            {"suggested_friends": serializer.data[:PAGE_SIZE]}, status=status.HTTP_200_OK
         )
 
 
@@ -76,7 +79,7 @@ class RecentLikesListView(ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Like.objects.filter(receiver=self.request.user).order_by("-created_at")
+        return Like.objects.filter(receiver=self.request.user).order_by("-created_at")[:PAGE_SIZE]
 
 
 class MatchesListView(ListAPIView):
@@ -87,7 +90,7 @@ class MatchesListView(ListAPIView):
         user = self.request.user
         return Match.objects.filter(Q(user1=user) | Q(user2=user)).order_by(
             "-created_at"
-        )
+        )[:PAGE_SIZE]
 
 
 class NearYouListView(ListAPIView):
@@ -123,7 +126,7 @@ class NearYouListView(ListAPIView):
 
         closest_users = sorted(users_with_distance, key=lambda x: x[1])
 
-        return [user for user, _ in closest_users]
+        return [user for user, _ in closest_users][:PAGE_SIZE]
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
