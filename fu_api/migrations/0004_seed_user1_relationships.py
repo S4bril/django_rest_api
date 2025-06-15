@@ -8,9 +8,9 @@ from fu_api.models.custom_user_model import CustomUser
 from fu_api.models.like_model import Like
 from fu_api.models.match_model import Match
 
-NUM_TO_LIKE = 20
+NUM_TO_LIKE = 5
 NUM_TO_BE_LIKED = 20
-NUM_TO_MATCH = 10
+NUM_TO_MATCH = 5
 
 
 def seed_user1_relationships(apps, schema_editor):
