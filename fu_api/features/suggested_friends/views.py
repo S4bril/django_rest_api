@@ -20,7 +20,6 @@ from fu_api.models.match_model import Match
 
 from .services import LikeService
 
-
 PAGE_SIZE = 6
 
 
@@ -43,7 +42,8 @@ class UserSuggestedFriendsRetrieveView(APIView):
         )
 
         return Response(
-            {"suggested_friends": serializer.data[:PAGE_SIZE]}, status=status.HTTP_200_OK
+            {"suggested_friends": serializer.data[:PAGE_SIZE]},
+            status=status.HTTP_200_OK,
         )
 
 
@@ -79,7 +79,9 @@ class RecentLikesListView(ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Like.objects.filter(receiver=self.request.user).order_by("-created_at")[:PAGE_SIZE]
+        return Like.objects.filter(receiver=self.request.user).order_by("-created_at")[
+            :PAGE_SIZE
+        ]
 
 
 class MatchesListView(ListAPIView):
@@ -103,8 +105,12 @@ class NearYouListView(ListAPIView):
         if user.location is None:
             return CustomUser.objects.none()
 
-        liked_by_user = Like.objects.filter(sender=user).values_list("receiver_id", flat=True)
-        liked_me = Like.objects.filter(receiver=user).values_list("sender_id", flat=True)
+        liked_by_user = Like.objects.filter(sender=user).values_list(
+            "receiver_id", flat=True
+        )
+        liked_me = Like.objects.filter(receiver=user).values_list(
+            "sender_id", flat=True
+        )
         exclusion_query = (
             Q(id=user.id)
             | Q(rejected_users=user)

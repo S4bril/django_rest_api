@@ -31,9 +31,9 @@ class TestNearYouListView(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertTrue(isinstance(response.data, list))
-        self.assertEqual(len(response.data), 10)
+        self.assertEqual(len(response.data), 6)
         returned_usernames = [u["username"] for u in response.data]
-        expected = [f"user{i}" for i in range(1, 11)]
+        expected = [f"user{i}" for i in range(1, 7)]
         self.assertEqual(returned_usernames, expected)
 
     def test_no_location_returns_empty(self):

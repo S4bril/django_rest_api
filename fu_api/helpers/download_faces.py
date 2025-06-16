@@ -1,5 +1,6 @@
 import os
 import time
+
 import requests
 
 
@@ -12,10 +13,10 @@ def download_faces(num_images: int, output_folder: str = "images"):
                 "https://thispersondoesnotexist.com",
                 headers={
                     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) "
-                                  "AppleWebKit/537.36 (KHTML, like Gecko) "
-                                  "Chrome/88.0.4324.96 Safari/537.36"
+                    "AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/88.0.4324.96 Safari/537.36"
                 },
-                timeout=10
+                timeout=10,
             )
             if response.status_code == 200:
                 filename = os.path.join(output_folder, f"image_{i+200:03d}.jpg")
@@ -28,6 +29,7 @@ def download_faces(num_images: int, output_folder: str = "images"):
             print(f"[{i}/{num_images}] Wyjątek podczas pobierania: {e}")
 
         time.sleep(0.5)
+
 
 if __name__ == "__main__":
     download_faces(num_images=500, output_folder="all")

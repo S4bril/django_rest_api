@@ -67,7 +67,7 @@ class MarkMessageAsReadView(APIView):
         if message.sender == request.user:
             return Response(
                 {"detail": "Nie możesz oznaczyć własnej wiadomości jako przeczytaną."},
-                status=status.HTTP_403_FORBIDDEN
+                status=status.HTTP_403_FORBIDDEN,
             )
 
         message.is_read = True
@@ -81,9 +81,10 @@ class CheckIfExistsUnreadMessage(APIView):
     def get(self, request):
         user = request.user
 
-        has_unread = Message.objects.filter(
-            chat_room__members=user,
-            is_read=False
-        ).exclude(sender=user).exists()
+        has_unread = (
+            Message.objects.filter(chat_room__members=user, is_read=False)
+            .exclude(sender=user)
+            .exists()
+        )
 
-        return Response({'has_unread': has_unread}, status=status.HTTP_200_OK)
+        return Response({"has_unread": has_unread}, status=status.HTTP_200_OK)

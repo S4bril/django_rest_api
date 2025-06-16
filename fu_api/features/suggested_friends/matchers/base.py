@@ -9,7 +9,9 @@ from fu_api.models.like_model import Like
 
 class BaseMatcher(ABC):
     def get_valid_candidates(self, user, number_of_users):
-        liked_by_user = Like.objects.filter(sender=user).values_list("receiver_id", flat=True)
+        liked_by_user = Like.objects.filter(sender=user).values_list(
+            "receiver_id", flat=True
+        )
         exclusion_query = (
             Q(id=user.id)
             | Q(rejected_users=user)
